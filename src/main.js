@@ -876,36 +876,31 @@ function renderOrder() {
 
     const rows = parts.join("");
 
-    const totalWeight = cart.reduce((s, it) => {
-      const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
-      const w =
-        it.avgWeight != null ? it.avgWeight : prod.avgWeight;
-      return s + (Number(w) || 0) * (it.qty || 0);
-    }, 0);
-    const totalQty = cart.reduce(
-      (s, it) => s + (it.qty || 0),
-      0
-    );
+      // Итоги ТОЛЬКО по текущей категории
+  const catPositions = catList.length;
+  const catQty = catList.reduce(
+    (s, g) => s + (g.totalQty || 0),
+    0
+  );
+  const catWeight = catList.reduce(
+    (s, g) => s + (g.totalWeight || 0),
+    0
+  );
 
-    box.innerHTML = `
-      <div class="list">
-        ${rows}
+  box.innerHTML = `
+    <div class="cart-category-header">${label}</div>
+    <div class="list">
+      ${rows}
+    </div>
+    <div style="height:10px"></div>
+    <div class="card order-summary-card">
+      <div class="section-title">Итого</div>
+      <div class="order-summary-text">
+        Позиции: ${catPositions}, штук: ${catQty}, вес ~ ${formatWeight(catWeight)} г
       </div>
-      <div style="height:10px"></div>
-      <div class="card order-summary-card">
-        <div class="section-title">Итого</div>
-        <div class="order-summary-text">
-          Позиции: ${groups.length}, штук: ${totalQty}, вес ~ ${formatWeight(
-      totalWeight
-    )} г
-        </div>
-        <div class="order-actions">
-          <button id="clearOrder" class="btn-secondary order-action-btn" type="button">Очистить</button>
-          <button id="copyOrder" class="btn-secondary order-action-btn" type="button">Скопировать</button>
-        </div>
-      </div>
-      <div class="order-bottom-space"></div>
-    `;
+    </div>
+    <div class="order-bottom-space"></div>
+  `;
 
     // Клик по КАТЕГОРИИ → переходим в режим 2 (список моделей этой категории)
     box.onclick = function (e) {
@@ -919,69 +914,17 @@ function renderOrder() {
         "order.html?cat=" + encodeURIComponent(cat);
     };
 
-    // Кнопки копирования / очистки / менеджеру — общие
-    $("#copyOrder").onclick = () => {
-      const cartNow = loadCart();
-      if (!cartNow.length) return;
-
-      const header = "Артикул;Размер;Кол-во";
-      const lines = cartNow.map(
-        it => `${it.sku};${it.size};${it.qty}`
-      );
-      const txt = header + "\n" + lines.join("\n");
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(txt).then(() =>
-          toast("Заявка скопирована")
-        );
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = txt;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        toast("Заявка скопирована");
-      }
+      // В режиме категории нижняя кнопка работает как "Готово" — возврат к общему виду корзины
+  const btnSend = $("#sendToManager");
+  if (btnSend) {
+    btnSend.textContent = "Готово";
+    btnSend.onclick = () => {
+      window.location.href = "order.html";
     };
-
-    $("#clearOrder").onclick = () => {
-      if (!confirm("Очистить корзину?")) return;
-      saveCart([]);
-      renderOrder();
-    };
-
-    const btnSend = $("#sendToManager");
-    if (btnSend) {
-      btnSend.onclick = () => {
-        const cartNow = loadCart();
-        if (!cartNow.length) {
-          toast("Корзина пуста");
-          return;
-        }
-
-        const lines = cartNow.map(
-          it => `${it.sku};${it.size};${it.qty}`
-        );
-        const txt =
-          "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n" +
-          "Артикул;Размер;Кол-во\n" +
-          lines.join("\n") +
-          "\n\nС уважением,\n";
-
-        const phone = MANAGER_PHONE;
-        const url =
-          "https://wa.me/" +
-          phone +
-          "?text=" +
-          encodeURIComponent(txt);
-        window.open(url, "_blank");
-      };
-    }
-
-    updateCartBadge();
-    return; // ВЫХОД из функции в режиме категорий
   }
+
+  updateCartBadge();
+}
 
   // -----------------------------
   // РЕЖИМ 2: Внутри категории (?cat=rings) — список моделей этой категории
