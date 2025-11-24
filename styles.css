@@ -878,7 +878,7 @@ body.no-scroll {
   height: 90px;
 }
 
-/* Фиксированная нижняя кнопка "Менеджеру" / "Готово" */
+/* Фиксированная нижняя кнопка "Менеджеру" (как "В корзину") */
 .order-footer-btn {
   position: fixed;
   left: 50%;
@@ -898,7 +898,6 @@ body.no-scroll {
     max-width: none;
     margin: 12px auto 0;
   }
-}
 
   .order-bottom-space {
     height: 0;
@@ -1292,4 +1291,10 @@ body.no-scroll {
     font-size: 15px;
     padding: 0 16px;
   }
+}
+
+.order-footer-btn {
+  display: block;
+  width: min(420px, 85%) !important;
+  margin: 16px auto 24px;
 }
