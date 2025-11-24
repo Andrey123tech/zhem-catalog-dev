@@ -878,6 +878,32 @@ body.no-scroll {
   height: 90px;
 }
 
+/* Фиксированная нижняя кнопка "Менеджеру" (как "В корзину") */
+.order-footer-btn {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+  width: calc(100% - 32px);
+  max-width: 980px;
+  z-index: 50;
+}
+
+/* На больших экранах ведём себя как обычная кнопка */
+@media (min-width: 901px) {
+  .order-footer-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin: 12px auto 0;
+  }
+
+  .order-bottom-space {
+    height: 0;
+  }
+}
+
 /* === Экран модели в заказе: фиксированная кнопка "Готово" === */
 @media (max-width: 900px) {
   /* чтобы список размеров не уезжал под кнопку */
@@ -1271,19 +1297,4 @@ body.no-scroll {
   display: block;
   width: min(420px, 85%) !important;
   margin: 16px auto 24px;
-}
-
-/* === НИЖНИЙ БЛОК КОРЗИНЫ (КНОПКА "МЕНЕДЖЕРУ") === */
-
-.order-footer {
-  padding: 16px 16px 24px;
-}
-
-/* "Менеджеру" — такая же по высоте и шрифту, как все .btn-primary,
-   только по ширине ограничена и по центру */
-.order-footer-btn {
-  display: block;
-  width: 100%;
-  max-width: 360px;
-  margin: 12px auto 0;
 }
