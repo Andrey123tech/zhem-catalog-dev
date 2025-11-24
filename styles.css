@@ -1171,8 +1171,8 @@ body.no-scroll {
 }
 
 .btn-primary:active {
-  transform: translateY(1px);
-  box-shadow: 0 8px 18px rgba(90, 23, 34, 0.38);
+  /* убираем сдвиг, оставляем только изменение тени */
+  box-shadow: 0 6px 14px rgba(90, 23, 34, 0.32);
 }
 
 .btn-primary:disabled {
@@ -1275,8 +1275,8 @@ body.no-scroll {
 }
 
 .btn-primary:active {
-  transform: translateY(1px);
-  box-shadow: 0 8px 18px rgba(90, 23, 34, 0.38);
+  /* убираем сдвиг, оставляем только изменение тени */
+  box-shadow: 0 6px 14px rgba(90, 23, 34, 0.32);
 }
 
 .btn-primary:disabled {
