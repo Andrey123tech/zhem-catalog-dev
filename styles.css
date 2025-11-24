@@ -1272,3 +1272,18 @@ body.no-scroll {
   width: min(420px, 85%) !important;
   margin: 16px auto 24px;
 }
+
+/* === НИЖНИЙ БЛОК КОРЗИНЫ (КНОПКА "МЕНЕДЖЕРУ") === */
+
+.order-footer {
+  padding: 16px 16px 24px;
+}
+
+/* "Менеджеру" — такая же по высоте и шрифту, как все .btn-primary,
+   только по ширине ограничена и по центру */
+.order-footer-btn {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 12px auto 0;
+}
