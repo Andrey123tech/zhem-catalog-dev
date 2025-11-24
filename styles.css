@@ -1294,7 +1294,11 @@ body.no-scroll {
 }
 
 .order-footer-btn {
-  display: block;
-  width: min(420px, 85%) !important;
-  margin: 16px auto 24px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 360px;
+    margin: 12px auto 0;
+    /* фиксируем высоту для стабильности */
+    height: auto;
 }
