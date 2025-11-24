@@ -1100,38 +1100,18 @@ function renderOrder() {
     window.location.href = "order.html";
   };
 
-  const btnSend = $("#sendToManager");
+    const btnSend = $("#sendToManager");
   if (btnSend) {
+    // В режиме просмотра одной категории "Менеджеру" превращаем в "Готово"
+    // и просто возвращаемся к общему виду корзины.
+    btnSend.textContent = "Готово";
     btnSend.onclick = () => {
-      const cartNow = loadCart();
-      if (!cartNow.length) {
-        toast("Корзина пуста");
-        return;
-      }
-
-      const lines = cartNow.map(
-        it => `${it.sku};${it.size};${it.qty}`
-      );
-      const txt =
-        "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n" +
-        "Артикул;Размер;Кол-во\n" +
-        lines.join("\n") +
-        "\n\nС уважением,\n";
-
-      const phone = MANAGER_PHONE;
-      const url =
-        "https://wa.me/" +
-        phone +
-        "?text=" +
-        encodeURIComponent(txt);
-      window.open(url, "_blank");
+      window.location.href = "order.html";
     };
   }
 
   updateCartBadge();
 }
-
-/* === КАРТОЧКА МОДЕЛИ В КОРЗИНЕ (по одному артикулу) === */
 
 /* === КАРТОЧКА МОДЕЛИ В КОРЗИНЕ (по одному артикулу) === */
 
