@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Корзина · Жемчужина</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <img src="img/logo_zhem.jpg" alt="Жемчужина" class="logo-img">
+    </div>
+
+    <a href="order.html" class="cart-link">
+      Заказ
+      <span id="cartCount" class="cart-count">0</span>
+    </a>
+  </header>
+
+  <nav class="main-tabs">
+  <a href="index.html" class="tab-link">Главная</a>
+</nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="hero-title">Корзина</h1>
+      <p class="hero-sub">
+        Проверка позиций перед отправкой заявки менеджеру.
+      </p>
+    </section>
+
+    <section id="order"></section>
+
+    <button id="sendToManager" class="btn-primary order-footer-btn" type="button">
+      Менеджеру
+    </button>
+  </main>
+
+  <div class="toast"></div>  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

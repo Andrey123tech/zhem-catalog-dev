@@ -1,0 +1,1300 @@
+/* ============= БАЗА ============= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 12px 110px;
+}
+
+/* ============= ШАПКА ============= */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #ffffff;
+  border-bottom: 2px solid #6A1F2A;
+  padding: 4px 10px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 52px;   /* было 40 */
+  width: auto;
+  object-fit: contain;
+}
+
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #111827;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.7);
+  background: #ffffff;
+}
+
+.cart-count {
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #6A1F2A;
+  color: #f9fafb;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============= ГЕРОЙ / ТЕКСТ ============= */
+
+.hero {
+  margin-bottom: 18px;
+}
+
+.hero-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.hero-sub {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+/* ============= КАТЕГОРИИ (главная) ============= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.category-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 14px 30px rgba(15,23,42,0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.category-image {
+  background: #f8fafc;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-image .stub {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.category-body {
+  padding: 10px 12px 12px;
+}
+
+.category-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.category-disabled {
+  opacity: 0.65;
+}
+
+/* ============= КАТАЛОГ: СЕТКА ============= */
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+/* На телефоне — 3 карточки в ряд, но ближе друг к другу */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px; /* ещё чуть меньше */
+  }
+
+  .tile {
+    border-radius: 18px; /* уменьшили, даёт визуальное расширение */
+  }
+
+  .tile-body {
+    padding: 6px 4px 8px;  
+    /* было: 8px 8px 10px
+       стало: 6px сверху, 4px слева/справа — максимум полезного места */
+  }
+
+  .tile-title {
+    margin-bottom: 0px;
+  }
+}
+
+.tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.14);
+  overflow: hidden;
+}
+
+.square {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: #f8fafc;
+}
+
+.square img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-body {
+  padding: 10px 12px 12px;
+}
+
+.tile-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.tile-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.tile-sub span {
+  white-space: nowrap;
+}
+
+.tile-art {
+  opacity: 0.95;
+}
+
+.tile-weight {
+  opacity: 0.95;
+}
+
+/* ============= КАРТОЧКА ТОВАРА ============= */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 16px 16px 18px;
+  box-shadow: 0 16px 38px rgba(15,23,42,0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-breadcrumbs {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.product-breadcrumbs a {
+  color: #64748b;
+  text-decoration: none;
+}
+
+.product-breadcrumbs span {
+  color: #111827;
+}
+
+.product-photo-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.product-photo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-art {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.product-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: #0f172a;
+}
+
+.product-weight {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.product-controls {
+  margin-top: 4px;
+  border-radius: 20px;
+  padding: 12px 12px 14px;
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-controls-row {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .product-controls-row {
+    gap: 8px;
+  }
+}
+
+.field {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+.field-control {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* select размера */
+
+.size-select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  padding: 2px 0;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align-last: left;
+}
+
+.field-control.size-control {
+  position: relative;
+}
+
+.field-control.size-control::after {
+  content: "▾";
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.field-control.size-control.active {
+  border-color: #6A1F2A;
+  box-shadow: 0 0 0 1px rgba(106,31,42,0.25);
+}
+
+/* количество в карточке */
+
+.qty-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.qty-inline button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qty-inline span {
+  min-width: 22px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* кнопка "В корзину" */
+
+/* ============= КОРЗИНА ============= */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-item {
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1px solid #e2e8f0;
+  padding: 10px 12px;
+  box-shadow: 0 14px 32px rgba(15,23,42,0.12);
+  display: flex;
+  gap: 10px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cart-thumb {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f8fafc;
+}
+
+.cart-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-meta {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.cart-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cart-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cart-sub {
+  font-size: 15px;
+  color: #111827;
+}
+
+.cart-header-row .qty-inline {
+  gap: 10px;
+}
+
+.cart-header-row .qty-inline button {
+  font-size: 18px;
+  padding: 0 3px;
+}
+
+.cart-header-row .qty-inline span {
+  min-width: 20px;
+  font-size: 16px;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+.btn.icon {
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+  font-size: 13px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* низ корзины */
+
+.btn-row {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+/* ============= ПРОЧЕЕ ============= */
+
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 12px 14px;
+  box-shadow: 0 12px 28px rgba(15,23,42,0.12);
+}
+
+/* тост */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.9);
+  color: #f9fafb;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 50;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* "улетающий" маркер */
+
+.fly-dot {
+  pointer-events: none;
+}
+
+/* ==== ЛЁГКАЯ НАВИГАЦИЯ ПОД ШАПКОЙ ==== */
+
+.main-tabs {
+  display: flex;
+  gap: 16px;
+  padding: 6px 12px 4px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-link {
+  font-size: 14px;
+  color: #4b5563;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-link.active {
+  border-bottom-color: #6A1F2A;
+  color: #111827;
+}
+
+/* === Полировка: сетка 3 в ряд на телефоне === */
+
+@media (max-width: 540px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* === Полировка: карточка изделия === */
+
+/* Чуть компактнее общая карточка (каталог + продукт) */
+.product-card {
+  padding: 12px 12px 14px;
+  gap: 10px;
+}
+
+/* Блок размеров + количества делаем плотнее и собраннее */
+.product-controls {
+  padding: 10px 10px 12px;
+  gap: 8px;
+}
+
+/* Кнопка "Добавить в заказ" — чуть крупнее и приятнее */
+
+/* === Полировка: корзина === */
+
+/* Чуть меньше воздуха вокруг карточки позиции */
+.list-item {
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+/* Фото немного уменьшаем, чтобы больше места было под текст */
+.cart-thumb {
+  width: 100px;
+  height: 100px;
+}
+
+/* Кнопки внизу корзины (Очистить / Продолжить / Менеджеру) — немного крупнее */
+
+/* === Детальное редактирование модели в корзине === */
+
+.model-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - 140px);
+}
+
+.model-photo-wrap {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f8fafc;
+  flex-shrink: 0;
+}
+
+.model-photo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.model-edit-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+
+.model-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.model-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.model-avg {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.model-sizes-list {
+  flex: 1 1 auto;
+  margin-top: 6px;
+  padding: 4px 0;
+  overflow-y: auto;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.size-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.size-row:last-child {
+  border-bottom: none;
+}
+
+.size-row-size {
+  color: #111827;
+}
+
+.size-row-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.size-row-qty button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 3px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.size-row-qty span {
+  min-width: 20px;
+  text-align: center;
+}
+
+.size-row-weight {
+  font-size: 13px;
+  color: #4b5563;
+  text-align: right;
+}
+
+.model-summary {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#modelDone {
+  margin-top: 10px;
+}
+
+/* === Матричный выбор размеров из карточки товара === */
+
+.size-picker-display {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 9px 12px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.size-picker-display:active {
+  background: #f3f4f6;
+}
+
+.size-picker-arrow {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* затемнённый фон */
+
+.size-matrix-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 40;
+}
+
+.size-matrix-backdrop.hidden {
+  display: none !important;
+}
+
+/* "лист" как на скрине выбора размера */
+
+.size-matrix-sheet {
+  width: 100%;
+  max-width: 480px;
+  max-height: 70vh;
+  background: #ffffff;
+  border-radius: 18px 18px 0 0;
+  padding: 12px 14px 16px;
+  box-shadow: 0 -10px 25px rgba(15, 23, 42, 0.18);
+}
+
+.size-matrix-header {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.size-matrix-list {
+  max-height: 52vh;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* кнопка "Готово" внизу листа */
+
+.size-matrix-done {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* чтобы фон под модалкой не скроллился */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* универсальный helper */
+
+.hidden {
+  display: none !important;
+}
+
+/* === Фиксированная кнопка "В корзину" только на карточке товара === */
+@media (max-width: 900px) {
+  /* Чтобы контент не уезжал под кнопку при прокрутке */
+  .product-controls {
+    padding-bottom: 80px;
+  }
+
+  /* Кнопка остаётся той же, просто закрепляем её внизу экрана */
+  #addToCart {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    width: calc(100% - 32px);   /* те же поля, что у контента (по 16px слева/справа) */
+    max-width: 980px;           /* ширина как у контентной области */
+    z-index: 50;
+  }
+}
+
+/* === Корзина: компактный блок "Итого" и кнопки === */
+.order-summary-card {
+  margin-top: 8px;
+}
+
+.order-summary-text {
+  margin: 8px 0 12px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.order-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.order-action-btn {
+  flex: 1;
+}
+
+/* Немного запаса под фиксированной кнопкой */
+.order-bottom-space {
+  height: 90px;
+}
+
+/* Фиксированная нижняя кнопка "Менеджеру" (как "В корзину") */
+.order-footer-btn {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+  width: calc(100% - 32px);
+  max-width: 980px;
+  z-index: 50;
+}
+
+/* На больших экранах ведём себя как обычная кнопка */
+@media (min-width: 901px) {
+  .order-footer-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin: 12px auto 0;
+  }
+
+  .order-bottom-space {
+    height: 0;
+  }
+}
+
+/* === Экран модели в заказе: фиксированная кнопка "Готово" === */
+@media (max-width: 900px) {
+  /* чтобы список размеров не уезжал под кнопку */
+  .model-edit-body {
+    padding-bottom: 90px;
+  }
+
+  #modelDone {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    width: calc(100% - 32px);   /* те же поля, что у контента */
+    max-width: 980px;
+    z-index: 50;
+  }
+}
+
+/* === Типографика под iOS-ощущения === */
+
+/* Вкладки вверху: Главная / Каталог / Заказ */
+.tab-link {
+  font-size: 15px;
+}
+
+/* Крупные заголовки на страницах (hero) */
+.hero-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.hero-sub {
+  font-size: 15px;
+}
+
+/* Карточки в каталоге */
+.tile-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tile-sub {
+  font-size: 13px;
+}
+
+/* Карточка товара */
+.product-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.product-art {
+  font-size: 14px;
+}
+
+.product-weight {
+  font-size: 14px;
+}
+
+/* Подписи "Размер", "Кол-во" */
+.field-label {
+  font-size: 14px;
+}
+
+/* Значения в селекте и счётчике */
+.field-control,
+.qty-inline {
+  font-size: 16px;
+}
+
+/* Общие кнопки */
+
+/* Список в корзине */
+.cart-title {
+  font-size: 16px;
+}
+
+.cart-sub {
+  font-size: 14px;
+}
+
+.cart-meta {
+  font-size: 13px;
+}
+
+/* Блок "Итого" в корзине */
+.order-summary-text {
+  font-size: 15px;
+}
+
+/* Экран модели в корзине */
+.model-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.model-avg {
+  font-size: 13px;
+}
+
+.model-summary {
+  font-size: 15px;
+}
+
+/* Строки размеров в модели */
+.size-row {
+  font-size: 15px;
+}
+
+.size-row-size {
+  font-size: 15px;
+}
+
+.size-row-weight {
+  font-size: 13px;
+}
+
+/* На телефоне — фиксировано 3 карточки в ряд */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px; /* ← сделаем чуть меньше */
+  }
+
+  .tile {
+    border-radius: 18px; /* ← чуть уменьшили, даст больше визуального места */
+  }
+
+  .tile-body {
+    padding: 6px 4px 8px; /* ← уменьшили слева/справа */
+  }
+
+  .tile-sub {
+    padding: 0 2px; /* ← добавили! немного сдвигает текст */
+  }
+
+  .tile-weight {
+    font-size: 12.5px; /* ← если нужно ещё чуть-чуть места */
+  }
+}
+
+/* Опустить клавишу "Выбрать размеры" на ~5 мм */
+.size-picker-display {
+  margin-top: 35px !important;
+}
+
+/* Убираем фон/подложку/рамку под кнопкой "Выбрать размеры" */
+.field-control,
+.field,
+.product-controls-row .field {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Центровка текста и расширение кнопки "Выбрать размеры" */
+.size-picker-display {
+  position: relative;
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Стрелочка справа, не влияет на центр текста */
+.size-picker-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Увеличиваем высоту строк размера в матрице на +25% */
+.size-row {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  min-height: 44px !important;
+}
+
+/* Модальное окно размеров должно перекрывать фиксированную кнопку "В корзину" */
+.size-matrix-backdrop {
+  z-index: 80 !important;  /* выше, чем #addToCart (50) */
+}
+
+.breadcrumbs {
+  font-size: 13px;
+  color: #6b7280; /* серый */
+  padding: 6px 16px 0;
+}
+
+.breadcrumbs a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.main-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.main-section-card {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  text-decoration: none;
+  color: #111827;
+}
+
+.main-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.main-section-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* === ОСНОВНАЯ КНОПКА (В КОРЗИНУ / ГОТОВО / МЕНЕДЖЕРУ) === */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 46px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  background: linear-gradient(135deg, #7B2331, #5A1722);
+  color: #f9fafb;
+
+  box-shadow: 0 12px 26px rgba(90, 23, 34, 0.42);
+
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #842736, #5F1824);
+  box-shadow: 0 14px 30px rgba(90, 23, 34, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 8px 18px rgba(90, 23, 34, 0.38);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+/* На маленьких экранах — компактнее */
+@media (max-width: 480px) {
+  .btn-primary {
+    min-height: 44px;
+    font-size: 15px;
+    padding: 0 16px;
+  }
+}
+
+/* Вспомогательная кнопка (Очистить / Скопировать / сервисные действия) */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 14px;
+  min-height: 36px;
+
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+
+  background: #ffffff;
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.btn-secondary:hover {
+  background: #f3f4f6;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.16);
+}
+
+.btn-secondary:disabled,
+.btn-secondary[disabled] {
+  opacity: 0.5;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* === ОСНОВНАЯ КНОПКА (В КОРЗИНУ / ГОТОВО / МЕНЕДЖЕРУ) === */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 46px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  background: linear-gradient(135deg, #7B2331, #5A1722);
+  color: #f9fafb;
+
+  box-shadow: 0 12px 26px rgba(90, 23, 34, 0.42);
+
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #842736, #5F1824);
+  box-shadow: 0 14px 30px rgba(90, 23, 34, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 8px 18px rgba(90, 23, 34, 0.38);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+/* На маленьких экранах — компактнее */
+@media (max-width: 480px) {
+  .btn-primary {
+    min-height: 44px;
+    font-size: 15px;
+    padding: 0 16px;
+  }
+}
+
+.order-footer-btn {
+  display: block;
+  width: min(420px, 85%) !important;
+  margin: 16px auto 24px;
+}
