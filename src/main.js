@@ -1015,14 +1015,14 @@ function renderOrder() {
     })
     .join("");
 
-  const totalWeight = cart.reduce((s, it) => {
-    const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
-    const w =
-      it.avgWeight != null ? it.avgWeight : prod.avgWeight;
-    return s + (Number(w) || 0) * (it.qty || 0);
-  }, 0);
-  const totalQty = cart.reduce(
-    (s, it) => s + (it.qty || 0),
+    // Итоги только по текущей категории
+  const catPositions = catList.length;
+  const catQty = catList.reduce(
+    (s, g) => s + (g.totalQty || 0),
+    0
+  );
+  const catWeight = catList.reduce(
+    (s, g) => s + (g.totalWeight || 0),
     0
   );
 
@@ -1035,103 +1035,24 @@ function renderOrder() {
     <div class="card order-summary-card">
       <div class="section-title">Итого</div>
       <div class="order-summary-text">
-        Позиции: ${groups.length}, штук: ${totalQty}, вес ~ ${formatWeight(
-    totalWeight
-  )} г
-      </div>
-      <div class="order-actions">
-        <button id="clearOrder" class="btn small order-action-btn" type="button">Очистить</button>
-        <button id="copyOrder" class="btn small order-action-btn" type="button">Скопировать</button>
+        Позиции: ${catPositions}, штук: ${catQty}, вес ~ ${formatWeight(catWeight)} г
       </div>
     </div>
     <div class="order-bottom-space"></div>
   `;
 
-  // Клик по модели → в order_item.html для правки размеров/штук
-  box.onclick = function (e) {
-    const row = e.target.closest(".cart-row");
-    if (!row) return;
-
-    const now = Date.now();
-    if (now - lastSwipeTime < SWIPE_CLICK_SUPPRESS_MS) {
-      return; // только что был свайп — не считаем это кликом
-    }
-
-    const sku = row.dataset.sku;
-    if (!sku) return;
-    const params2 = new URLSearchParams();
-    params2.set("sku", sku);
-    params2.set("fromCat", catFilter);
-
-    window.location.href = "order_item.html?" + params2.toString();
-
-  };
-
-  // Копирование заявки / очистка / отправка менеджеру — те же
-  $("#copyOrder").onclick = () => {
-    const cartNow = loadCart();
-    if (!cartNow.length) return;
-
-    const header = "Артикул;Размер;Кол-во";
-    const lines = cartNow.map(
-      it => `${it.sku};${it.size};${it.qty}`
-    );
-    const txt = header + "\n" + lines.join("\n");
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(txt).then(() =>
-        toast("Заявка скопирована")
-      );
-    } else {
-      const ta = document.createElement("textarea");
-      ta.value = txt;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      toast("Заявка скопирована");
-    }
-  };
-
-  $("#clearOrder").onclick = () => {
-    if (!confirm("Очистить корзину?")) return;
-    saveCart([]);
-    // после очистки вернёмся в общий вид корзины (без cat)
-    window.location.href = "order.html";
-  };
-
+    // В режиме категорий нижняя кнопка работает как "Готово" — просто возвращаемся
   const btnSend = $("#sendToManager");
   if (btnSend) {
+    btnSend.textContent = "Готово";
     btnSend.onclick = () => {
-      const cartNow = loadCart();
-      if (!cartNow.length) {
-        toast("Корзина пуста");
-        return;
-      }
-
-      const lines = cartNow.map(
-        it => `${it.sku};${it.size};${it.qty}`
-      );
-      const txt =
-        "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n" +
-        "Артикул;Размер;Кол-во\n" +
-        lines.join("\n") +
-        "\n\nС уважением,\n";
-
-      const phone = MANAGER_PHONE;
-      const url =
-        "https://wa.me/" +
-        phone +
-        "?text=" +
-        encodeURIComponent(txt);
-      window.open(url, "_blank");
+      window.location.href = "order.html";
     };
   }
 
   updateCartBadge();
+  return; // ВЫХОД из функции в режиме категорий
 }
-
-/* === КАРТОЧКА МОДЕЛИ В КОРЗИНЕ (по одному артикулу) === */
 
 /* === КАРТОЧКА МОДЕЛИ В КОРЗИНЕ (по одному артикулу) === */
 
