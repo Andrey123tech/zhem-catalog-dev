@@ -876,36 +876,31 @@ function renderOrder() {
 
     const rows = parts.join("");
 
-    const totalWeight = cart.reduce((s, it) => {
-      const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
-      const w =
-        it.avgWeight != null ? it.avgWeight : prod.avgWeight;
-      return s + (Number(w) || 0) * (it.qty || 0);
-    }, 0);
-    const totalQty = cart.reduce(
-      (s, it) => s + (it.qty || 0),
-      0
-    );
+      // Итоги только по текущей категории
+  const catPositions = catList.length;
+  const catQty = catList.reduce(
+    (s, g) => s + (g.totalQty || 0),
+    0
+  );
+  const catWeight = catList.reduce(
+    (s, g) => s + (g.totalWeight || 0),
+    0
+  );
 
-    box.innerHTML = `
-      <div class="list">
-        ${rows}
+  box.innerHTML = `
+    <div class="cart-category-header">${label}</div>
+    <div class="list">
+      ${rows}
+    </div>
+    <div style="height:10px"></div>
+    <div class="card order-summary-card">
+      <div class="section-title">Итого</div>
+      <div class="order-summary-text">
+        Позиции: ${catPositions}, штук: ${catQty}, вес ~ ${formatWeight(catWeight)} г
       </div>
-      <div style="height:10px"></div>
-      <div class="card order-summary-card">
-        <div class="section-title">Итого</div>
-        <div class="order-summary-text">
-          Позиции: ${groups.length}, штук: ${totalQty}, вес ~ ${formatWeight(
-      totalWeight
-    )} г
-        </div>
-        <div class="order-actions">
-          <button id="clearOrder" class="btn-secondary order-action-btn" type="button">Очистить</button>
-          <button id="copyOrder" class="btn-secondary order-action-btn" type="button">Скопировать</button>
-        </div>
-      </div>
-      <div class="order-bottom-space"></div>
-    `;
+    </div>
+    <div class="order-bottom-space"></div>
+  `;
 
     // Клик по КАТЕГОРИИ → переходим в режим 2 (список моделей этой категории)
     box.onclick = function (e) {
