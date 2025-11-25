@@ -1041,6 +1041,25 @@ function renderOrder() {
     <div class="order-bottom-space"></div>
   `;
 
+      // Клик по позиции внутри текущей категории → перейти на экран редактирования
+    box.onclick = function (e) {
+      const row = e.target.closest(".order-item");
+      if (!row) return;
+
+      const sku = row.dataset.sku;
+      const size = row.dataset.size;
+
+      if (!sku) return;
+
+      const params = new URLSearchParams();
+      params.set("sku", sku);
+      if (size) {
+        params.set("size", size);
+      }
+
+      window.location.href = "order_item.html?" + params.toString();
+    };
+
     // В режиме категорий нижняя кнопка работает как "Готово" — просто возвращаемся
   const btnSend = $("#sendToManager");
   if (btnSend) {
