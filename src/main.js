@@ -1015,7 +1015,7 @@ function renderOrder() {
     })
     .join("");
 
-    // Итоги только по текущей категории
+      // Итоги только по текущей категории
   const catPositions = catList.length;
   const catQty = catList.reduce(
     (s, g) => s + (g.totalQty || 0),
@@ -1041,26 +1041,28 @@ function renderOrder() {
     <div class="order-bottom-space"></div>
   `;
 
-      // Клик по позиции внутри текущей категории → перейти на экран редактирования
-    box.onclick = function (e) {
-      const row = e.target.closest(".order-item");
-      if (!row) return;
+  // Клик по модели в режиме категории → переходим в order_item.html
+  box.onclick = function (e) {
+    const row = e.target.closest(".cart-row");
+    if (!row) return;
 
-      const sku = row.dataset.sku;
-      const size = row.dataset.size;
+    const now = Date.now();
+    if (now - lastSwipeTime < SWIPE_CLICK_SUPPRESS_MS) {
+      // Только что был свайп — не считаем это кликом
+      return;
+    }
 
-      if (!sku) return;
+    const sku = row.dataset.sku;
+    if (!sku) return;
 
-      const params = new URLSearchParams();
-      params.set("sku", sku);
-      if (size) {
-        params.set("size", size);
-      }
+    const params2 = new URLSearchParams();
+    params2.set("sku", sku);
+    params2.set("fromCat", catFilter);
 
-      window.location.href = "order_item.html?" + params.toString();
-    };
+    window.location.href = "order_item.html?" + params2.toString();
+  };
 
-    // В режиме категорий нижняя кнопка работает как "Готово" — просто возвращаемся
+  // В режиме категорий нижняя кнопка работает как "Готово" — просто возвращаемся
   const btnSend = $("#sendToManager");
   if (btnSend) {
     btnSend.textContent = "Готово";
