@@ -354,28 +354,33 @@ function renderProduct() {
 
   // Определяем тип изделия и русский ярлык
   const cat = prod.category; // rings / earrings / bracelets / pendants / pins
-  const TYPE_LABELS = {
-    rings: "Кольцо",
-    earrings: "Серьги",
-    bracelets: "Браслет",
-    pendants: "Подвеска",
-    pins: "Булавка"
-  };
-  const typeLabel = TYPE_LABELS[cat] || "Модель";
+const TYPE_LABELS = {
+  rings: "Кольцо",
+  earrings: "Серьги",
+  bracelets: "Браслет",
+  pendants: "Подвеска",
+  pins: "Булавка"
+};
+const typeLabel = TYPE_LABELS[cat] || "Модель";
 
-  // Кольца работают по размерной матрице, остальные типы — по количеству
-  const isRingSized = cat === "rings";
-  const isNoSize =
-    cat === "earrings" ||
-    cat === "pendants" ||
-    cat === "pins" ||
-    cat === "bracelets"; // браслеты пока тоже без размеров (размеры сделаем отдельной карточкой позже)
+// Изделия с размерной матрицей (кольца / браслеты)
+const isSizedMatrix = cat === "rings" || cat === "bracelets";
 
-  // Размерная линейка только для колец
-  const sizes =
-    isRingSized && Array.isArray(SIZES) && SIZES.length
-      ? SIZES
-      : [];
+// Изделия без размера (просто количество)
+const isNoSize =
+  cat === "earrings" ||
+  cat === "pendants" ||
+  cat === "pins";
+
+// Размерная линейка:
+// - для колец берём общую матрицу SIZES
+// - для браслетов — фиксированные 17 / 18 / 19
+let sizes = [];
+if (cat === "rings" && Array.isArray(SIZES) && SIZES.length) {
+  sizes = SIZES;
+} else if (cat === "bracelets") {
+  sizes = [17, 18, 19];
+}
 
   const sizeState = new Map();
   sizes.forEach(s => sizeState.set(String(s), 0));
