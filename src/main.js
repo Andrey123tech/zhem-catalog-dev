@@ -1062,71 +1062,19 @@ function renderOrder() {
 
   };
 
-  // Копирование заявки / очистка / отправка менеджеру — те же
-  $("#copyOrder").onclick = () => {
-    const cartNow = loadCart();
-    if (!cartNow.length) return;
-
-    const header = "Артикул;Размер;Кол-во";
-    const lines = cartNow.map(
-      it => `${it.sku};${it.size};${it.qty}`
-    );
-    const txt = header + "\n" + lines.join("\n");
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(txt).then(() =>
-        toast("Заявка скопирована")
-      );
-    } else {
-      const ta = document.createElement("textarea");
-      ta.value = txt;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      toast("Заявка скопирована");
-    }
-  };
-
-  $("#clearOrder").onclick = () => {
-    if (!confirm("Очистить корзину?")) return;
-    saveCart([]);
-    // после очистки вернёмся в общий вид корзины (без cat)
-    window.location.href = "order.html";
-  };
-
+  // В режиме КАТЕГОРИИ:
+  // - кнопок "Очистить" и "Скопировать" уже нет
+  // - нижняя кнопка работает как "Готово" (возврат в общую корзину)
   const btnSend = $("#sendToManager");
   if (btnSend) {
+    btnSend.textContent = "Готово";
     btnSend.onclick = () => {
-      const cartNow = loadCart();
-      if (!cartNow.length) {
-        toast("Корзина пуста");
-        return;
-      }
-
-      const lines = cartNow.map(
-        it => `${it.sku};${it.size};${it.qty}`
-      );
-      const txt =
-        "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n" +
-        "Артикул;Размер;Кол-во\n" +
-        lines.join("\n") +
-        "\n\nС уважением,\n";
-
-      const phone = MANAGER_PHONE;
-      const url =
-        "https://wa.me/" +
-        phone +
-        "?text=" +
-        encodeURIComponent(txt);
-      window.open(url, "_blank");
+      window.location.href = "order.html";
     };
   }
 
   updateCartBadge();
 }
-
-/* === КАРТОЧКА МОДЕЛИ В КОРЗИНЕ (по одному артикулу) === */
 
 /* === КАРТОЧКА МОДЕЛИ В КОРЗИНЕ (по одному артикулу) === */
 
