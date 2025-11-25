@@ -363,19 +363,20 @@ function renderProduct() {
   };
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
-  // Кольца работают по размерной матрице, остальные типы — по количеству
-  const isRingSized = cat === "rings";
-  const isNoSize =
-    cat === "earrings" ||
-    cat === "pendants" ||
-    cat === "pins" ||
-    cat === "bracelets"; // браслеты пока тоже без размеров (размеры сделаем отдельной карточкой позже)
+  // Определяем категории и логику размеров
+const isSizedMatrix = cat === "rings" || cat === "bracelets"; // размерная логика (но UI пока не включаем)
+const isNoSize =
+  cat === "earrings" ||
+  cat === "pendants" ||
+  cat === "pins";
 
-  // Размерная линейка только для колец
-  const sizes =
-    isRingSized && Array.isArray(SIZES) && SIZES.length
-      ? SIZES
-      : [];
+// Размерная линейка (только подготовка)
+let sizes = [];
+if (cat === "rings" && Array.isArray(SIZES)) {
+  sizes = SIZES;                // исходные размеры колец
+} else if (cat === "bracelets") {
+  sizes = [17, 18, 19];         // готовим размеры браслетов
+}
 
   const sizeState = new Map();
   sizes.forEach(s => sizeState.set(String(s), 0));
