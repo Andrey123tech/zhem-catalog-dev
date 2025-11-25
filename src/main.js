@@ -58,6 +58,73 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
+/* === Формирование текста заявки для WhatsApp + Excel === */
+function buildOrderText(cart, products) {
+  if (!Array.isArray(cart) || !cart.length) return "";
+
+  // Группируем по категориям
+  const groups = {};
+  cart.forEach(it => {
+    const prod = products.find(p => p.sku === it.sku);
+    if (!prod) return;
+
+    const cat = prod.category || "other";
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push({
+      sku: it.sku,
+      size: it.size || "-",
+      qty: it.qty || 0,
+      avgWeight: prod.avgWeight || 0
+    });
+  });
+
+  // Заголовок
+  let txt = "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n";
+
+  // Человекочитаемая часть
+  const CATEGORY_NAMES = {
+    rings: "КОЛЬЦА",
+    earrings: "СЕРЬГИ",
+    bracelets: "БРАСЛЕТЫ",
+    pendants: "ПОДВЕСКИ",
+    pins: "БУЛАВКИ",
+    other: "ДРУГОЕ"
+  };
+
+  let totalQty = 0;
+  let totalWeight = 0;
+
+  Object.keys(groups).forEach(cat => {
+    txt += CATEGORY_NAMES[cat] + "\n";
+
+    groups[cat].forEach(row => {
+      txt += `${row.sku} — ${row.size} — ${row.qty} шт\n`;
+      totalQty += row.qty;
+      totalWeight += row.qty * row.avgWeight;
+    });
+
+    txt += "\n";
+  });
+
+  txt += `ОБЩИЙ ИТОГ:\nВсего: ${totalQty} шт ~ ${formatWeight(totalWeight)} г\n\n`;
+  txt += "---------------------------------------\n";
+  txt += "Таблица для Excel (копировать только этот блок):\n";
+  txt += "Категория;Артикул;Размер;Кол-во\n";
+
+  Object.keys(groups).forEach(cat => {
+    const catName = CATEGORY_NAMES[cat];
+    groups[cat].forEach(row => {
+      txt += `${catName};${row.sku};${row.size};${row.qty}\n`;
+    });
+  });
+
+  txt += `ИТОГО ВСЕГО;;;${totalQty}\n`;
+  txt += "---------------------------------------\n\n";
+  txt += "С уважением,\n";
+
+  return txt;
+}
+
 function getSkuFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("sku");
@@ -963,11 +1030,7 @@ function renderOrder() {
         const lines = cartNow.map(
           it => `${it.sku};${it.size};${it.qty}`
         );
-        const txt =
-          "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n" +
-          "Артикул;Размер;Кол-во\n" +
-          lines.join("\n") +
-          "\n\nС уважением,\n";
+        const txt = buildOrderText(cartNow, PRODUCTS);
 
         const phone = MANAGER_PHONE;
         const url =
