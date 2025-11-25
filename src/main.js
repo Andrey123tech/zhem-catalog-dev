@@ -118,9 +118,11 @@ function buildOrderText(cart, products) {
     });
   });
 
-  txt += `ИТОГО ВСЕГО;;;${totalQty}\n`;
-  txt += "---------------------------------------\n\n";
-  txt += "С уважением,\n";
+  txt += `\nИТОГО;;;\n`;
+txt += `;;Всего штук;${totalQty}\n`;
+txt += `;;Вес, г;${formatWeight(totalWeight)}\n`;
+txt += "---------------------------------------\n\n";
+txt += "С уважением,\n";
 
   return txt;
 }
