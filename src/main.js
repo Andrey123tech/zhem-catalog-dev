@@ -433,19 +433,18 @@ function renderProduct() {
   };
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
-  // Подготовка к расширению логики размеров
+    // Подготовка к логике размеров
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
 
-  // Пока как и раньше: размерами управляют только кольца
-  const isRingSized = isRing;
+  // Теперь и кольца, и браслеты считаем размерными
+  const isRingSized = isRing || isBracelet;
 
-  // Изделия без размеров (поведение НЕ меняем: браслеты остаются тут)
+  // Изделия без размеров — серьги / подвески / булавки
   const isNoSize =
     cat === "earrings" ||
     cat === "pendants" ||
-    cat === "pins" ||
-    isBracelet; // пока браслеты всё ещё без размеров
+    cat === "pins";
 
   // Размерная линейка только для колец (пока)
   // Общая логика размеров: кольца — SIZES, браслеты — BRACELET_SIZES
