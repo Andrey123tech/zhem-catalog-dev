@@ -421,6 +421,8 @@ function renderProduct() {
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
+  const cat = prod.category; // ← ЭТО ДОБАВИТЬ
+  
   // Определяем тип изделия и русский ярлык
   const TYPE_LABELS = {
     rings: "Кольцо",
