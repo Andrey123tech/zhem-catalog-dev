@@ -1405,13 +1405,8 @@ function renderOrderItem() {
     } else {
       item.qty = qty;
       const qtySpan = row.querySelector(".size-row-qty span");
-      const weightCell = row.querySelector(".size-row-weight");
       if (qtySpan) qtySpan.textContent = String(qty);
-      if (weightCell && avgW != null) {
-        weightCell.textContent =
-          formatWeight((Number(avgW) || 0) * qty) + " г";
       }
-    }
 
     saveCart(cartNow);
 
