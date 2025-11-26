@@ -422,7 +422,6 @@ function renderProduct() {
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
   // Определяем тип изделия и русский ярлык
-  const cat = prod.category; // rings / earrings / bracelets / pendants / pins
   const TYPE_LABELS = {
     rings: "Кольцо",
     earrings: "Серьги",
@@ -432,15 +431,21 @@ function renderProduct() {
   };
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
-  // Кольца работают по размерной матрице, остальные типы — по количеству
-  const isRingSized = cat === "rings";
+  // Подготовка к расширению логики размеров
+  const isRing = cat === "rings";
+  const isBracelet = cat === "bracelets";
+
+  // Пока как и раньше: размерами управляют только кольца
+  const isRingSized = isRing;
+
+  // Изделия без размеров (поведение НЕ меняем: браслеты остаются тут)
   const isNoSize =
     cat === "earrings" ||
     cat === "pendants" ||
     cat === "pins" ||
-    cat === "bracelets"; // браслеты пока тоже без размеров (размеры сделаем отдельной карточкой позже)
+    isBracelet; // пока браслеты всё ещё без размеров
 
-  // Размерная линейка только для колец
+  // Размерная линейка только для колец (пока)
   const sizes =
     isRingSized && Array.isArray(SIZES) && SIZES.length
       ? SIZES
