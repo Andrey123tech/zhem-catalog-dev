@@ -447,10 +447,12 @@ function renderProduct() {
     cat === "pins";
 
   // Размерная линейка только для колец (пока)
-  // Общая логика размеров: кольца — SIZES, браслеты — BRACELET_SIZES
-const sizes = isRing
-  ? (Array.isArray(SIZES) ? SIZES : [])
-  : (isBracelet ? BRACELET_SIZES : []);
+   // Общая логика размеров: кольца — SIZES, браслеты — BRACELET_SIZES
+  const sizes = (isRing && Array.isArray(SIZES))
+    ? SIZES
+    : (isBracelet && Array.isArray(BRACELET_SIZES))
+      ? BRACELET_SIZES
+      : [];
 
   const sizeState = new Map();
   sizes.forEach(s => sizeState.set(String(s), 0));
@@ -516,8 +518,7 @@ const sizes = isRing
 preventDoubleTapZoom(btnQtyDec);
 preventDoubleTapZoom(btnQtyInc);
 
-
-  /* === РЕЖИМ БЕЗ РАЗМЕРОВ (СЕРЬГИ / ПОДВЕСКИ / БУЛАВКИ / БРАСЛЕТЫ) === */
+   /* === РЕЖИМ БЕЗ РАЗМЕРОВ (СЕРЬГИ / ПОДВЕСКИ / БУЛАВКИ) === */
 
   if (isNoSize) {
     // Прячем кнопку "Выбрать размеры"
