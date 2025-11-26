@@ -1159,12 +1159,10 @@ function renderOrderItem() {
   const params = new URLSearchParams(window.location.search);
   const sku = params.get("sku");
   if (!sku) {
-    box.innerHTML =
-      "<div class='card'>Не указан артикул.</div>";
+    box.innerHTML = "<div class='card'>Не указан артикул.</div>";
     return;
   }
 
-  // откуда пришли: из конкретной категории корзины или из общего заказа
   const fromCat = getFromCatFromUrl();
   const backUrl = fromCat
     ? "order.html?cat=" + encodeURIComponent(fromCat)
@@ -1172,9 +1170,10 @@ function renderOrderItem() {
 
   const cart = loadCart();
   let items = cart.filter(it => it.sku === sku);
-  items.sort(
-    (a, b) => parseFloat(a.size) - parseFloat(b.size)
-  );
+
+  // сортировка по размеру
+  items.sort((a, b) => parseFloat(a.size) - parseFloat(b.size));
+
   if (!items.length) {
     box.innerHTML =
       "<div class='card'>В корзине нет позиций по артикулу " +
@@ -1189,21 +1188,22 @@ function renderOrderItem() {
     (prod.images && prod.images[0]) ||
     "https://picsum.photos/seed/placeholder/900";
   const avgW =
-    items[0].avgWeight != null
-      ? items[0].avgWeight
-      : prod.avgWeight;
-  const title = prod.title || `Кольцо ${sku}`;
+    items[0].avgWeight != null ? items[0].avgWeight : prod.avgWeight;
+  const title = prod.title || `Модель ${sku}`;
 
-  // ==== ИЗДЕЛИЯ БЕЗ РАЗМЕРОВ (СЕРЬГИ / ПОДВЕСКИ / БУЛАВКИ / БРАСЛЕТЫ) ====
   const cat = prod.category;
+
+  // НОВАЯ ЛОГИКА ❗  
+  // Размеров НЕТ — только серьги, подвески, булавки
   const isNoSizeType =
     cat === "earrings" ||
     cat === "pendants" ||
-    cat === "pins" ||
-    cat === "bracelets"; // пока браслеты тоже без размеров
+    cat === "pins";
 
+  /* ============================================================
+     БЕЗРАЗМЕРНЫЕ ИЗДЕЛИЯ (earrings / pendants / pins)
+     ============================================================ */
   if (isNoSizeType) {
-    // для таких изделий у нас одна запись с size == null / ""
     const item = items[0];
     const qty = item.qty || 0;
 
@@ -1227,9 +1227,7 @@ function renderOrderItem() {
             <div class="model-title">${title}</div>
             ${
               avgW != null
-                ? `<div class="model-avg">Средний вес ~ ${formatWeight(
-                    avgW
-                  )} г</div>`
+                ? `<div class="model-avg">Средний вес ~ ${formatWeight(avgW)} г</div>`
                 : ""
             }
           </div>
@@ -1246,9 +1244,7 @@ function renderOrderItem() {
             </div>
           </div>
 
-          <div class="model-summary">
-            ${totalLine}
-          </div>
+          <div class="model-summary">${totalLine}</div>
 
           <button id="modelDone" class="btn-primary" type="button">
             Готово
@@ -1257,13 +1253,12 @@ function renderOrderItem() {
       </div>
     `;
 
-    // Обработчик +/- для изделия без размеров
+    // Обработка кнопок +/- (безразмерная логика)
     box.onclick = function (e) {
       const btn = e.target.closest("button");
       if (!btn || !btn.dataset.act) return;
 
       const act = btn.dataset.act;
-
       let cartNow = loadCart();
       const it = cartNow.find(
         it => it.sku === sku && (it.size == null || it.size === "")
@@ -1275,7 +1270,6 @@ function renderOrderItem() {
       if (act === "dec") q = Math.max(0, q - 1);
 
       if (q === 0) {
-        // если стало 0 — убираем модель и возвращаемся в нужный уровень корзины
         cartNow = cartNow.filter(
           it => !(it.sku === sku && (it.size == null || it.size === ""))
         );
@@ -1303,32 +1297,23 @@ function renderOrderItem() {
       updateCartBadge();
     };
 
-    const btnDone = $("#modelDone", box);
-    if (btnDone) {
-      btnDone.onclick = () => {
-        window.location.href = backUrl;
-      };
-    }
+    $("#modelDone").onclick = () => {
+      window.location.href = backUrl;
+    };
 
     updateCartBadge();
-    return; // важное: выходим, чтобы дальше не рисовать "р-р size"
+    return;
   }
 
-  // ==== КОЛЬЦА (или другие с размерами) ====
+  /* ============================================================
+     РАЗМЕРНЫЕ ИЗДЕЛИЯ (rings + bracelets)
+     ============================================================ */
 
   function calcSummary(list) {
-    const totalQty = list.reduce(
-      (s, it) => s + (it.qty || 0),
-      0
-    );
+    const totalQty = list.reduce((s, it) => s + (it.qty || 0), 0);
     const totalWeight =
       avgW != null
-        ? list.reduce(
-            (s, it) =>
-              s +
-              (it.qty || 0) * (Number(avgW) || 0),
-            0
-          )
+        ? list.reduce((s, it) => s + (it.qty || 0) * (Number(avgW) || 0), 0)
         : null;
     return { totalQty, totalWeight };
   }
@@ -1339,9 +1324,7 @@ function renderOrderItem() {
       const qty = it.qty || 0;
       const lineWeight =
         avgW != null
-          ? formatWeight(
-              (Number(avgW) || 0) * qty
-            ) + " г"
+          ? formatWeight((Number(avgW) || 0) * qty) + " г"
           : "";
       return `
         <div class="size-row" data-size="${size}">
@@ -1360,9 +1343,7 @@ function renderOrderItem() {
   const summary = calcSummary(items);
   const totalLine =
     summary.totalWeight != null
-      ? `Всего: ${summary.totalQty} шт · ~ ${formatWeight(
-          summary.totalWeight
-        )} г`
+      ? `Всего: ${summary.totalQty} шт · ~ ${formatWeight(summary.totalWeight)} г`
       : `Всего: ${summary.totalQty} шт`;
 
   box.innerHTML = `
@@ -1377,9 +1358,7 @@ function renderOrderItem() {
           <div class="model-title">${title}</div>
           ${
             avgW != null
-              ? `<div class="model-avg">Средний вес ~ ${formatWeight(
-                  avgW
-                )} г</div>`
+              ? `<div class="model-avg">Средний вес ~ ${formatWeight(avgW)} г</div>`
               : ""
           }
         </div>
@@ -1388,9 +1367,7 @@ function renderOrderItem() {
           ${rowsHtml}
         </div>
 
-        <div class="model-summary">
-          ${totalLine}
-        </div>
+        <div class="model-summary">${totalLine}</div>
 
         <button id="modelDone" class="btn-primary" type="button">
           Готово
@@ -1399,6 +1376,7 @@ function renderOrderItem() {
     </div>
   `;
 
+  // ЛОГИКА +/- ПО РАЗМЕРАМ ❗ (Кольца + браслеты)
   box.onclick = function (e) {
     const btn = e.target.closest("button");
     if (!btn || !btn.dataset.act) return;
@@ -1417,33 +1395,22 @@ function renderOrderItem() {
     if (act === "inc") qty = Math.min(999, qty + 1);
     if (act === "dec") qty = Math.max(0, qty - 1);
 
-    const row = box.querySelector(
-      `.size-row[data-size="${size}"]`
-    );
+    const row = box.querySelector(`.size-row[data-size="${size}"]`);
     if (!row) return;
 
     if (qty === 0) {
       cartNow = cartNow.filter(
-        it =>
-          !(
-            it.sku === sku &&
-            String(it.size) === String(size)
-          )
+        it => !(it.sku === sku && String(it.size) === String(size))
       );
       row.remove();
     } else {
       item.qty = qty;
-      const qtySpan = row.querySelector(
-        ".size-row-qty span"
-      );
-      const weightCell = row.querySelector(
-        ".size-row-weight"
-      );
+      const qtySpan = row.querySelector(".size-row-qty span");
+      const weightCell = row.querySelector(".size-row-weight");
       if (qtySpan) qtySpan.textContent = String(qty);
       if (weightCell && avgW != null) {
-        const lw = (Number(avgW) || 0) * qty;
         weightCell.textContent =
-          formatWeight(lw) + " г";
+          formatWeight((Number(avgW) || 0) * qty) + " г";
       }
     }
 
@@ -1456,27 +1423,20 @@ function renderOrderItem() {
     }
 
     const newSummary = calcSummary(remain);
-    const summaryEl = box.querySelector(
-      ".model-summary"
-    );
+    const summaryEl = box.querySelector(".model-summary");
     if (summaryEl) {
       summaryEl.textContent =
         newSummary.totalWeight != null
-          ? `Всего: ${newSummary.totalQty} шт · ~ ${formatWeight(
-              newSummary.totalWeight
-            )} г`
+          ? `Всего: ${newSummary.totalQty} шт · ~ ${formatWeight(newSummary.totalWeight)} г`
           : `Всего: ${newSummary.totalQty} шт`;
     }
 
     updateCartBadge();
   };
 
-  const btnDone = $("#modelDone", box);
-  if (btnDone) {
-    btnDone.onclick = () => {
-      window.location.href = backUrl;
-    };
-  }
+  $("#modelDone").onclick = () => {
+    window.location.href = backUrl;
+  };
 
   updateCartBadge();
 }
