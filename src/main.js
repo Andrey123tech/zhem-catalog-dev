@@ -1334,7 +1334,6 @@ function renderOrderItem() {
             <span>${qty}</span>
             <button type="button" data-act="inc" data-size="${size}">+</button>
           </div>
-          <div class="size-row-weight">${lineWeight}</div>
         </div>
       `;
     })
