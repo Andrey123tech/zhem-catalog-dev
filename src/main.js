@@ -2,7 +2,7 @@
 // Каталог, карточка, корзина. Vite-версия.
 
 // Подключаем данные каталога
-import { PRODUCTS, SIZES } from "./catalog_data.js";
+import { PRODUCTS, SIZES, BRACELET_SIZES } from "./catalog_data.js";
 
 /* УТИЛИТЫ DOM */
 
@@ -448,10 +448,10 @@ function renderProduct() {
     isBracelet; // пока браслеты всё ещё без размеров
 
   // Размерная линейка только для колец (пока)
-  const sizes =
-    isRingSized && Array.isArray(SIZES) && SIZES.length
-      ? SIZES
-      : [];
+  // Общая логика размеров: кольца — SIZES, браслеты — BRACELET_SIZES
+const sizes = isRing
+  ? (Array.isArray(SIZES) ? SIZES : [])
+  : (isBracelet ? BRACELET_SIZES : []);
 
   const sizeState = new Map();
   sizes.forEach(s => sizeState.set(String(s), 0));
