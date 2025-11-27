@@ -8,7 +8,8 @@
     "avgWeight": 2.284,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 5
   },
   {
     "sku": "Au0237165",
@@ -19,7 +20,8 @@
     "avgWeight": 4.015,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 1
   },
   {
     "sku": "Au177628",
@@ -30,7 +32,8 @@
     "avgWeight": 7.674,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 1
   },
   {
     "sku": "Au180572p",
@@ -41,7 +44,8 @@
     "avgWeight": 1.368,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 1
   },
   {
     "sku": "Au178175",
@@ -52,7 +56,8 @@
     "avgWeight": 0.795,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 1
   },
   {
     "sku": "Au190131",
@@ -63,7 +68,8 @@
     "avgWeight": 1.723,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 8
   },
   {
     "sku": "Au0237168M",
@@ -74,7 +80,8 @@
     "avgWeight": 2.369,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 2
   },
   {
     "sku": "Au177785",
@@ -85,7 +92,8 @@
     "avgWeight": 9.539,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 2
   },
   {
     "sku": "Au180574p",
@@ -96,7 +104,8 @@
     "avgWeight": 1.976,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 2
   },
   {
     "sku": "Au178176",
@@ -107,7 +116,8 @@
     "avgWeight": 0.934,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 2
   },
   {
     "sku": "Au190023",
@@ -118,7 +128,8 @@
     "avgWeight": 1.302,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 9
   },
   {
     "sku": "Au0237168",
@@ -129,7 +140,8 @@
     "avgWeight": 3.129,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 3
   },
   {
     "sku": "Au177602",
@@ -140,7 +152,8 @@
     "avgWeight": 11.417,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 3
   },
   {
     "sku": "Au180573p",
@@ -151,7 +164,8 @@
     "avgWeight": 1.858,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 3
   },
   {
     "sku": "Au178174",
@@ -162,7 +176,8 @@
     "avgWeight": 0.802,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 3
   },
   {
     "sku": "Au185800Kk",
@@ -173,7 +188,8 @@
     "avgWeight": 2.569,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 11
   },
   {
     "sku": "Au180007",
@@ -184,7 +200,8 @@
     "avgWeight": 2.621,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 4
   },
   {
     "sku": "Au177787",
@@ -195,7 +212,8 @@
     "avgWeight": 9.323,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 26
   },
   {
     "sku": "Au178604",
@@ -206,7 +224,8 @@
     "avgWeight": 2.661,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 4
   },
   {
     "sku": "Au190059",
@@ -217,7 +236,8 @@
     "avgWeight": 1.112,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 12
   },
   {
     "sku": "Au0237162",
@@ -228,7 +248,8 @@
     "avgWeight": 3.794,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 6
   },
   {
     "sku": "Au177601",
@@ -239,7 +260,8 @@
     "avgWeight": 10.677,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 4
   },
   {
     "sku": "Au178605",
@@ -250,7 +272,8 @@
     "avgWeight": 1.334,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 5
   },
   {
     "sku": "Au190037",
@@ -261,7 +284,8 @@
     "avgWeight": 1.116,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 13
   },
   {
     "sku": "Au180483",
@@ -272,7 +296,8 @@
     "avgWeight": 3.66,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 7
   },
   {
     "sku": "Au177630",
@@ -283,7 +308,8 @@
     "avgWeight": 9.507,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 5
   },
   {
     "sku": "Au180575p",
@@ -294,7 +320,8 @@
     "avgWeight": 1.508,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 6
   },
   {
     "sku": "Au190020",
@@ -305,7 +332,8 @@
     "avgWeight": 1.134,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 19
   },
   {
     "sku": "Au077724",
@@ -316,7 +344,8 @@
     "avgWeight": 2.221,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 8
   },
   {
     "sku": "Au177623",
@@ -327,7 +356,8 @@
     "avgWeight": 10.223,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 6
   },
   {
     "sku": "Au180555",
@@ -338,7 +368,8 @@
     "avgWeight": 1.297,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 7
   },
   {
     "sku": "Au190024",
@@ -349,7 +380,8 @@
     "avgWeight": 0.966,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 20
   },
   {
     "sku": "Au016075",
@@ -360,7 +392,8 @@
     "avgWeight": 4.005,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 12
   },
   {
     "sku": "Au0757705",
@@ -371,7 +404,8 @@
     "avgWeight": 5.875,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 7
   },
   {
     "sku": "Au180405p",
@@ -382,7 +416,8 @@
     "avgWeight": 1.262,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 9
   },
   {
     "sku": "Au190548",
@@ -393,7 +428,8 @@
     "avgWeight": 1.151,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 25
   },
   {
     "sku": "Au077167",
@@ -404,7 +440,8 @@
     "avgWeight": 2.602,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 13
   },
   {
     "sku": "Au179001",
@@ -415,7 +452,8 @@
     "avgWeight": 5.886,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 8
   },
   {
     "sku": "Au177731",
@@ -426,7 +464,8 @@
     "avgWeight": 0.498,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 10
   },
   {
     "sku": "Au190056",
@@ -437,7 +476,8 @@
     "avgWeight": 1.502,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 26
   },
   {
     "sku": "Au016167",
@@ -448,7 +488,8 @@
     "avgWeight": 4.187,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 14
   },
   {
     "sku": "Au177834",
@@ -459,7 +500,8 @@
     "avgWeight": 8.445,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 9
   },
   {
     "sku": "Au180562p",
@@ -470,7 +512,8 @@
     "avgWeight": 1.788,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 11
   },
   {
     "sku": "Au190573",
@@ -481,7 +524,8 @@
     "avgWeight": 1.394,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 27
   },
   {
     "sku": "Au178075",
@@ -492,7 +536,8 @@
     "avgWeight": 2.358,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 16
   },
   {
     "sku": "Au177622",
@@ -503,7 +548,8 @@
     "avgWeight": 9.807,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 10
   },
   {
     "sku": "Au190314p",
@@ -514,7 +560,8 @@
     "avgWeight": 0.771,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 8
   },
   {
     "sku": "Au190567",
@@ -525,7 +572,8 @@
     "avgWeight": 1.846,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 31
   },
   {
     "sku": "Au0237210",
@@ -536,7 +584,8 @@
     "avgWeight": 4.798,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 17
   },
   {
     "sku": "Au177621",
@@ -547,7 +596,8 @@
     "avgWeight": 9.24,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 11
   },
   {
     "sku": "Au180634p",
@@ -558,7 +608,8 @@
     "avgWeight": 1.57,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 12
   },
   {
     "sku": "Au190026",
@@ -569,7 +620,8 @@
     "avgWeight": 0.926,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 33
   },
   {
     "sku": "Au180590",
@@ -580,7 +632,8 @@
     "avgWeight": 3.523,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 18
   },
   {
     "sku": "Au177620",
@@ -591,7 +644,8 @@
     "avgWeight": 11.712,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 12
   },
   {
     "sku": "Au185583",
@@ -602,7 +656,8 @@
     "avgWeight": 0.83,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 13
   },
   {
     "sku": "Au190132",
@@ -613,7 +668,8 @@
     "avgWeight": 1.233,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 35
   },
   {
     "sku": "Au080167",
@@ -624,7 +680,8 @@
     "avgWeight": 1.358,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 20
   },
   {
     "sku": "Au177629",
@@ -635,7 +692,8 @@
     "avgWeight": 8.161,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 13
   },
   {
     "sku": "Au190156",
@@ -646,7 +704,8 @@
     "avgWeight": 1.626,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 37
   },
   {
     "sku": "Au0757719",
@@ -657,7 +716,8 @@
     "avgWeight": 2.101,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 21
   },
   {
     "sku": "Au177617",
@@ -668,7 +728,8 @@
     "avgWeight": 11.402,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 14
   },
   {
     "sku": "Au190144",
@@ -679,7 +740,8 @@
     "avgWeight": 1.394,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 41
   },
   {
     "sku": "Au0237210M",
@@ -690,7 +752,8 @@
     "avgWeight": 2.928,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 22
   },
   {
     "sku": "Au180602",
@@ -701,7 +764,8 @@
     "avgWeight": 9.352,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 15
   },
   {
     "sku": "Au190141",
@@ -712,7 +776,8 @@
     "avgWeight": 1.216,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 43
   },
   {
     "sku": "Au180359",
@@ -723,7 +788,8 @@
     "avgWeight": 3.813,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 23
   },
   {
     "sku": "Au180600",
@@ -734,7 +800,8 @@
     "avgWeight": 9.485,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 16
   },
   {
     "sku": "Au190574",
@@ -745,7 +812,8 @@
     "avgWeight": 1.455,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 45
   },
   {
     "sku": "Au0507739",
@@ -756,7 +824,8 @@
     "avgWeight": 1.667,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 24
   },
   {
     "sku": "Au0657706",
@@ -767,7 +836,8 @@
     "avgWeight": 5.009,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 17
   },
   {
     "sku": "Au190542",
@@ -778,7 +848,8 @@
     "avgWeight": 1.079,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 46
   },
   {
     "sku": "Au179329",
@@ -789,7 +860,8 @@
     "avgWeight": 2.86,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 25
   },
   {
     "sku": "Au178984",
@@ -800,7 +872,8 @@
     "avgWeight": 6.002,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 18
   },
   {
     "sku": "Au190569",
@@ -811,7 +884,8 @@
     "avgWeight": 1.547,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 48
   },
   {
     "sku": "Au0407756",
@@ -822,7 +896,8 @@
     "avgWeight": 2.111,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 27
   },
   {
     "sku": "Au179006",
@@ -833,7 +908,8 @@
     "avgWeight": 4.59,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 19
   },
   {
     "sku": "Au190155",
@@ -844,7 +920,8 @@
     "avgWeight": 1.749,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 52
   },
   {
     "sku": "Au185702",
@@ -855,7 +932,8 @@
     "avgWeight": 3.638,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 28
   },
   {
     "sku": "Au190174",
@@ -866,7 +944,8 @@
     "avgWeight": 7.293,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 20
   },
   {
     "sku": "Au190142",
@@ -877,7 +956,8 @@
     "avgWeight": 1.247,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 53
   },
   {
     "sku": "Au177208",
@@ -888,7 +968,8 @@
     "avgWeight": 2.411,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 29
   },
   {
     "sku": "Au178985",
@@ -899,7 +980,8 @@
     "avgWeight": 5.805,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 21
   },
   {
     "sku": "Au190543",
@@ -910,7 +992,8 @@
     "avgWeight": 1.094,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 54
   },
   {
     "sku": "Au0357734",
@@ -921,7 +1004,8 @@
     "avgWeight": 1.292,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 30
   },
   {
     "sku": "Au177554",
@@ -932,7 +1016,8 @@
     "avgWeight": 6.389,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 22
   },
   {
     "sku": "Au190572",
@@ -943,7 +1028,8 @@
     "avgWeight": 1.442,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 59
   },
   {
     "sku": "Au179349",
@@ -954,7 +1040,8 @@
     "avgWeight": 1.961,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 31
   },
   {
     "sku": "Au178998",
@@ -965,7 +1052,8 @@
     "avgWeight": 4.381,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 23
   },
   {
     "sku": "Au190129",
@@ -976,7 +1064,8 @@
     "avgWeight": 0.958,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 60
   },
   {
     "sku": "Au185853",
@@ -987,7 +1076,8 @@
     "avgWeight": 1.233,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 32
   },
   {
     "sku": "Au178994",
@@ -998,7 +1088,8 @@
     "avgWeight": 4.432,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 24
   },
   {
     "sku": "Au190133",
@@ -1009,7 +1100,8 @@
     "avgWeight": 1.584,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 64
   },
   {
     "sku": "Au0207109",
@@ -1020,7 +1112,8 @@
     "avgWeight": 1.451,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 33
   },
   {
     "sku": "Au0357716",
@@ -1031,7 +1124,8 @@
     "avgWeight": 3.727,
     "sizes": "bracelet",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 25
   },
   {
     "sku": "Au190159",
@@ -1042,7 +1136,8 @@
     "avgWeight": 1.348,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 65
   },
   {
     "sku": "Au190196",
@@ -1053,7 +1148,8 @@
     "avgWeight": 3.669,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 34
   },
   {
     "sku": "Au190140",
@@ -1064,7 +1160,8 @@
     "avgWeight": 1.236,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 66
   },
   {
     "sku": "Au180395",
@@ -1075,7 +1172,8 @@
     "avgWeight": 3.186,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 35
   },
   {
     "sku": "Au190561",
@@ -1086,7 +1184,8 @@
     "avgWeight": 2.244,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 68
   },
   {
     "sku": "Au0407107",
@@ -1097,7 +1196,8 @@
     "avgWeight": 2.82,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 37
   },
   {
     "sku": "Au190134",
@@ -1108,7 +1208,8 @@
     "avgWeight": 1.559,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 69
   },
   {
     "sku": "Au180402",
@@ -1119,7 +1220,8 @@
     "avgWeight": 2.923,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 38
   },
   {
     "sku": "Au190052",
@@ -1130,7 +1232,8 @@
     "avgWeight": 2.256,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 70
   },
   {
     "sku": "Au180667",
@@ -1141,7 +1244,8 @@
     "avgWeight": 3.884,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 40
   },
   {
     "sku": "Au190014",
@@ -1152,7 +1256,8 @@
     "avgWeight": 1.36,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 72
   },
   {
     "sku": "Au180653",
@@ -1163,7 +1268,8 @@
     "avgWeight": 2.455,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 41
   },
   {
     "sku": "Au190163K",
@@ -1174,7 +1280,8 @@
     "avgWeight": 1.703,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 73
   },
   {
     "sku": "Au0307108",
@@ -1185,7 +1292,8 @@
     "avgWeight": 1.954,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 42
   },
   {
     "sku": "Au190016",
@@ -1196,7 +1304,8 @@
     "avgWeight": 1.209,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 76
   },
   {
     "sku": "Au180659",
@@ -1207,7 +1316,8 @@
     "avgWeight": 2.588,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 43
   },
   {
     "sku": "Au190365K",
@@ -1218,7 +1328,8 @@
     "avgWeight": 1.461,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 78
   },
   {
     "sku": "Au180387",
@@ -1229,7 +1340,8 @@
     "avgWeight": 2.062,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 44
   },
   {
     "sku": "Au190562",
@@ -1240,7 +1352,8 @@
     "avgWeight": 2.889,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 81
   },
   {
     "sku": "Au177760",
@@ -1251,7 +1364,8 @@
     "avgWeight": 3.823,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 45
   },
   {
     "sku": "Au190064",
@@ -1262,7 +1376,8 @@
     "avgWeight": 1.806,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 83
   },
   {
     "sku": "Au178110",
@@ -1273,7 +1388,8 @@
     "avgWeight": 2.531,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 46
   },
   {
     "sku": "Au190555",
@@ -1284,7 +1400,8 @@
     "avgWeight": 2.098,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 84
   },
   {
     "sku": "Au177039",
@@ -1295,7 +1412,8 @@
     "avgWeight": 3.258,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 48
   },
   {
     "sku": "Au190546",
@@ -1306,7 +1424,8 @@
     "avgWeight": 1.116,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 88
   },
   {
     "sku": "Au180635C",
@@ -1317,7 +1436,8 @@
     "avgWeight": 2.634,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 49
   },
   {
     "sku": "Au178850",
@@ -1328,7 +1448,8 @@
     "avgWeight": 2.95,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 17
   },
   {
     "sku": "Au180392",
@@ -1339,7 +1460,8 @@
     "avgWeight": 3.408,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 51
   },
   {
     "sku": "Au180381K",
@@ -1350,7 +1472,8 @@
     "avgWeight": 2.62,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 86
   },
   {
     "sku": "Au180668M",
@@ -1361,7 +1484,8 @@
     "avgWeight": 2.173,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 52
   },
   {
     "sku": "Au077460F",
@@ -1372,7 +1496,8 @@
     "avgWeight": 3.784,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 3
   },
   {
     "sku": "Au180002",
@@ -1383,7 +1508,8 @@
     "avgWeight": 2.648,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 53
   },
   {
     "sku": "Au190125",
@@ -1394,7 +1520,8 @@
     "avgWeight": 3.038,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 6
   },
   {
     "sku": "Au177758",
@@ -1405,7 +1532,8 @@
     "avgWeight": 2.789,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 54
   },
   {
     "sku": "Au190119",
@@ -1416,7 +1544,8 @@
     "avgWeight": 5.134,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 18
   },
   {
     "sku": "Au179317",
@@ -1427,7 +1556,8 @@
     "avgWeight": 2.418,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 55
   },
   {
     "sku": "Au190124",
@@ -1438,7 +1568,8 @@
     "avgWeight": 5.029,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 23
   },
   {
     "sku": "Au180658",
@@ -1449,7 +1580,8 @@
     "avgWeight": 2.471,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 56
   },
   {
     "sku": "Au190126",
@@ -1460,7 +1592,8 @@
     "avgWeight": 5.239,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 24
   },
   {
     "sku": "Au179320",
@@ -1471,7 +1604,8 @@
     "avgWeight": 2.546,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 57
   },
   {
     "sku": "Au190121",
@@ -1482,7 +1616,8 @@
     "avgWeight": 3.075,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 28
   },
   {
     "sku": "Au180003",
@@ -1493,7 +1628,8 @@
     "avgWeight": 2.527,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 58
   },
   {
     "sku": "Au1407386F",
@@ -1504,7 +1640,8 @@
     "avgWeight": 4.827,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 32
   },
   {
     "sku": "Au179305G",
@@ -1515,7 +1652,8 @@
     "avgWeight": 1.099,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 59
   },
   {
     "sku": "Au1409391F",
@@ -1526,7 +1664,8 @@
     "avgWeight": 4.851,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 38
   },
   {
     "sku": "Au179305",
@@ -1537,7 +1676,8 @@
     "avgWeight": 1.091,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 60
   },
   {
     "sku": "Au190122",
@@ -1548,7 +1688,8 @@
     "avgWeight": 5.138,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 51
   },
   {
     "sku": "Au010102",
@@ -1559,7 +1700,8 @@
     "avgWeight": 0.817,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 61
   },
   {
     "sku": "Au177446F",
@@ -1570,7 +1712,8 @@
     "avgWeight": 3.774,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 56
   },
   {
     "sku": "Au185684",
@@ -1581,7 +1724,8 @@
     "avgWeight": 1.228,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 5
   },
   {
     "sku": "Au0407708",
@@ -1592,7 +1736,8 @@
     "avgWeight": 1.086,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 2
   },
   {
     "sku": "Au180570",
@@ -1603,7 +1748,8 @@
     "avgWeight": 1.639,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 9
   },
   {
     "sku": "Au0407709",
@@ -1614,7 +1760,8 @@
     "avgWeight": 2.459,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 22
   },
   {
     "sku": "Au180553",
@@ -1625,7 +1772,8 @@
     "avgWeight": 1.606,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 10
   },
   {
     "sku": "Au0407712",
@@ -1636,7 +1784,8 @@
     "avgWeight": 2.4,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 34
   },
   {
     "sku": "Au0407397",
@@ -1647,7 +1796,8 @@
     "avgWeight": 0.839,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 11
   },
   {
     "sku": "Au0507708",
@@ -1658,7 +1808,8 @@
     "avgWeight": 1.358,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 39
   },
   {
     "sku": "Au0507397",
@@ -1669,7 +1820,8 @@
     "avgWeight": 1.036,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 15
   },
   {
     "sku": "Au04007",
@@ -1680,7 +1832,8 @@
     "avgWeight": 3.04,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 40
   },
   {
     "sku": "Au177916",
@@ -1691,7 +1844,8 @@
     "avgWeight": 0.771,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 19
   },
   {
     "sku": "Au0307709",
@@ -1702,7 +1856,8 @@
     "avgWeight": 1.81,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 62
   },
   {
     "sku": "Au180381",
@@ -1713,7 +1868,8 @@
     "avgWeight": 3.851,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 26
   },
   {
     "sku": "Au0607708",
@@ -1724,7 +1880,8 @@
     "avgWeight": 1.719,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 71
   },
   {
     "sku": "Au178923",
@@ -1735,7 +1892,8 @@
     "avgWeight": 1.576,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 36
   },
   {
     "sku": "Au0507709",
@@ -1746,7 +1904,8 @@
     "avgWeight": 2.881,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 77
   },
   {
     "sku": "Au180634C",
@@ -1757,7 +1916,8 @@
     "avgWeight": 3.897,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 39
   },
   {
     "sku": "Au077454F",
@@ -1768,7 +1928,8 @@
     "avgWeight": 3.798,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 10
   },
   {
     "sku": "Au185807",
@@ -1779,7 +1940,8 @@
     "avgWeight": 1.303,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 47
   },
   {
     "sku": "Au1407452F",
@@ -1790,7 +1952,8 @@
     "avgWeight": 5.135,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 21
   },
   {
     "sku": "Au185813",
@@ -1801,7 +1964,8 @@
     "avgWeight": 0.998,
     "sizes": null,
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 50
   },
   {
     "sku": "Au0507429F",
@@ -1812,7 +1976,8 @@
     "avgWeight": 3.04,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 74
   },
   {
     "sku": "Au177260F",
@@ -1823,7 +1988,8 @@
     "avgWeight": 2.616,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 1
   },
   {
     "sku": "Au178854",
@@ -1834,7 +2000,8 @@
     "avgWeight": 2.382,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 4
   },
   {
     "sku": "Au178846",
@@ -1845,7 +2012,8 @@
     "avgWeight": 2.165,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 7
   },
   {
     "sku": "Au185800K",
@@ -1856,7 +2024,8 @@
     "avgWeight": 2.19,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 15
   },
   {
     "sku": "Au177249",
@@ -1867,7 +2036,8 @@
     "avgWeight": 2.323,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 16
   },
   {
     "sku": "Au178852",
@@ -1878,7 +2048,8 @@
     "avgWeight": 2.366,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 29
   },
   {
     "sku": "Au177249F",
@@ -1889,7 +2060,8 @@
     "avgWeight": 3.859,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 30
   },
   {
     "sku": "Au180503",
@@ -1900,7 +2072,8 @@
     "avgWeight": 2.979,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 36
   },
   {
     "sku": "Au178648",
@@ -1911,7 +2084,8 @@
     "avgWeight": 1.823,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 42
   },
   {
     "sku": "Au190560",
@@ -1922,7 +2096,8 @@
     "avgWeight": 2.021,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 44
   },
   {
     "sku": "Au190502",
@@ -1933,7 +2108,8 @@
     "avgWeight": 2.59,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 47
   },
   {
     "sku": "Au190593",
@@ -1944,7 +2120,8 @@
     "avgWeight": 2.272,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 49
   },
   {
     "sku": "Au190503",
@@ -1955,7 +2132,8 @@
     "avgWeight": 2.772,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 50
   },
   {
     "sku": "Au177260",
@@ -1966,7 +2144,8 @@
     "avgWeight": 1.612,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 55
   },
   {
     "sku": "Au190136",
@@ -1977,7 +2156,8 @@
     "avgWeight": 1.242,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 57
   },
   {
     "sku": "Au190039",
@@ -1988,7 +2168,8 @@
     "avgWeight": 2.033,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 58
   },
   {
     "sku": "Au190599",
@@ -1999,7 +2180,8 @@
     "avgWeight": 2.27,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 61
   },
   {
     "sku": "Au190554",
@@ -2010,7 +2192,8 @@
     "avgWeight": 2.48,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 63
   },
   {
     "sku": "Au190070",
@@ -2021,7 +2204,8 @@
     "avgWeight": 1.82,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 67
   },
   {
     "sku": "Au180590",
@@ -2032,7 +2216,8 @@
     "avgWeight": 2.246,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 14
   },
   {
     "sku": "Au190556",
@@ -2043,7 +2228,8 @@
     "avgWeight": 1.785,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 75
   },
   {
     "sku": "Au0757755",
@@ -2054,7 +2240,8 @@
     "avgWeight": 2.219,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 79
   },
   {
     "sku": "Au190524",
@@ -2065,7 +2252,8 @@
     "avgWeight": 0.967,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 80
   },
   {
     "sku": "Au190018",
@@ -2076,7 +2264,8 @@
     "avgWeight": 2.051,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 82
   },
   {
     "sku": "Au190638",
@@ -2087,7 +2276,8 @@
     "avgWeight": 2.095,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 85
   },
   {
     "sku": "Au190137",
@@ -2098,7 +2288,8 @@
     "avgWeight": 1.151,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 87
   },
   {
     "sku": "Au190552",
@@ -2109,6 +2300,7 @@
     "avgWeight": 2.088,
     "sizes": "ring",
     "isHit": true,
-    "images": []
+    "images": [],
+    "sortOrder": 89
   }
 ]
