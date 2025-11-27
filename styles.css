@@ -48,7 +48,7 @@ img {
 .topbar-left {
   display: flex;
   align-items: center;
-  padding-top: 2px; 
+  padding-top: 10px; 
 }
 
 .logo-img {
