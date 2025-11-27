@@ -359,13 +359,34 @@ function renderGrid() {
     return;
   }
 
-  // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
+    // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
 
   // фильтрация по категории
   let list = PRODUCTS.filter(p => p.category === category);
 
-  // сортировка по артикулу, чтобы не было хаоса
-  list = list.slice().sort((a, b) => String(a.sku).localeCompare(String(b.sku)));
+  // поиск по артикулу (если есть строка поиска)
+  const searchInput = $("#skuSearch");
+  let query = "";
+  if (searchInput) {
+    query = searchInput.value.trim();
+  }
+
+  if (query) {
+    const q = query.toLowerCase();
+    list = list.filter(p => String(p.sku).toLowerCase().includes(q));
+  }
+
+  // сортировка:
+  // 1) сначала по sortOrder (если есть),
+  // 2) потом по артикулу — чтобы список был стабильным.
+  list = list
+    .slice()
+    .sort((a, b) => {
+      const sa = typeof a.sortOrder === "number" ? a.sortOrder : 9999;
+      const sb = typeof b.sortOrder === "number" ? b.sortOrder : 9999;
+      if (sa !== sb) return sa - sb;
+      return String(a.sku).localeCompare(String(b.sku));
+    });
 
   // заголовки
   const label = CATEGORY_LABELS[category];
