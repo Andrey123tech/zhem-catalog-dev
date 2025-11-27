@@ -365,9 +365,17 @@ function renderGrid() {
   let list = PRODUCTS.filter(p => p.category === category);
 
   // поиск по артикулу (если есть строка поиска)
-  const searchInput = $("#skuSearch");
+    const searchInput = $("#skuSearch");
   let query = "";
   if (searchInput) {
+    // Вешаем обработчик только один раз
+    if (!searchInput.dataset.bound) {
+      searchInput.dataset.bound = "1";
+      searchInput.addEventListener("input", () => {
+        renderGrid();
+      });
+    }
+
     query = searchInput.value.trim();
   }
 
