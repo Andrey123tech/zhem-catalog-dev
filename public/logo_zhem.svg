@@ -1,17 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500">
+  <!-- Основное слово -->
   <text x="50%" y="42%" text-anchor="middle"
         font-family="Times New Roman, serif"
         font-size="200"
         letter-spacing="35"
-        fill="#000000">
+        fill="#000000"
+        font-weight="600"
+        stroke="#000000"
+        stroke-width="1.2">
     ЖЕМЧУЖИНА
   </text>
 
+  <!-- EST • 2004 -->
   <text x="50%" y="75%" text-anchor="middle"
         font-family="Times New Roman, serif"
         font-size="120"
         letter-spacing="30"
-        fill="#000000">
+        fill="#000000"
+        font-weight="600"
+        stroke="#000000"
+        stroke-width="0.9">
     EST • 2004
   </text>
 </svg>
