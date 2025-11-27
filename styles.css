@@ -38,10 +38,10 @@ img {
   top: 0;
   z-index: 20;
   background: #ffffff;
-  border-bottom: 2px solid #6A1F2A;
-  padding: 4px 10px 4px;
+  border-bottom: 1px solid #d8d8d8;  /* тоньше и светлее */
+  padding: 6px 16px;                  /* аккуратные отступы */
   display: flex;
-  align-items: center;
+  align-items: center;                /* центрируем логотип и кнопку по вертикали */
   justify-content: space-between;
 }
 
