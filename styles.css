@@ -1320,112 +1320,66 @@ body.no-scroll {
   border-color: #0f172a;
 }
 
-/* === ТИПОГРАФИКА · ВАРИАНТ A ПОД НОВЫЙ ЛОГО === */
+/* === ТИПОГРАФИКА ПОД НОВЫЙ ЛОГО (ЧИСТАЯ ВЕРСИЯ) === */
 
-/* Базовый текст */
+/* Базовый текст по всему приложению */
 body {
   font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
   font-weight: 400;
-  letter-spacing: 0.01em;   /* чуть воздуха */
+  letter-spacing: 0.01em;  /* чуть воздуха */
+  color: #1a1a1a;          /* мягкий чёрный, не #000 */
 }
 
-/* Хлебные крошки, описания, подписи */
+/* Хлебные крошки, описания, подписи, вспомогательный текст */
 .breadcrumb,
+.breadcrumbs,
 .hero-sub,
 .main-section-sub,
 .tile-sub,
 .cart-summary-text,
-.section-note {
+.section-note,
+.small,
+.muted-text {
   font-weight: 400;
   letter-spacing: 0.01em;
+  color: #6e6e6e;
 }
 
-/* Крупные заголовки (как "Каталог", "Корзина") */
+/* КРУПНЫЕ ЗАГОЛОВКИ (КАК "Каталог", "Корзина" и т.п.) */
 .hero-title,
 .section-title,
 .page-title,
 .cart-title {
-  font-weight: 500;         /* было ближе к 700, если h1/h2 по умолчанию */
-  letter-spacing: 0.04em;   /* ближе к логотипу по характеру */
+  font-weight: 440;        /* ЧУТЬ тоньше, чем было */
+  letter-spacing: 0.04em;  /* характер под лого */
+  color: #222222;
 }
 
-/* Подзаголовки внутри карточек / блоков */
+/* ЗАГОЛОВКИ ВНУТРИ БЛОКОВ / КАРТОЧЕК ("Кольца", "Серьги", группы в корзине) */
 .tile-title,
 .main-section-title,
 .category-title,
 .cart-group-title {
-  font-weight: 500;
+  font-weight: 460;        /* немного плотнее, чем h1, но всё ещё тонко */
   letter-spacing: 0.03em;
+  color: #222222;
 }
 
-/* Мелкие заголовки в корзине, итогах и т.п. */
+/* МЕЛКИЕ ЗАГОЛОВКИ (итоги, маленькие подписи-блоки) */
 .summary-title,
 .block-title-sm {
-  font-weight: 500;
+  font-weight: 450;
   letter-spacing: 0.02em;
+  color: #222222;
 }
 
-/* Кнопки — читаемые, но не жирные кирпичи */
+/* КНОПКИ: читаемые, но не "кирпичи" */
 button,
 .btn,
 .btn-primary,
 .btn-secondary,
 .cart-link {
-  font-weight: 500;
+  font-weight: 480;        /* чуть плотнее для читаемости */
   letter-spacing: 0.04em;
-}
-
-/* Для совсем мелкого текста, если он есть */
-.small,
-.muted-text {
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
-
-body {
-  color: #1a1a1a; /* было #000, стало на 20% светлее */
-}
-
-.section-title,
-.hero-title,
-.tile-title,
-.cart-group-title,
-button,
-.btn,
-.btn-primary,
-.btn-secondary {
   color: #1a1a1a;
-}
-
-.hero-title,
-.section-title,
-.tile-title,
-.cart-group-title {
-  font-weight: 450;
-}
-
-button,
-.btn,
-.btn-primary,
-.cart-link {
-  font-weight: 480;
-}
-
-.section-title,
-.hero-title,
-.tile-title,
-.breadcrumbs,
-h1, h2, h3 {
-  font-weight: 460;
-}
-
-.section-title,
-.hero-title,
-.tile-title,
-.breadcrumbs {
-  color: #222;
-}
-
-.tile-title {
-  font-weight: 480;
 }
