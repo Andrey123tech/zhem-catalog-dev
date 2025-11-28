@@ -1410,3 +1410,42 @@ body {
 .cart-sub {
   color: var(--text-muted);
 }
+
+/* === Главная: белые карточки разделов, как в корзине === */
+
+.main-sections {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main-section-card {
+  background: #ffffff;                       /* белый, как блоки в корзине */
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #111827;
+}
+
+.main-section-title {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-bottom: 2px;
+  color: #111827;
+}
+
+.main-section-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* лёгкий отклик на тап */
+.main-section-card:active {
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
+  transform: translateY(1px);
+}
+
