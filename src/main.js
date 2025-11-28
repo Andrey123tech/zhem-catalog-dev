@@ -1778,10 +1778,11 @@ function initFilterSheet() {
   }
 
   // Применить — читаем значения в filterState и закрываем шторку
-  if (btnApply) {
+    if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
-      closeSheet();           // просто закрыли, рендер пока не трогаем
+      closeSheet();
+      renderGrid();           // перерисовали каталог с учётом фильтров
     });
   }
 
