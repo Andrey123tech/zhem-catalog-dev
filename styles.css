@@ -495,13 +495,18 @@ img {
 }
 
 .cart-title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;        /* ближе к каталогу, не орёт */
+  font-weight: 500;       /* вместо 600 – заметно спокойнее */
+  letter-spacing: 0.01em;
+  color: #222222;
 }
 
 .cart-sub {
-  font-size: 15px;
-  color: #111827;
+  font-size: 11px;        /* как "Арт. … 2,62 г" в плитках */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #555555;         /* мягче, не спорит с заголовком */
 }
 
 .cart-header-row .qty-inline {
