@@ -1319,3 +1319,65 @@ body.no-scroll {
 .sku-search:focus {
   border-color: #0f172a;
 }
+
+/* === ТИПОГРАФИКА · ВАРИАНТ A ПОД НОВЫЙ ЛОГО === */
+
+/* Базовый текст */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;   /* чуть воздуха */
+}
+
+/* Хлебные крошки, описания, подписи */
+.breadcrumb,
+.hero-sub,
+.main-section-sub,
+.tile-sub,
+.cart-summary-text,
+.section-note {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Крупные заголовки (как "Каталог", "Корзина") */
+.hero-title,
+.section-title,
+.page-title,
+.cart-title {
+  font-weight: 500;         /* было ближе к 700, если h1/h2 по умолчанию */
+  letter-spacing: 0.04em;   /* ближе к логотипу по характеру */
+}
+
+/* Подзаголовки внутри карточек / блоков */
+.tile-title,
+.main-section-title,
+.category-title,
+.cart-group-title {
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* Мелкие заголовки в корзине, итогах и т.п. */
+.summary-title,
+.block-title-sm {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Кнопки — читаемые, но не жирные кирпичи */
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.cart-link {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* Для совсем мелкого текста, если он есть */
+.small,
+.muted-text {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
