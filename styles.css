@@ -227,7 +227,7 @@ img {
 
 .tile-title {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 460;
   margin-bottom: 2px;
 }
 
@@ -1360,7 +1360,7 @@ body {
 .main-section-title,
 .category-title,
 .cart-group-title {
-  font-weight: 400;        /* немного плотнее, чем h1, но всё ещё тонко */
+  font-weight: 460;        /* немного плотнее, чем h1, но всё ещё тонко */
   letter-spacing: 0.03em;
   color: #222222;
 }
