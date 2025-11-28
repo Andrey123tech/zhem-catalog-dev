@@ -1672,6 +1672,8 @@ function initFilterSheet() {
   const overlay = document.getElementById("filterOverlay");
   const sheet = document.getElementById("filterSheet");
   const btnClose = document.getElementById("filterCloseBtn");
+  const btnReset = document.getElementById("filterResetBtn");
+  const btnApply = document.getElementById("filterApplyBtn");
 
   if (!btnToggle || !overlay || !sheet) return;
 
@@ -1689,8 +1691,42 @@ function initFilterSheet() {
   if (btnClose) {
     btnClose.addEventListener("click", closeSheet);
   }
-}
 
-document.addEventListener("DOMContentLoaded", () => {
-  initFilterSheet();
-});
+  // Сброс — пока только чистим поля и визуальное состояние
+  if (btnReset) {
+    btnReset.addEventListener("click", () => {
+      const wMin = document.getElementById("filterWeightMin");
+      const wMax = document.getElementById("filterWeightMax");
+      const cbPopular = document.getElementById("filterPopular");
+      const cbNew = document.getElementById("filterNew");
+      const cbInStock = document.getElementById("filterInStock");
+
+      if (wMin) wMin.value = "";
+      if (wMax) wMax.value = "";
+      if (cbPopular) cbPopular.checked = false;
+      if (cbNew) cbNew.checked = false;
+      if (cbInStock) cbInStock.checked = false;
+
+      document.querySelectorAll(".filter-size-chip").forEach(chip => {
+        chip.classList.remove("active");
+      });
+    });
+  }
+
+  // Применить — пока просто закрываем шторку.
+  // Логику фильтрации подцепим отдельным шагом.
+  if (btnApply) {
+    btnApply.addEventListener("click", () => {
+      closeSheet();
+    });
+  }
+
+  // Переключение размера (только визуально: активная "таблетка")
+  document.querySelectorAll(".filter-size-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const isActive = chip.classList.contains("active");
+      document.querySelectorAll(".filter-size-chip").forEach(c => c.classList.remove("active"));
+      if (!isActive) chip.classList.add("active");
+    });
+  });
+}
