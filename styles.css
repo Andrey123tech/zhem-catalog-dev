@@ -1354,3 +1354,59 @@ body {
 .size-matrix-backdrop {
   z-index: 80;
 }
+
+/* === ЕДИНАЯ СИСТЕМА СЕРЫХ ПОДЛОЖЕК И ТЕКСТА === */
+
+:root {
+  /* Фон страницы, карточек и "мягких" блоков */
+  --bg-page:   #f1f5f9;  /* общий фон (как сейчас) */
+  --bg-card:   #ffffff;  /* белые карточки */
+  --bg-muted:  #f3f4f6;  /* мягкий серый фон для "внутренних" блоков */
+
+  /* Бордеры */
+  --border-soft: #e2e8f0;
+
+  /* Текст */
+  --text-main:   #1a1a1a;
+  --text-muted:  #6b7280;  /* единый серый для подписи/описаний */
+}
+
+/* Фон страницы */
+body {
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+/* Белые карточки: категории, плитки, товар, позиции в корзине, универсальные карточки */
+.category-card,
+.tile,
+.product-card,
+.list-item,
+.card,
+.size-matrix-sheet {
+  background: var(--bg-card);
+  border-color: var(--border-soft);
+}
+
+/* Мягкие серые подложки внутри (контейнеры, где "второй слой") */
+.category-image,
+.product-controls,
+.model-sizes-list,
+.size-matrix-list,
+.product-photo-wrap,
+.model-photo-wrap {
+  background: var(--bg-muted);
+}
+
+/* Описания и "вторичный" текст: приводим к одному серому */
+.hero-sub,
+.category-sub,
+.main-section-sub,
+.product-art,
+.product-weight,
+.model-avg,
+.size-row-weight,
+.tile-sub,
+.cart-sub {
+  color: var(--text-muted);
+}
