@@ -1418,3 +1418,22 @@ button,
 .btn-primary {
   color: #fff !important;
 }
+
+/* Карточка: название и подстрока (арт./вес) */
+.tile-title {
+  font-size: 16px;        /* как сейчас, можно не трогать */
+  font-weight: 400;       /* было жирнее — делаем тоньше */
+  letter-spacing: 0.02em; /* чуть воздуха, ближе к логотипу */
+  color: #111;            /* слегка темнее тела, но без жирности */
+}
+
+.tile-sub {
+  font-size: 10px;        /* твой текущий размер */
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  font-weight: 400;       /* фиксируем нормальный, не жирный */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #666;            /* мягче и не спорит с заголовком */
+}
