@@ -1545,3 +1545,65 @@ body {
 .filter-sheet-footer .btn-primary {
   flex: 1;
 }
+
+.filter-block {
+  margin-bottom: 12px;
+}
+
+.filter-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.filter-weight-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 13px;
+}
+
+.filter-input.small {
+  max-width: 120px;
+}
+
+.filter-weight-sep {
+  font-size: 13px;
+  color: #777;
+}
+
+.filter-size-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-size-chip {
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f8f8fa;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.filter-size-chip.active {
+  border-color: #00897b;
+  background: #e0f2f1;
+}
+
+.filter-switch-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
