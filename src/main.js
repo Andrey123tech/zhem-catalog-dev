@@ -68,6 +68,38 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
+// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ПОКА ТОЛЬКО ВЕС) ===
+function applyFiltersByWeight(list) {
+  // Если фильтры по весу не заданы – возвращаем список как есть
+  if (
+    (filterState.weightMin == null || isNaN(filterState.weightMin)) &&
+    (filterState.weightMax == null || isNaN(filterState.weightMax))
+  ) {
+    return list;
+  }
+
+  return list.filter(p => {
+    // Берём основной вес: avgWeight (как в buildOrderText), если нет — запасной weight
+    const w = p.avgWeight ?? p.weight;
+
+    // Если веса нет – сейчас не выбрасываем модель, чтобы не терять позиции
+    if (w == null || isNaN(w)) {
+      return true;
+    }
+
+    let ok = true;
+
+    if (filterState.weightMin != null && !isNaN(filterState.weightMin)) {
+      ok = ok && w >= filterState.weightMin;
+    }
+    if (filterState.weightMax != null && !isNaN(filterState.weightMax)) {
+      ok = ok && w <= filterState.weightMax;
+    }
+
+    return ok;
+  });
+}
+
 /* === Формирование текста заявки для WhatsApp + Excel === */
 function buildOrderText(cart, products) {
   if (!Array.isArray(cart) || !cart.length) return "";
