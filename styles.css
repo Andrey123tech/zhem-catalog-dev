@@ -1381,3 +1381,18 @@ button,
   font-weight: 400;
   letter-spacing: 0.02em;
 }
+
+body {
+  color: #1a1a1a; /* было #000, стало на 20% светлее */
+}
+
+.section-title,
+.hero-title,
+.tile-title,
+.cart-group-title,
+button,
+.btn,
+.btn-primary,
+.btn-secondary {
+  color: #1a1a1a;
+}
