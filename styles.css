@@ -1410,3 +1410,18 @@ button,
 .cart-link {
   font-weight: 480;
 }
+
+.section-title,
+.hero-title,
+.tile-title,
+.breadcrumbs,
+h1, h2, h3 {
+  font-weight: 460;
+}
+
+.section-title,
+.hero-title,
+.tile-title,
+.breadcrumbs {
+  color: #222;
+}
