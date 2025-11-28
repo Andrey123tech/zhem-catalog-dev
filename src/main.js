@@ -1746,7 +1746,7 @@ function initFilterSheet() {
   }
 
   // Сброс — чистим поля + состояние filterState
-  if (btnReset) {
+    if (btnReset) {
     btnReset.addEventListener("click", () => {
       const wMin = document.getElementById("filterWeightMin");
       const wMax = document.getElementById("filterWeightMax");
@@ -1771,6 +1771,9 @@ function initFilterSheet() {
       filterState.isPopular = false;
       filterState.isNew = false;
       filterState.inStock = false;
+
+      // Перерисовываем каталог, если мы на странице с сеткой
+      renderGrid();
     });
   }
 
