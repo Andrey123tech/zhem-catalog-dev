@@ -1425,3 +1425,7 @@ h1, h2, h3 {
 .breadcrumbs {
   color: #222;
 }
+
+.tile-title {
+  font-weight: 480;
+}
