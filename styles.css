@@ -1350,7 +1350,7 @@ body {
 .section-title,
 .page-title,
 .cart-title {
-  font-weight: 440;        /* ЧУТЬ тоньше, чем было */
+  font-weight: 400;        /* ЧУТЬ тоньше, чем было */
   letter-spacing: 0.04em;  /* характер под лого */
   color: #222222;
 }
