@@ -1432,59 +1432,64 @@ button,
 }
 
 /* ======================
-   ТИПОГРАФИКА · ЦЕНТРАЛЬНЫЙ ПУЛЬТ
-   Всё, что ниже, аккуратно выравнивает размеры и жирность
+   ТИПОГРАФИКА · ЕДИНЫЙ БЛОК
    ====================== */
 
 :root {
   /* базовые размеры */
   --fs-body: 15px;
   --fs-breadcrumb: 13px;
-  --fs-hero-title: 22px;    /* "Каталог", "Корзина" */
-  --fs-section-title: 18px; /* "Кольца · текущая подборка" */
-  --fs-card-title: 15px;    /* "Кольцо", "Серьги" в плитках */
-  --fs-card-sub: 11px;      /* "Арт. Au177260F 2,62 г" */
+
+  --fs-hero-title: 22px;     /* "Каталог", "Корзина" */
+  --fs-section-title: 18px;  /* "Кольца · текущая подборка" и заголовки групп в корзине */
+
+  --fs-card-title: 15px;     /* "Кольцо" в плитках и списках */
+  --fs-card-sub: 10px;       /* "Арт. Au177260F  2,62 г" и подобные строки */
 }
 
-/* Базовый текст везде */
+/* Базовый текст */
 body {
   font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
   font-size: var(--fs-body);
   line-height: 1.35;
-  color: #222;
+  color: #222222;
 }
 
-/* Крупные заголовки: "Каталог", "Корзина" */
+/* Хлебные крошки */
+.breadcrumb,
+.breadcrumbs {
+  font-size: var(--fs-breadcrumb);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* КРУПНЫЕ ЗАГОЛОВКИ СТРАНИЦ
+   (например, "Каталог · Кольца", "Корзина") */
 .hero-title,
 .page-title,
 .cart-title {
   font-size: var(--fs-hero-title);
   font-weight: 500;
   letter-spacing: 0.03em;
-  color: #222;
+  color: #222222;
 }
 
-/* Подзаголовки разделов: "Кольца · текущая подборка" и т.п. */
+/* ЗАГОЛОВКИ РАЗДЕЛОВ
+   ("Кольца · текущая подборка", заголовки внутри корзины) */
 .section-title,
 .cart-group-title {
   font-size: var(--fs-section-title);
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: #222;
+  color: #222222;
 }
 
-/* Хлебные крошки */
-.breadcrumb {
-  font-size: var(--fs-breadcrumb);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-/* Плитки каталога: "Кольцо" / "Арт. Au..." */
+/* ПЛИТКИ КАТАЛОГА: "Кольцо" + "Арт. ..." */
 .tile-title {
   font-size: var(--fs-card-title);
   font-weight: 500;
   letter-spacing: 0.01em;
+  color: #222222;
 }
 
 .tile-sub {
@@ -1492,17 +1497,52 @@ body {
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Карточка одной модели: "Кольцо · Арт..." и вес */
+/* КАРТОЧКА ОДНОЙ МОДЕЛИ (product.html)
+   Заголовок "Кольцо · Арт. …" и строка веса */
 #product h1 {
   font-size: var(--fs-card-title);
   font-weight: 500;
   letter-spacing: 0.02em;
+  color: #222222;
 }
 
 #product p {
   font-size: var(--fs-body);
   font-weight: 400;
-  color: #555;
+  color: #555555;
 }
+
+/* КОРЗИНА · СПИСОК ИЗДЕЛИЙ ВНУТРИ ГРУППЫ
+   (например, нажал "Кольца" в корзине → перечень колец) */
+
+/* Заголовок блока типа "Кольца · позиции заказа"
+   — если используется отдельный класс */
+.order-section-title {
+  font-size: var(--fs-section-title);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #222222;
+}
+
+/* Название изделия в строке списка внутри корзины */
+.order-item-title {
+  font-size: var(--fs-card-title);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+/* Подписи поменьше (размеры, вес, количество) внутри строки корзины */
+.order-item-sub {
+  font-size: var(--fs-card-sub);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #555555;
+}
+
