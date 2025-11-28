@@ -1404,3 +1404,12 @@ button,
   color: #1e1e1e !important;
   font-weight: 500 !important;
 }
+
+.tile-sub {
+  font-size: 13px;          /* было 14px — на 1px меньше, но заметно */
+  line-height: 1.2;         /* компактнее */
+  letter-spacing: 0.01em;   /* легкая коррекция */
+  white-space: nowrap;      /* НЕ переносить */
+  overflow: hidden;
+  text-overflow: ellipsis;  /* … вместо обрезки */
+}
