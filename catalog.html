@@ -52,7 +52,27 @@
 
   <div id="grid" class="grid"></div>
 </section>
-  </main>
+    </main>
+
+  <!-- Панель фильтров -->
+  <div id="filterOverlay" class="filter-overlay"></div>
+
+  <div id="filterSheet" class="filter-sheet">
+    <div class="filter-sheet-header">
+      <span class="filter-sheet-title">Фильтры</span>
+      <button class="filter-sheet-close" id="filterCloseBtn">×</button>
+    </div>
+
+    <div class="filter-sheet-content">
+      <!-- Пока заглушка. Поля добавим позже. -->
+      <p class="filter-placeholder">Здесь будут настройки фильтров.</p>
+    </div>
+
+    <div class="filter-sheet-footer">
+      <button class="btn-outline" type="button" id="filterResetBtn">Сбросить</button>
+      <button class="btn-primary" type="button" id="filterApplyBtn">Применить</button>
+    </div>
+  </div>
 
   <div class="toast"></div>
   <script type="module" src="./src/main.js"></script>
