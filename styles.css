@@ -1383,3 +1383,24 @@ button,
   letter-spacing: 0.04em;
   color: #1a1a1a;
 }
+
+/* === Хлебные крошки: активный элемент ярче === */
+
+/* обычные части "Главная / Каталог / Кольца" */
+.breadcrumbs a {
+  color: #6a6a6a;          /* спокойный серый */
+  font-weight: 400;
+}
+
+/* последний элемент = активная страница */
+.breadcrumbs span,
+.breadcrumbs .active {
+  color: #1e1e1e;          /* темнее, как заголовок */
+  font-weight: 500;        /* лёгкий акцент */
+}
+
+/* небольшой трюк: добавляем класс автоматически, если нужно */
+.breadcrumbs > *:last-child {
+  color: #1e1e1e !important;
+  font-weight: 500 !important;
+}
