@@ -1666,3 +1666,81 @@ document.addEventListener("DOMContentLoaded", () => {
   initSwipeToDelete();
   setupBreadcrumbs(); // <-- добавили
 });
+
+function initFilterSheet() {
+  const btnToggle = document.getElementById("filterToggleBtn");
+  const overlay = document.getElementById("filterOverlay");
+  const sheet = document.getElementById("filterSheet");
+  const btnClose = document.getElementById("filterCloseBtn");
+  const btnReset = document.getElementById("filterResetBtn");
+  const btnApply = document.getElementById("filterApplyBtn");
+
+  // Если на этой странице нет фильтров — тихо выходим
+  if (!btnToggle || !overlay || !sheet) {
+    return;
+  }
+
+  function openSheet() {
+    overlay.classList.add("visible");
+    sheet.classList.add("open");
+  }
+
+  function closeSheet() {
+    overlay.classList.remove("visible");
+    sheet.classList.remove("open");
+  }
+
+  // Открыть по кнопке "Фильтры"
+  btnToggle.addEventListener("click", openSheet);
+
+  // Закрыть по клику по фону
+  overlay.addEventListener("click", closeSheet);
+
+  // Закрыть по крестику
+  if (btnClose) {
+    btnClose.addEventListener("click", closeSheet);
+  }
+
+  // Сброс — пока только чистим поля и визуальное состояние
+  if (btnReset) {
+    btnReset.addEventListener("click", () => {
+      const wMin = document.getElementById("filterWeightMin");
+      const wMax = document.getElementById("filterWeightMax");
+      const cbPopular = document.getElementById("filterPopular");
+      const cbNew = document.getElementById("filterNew");
+      const cbInStock = document.getElementById("filterInStock");
+
+      if (wMin) wMin.value = "";
+      if (wMax) wMax.value = "";
+      if (cbPopular) cbPopular.checked = false;
+      if (cbNew) cbNew.checked = false;
+      if (cbInStock) cbInStock.checked = false;
+
+      document.querySelectorAll(".filter-size-chip").forEach(chip => {
+        chip.classList.remove("active");
+      });
+    });
+  }
+
+  // Применить — пока просто закрываем шторку
+  if (btnApply) {
+    btnApply.addEventListener("click", () => {
+      closeSheet();
+    });
+  }
+
+  // Переключение размера: одна активная "таблетка"
+  document.querySelectorAll(".filter-size-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const isActive = chip.classList.contains("active");
+      document.querySelectorAll(".filter-size-chip").forEach(c => c.classList.remove("active"));
+      if (!isActive) {
+        chip.classList.add("active");
+      }
+    });
+  });
+}
+
+// НЕ трогаем твои DOMContentLoaded и старый init.
+// Просто добавляем отдельный хук на загрузку страницы.
+window.addEventListener("load", initFilterSheet);
