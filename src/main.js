@@ -1666,3 +1666,31 @@ document.addEventListener("DOMContentLoaded", () => {
   initSwipeToDelete();
   setupBreadcrumbs(); // <-- добавили
 });
+
+function initFilterSheet() {
+  const btnToggle = document.getElementById("filterToggleBtn");
+  const overlay = document.getElementById("filterOverlay");
+  const sheet = document.getElementById("filterSheet");
+  const btnClose = document.getElementById("filterCloseBtn");
+
+  if (!btnToggle || !overlay || !sheet) return;
+
+  const closeSheet = () => {
+    overlay.classList.remove("visible");
+    sheet.classList.remove("open");
+  };
+
+  btnToggle.addEventListener("click", () => {
+    overlay.classList.add("visible");
+    sheet.classList.add("open");
+  });
+
+  overlay.addEventListener("click", closeSheet);
+  if (btnClose) {
+    btnClose.addEventListener("click", closeSheet);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initFilterSheet();
+});
