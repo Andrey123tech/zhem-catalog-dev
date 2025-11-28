@@ -1404,3 +1404,9 @@ button,
   font-weight: 450;
 }
 
+button,
+.btn,
+.btn-primary,
+.cart-link {
+  font-weight: 480;
+}
