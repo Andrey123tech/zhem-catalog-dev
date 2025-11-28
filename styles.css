@@ -1418,21 +1418,3 @@ button,
 .btn-primary {
   color: #fff !important;
 }
-
-/* === ФИКС ДЛЯ СПИСКА РАЗМЕРОВ В КАРТОЧКЕ === */
-.size-selector {
-  max-height: 136px;        /* фикс. высота чтобы ничего не уезжало */
-  overflow-y: auto;         /* только внутренняя прокрутка */
-  padding-right: 4px;       /* место под скролл на iOS */
-  -webkit-overflow-scrolling: touch;
-}
-
-/* чтобы кнопки-"кружки" не упирались */
-.size-option {
-  margin: 4px 3px;
-}
-
-/* чтобы кнопка "В корзину" всегда на своей линии */
-.product-actions {
-  margin-top: 12px;
-}
