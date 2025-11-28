@@ -64,17 +64,64 @@
     </div>
 
     <div class="filter-sheet-content">
-      <!-- Пока заглушка. Поля добавим позже. -->
-      <p class="filter-placeholder">Здесь будут настройки фильтров.</p>
-    </div>
-
-    <div class="filter-sheet-footer">
-      <button class="btn-outline" type="button" id="filterResetBtn">Сбросить</button>
-      <button class="btn-primary" type="button" id="filterApplyBtn">Применить</button>
+  <!-- Вес -->
+  <div class="filter-block">
+    <span class="filter-label">Вес, г</span>
+    <div class="filter-weight-row">
+      <input
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        min="0"
+        id="filterWeightMin"
+        class="filter-input small"
+        placeholder="от"
+      >
+      <span class="filter-weight-sep">—</span>
+      <input
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        min="0"
+        id="filterWeightMax"
+        class="filter-input small"
+        placeholder="до"
+      >
     </div>
   </div>
 
-  <div class="toast"></div>
-  <script type="module" src="./src/main.js"></script>
-</body>
-</html>
+  <!-- Размер (для роста, пригодится и сейчас, и потом с 1С) -->
+  <div class="filter-block" id="filterSizeBlock">
+    <span class="filter-label">Размер</span>
+    <div class="filter-size-grid" id="filterSizeGrid">
+      <button type="button" class="filter-size-chip">15</button>
+      <button type="button" class="filter-size-chip">16</button>
+      <button type="button" class="filter-size-chip">17</button>
+      <button type="button" class="filter-size-chip">18</button>
+      <button type="button" class="filter-size-chip">19</button>
+      <button type="button" class="filter-size-chip">20</button>
+      <button type="button" class="filter-size-chip">21</button>
+    </div>
+  </div>
+
+  <!-- Переключатели -->
+  <div class="filter-block">
+    <span class="filter-label">Дополнительно</span>
+
+    <label class="filter-switch-row">
+      <input type="checkbox" id="filterPopular">
+      <span>Популярные</span>
+    </label>
+
+    <label class="filter-switch-row">
+      <input type="checkbox" id="filterNew">
+      <span>Новинки</span>
+    </label>
+
+    <label class="filter-switch-row">
+      <input type="checkbox" id="filterInStock">
+      <span>В наличии</span>
+    </label>
+  </div>
+</div>
+
