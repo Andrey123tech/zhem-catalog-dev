@@ -401,13 +401,13 @@ function renderGrid() {
     return;
   }
 
-    // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
+     // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
 
   // фильтрация по категории
   let list = PRODUCTS.filter(p => p.category === category);
 
   // поиск по артикулу (если есть строка поиска)
-    const searchInput = $("#skuSearch");
+  const searchInput = $("#skuSearch");
   let query = "";
   if (searchInput) {
     // Вешаем обработчик только один раз
@@ -426,6 +426,9 @@ function renderGrid() {
     list = list.filter(p => String(p.sku).toLowerCase().includes(q));
   }
 
+  // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
+  list = applyFiltersByWeight(list);
+
   // сортировка:
   // 1) сначала по sortOrder (если есть),
   // 2) потом по артикулу — чтобы список был стабильным.
@@ -439,6 +442,7 @@ function renderGrid() {
     });
 
   // заголовки
+
   const label = CATEGORY_LABELS[category];
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = `${label} · текущая подборка`;
