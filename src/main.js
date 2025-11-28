@@ -4,6 +4,16 @@
 // Подключаем данные каталога
 import { PRODUCTS, SIZES, BRACELET_SIZES } from "./catalog_data.js";
 
+// === СОСТОЯНИЕ ФИЛЬТРОВ (ФИЛЬТРЫ 1.0) ===
+const filterState = {
+  weightMin: null,
+  weightMax: null,
+  size: null,
+  isPopular: false,
+  isNew: false,
+  inStock: false
+};
+
 /* УТИЛИТЫ DOM */
 
 const $ = (sel, root = document) => root.querySelector(sel);
