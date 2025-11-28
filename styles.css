@@ -1546,3 +1546,44 @@ body {
   color: #555555;
 }
 
+/* ======================
+   КОРЗИНА · ЭКРАН "СПИСОК КОЛЕЦ"
+   Выравниваем шрифты только на этой странице
+   (body.page-order)
+   ====================== */
+
+/* Базовый текст на странице корзины (список позиций) */
+.page-order .container {
+  font-size: var(--fs-body);      /* как везде */
+  line-height: 1.35;
+}
+
+/* Заголовок типа "Кольца · позиции заказа" */
+.page-order h1,
+.page-order h2,
+.page-order .section-title {
+  font-size: var(--fs-section-title);  /* как "Кольца · текущая подборка" */
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #222222;
+}
+
+/* Строки с моделями в списке (название/арт.) */
+.page-order .order-item-title,
+.page-order .order-line-title {
+  font-size: var(--fs-card-title);     /* как "Кольцо" в плитках */
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+/* Подписи поменьше (размеры, вес, количество) */
+.page-order .order-item-sub,
+.page-order .order-line-sub,
+.page-order .order-item-meta {
+  font-size: var(--fs-card-sub);       /* как "Арт. Au177260F 2,62 г" */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #555555;
+}
