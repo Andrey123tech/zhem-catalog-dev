@@ -1753,4 +1753,26 @@ function initFilterSheet() {
 
 // НЕ трогаем твои DOMContentLoaded и старый init.
 // Просто добавляем отдельный хук на загрузку страницы.
+function readFilterControls() {
+  const wMin = document.getElementById("filterWeightMin");
+  const wMax = document.getElementById("filterWeightMax");
+  const cbPopular = document.getElementById("filterPopular");
+  const cbNew = document.getElementById("filterNew");
+  const cbInStock = document.getElementById("filterInStock");
+
+  const activeSizeChip = document.querySelector(".filter-size-chip.active");
+
+  // Вес
+  filterState.weightMin = wMin && wMin.value ? parseFloat(wMin.value) : null;
+  filterState.weightMax = wMax && wMax.value ? parseFloat(wMax.value) : null;
+
+  // Размер
+  filterState.size = activeSizeChip ? activeSizeChip.textContent.trim() : null;
+
+  // Флаги
+  filterState.isPopular = !!(cbPopular && cbPopular.checked);
+  filterState.isNew = !!(cbNew && cbNew.checked);
+  filterState.inStock = !!(cbInStock && cbInStock.checked);
+}
+
 window.addEventListener("load", initFilterSheet);
