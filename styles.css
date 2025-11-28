@@ -929,178 +929,87 @@ body.no-scroll {
   }
 }
 
-/* === Типографика под iOS-ощущения === */
+/* === ТИПОГРАФИКА И ФИНАЛЬНАЯ ПОЛИРОВКА (ЕДИНЫЙ БЛОК) === */
 
-/* Вкладки вверху: Главная / Каталог / Заказ */
-.tab-link {
-  font-size: 15px;
+/* 1. Базовые размеры шрифтов — тут один пульт для всего */
+:root {
+  --fs-body: 15px;
+
+  --fs-hero-title: 22px;
+  --fs-hero-sub: 14px;
+
+  --fs-section-title: 18px;
+  --fs-tab: 15px;
+
+  --fs-card-title: 15px;
+  --fs-card-sub: 10px;
+
+  --fs-breadcrumb: 13px;
+
+  --fs-main-section-title: 15px;
+  --fs-main-section-sub: 13px;
+
+  --fs-product-title: 18px;
+  --fs-product-art: 13px;
+  --fs-product-weight: 13px;
+
+  --fs-cart-title: 15px;
+  --fs-cart-sub: 11px;
+  --fs-cart-summary: 15px;
+
+  --fs-model-title: 16px;
+  --fs-model-avg: 13px;
+  --fs-model-summary: 14px;
+
+  --fs-size-row: 14px;
+  --fs-size-row-weight: 13px;
+
+  --fs-button: 16px;
 }
 
-/* Крупные заголовки на страницах (hero) */
+/* 2. Базовый текст */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: #1a1a1a;
+}
+
+/* 3. Вкладки под шапкой */
+.tab-link {
+  font-size: var(--fs-tab);
+}
+
+/* 4. Крупные заголовки (hero: "Каталог", "Корзина") */
 .hero-title {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--fs-hero-title);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #222222;
 }
 
 .hero-sub {
-  font-size: 15px;
+  font-size: var(--fs-hero-sub);
+  font-weight: 400;
+  color: #6b7280;
 }
 
-/* Карточки в каталоге */
-.tile-title {
-  font-size: 16px;
-  font-weight: 600;
+/* 5. Заголовки разделов ("Кольца · текущая подборка" и т.п.) */
+.section-title,
+.cart-group-title {
+  font-size: var(--fs-section-title);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #222222;
 }
 
-.tile-sub {
-  font-size: 13px;
-}
-
-/* Карточка товара */
-.product-title {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.product-art {
-  font-size: 14px;
-}
-
-.product-weight {
-  font-size: 14px;
-}
-
-/* Подписи "Размер", "Кол-во" */
-.field-label {
-  font-size: 14px;
-}
-
-/* Значения в селекте и счётчике */
-.field-control,
-.qty-inline {
-  font-size: 16px;
-}
-
-/* Общие кнопки */
-
-/* Список в корзине */
-.cart-title {
-  font-size: 16px;
-}
-
-.cart-sub {
-  font-size: 14px;
-}
-
-.cart-meta {
-  font-size: 13px;
-}
-
-/* Блок "Итого" в корзине */
-.order-summary-text {
-  font-size: 15px;
-}
-
-/* Экран модели в корзине */
-.model-title {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.model-avg {
-  font-size: 13px;
-}
-
-.model-summary {
-  font-size: 15px;
-}
-
-/* Строки размеров в модели */
-.size-row {
-  font-size: 15px;
-}
-
-.size-row-size {
-  font-size: 15px;
-}
-
-.size-row-weight {
-  font-size: 13px;
-}
-
-/* На телефоне — фиксировано 3 карточки в ряд */
-@media (max-width: 480px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px; /* ← сделаем чуть меньше */
-  }
-
-  .tile {
-    border-radius: 18px; /* ← чуть уменьшили, даст больше визуального места */
-  }
-
-  .tile-body {
-    padding: 6px 4px 8px; /* ← уменьшили слева/справа */
-  }
-
-  .tile-sub {
-    padding: 0 2px; /* ← добавили! немного сдвигает текст */
-  }
-
-  .tile-weight {
-    font-size: 12.5px; /* ← если нужно ещё чуть-чуть места */
-  }
-}
-
-/* Опустить клавишу "Выбрать размеры" на ~5 мм */
-.size-picker-display {
-  margin-top: 35px !important;
-}
-
-/* Убираем фон/подложку/рамку под кнопкой "Выбрать размеры" */
-.field-control,
-.field,
-.product-controls-row .field {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Центровка текста и расширение кнопки "Выбрать размеры" */
-.size-picker-display {
-  position: relative;
-  width: 100% !important;
-  justify-content: center !important;
-  text-align: center !important;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-/* Стрелочка справа, не влияет на центр текста */
-.size-picker-arrow {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* Увеличиваем высоту строк размера в матрице на +25% */
-.size-row {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-  min-height: 44px !important;
-}
-
-/* Модальное окно размеров должно перекрывать фиксированную кнопку "В корзину" */
-.size-matrix-backdrop {
-  z-index: 80 !important;  /* выше, чем #addToCart (50) */
-}
-
+/* 6. Хлебные крошки */
+.breadcrumb,
 .breadcrumbs {
-  font-size: 13px;
-  color: #6b7280; /* серый */
+  font-size: var(--fs-breadcrumb);
+  font-weight: 400;
+  color: #6b7280;
   padding: 6px 16px 0;
 }
 
@@ -1113,6 +1022,13 @@ body.no-scroll {
   text-decoration: underline;
 }
 
+/* активная (последняя) часть крошек */
+.breadcrumbs > *:last-child {
+  color: #1e1e1e;
+  font-weight: 500;
+}
+
+/* 7. Главные карточки на главной */
 .main-sections {
   display: flex;
   flex-direction: column;
@@ -1130,17 +1046,110 @@ body.no-scroll {
 }
 
 .main-section-title {
-  font-size: 15px;
+  font-size: var(--fs-main-section-title);
   font-weight: 600;
   margin-bottom: 2px;
 }
 
 .main-section-sub {
-  font-size: 13px;
+  font-size: var(--fs-main-section-sub);
   color: #6b7280;
 }
 
-/* === ОСНОВНАЯ КНОПКА (В КОРЗИНУ / ГОТОВО / МЕНЕДЖЕРУ) === */
+/* 8. Плитки каталога (сеткой 3×4) */
+.tile-title {
+  font-size: var(--fs-card-title);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+.tile-sub {
+  font-size: var(--fs-card-sub);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 9. Карточка товара */
+.product-title {
+  font-size: var(--fs-product-title);
+  font-weight: 500;
+  margin: 0;
+}
+
+.product-art {
+  font-size: var(--fs-product-art);
+  color: #6b7280;
+}
+
+.product-weight {
+  font-size: var(--fs-product-weight);
+  color: #6b7280;
+}
+
+/* подписи "Размер", "Кол-во" */
+.field-label {
+  font-size: 13px;
+}
+
+/* 10. Корзина: список позиций */
+.cart-title {
+  font-size: var(--fs-cart-title);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+.cart-sub {
+  font-size: var(--fs-cart-sub);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #555555;
+}
+
+.cart-meta {
+  font-size: 13px;
+}
+
+/* итоговый текст "Итого по заказу" */
+.order-summary-text {
+  font-size: var(--fs-cart-summary);
+}
+
+/* 11. Экран модели в заказе */
+.model-title {
+  font-size: var(--fs-model-title);
+  font-weight: 600;
+}
+
+.model-avg {
+  font-size: var(--fs-model-avg);
+  color: #6b7280;
+}
+
+.model-summary {
+  font-size: var(--fs-model-summary);
+}
+
+/* строки размеров */
+.size-row {
+  font-size: var(--fs-size-row);
+}
+
+.size-row-size {
+  font-size: var(--fs-size-row);
+}
+
+.size-row-weight {
+  font-size: var(--fs-size-row-weight);
+}
+
+/* 12. Основные кнопки (В корзину / Менеджеру / Готово) */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -1153,7 +1162,7 @@ body.no-scroll {
   border: none;
   border-radius: 999px;
 
-  font-size: 16px;
+  font-size: var(--fs-button);
   font-weight: 600;
   letter-spacing: 0.01em;
 
@@ -1178,7 +1187,6 @@ body.no-scroll {
 }
 
 .btn-primary:active {
-  /* убираем сдвиг, оставляем только изменение тени */
   box-shadow: 0 6px 14px rgba(90, 23, 34, 0.32);
 }
 
@@ -1196,7 +1204,7 @@ body.no-scroll {
   }
 }
 
-/* Вспомогательная кнопка (Очистить / Скопировать / сервисные действия) */
+/* Вспомогательная кнопка (Очистить / Скопировать и т.п.) */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -1244,68 +1252,14 @@ body.no-scroll {
   box-shadow: none;
 }
 
-/* === ОСНОВНАЯ КНОПКА (В КОРЗИНУ / ГОТОВО / МЕНЕДЖЕРУ) === */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  min-height: 46px;
-  padding: 0 18px;
-
-  border: none;
-  border-radius: 999px;
-
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-
-  background: linear-gradient(135deg, #7B2331, #5A1722);
-  color: #f9fafb;
-
-  box-shadow: 0 12px 26px rgba(90, 23, 34, 0.42);
-
-  cursor: pointer;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-
-  transition:
-    background 0.16s ease,
-    box-shadow 0.16s ease,
-    transform 0.12s ease;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #842736, #5F1824);
-  box-shadow: 0 14px 30px rgba(90, 23, 34, 0.55);
-}
-
-.btn-primary:active {
-  /* убираем сдвиг, оставляем только изменение тени */
-  box-shadow: 0 6px 14px rgba(90, 23, 34, 0.32);
-}
-
-.btn-primary:disabled {
-  opacity: 0.55;
-  box-shadow: none;
-}
-
-/* На маленьких экранах — компактнее */
-@media (max-width: 480px) {
-  .btn-primary {
-    min-height: 44px;
-    font-size: 15px;
-    padding: 0 16px;
-  }
-}
-
+/* Кнопка "Менеджеру" — центрируем на мобильных */
 .order-footer-btn {
   display: block;
-  width: min(420px, 85%) !important;
+  width: min(420px, 85%);
   margin: 16px auto 24px;
 }
 
+/* 13. Поле поиска по артикулу */
 .catalog-controls {
   margin-bottom: 12px;
   display: flex;
@@ -1325,321 +1279,78 @@ body.no-scroll {
   border-color: #0f172a;
 }
 
-/* === ТИПОГРАФИКА ПОД НОВЫЙ ЛОГО (ЧИСТАЯ ВЕРСИЯ) === */
+/* 14. Мобильная сетка карточек */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
 
-/* Базовый текст по всему приложению */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.01em;  /* чуть воздуха */
-  color: #1a1a1a;          /* мягкий чёрный, не #000 */
+  .tile {
+    border-radius: 18px;
+  }
+
+  .tile-body {
+    padding: 6px 4px 8px;
+  }
+
+  .tile-sub {
+    padding: 0 2px;
+  }
+
+  .tile-weight {
+    font-size: 12.5px;
+  }
 }
 
-/* Хлебные крошки, описания, подписи, вспомогательный текст */
-.breadcrumb,
-.breadcrumbs,
-.hero-sub,
-.main-section-sub,
-.tile-sub,
-.cart-summary-text,
-.section-note,
-.small,
-.muted-text {
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: #6e6e6e;
+/* 15. Кнопка "Выбрать размеры" — стили и позиционирование */
+.size-picker-display {
+  position: relative;
+  width: 100%;
+  margin-top: 35px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 9px 12px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* КРУПНЫЕ ЗАГОЛОВКИ (КАК "Каталог", "Корзина" и т.п.) */
-.hero-title,
-.section-title,
-.page-title,
-.cart-title {
-  font-weight: 400;        /* ЧУТЬ тоньше, чем было */
-  letter-spacing: 0.04em;  /* характер под лого */
-  color: #222222;
+.size-picker-display:active {
+  background: #f3f4f6;
 }
 
-/* ЗАГОЛОВКИ ВНУТРИ БЛОКОВ / КАРТОЧЕК ("Кольца", "Серьги", группы в корзине) */
-.tile-title,
-.main-section-title,
-.category-title,
-.cart-group-title {
-  font-weight: 460;        /* немного плотнее, чем h1, но всё ещё тонко */
-  letter-spacing: 0.03em;
-  color: #222222;
-}
-
-/* МЕЛКИЕ ЗАГОЛОВКИ (итоги, маленькие подписи-блоки) */
-.summary-title,
-.block-title-sm {
-  font-weight: 450;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
-/* КНОПКИ: читаемые, но не "кирпичи" */
-button,
-.btn,
-.btn-primary,
-.btn-secondary,
-.cart-link {
-  font-weight: 480;        /* чуть плотнее для читаемости */
-  letter-spacing: 0.04em;
-  color: #1a1a1a;
-}
-
-/* === Хлебные крошки: активный элемент ярче === */
-
-/* обычные части "Главная / Каталог / Кольца" */
-.breadcrumbs a {
-  color: #6a6a6a;          /* спокойный серый */
-  font-weight: 400;
-}
-
-/* последний элемент = активная страница */
-.breadcrumbs span,
-.breadcrumbs .active {
-  color: #1e1e1e;          /* темнее, как заголовок */
-  font-weight: 500;        /* лёгкий акцент */
-}
-
-/* небольшой трюк: добавляем класс автоматически, если нужно */
-.breadcrumbs > *:last-child {
-  color: #1e1e1e !important;
-  font-weight: 500 !important;
-}
-
-.tile-sub {
-  font-size: 10px;          /* было 14px — на 1px меньше, но заметно */
-  line-height: 1.2;         /* компактнее */
-  letter-spacing: 0.01em;   /* легкая коррекция */
-  white-space: nowrap;      /* НЕ переносить */
-  overflow: hidden;
-  text-overflow: ellipsis;  /* … вместо обрезки */
-}
-
-/* Возвращаем белый текст в кнопке "В корзину" */
-.btn-primary {
-  color: #fff !important;
-}
-
-/* Карточка одной модели: заголовок и строка веса внутри #product */
-#product h1 {
-  font-weight: 500;       /* вместо дефолтных жирных ~700 */
-  letter-spacing: 0.03em; /* характер ближе к лого */
-}
-
-#product p {
-  font-weight: 400;
+.size-picker-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 14px;
-  color: #555;            /* чуть мягче, чем заголовок */
+  color: #9ca3af;
 }
 
-/* ======================
-   ТИПОГРАФИКА · ЕДИНЫЙ БЛОК
-   ====================== */
-
-:root {
-  /* базовые размеры */
-  --fs-body: 15px;
-  --fs-breadcrumb: 13px;
-
-  --fs-hero-title: 22px;     /* "Каталог", "Корзина" */
-  --fs-section-title: 18px;  /* "Кольца · текущая подборка" и заголовки групп в корзине */
-
-  --fs-card-title: 15px;     /* "Кольцо" в плитках и списках */
-  --fs-card-sub: 10px;       /* "Арт. Au177260F  2,62 г" и подобные строки */
+/* убираем фон у обёрток вокруг кнопки размеров */
+.field-control,
+.field,
+.product-controls-row .field {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Базовый текст */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
-  font-size: var(--fs-body);
-  line-height: 1.35;
-  color: #222222;
+/* 16. Увеличиваем высоту строк размера в матрице */
+.size-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 44px;
 }
 
-/* Хлебные крошки */
-.breadcrumb,
-.breadcrumbs {
-  font-size: var(--fs-breadcrumb);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-/* КРУПНЫЕ ЗАГОЛОВКИ СТРАНИЦ
-   (например, "Каталог · Кольца", "Корзина") */
-.hero-title,
-.page-title,
-.cart-title {
-  font-size: var(--fs-hero-title);
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  color: #222222;
-}
-
-/* ЗАГОЛОВКИ РАЗДЕЛОВ
-   ("Кольца · текущая подборка", заголовки внутри корзины) */
-.section-title,
-.cart-group-title {
-  font-size: var(--fs-section-title);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
-/* ПЛИТКИ КАТАЛОГА: "Кольцо" + "Арт. ..." */
-.tile-title {
-  font-size: var(--fs-card-title);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #222222;
-}
-
-.tile-sub {
-  font-size: var(--fs-card-sub);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* КАРТОЧКА ОДНОЙ МОДЕЛИ (product.html)
-   Заголовок "Кольцо · Арт. …" и строка веса */
-#product h1 {
-  font-size: var(--fs-card-title);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
-#product p {
-  font-size: var(--fs-body);
-  font-weight: 400;
-  color: #555555;
-}
-
-/* КОРЗИНА · СПИСОК ИЗДЕЛИЙ ВНУТРИ ГРУППЫ
-   (например, нажал "Кольца" в корзине → перечень колец) */
-
-/* Заголовок блока типа "Кольца · позиции заказа"
-   — если используется отдельный класс */
-.order-section-title {
-  font-size: var(--fs-section-title);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
-/* Название изделия в строке списка внутри корзины */
-.order-item-title {
-  font-size: var(--fs-card-title);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #222222;
-}
-
-/* Подписи поменьше (размеры, вес, количество) внутри строки корзины */
-.order-item-sub {
-  font-size: var(--fs-card-sub);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  color: #555555;
-}
-
-/* ======================
-   КОРЗИНА · ЭКРАН "СПИСОК КОЛЕЦ"
-   Выравниваем шрифты только на этой странице
-   (body.page-order)
-   ====================== */
-
-/* Базовый текст на странице корзины (список позиций) */
-.page-order .container {
-  font-size: var(--fs-body);      /* как везде */
-  line-height: 1.35;
-}
-
-/* Заголовок типа "Кольца · позиции заказа" */
-.page-order h1,
-.page-order h2,
-.page-order .section-title {
-  font-size: var(--fs-section-title);  /* как "Кольца · текущая подборка" */
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #222222;
-}
-
-/* Строки с моделями в списке (название/арт.) */
-.page-order .order-item-title,
-.page-order .order-line-title {
-  font-size: var(--fs-card-title);     /* как "Кольцо" в плитках */
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #222222;
-}
-
-/* Подписи поменьше (размеры, вес, количество) */
-.page-order .order-item-sub,
-.page-order .order-line-sub,
-.page-order .order-item-meta {
-  font-size: var(--fs-card-sub);       /* как "Арт. Au177260F 2,62 г" */
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  color: #555555;
-}
-
-/* ======================
-   КОРЗИНА · ВЫРАВНИВАНИЕ ШРИФТОВ
-   действует только на страницы с body.page-order
-   ====================== */
-
-/* Базовый размер текста в основной области корзины */
-.page-order main,
-.page-order .container {
-  font-size: var(--fs-body);
-  line-height: 1.35;
-}
-
-/* Заголовки внутри корзины (включая "Кольца" в списке позиций) */
-.page-order main h1,
-.page-order main h2,
-.page-order main .section-title {
-  font-size: var(--fs-section-title);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #222;
-}
-
-/* Любые "жирные" куски текста внутри корзины — делаем спокойнее */
-.page-order main b,
-.page-order main strong {
-  font-weight: 500;
-}
-
-/* Строки позиций заказа (на случай разных классов/разметки) */
-.page-order main li,
-.page-order main .order-row,
-.page-order main .order-item,
-.page-order main .order-line {
-  font-size: var(--fs-card-title);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #222;
-}
-
-/* Мелкие подписи внутри этих строк (размеры, вес, количество) */
-.page-order main small,
-.page-order main .meta,
-.page-order main .order-meta,
-.page-order main .order-sub {
-  font-size: var(--fs-card-sub);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  color: #555;
+/* 17. Модальное окно размеров поверх фиксированной кнопки "В корзину" */
+.size-matrix-backdrop {
+  z-index: 80;
 }
