@@ -1676,7 +1676,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSwipeToDelete();
   setupBreadcrumbs(); // <-- добавили
 });
-
 function initFilterSheet() {
   const btnToggle = document.getElementById("filterToggleBtn");
   const overlay = document.getElementById("filterOverlay");
@@ -1685,7 +1684,6 @@ function initFilterSheet() {
   const btnReset = document.getElementById("filterResetBtn");
   const btnApply = document.getElementById("filterApplyBtn");
 
-  // Если на этой странице нет фильтров — тихо выходим
   if (!btnToggle || !overlay || !sheet) {
     return;
   }
@@ -1711,7 +1709,7 @@ function initFilterSheet() {
     btnClose.addEventListener("click", closeSheet);
   }
 
-  // Сброс — пока только чистим поля и визуальное состояние
+  // Сброс — чистим поля + состояние filterState
   if (btnReset) {
     btnReset.addEventListener("click", () => {
       const wMin = document.getElementById("filterWeightMin");
@@ -1729,13 +1727,22 @@ function initFilterSheet() {
       document.querySelectorAll(".filter-size-chip").forEach(chip => {
         chip.classList.remove("active");
       });
+
+      // Сбрасываем и внутреннее состояние
+      filterState.weightMin = null;
+      filterState.weightMax = null;
+      filterState.size = null;
+      filterState.isPopular = false;
+      filterState.isNew = false;
+      filterState.inStock = false;
     });
   }
 
-  // Применить — пока просто закрываем шторку
+  // Применить — читаем значения в filterState и закрываем шторку
   if (btnApply) {
     btnApply.addEventListener("click", () => {
-      closeSheet();
+      readFilterControls();   // обновили filterState из UI
+      closeSheet();           // просто закрыли, рендер пока не трогаем
     });
   }
 
