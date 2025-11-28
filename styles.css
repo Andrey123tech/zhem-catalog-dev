@@ -1396,3 +1396,11 @@ button,
 .btn-secondary {
   color: #1a1a1a;
 }
+
+.hero-title,
+.section-title,
+.tile-title,
+.cart-group-title {
+  font-weight: 450;
+}
+
