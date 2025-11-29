@@ -248,6 +248,17 @@ img {
   opacity: 0.95;
 }
 
+/* индикатор наличия рядом с артикулом */
+.stock-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #16a34a; /* зелёная точка */
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 .tile-weight {
   opacity: 0.95;
 }
