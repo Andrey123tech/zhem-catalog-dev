@@ -1828,8 +1828,8 @@ function initFilterSheet() {
     btnClose.addEventListener("click", closeSheet);
   }
 
-  // Сброс — чистим поля + состояние filterState
-    if (btnReset) {
+    // Сброс — чистим поля + состояние filterState
+  if (btnReset) {
     btnReset.addEventListener("click", () => {
       const wMin = document.getElementById("filterWeightMin");
       const wMax = document.getElementById("filterWeightMax");
@@ -1855,17 +1855,23 @@ function initFilterSheet() {
       filterState.isNew = false;
       filterState.inStock = false;
 
-      // Перерисовываем каталог, если мы на странице с сеткой
-      renderGrid();
+      // Перерисовываем каталог, если мы на странице каталога
+      if (document.getElementById("grid")) {
+        renderGrid();
+      }
     });
   }
 
   // Применить — читаем значения в filterState и закрываем шторку
-    if (btnApply) {
+  if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
       closeSheet();
-      renderGrid();           // перерисовали каталог с учётом фильтров
+
+      // Перерисовываем каталог, если мы на странице каталога
+      if (document.getElementById("grid")) {
+        renderGrid();
+      }
     });
   }
 
