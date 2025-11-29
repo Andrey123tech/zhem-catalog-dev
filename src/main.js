@@ -14,6 +14,53 @@ const filterState = {
   inStock: false
 };
 
+/* === ОСТАТКИ ПО РАЗМЕРАМ (stockBySize) === */
+/**
+ * Возвращает информацию по остаткам для модели.
+ * prod.stockBySize ожидается в формате:
+ * {
+ *   "17.0": 3,
+ *   "17.5": 8,
+ *   ...
+ * }
+ */
+function getStockInfo(prod) {
+  const map =
+    prod &&
+    typeof prod.stockBySize === "object" &&
+    prod.stockBySize !== null
+      ? prod.stockBySize
+      : null;
+
+  let totalStock = 0;
+  const sizesWithStock = [];
+
+  if (map) {
+    for (const [size, rawQty] of Object.entries(map)) {
+      const qty = Number(rawQty) || 0;
+      if (qty > 0) {
+        totalStock += qty;
+        sizesWithStock.push({ size, qty });
+      }
+    }
+  }
+
+  return {
+    // суммарный остаток по модели
+    totalStock,
+    // есть ли хотя бы что-то на складе
+    hasAnyStock: totalStock > 0,
+    // массив размеров, где qty > 0
+    sizesWithStock,
+    // остаток по конкретному размеру
+    getForSize(size) {
+      if (!size || !map) return 0;
+      const val = map[String(size)];
+      return Number(val) || 0;
+    }
+  };
+}
+
 /* УТИЛИТЫ DOM */
 
 const $ = (sel, root = document) => root.querySelector(sel);
