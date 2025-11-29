@@ -1862,11 +1862,19 @@ function initFilterSheet() {
     });
   }
 
-  // Применить — читаем значения в filterState и закрываем шторку
+    // Применить — читаем значения в filterState, закрываем шторку и перерисовываем сетку
   if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
-      closeSheet();
+      closeSheet();           // закрыли шторку
+
+      // если мы сейчас на странице каталога с сеткой — перерисуем
+      const grid = document.querySelector("#grid");
+      if (grid) {
+        renderGrid();
+      }
+    });
+  }
 
       // Перерисовываем каталог, если мы на странице каталога
       if (document.getElementById("grid")) {
