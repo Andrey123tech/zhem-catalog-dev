@@ -494,7 +494,7 @@ function renderGrid() {
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = `${label} · текущая подборка`;
 
-  // рендер сетки моделей
+    // рендер сетки моделей
   grid.innerHTML = list
     .map(p => {
       const img =
@@ -505,6 +505,15 @@ function renderGrid() {
       const fullTitle = p.title || `Кольцо ${p.sku}`;
       let shortTitle = fullTitle.replace(p.sku, "").trim();
       if (!shortTitle) shortTitle = "Кольцо";
+
+      // информация по остаткам (если есть stockBySize)
+      const stock = getStockInfo(p);
+      let stockLine = "";
+      if (stock.hasAnyStock) {
+        stockLine = `<div class="tile-stock tile-stock-in">В наличии · ${stock.totalStock} шт</div>`;
+      } else {
+        stockLine = `<div class="tile-stock tile-stock-out">Под заказ</div>`;
+      }
 
       return `
         <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
@@ -517,6 +526,7 @@ function renderGrid() {
               <span class="tile-art">Арт. ${p.sku}</span>
               ${w ? `<span class="tile-weight">${w}</span>` : ""}
             </div>
+            ${stockLine}
           </div>
         </a>
       `;
