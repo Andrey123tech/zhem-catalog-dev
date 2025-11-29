@@ -431,7 +431,6 @@ function renderGrid() {
           c.key
         )}">
           <div class="square">
-            <!-- пока без реальных иконок категорий, можно потом добавить -->
             <div class="category-icon-placeholder"></div>
           </div>
           <div class="tile-body">
@@ -448,23 +447,21 @@ function renderGrid() {
     return;
   }
 
-     // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
+  // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
 
-  // фильтрация по категории
+  // 1) Базовый список по категории
   let list = PRODUCTS.filter(p => p.category === category);
 
-  // поиск по артикулу (если есть строка поиска)
+  // 2) Поиск по артикулу
   const searchInput = $("#skuSearch");
   let query = "";
   if (searchInput) {
-    // Вешаем обработчик только один раз
     if (!searchInput.dataset.bound) {
       searchInput.dataset.bound = "1";
       searchInput.addEventListener("input", () => {
         renderGrid();
       });
     }
-
     query = searchInput.value.trim();
   }
 
@@ -473,12 +470,46 @@ function renderGrid() {
     list = list.filter(p => String(p.sku).toLowerCase().includes(q));
   }
 
-  // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
-  list = applyFiltersByWeight(list);
+  // 3) ПРИМЕНЯЕМ ФИЛЬТРЫ (вес, "в наличии", размер)
+  const f = filterState;
 
-  // сортировка:
-  // 1) сначала по sortOrder (если есть),
-  // 2) потом по артикулу — чтобы список был стабильным.
+  // — вес "от"
+  if (f.weightMin != null) {
+    list = list.filter(p => {
+      if (typeof p.avgWeight !== "number") return false;
+      return p.avgWeight >= f.weightMin;
+    });
+  }
+
+  // — вес "до"
+  if (f.weightMax != null) {
+    list = list.filter(p => {
+      if (typeof p.avgWeight !== "number") return false;
+      return p.avgWeight <= f.weightMax;
+    });
+  }
+
+  // — "В наличии" + размер
+  const wantSizeFilter = f.inStock && f.size;
+
+  list = list.filter(p => {
+    const stock = getStockInfo(p);
+
+    // если включено "В наличии" — отсекаем модели без остатков
+    if (f.inStock && !stock.hasAnyStock) {
+      return false;
+    }
+
+    // если выбран размер (и включено "В наличии") — модель должна иметь остаток по этому размеру
+    if (wantSizeFilter) {
+      const q = stock.getForSize(f.size);
+      if (q <= 0) return false;
+    }
+
+    return true;
+  });
+
+  // 4) Сортировка: сначала sortOrder, потом артикул
   list = list
     .slice()
     .sort((a, b) => {
@@ -488,13 +519,12 @@ function renderGrid() {
       return String(a.sku).localeCompare(String(b.sku));
     });
 
-  // заголовки
-
+  // 5) Заголовки
   const label = CATEGORY_LABELS[category];
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = `${label} · текущая подборка`;
 
-    // рендер сетки моделей
+  // 6) Рендер сетки
   grid.innerHTML = list
     .map(p => {
       const img =
@@ -506,14 +536,10 @@ function renderGrid() {
       let shortTitle = fullTitle.replace(p.sku, "").trim();
       if (!shortTitle) shortTitle = "Кольцо";
 
-      // информация по остаткам (если есть stockBySize)
       const stock = getStockInfo(p);
-      let stockLine = "";
-      if (stock.hasAnyStock) {
-        stockLine = `<div class="tile-stock tile-stock-in">В наличии · ${stock.totalStock} шт</div>`;
-      } else {
-        stockLine = `<div class="tile-stock tile-stock-out">Под заказ</div>`;
-      }
+      const stockLine = stock.hasAnyStock
+        ? `<div class="tile-stock tile-stock-in">В наличии · ${stock.totalStock} шт</div>`
+        : `<div class="tile-stock tile-stock-out">Под заказ</div>`;
 
       return `
         <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
