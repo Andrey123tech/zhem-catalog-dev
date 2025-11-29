@@ -1,16 +1,27 @@
 [
   {
-    "sku": "Au190135",
-    "title": "Кольцо Au190135",
-    "category": "rings",
-    "metal": "Au585",
-    "color": "rose",
-    "avgWeight": 2.284,
-    "sizes": "ring",
-    "isHit": true,
-    "images": [],
-    "sortOrder": 5
-  },
+  "sku": "Au190135",
+  "title": "Кольцо Au190135",
+  "category": "rings",
+  "metal": "Au585",
+  "color": "rose",
+  "avgWeight": 2.284,
+  "sizes": "ring",
+  "isHit": true,
+  "images": [],
+  "sortOrder": 5,
+  "stockBySize": {
+    "16.5": 0,
+    "17.0": 3,
+    "17.5": 8,
+    "18.0": 10,
+    "18.5": 11,
+    "19.0": 8,
+    "19.5": 10,
+    "20.0": 1,
+    "20.5": 0
+  }
+},
   {
     "sku": "Au0237165",
     "title": "Серьги Au0237165",
