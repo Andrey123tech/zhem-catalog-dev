@@ -252,6 +252,40 @@ img {
   opacity: 0.95;
 }
 
+/* Индикатор наличия в плитках каталога */
+.tile-stock {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.tile-stock::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #9ca3af; /* базовый серый (под заказ) */
+}
+
+/* Есть живой остаток */
+.tile-stock-in {
+  color: #15803d;
+}
+
+.tile-stock-in::before {
+  background: #16a34a; /* зелёный индикатор "в наличии" */
+}
+
+/* Под заказ (нет остатков) */
+.tile-stock-out {
+  color: var(--text-muted);
+  /* точка остаётся серой из .tile-stock::before */
+}
+
 /* ============= КАРТОЧКА ТОВАРА ============= */
 
 .back-link {
