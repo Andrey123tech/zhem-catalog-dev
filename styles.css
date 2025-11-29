@@ -1074,6 +1074,20 @@ body {
   text-overflow: ellipsis;
 }
 
+/* Статус наличия в плитке каталога */
+.tile-stock {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.tile-stock-in {
+  color: #16a34a; /* "В наличии" — зелёный */
+}
+
+.tile-stock-out {
+  color: #6b7280; /* "Под заказ" — спокойный серый */
+}
+
 /* 9. Карточка товара */
 .product-title {
   font-size: var(--fs-product-title);
