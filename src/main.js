@@ -1859,11 +1859,9 @@ function initFilterSheet() {
     });
   }
 
-      // Перерисовываем каталог, если мы на странице каталога
-      if (document.getElementById("grid")) {
-        renderGrid();
-      }
-    });
+  // Перерисовываем каталог, если мы на странице каталога
+  if (document.getElementById("grid")) {
+    renderGrid();
   }
 
   // Переключение размера: одна активная "таблетка"
