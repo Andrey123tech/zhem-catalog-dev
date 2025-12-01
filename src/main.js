@@ -476,7 +476,7 @@ function renderGrid() {
     const w = typeof prod.avgWeight === "number" ? prod.avgWeight : null;
     const stock = getStockInfo(prod);
 
-    // Фильтр по весу
+    // Вес
     if (filterState.weightMin != null && w != null && w < filterState.weightMin) {
       return false;
     }
@@ -484,19 +484,17 @@ function renderGrid() {
       return false;
     }
 
-    // Фильтр "В наличии"
+    // «В наличии»
     if (filterState.inStock) {
-      // Модель вообще должна иметь живой остаток
       if (!stock.hasAnyStock) return false;
 
-      // Если выбран размер — проверяем остаток именно этого размера
       if (filterState.size) {
         const qtyForSize = stock.getForSize(filterState.size);
         if (!qtyForSize) return false;
       }
     }
 
-    // Когда "В наличии" выключен — фильтр по size не применяем
+    // Когда "В наличии" выключен — size не фильтруем
     return true;
   });
 
