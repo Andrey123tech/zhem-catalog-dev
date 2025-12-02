@@ -1607,3 +1607,26 @@ body {
   font-size: 13px;
   margin-bottom: 6px;
 }
+
+/* === Бейджи "Хит" и "Новинка" на карточке товара === */
+
+.product-hit-badge,
+.product-new-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 6px;
+  color: #fff;
+}
+
+/* Хит продаж — тёплый золотистый */
+.product-hit-badge {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+}
+
+/* Новинка — холодный зелёный */
+.product-new-badge {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
