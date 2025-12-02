@@ -449,33 +449,35 @@ function renderGrid() {
 
   // рендер сетки моделей
   grid.innerHTML = list
-    .map(p => {
-      const img =
-        (p.images && p.images[0]) ||
-        "https://picsum.photos/seed/placeholder/900";
-      const w =
-        p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
-      const fullTitle = p.title || `Кольцо ${p.sku}`;
-      let shortTitle = fullTitle.replace(p.sku, "").trim();
-      if (!shortTitle) shortTitle = "Кольцо";
+  .map(p => {
+    const img =
+      (p.images && p.images[0]) ||
+      "https://picsum.photos/seed/placeholder/900";
+    const w =
+      p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
+    const fullTitle = p.title || `Кольцо ${p.sku}`;
+    let shortTitle = fullTitle.replace(p.sku, "").trim();
+    if (!shortTitle) shortTitle = "Кольцо";
 
-      return `
-        <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
-          <div class="square">
-            <img src="${img}" alt="${p.title || p.sku}">
+    const isHit = !!p.isHit;
+
+    return `
+      <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
+        <div class="square">
+          ${isHit ? `<div class="tile-hit-badge">ХИТ</div>` : ""}
+          <img src="${img}" alt="${p.title || p.sku}">
+        </div>
+        <div class="tile-body">
+          <div class="tile-title">${shortTitle}</div>
+          <div class="tile-sub">
+            <span class="tile-art">Арт. ${p.sku}</span>
+            ${w ? `<span class="tile-weight">${w}</span>` : ""}
           </div>
-          <div class="tile-body">
-            <div class="tile-title">${shortTitle}</div>
-            <div class="tile-sub">
-              <span class="tile-art">Арт. ${p.sku}</span>
-              ${w ? `<span class="tile-weight">${w}</span>` : ""}
-            </div>
-          </div>
-        </a>
-      `;
-    })
-    .join("");
-}
+        </div>
+      </a>
+    `;
+  })
+  .join("");
 
 /* === КАРТОЧКА ТОВАРА === */
 
