@@ -9,18 +9,7 @@
     "sizes": "ring",
     "isHit": true,
     "images": [],
-    "sortOrder": 5,
-    "stockBySize": {
-      "16.5": 0,
-      "17.0": 3,
-      "17.5": 8,
-      "18.0": 10,
-      "18.5": 11,
-      "19.0": 8,
-      "19.5": 10,
-      "20.0": 1,
-      "20.5": 0
-    }
+    "sortOrder": 5
   },
   {
     "sku": "Au0237165",
@@ -44,12 +33,7 @@
     "sizes": "bracelet",
     "isHit": true,
     "images": [],
-    "sortOrder": 1,
-    "stockBySize": {
-      "17.0": 2,
-      "18.0": 5,
-      "19.0": 1
-    }
+    "sortOrder": 1
   },
   {
     "sku": "Au180572p",
@@ -85,18 +69,7 @@
     "sizes": "ring",
     "isHit": true,
     "images": [],
-    "sortOrder": 8,
-    "stockBySize": {
-      "16.5": 0,
-      "17.0": 0,
-      "17.5": 0,
-      "18.0": 0,
-      "18.5": 0,
-      "19.0": 0,
-      "19.5": 0,
-      "20.0": 0,
-      "20.5": 0
-    }
+    "sortOrder": 8
   },
   {
     "sku": "Au0237168M",
