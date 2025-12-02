@@ -550,7 +550,6 @@ function renderProduct() {
   </h1>
 
   ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
-
   ${isHit ? `<div class="product-hit-badge">Хит продаж по нашим данным</div>` : ""}
 </div>
 
