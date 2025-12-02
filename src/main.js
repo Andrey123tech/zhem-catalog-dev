@@ -485,6 +485,10 @@ function renderProduct() {
   const box = $("#product");
   if (!box) return;
 
+function renderProduct() {
+  const box = document.querySelector(".product-card");
+  if (!box) return;
+
   const sku = getSkuFromUrl();
   const prod = PRODUCTS.find(p => p.sku === sku);
   if (!prod) {
@@ -495,10 +499,14 @@ function renderProduct() {
   const img =
     (prod.images && prod.images[0]) ||
     "https://picsum.photos/seed/placeholder/900";
+
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
-  const cat = prod.category; // ← ЭТО ДОБАВИТЬ
+  const cat = prod.category;
+
+  // 🔥 ДОБАВЛЯЕМ ЭТО — флаг «ХИТ»
+  const isHit = !!prod.isHit;
   
   // Определяем тип изделия и русский ярлык
   const TYPE_LABELS = {
