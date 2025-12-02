@@ -482,11 +482,7 @@ function renderGrid() {
 /* === КАРТОЧКА ТОВАРА === */
 
 function renderProduct() {
-  const box = $("#product");
-  if (!box) return;
-
-function renderProduct() {
-  const box = document.querySelector(".product-card");
+  const box = $("#product"); // используем тот же селектор, что и в router-е
   if (!box) return;
 
   const sku = getSkuFromUrl();
