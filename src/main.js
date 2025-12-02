@@ -541,16 +541,20 @@ function renderProduct() {
   box.innerHTML = `
     <div class="product-main">
       <div class="product-photo-wrap">
-        <img src="${img}" alt="${prod.title || prod.sku}">
-      </div>
+  <img src="${img}" alt="${prod.title || prod.sku}">
+</div>
 
-            <div class="product-meta">
-        <h1 class="product-title">
-          ${typeLabel} · Арт. ${prod.sku}
-        </h1>
-        ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
-        ${isHit ? `<div class="product-hit-badge">Хит продаж по нашим данным</div>` : ""}
-      </div>
+<div class="product-meta">
+  <h1 class="product-title">
+    ${typeLabel} · Арт. ${prod.sku}
+  </h1>
+
+  ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
+
+  ${isHit ? `<div class="product-hit-badge">Хит продаж по нашим данным</div>` : ""}
+</div>
+
+<div class="product-controls">
 
       <div class="product-controls">
         <div class="product-controls-row">
