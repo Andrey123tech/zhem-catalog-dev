@@ -248,53 +248,8 @@ img {
   opacity: 0.95;
 }
 
-/* индикатор наличия рядом с артикулом */
-.stock-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #16a34a; /* зелёная точка */
-  margin-left: 4px;
-  vertical-align: middle;
-}
-
 .tile-weight {
   opacity: 0.95;
-}
-
-/* Индикатор наличия в плитках каталога */
-.tile-stock {
-  margin-top: 4px;
-  font-size: 11px;
-  line-height: 1.2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-muted);
-}
-
-.tile-stock::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #9ca3af; /* базовый серый (под заказ) */
-}
-
-/* Есть живой остаток */
-.tile-stock-in {
-  color: #15803d;
-}
-
-.tile-stock-in::before {
-  background: #16a34a; /* зелёный индикатор "в наличии" */
-}
-
-/* Под заказ (нет остатков) */
-.tile-stock-out {
-  color: var(--text-muted);
-  /* точка остаётся серой из .tile-stock::before */
 }
 
 /* ============= КАРТОЧКА ТОВАРА ============= */
@@ -1117,20 +1072,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Статус наличия в плитке каталога */
-.tile-stock {
-  margin-top: 2px;
-  font-size: 12px;
-}
-
-.tile-stock-in {
-  color: #16a34a; /* "В наличии" — зелёный */
-}
-
-.tile-stock-out {
-  color: #6b7280; /* "Под заказ" — спокойный серый */
 }
 
 /* 9. Карточка товара */
