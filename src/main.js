@@ -449,40 +449,38 @@ function renderGrid() {
 
   // рендер сетки моделей
   grid.innerHTML = list
-  .map(p => {
-    const img =
-      (p.images && p.images[0]) ||
-      "https://picsum.photos/seed/placeholder/900";
-    const w =
-      p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
-    const fullTitle = p.title || `Кольцо ${p.sku}`;
-    let shortTitle = fullTitle.replace(p.sku, "").trim();
-    if (!shortTitle) shortTitle = "Кольцо";
+    .map(p => {
+      const img =
+        (p.images && p.images[0]) ||
+        "https://picsum.photos/seed/placeholder/900";
+      const w =
+        p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
+      const fullTitle = p.title || `Кольцо ${p.sku}`;
+      let shortTitle = fullTitle.replace(p.sku, "").trim();
+      if (!shortTitle) shortTitle = "Кольцо";
 
-    const isHit = !!p.isHit;
-
-    return `
-      <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
-        <div class="square">
-          ${isHit ? `<div class="tile-hit-badge">ХИТ</div>` : ""}
-          <img src="${img}" alt="${p.title || p.sku}">
-        </div>
-        <div class="tile-body">
-          <div class="tile-title">${shortTitle}</div>
-          <div class="tile-sub">
-            <span class="tile-art">Арт. ${p.sku}</span>
-            ${w ? `<span class="tile-weight">${w}</span>` : ""}
+      return `
+        <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
+          <div class="square">
+            <img src="${img}" alt="${p.title || p.sku}">
           </div>
-        </div>
-      </a>
-    `;
-  })
-  .join("");
+          <div class="tile-body">
+            <div class="tile-title">${shortTitle}</div>
+            <div class="tile-sub">
+              <span class="tile-art">Арт. ${p.sku}</span>
+              ${w ? `<span class="tile-weight">${w}</span>` : ""}
+            </div>
+          </div>
+        </a>
+      `;
+    })
+    .join("");
+}
 
 /* === КАРТОЧКА ТОВАРА === */
 
 function renderProduct() {
-  const box = $("#product"); // используем тот же селектор, что и в router-е
+  const box = $("#product");
   if (!box) return;
 
   const sku = getSkuFromUrl();
@@ -495,14 +493,10 @@ function renderProduct() {
   const img =
     (prod.images && prod.images[0]) ||
     "https://picsum.photos/seed/placeholder/900";
-
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
-  const cat = prod.category;
-
-  // 🔥 ДОБАВЛЯЕМ ЭТО — флаг «ХИТ»
-  const isHit = !!prod.isHit;
+  const cat = prod.category; // ← ЭТО ДОБАВИТЬ
   
   // Определяем тип изделия и русский ярлык
   const TYPE_LABELS = {
@@ -541,19 +535,15 @@ function renderProduct() {
   box.innerHTML = `
     <div class="product-main">
       <div class="product-photo-wrap">
-  <img src="${img}" alt="${prod.title || prod.sku}">
-</div>
+        <img src="${img}" alt="${prod.title || prod.sku}">
+      </div>
 
-<div class="product-meta">
-  <h1 class="product-title">
-    ${typeLabel} · Арт. ${prod.sku}
-  </h1>
-
-  ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
-  ${isHit ? `<div class="product-hit-badge">Хит продаж по нашим данным</div>` : ""}
-</div>
-
-<div class="product-controls">
+      <div class="product-meta">
+        <h1 class="product-title">
+          ${typeLabel} · Арт. ${prod.sku}
+        </h1>
+        ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
+      </div>
 
       <div class="product-controls">
         <div class="product-controls-row">
