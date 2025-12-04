@@ -1863,6 +1863,18 @@ function initFilterSheet() {
   const btnReset = document.getElementById("filterResetBtn");
   const btnApply = document.getElementById("filterApplyBtn");
 
+    // Восстанавливаем "В наличии" из localStorage
+  try {
+    const saved = localStorage.getItem("zhem_filter_inStock");
+    const cbInStockInit = document.getElementById("filterInStock");
+    if (saved === "1") {
+      filterState.inStock = true;
+      if (cbInStockInit) cbInStockInit.checked = true;
+    }
+  } catch (e) {
+    // если что-то не так с localStorage — просто игнорируем
+  }
+
   if (!btnToggle || !overlay || !sheet) {
     return;
   }
