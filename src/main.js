@@ -88,7 +88,7 @@ function productHasStock(p, sizeFilter) {
       const qty = stockBySize[key];
       return (Number(qty) || 0) > 0;
     }
-    // нет карты размеров — считаем, что модель не подходит под этот размер
+    // нет карты размеров — считаем, что ПО ЭТОМУ РАЗМЕРУ нет наличия
     return false;
   }
 
@@ -100,7 +100,7 @@ function productHasStock(p, sizeFilter) {
     return stockTotal > 0;
   }
 
-  // Если вообще нет инфы про остатки — не режем
+  // Если вообще нет инфы про остатки — НЕ режем
   return true;
 }
 
@@ -110,6 +110,8 @@ function applyFiltersByWeight(list) {
 
   const wMin = filterState.weightMin;
   const wMax = filterState.weightMax;
+  const sizeFilter = filterState.size;
+  const inStockFlag = !!filterState.inStock;
 
   // 1) Фильтр по весу
   if (
@@ -127,20 +129,31 @@ function applyFiltersByWeight(list) {
     });
   }
 
-  // 2) Фильтр по размеру (имеет смысл только для колец и браслетов)
-  const sizeFilter = filterState.size;
+  // 2) Фильтр по размеру:
+  //    - если выбран размер и галочка "В наличии" НЕ стоит —
+  //      просто оставляем кольца/браслеты (тип), не режем по остаткам
+  //    - если выбран размер и галочка "В наличии" стоит —
+  //      берём только те, где есть остаток по ЭТОМУ размеру
   if (sizeFilter) {
     result = result.filter(p => {
-      if (p.category === "rings" || p.category === "bracelets") {
-        return productHasStock(p, sizeFilter);
+      if (p.category !== "rings" && p.category !== "bracelets") {
+        // если выбран размер — серьги/подвески/булавки скрываем
+        return false;
       }
-      // если выбран размер — серьги/подвески/булавки скрываем
-      return false;
+
+      if (!inStockFlag) {
+        // фильтруем только по типу (кольца/браслеты),
+        // остатки отдадим на отработку карточке товара
+        return true;
+      }
+
+      // размер + в наличии → нужен реальный остаток по размеру
+      return productHasStock(p, sizeFilter);
     });
   }
 
-  // 3) Фильтр "В наличии"
-  if (filterState.inStock) {
+  // 3) Фильтр "В наличии" БЕЗ выбранного размера
+  if (inStockFlag && !sizeFilter) {
     result = result.filter(p => productHasStock(p, null));
   }
 
