@@ -890,8 +890,15 @@ function renderProduct() {
   if (btnAdd) {
     btnAdd.onclick = () => {
       // 1) Безразмерные
-      if (isNoSize) {
+           if (isNoSize) {
         const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 1) : 1;
+
+        const max = getMaxNoSizeQty();
+
+        if (max <= 0) {
+          toast("Нет остатка по этой модели");
+          return;
+        }
 
         const cart = loadCart();
         const existing = cart.find(
@@ -899,13 +906,6 @@ function renderProduct() {
             it.sku === prod.sku &&
             (it.size == null || it.size === "")
         );
-
-        const max = stockTotal != null ? stockTotal : 999;
-
-        if (stockTotal === 0) {
-          toast("Нет остатка по этой модели");
-          return;
-        }
 
         if (existing) {
           const current = existing.qty || 0;
@@ -929,6 +929,25 @@ function renderProduct() {
 
         saveCart(cart);
         animateAddToCart(btnAdd);
+
+        const cartCount = document.querySelector("#cartCount");
+        if (cartCount) {
+          cartCount.classList.add("cart-bump");
+          setTimeout(
+            () => cartCount.classList.remove("cart-bump"),
+            260
+          );
+        }
+
+        btnAdd.classList.add("btn-add-pulse");
+        setTimeout(
+          () => btnAdd.classList.remove("btn-add-pulse"),
+          220
+        );
+
+        toast("Добавлено в корзину");
+        return;
+      }
 
         const cartCount = document.querySelector("#cartCount");
         if (cartCount) {
