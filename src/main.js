@@ -933,51 +933,12 @@ function renderProduct() {
     };
   }
 
-    /* === КНОПКА "В КОРЗИНУ" === */
+     /* === КНОПКА "В КОРЗИНУ" === */
 
   if (btnAdd) {
     btnAdd.onclick = () => {
-      // 1) БЕЗРАЗМЕРНЫЕ (серьги / подвески / булавки)
-      if (isNoSize) {
-        const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 1) : 1;
-
-        const max = getMaxNoSizeQty();
-
-        if (max <= 0) {
-          toast("Нет остатка по этой модели");
-          return;
-        }
-
-        const cart = loadCart();
-        const existing = cart.find(
-          it =>
-            it.sku === prod.sku &&
-            (it.size == null || it.size === "")
-        );
-
-        if (existing) {
-          const current = existing.qty || 0;
-          const newTotal = Math.min(max, current + qty);
-          existing.qty = newTotal;
-        } else {
-          const initial = Math.min(max, qty);
-          if (initial <= 0) {
-            toast("Нет остатка по этой модели");
-            return;
-          }
-          cart.push({
-            sku: prod.sku,
-            size: null,
-            qty: initial,
-            avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
-            image: img,
-            title: prod.title || `${typeLabel} ${prod.sku}`
-          });
-        }
-
-        saveCart(cart);
-        animateAddToCart(btnAdd);
-
+      // маленький помощник: анимация корзины + кнопки
+      const bumpCartUi = () => {
         const cartCount = document.querySelector("#cartCount");
         if (cartCount) {
           cartCount.classList.add("cart-bump");
@@ -986,7 +947,55 @@ function renderProduct() {
 
         btnAdd.classList.add("btn-add-pulse");
         setTimeout(() => btnAdd.classList.remove("btn-add-pulse"), 220);
+      };
 
+      // 1) БЕЗРАЗМЕРНЫЕ (серьги / подвески / булавки)
+      if (isNoSize) {
+        const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 1) : 1;
+
+        // максимальное доступное количество = остаток на складе минус то,
+        // что уже лежит в корзине по этой модели без размера
+        let max = 999;
+        if (stockTotal != null && !isNaN(stockTotal)) {
+          const cartNow = loadCart();
+          const existingNoSize = cartNow.find(
+            it => it.sku === prod.sku && (it.size == null || it.size === "")
+          );
+          const alreadyInCart = existingNoSize ? (existingNoSize.qty || 0) : 0;
+          max = Math.max(0, stockTotal - alreadyInCart);
+        }
+
+        if (max <= 0) {
+          toast("Нет остатка по этой модели");
+          return;
+        }
+
+        const cart = loadCart();
+        let existing = cart.find(
+          it => it.sku === prod.sku && (it.size == null || it.size === "")
+        );
+
+        const toAdd = Math.min(max, qty);
+
+        if (!existing) {
+          existing = {
+            sku: prod.sku,
+            size: null,
+            qty: 0,
+            avgWeight:
+              prod.avgWeight != null ? prod.avgWeight : null,
+            image: img,
+            title: prod.title || `${typeLabel} ${prod.sku}`
+          };
+          cart.push(existing);
+        }
+
+        const current = existing.qty || 0;
+        existing.qty = Math.min(999, current + toAdd);
+
+        saveCart(cart);
+        animateAddToCart(btnAdd);
+        bumpCartUi();
         toast("Добавлено в корзину");
         return;
       }
@@ -1003,18 +1012,10 @@ function renderProduct() {
           return;
         }
 
+        // внутренняя логика уже учитывает max по каждому размеру (stockBySize)
         addStateToCart();
         animateAddToCart(btnAdd);
-
-        const cartCount = document.querySelector("#cartCount");
-        if (cartCount) {
-          cartCount.classList.add("cart-bump");
-          setTimeout(() => cartCount.classList.remove("cart-bump"), 260);
-        }
-
-        btnAdd.classList.add("btn-add-pulse");
-        setTimeout(() => btnAdd.classList.remove("btn-add-pulse"), 220);
-
+        bumpCartUi();
         toast("Добавлено в корзину");
 
         // сбрасываем матрицу
@@ -1031,10 +1032,11 @@ function renderProduct() {
         return;
       }
 
-      // если ни одна схема не подошла
+      // 3) если ни одна схема не подошла
       toast("Невозможно определить схему размеров для товара");
     };
   }
+}
 
 /* === КОРЗИНА: ОБЩИЙ СПИСОК (группировка по артикулу) === */
 
