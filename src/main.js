@@ -675,20 +675,34 @@ function renderProduct() {
   preventDoubleTapZoom(btnQtyDec);
   preventDoubleTapZoom(btnQtyInc);
 
-  /* === БЕЗРАЗМЕРНЫЕ: серьги / подвески / булавки === */
+    // Вспомогательная функция для лимита безразмерных
+  function getMaxNoSizeQty() {
+    if (stockTotal == null || isNaN(stockTotal)) {
+      // Если остаток не передан — считаем, что максимум 1 шт,
+      // чтобы не рисовать сказочные 999 штук
+      return 1;
+    }
+    return Math.max(0, Number(stockTotal));
+  }
+
   if (isNoSize) {
     if (btnSizeOpen) btnSizeOpen.style.display = "none";
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
-    if (stockLabelNoSize && stockTotal != null) {
-      stockLabelNoSize.textContent = `В наличии: ${stockTotal} шт`;
+    const maxNoSize = getMaxNoSizeQty();
+
+    if (stockLabelNoSize) {
+      if (stockTotal != null && !isNaN(stockTotal)) {
+        stockLabelNoSize.textContent = `В наличии: ${maxNoSize} шт`;
+      } else {
+        stockLabelNoSize.textContent = `Остаток не указан`;
+      }
     }
 
     if (btnQtyInc && qtySpan) {
       btnQtyInc.onclick = () => {
         let v = parseInt(qtySpan.textContent, 10) || 1;
-        const max = stockTotal != null ? stockTotal : 999;
-        v = Math.min(max, v + 1);
+        v = Math.min(maxNoSize, v + 1);
         qtySpan.textContent = String(v);
       };
     }
