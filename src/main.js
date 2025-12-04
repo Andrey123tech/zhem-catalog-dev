@@ -933,12 +933,12 @@ function renderProduct() {
     };
   }
 
-  /* === КНОПКА "В КОРЗИНУ" === */
+    /* === КНОПКА "В КОРЗИНУ" === */
 
   if (btnAdd) {
     btnAdd.onclick = () => {
-      // 1) Безразмерные
-           if (isNoSize) {
+      // 1) БЕЗРАЗМЕРНЫЕ (серьги / подвески / булавки)
+      if (isNoSize) {
         const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 1) : 1;
 
         const max = getMaxNoSizeQty();
@@ -981,42 +981,17 @@ function renderProduct() {
         const cartCount = document.querySelector("#cartCount");
         if (cartCount) {
           cartCount.classList.add("cart-bump");
-          setTimeout(
-            () => cartCount.classList.remove("cart-bump"),
-            260
-          );
+          setTimeout(() => cartCount.classList.remove("cart-bump"), 260);
         }
 
         btnAdd.classList.add("btn-add-pulse");
-        setTimeout(
-          () => btnAdd.classList.remove("btn-add-pulse"),
-          220
-        );
+        setTimeout(() => btnAdd.classList.remove("btn-add-pulse"), 220);
 
         toast("Добавлено в корзину");
         return;
       }
 
-        const cartCount = document.querySelector("#cartCount");
-        if (cartCount) {
-          cartCount.classList.add("cart-bump");
-          setTimeout(
-            () => cartCount.classList.remove("cart-bump"),
-            260
-          );
-        }
-
-        btnAdd.classList.add("btn-add-pulse");
-        setTimeout(
-          () => btnAdd.classList.remove("btn-add-pulse"),
-          220
-        );
-
-        toast("Добавлено в корзину");
-        return;
-      }
-
-      // 2) Размерные (кольца / браслеты)
+      // 2) РАЗМЕРНЫЕ (кольца / браслеты)
       if (isRingSized && matrixSizes.length > 0 && addStateToCart) {
         let hasQty = false;
         sizeState.forEach(q => {
@@ -1034,20 +1009,15 @@ function renderProduct() {
         const cartCount = document.querySelector("#cartCount");
         if (cartCount) {
           cartCount.classList.add("cart-bump");
-          setTimeout(
-            () => cartCount.classList.remove("cart-bump"),
-            260
-          );
+          setTimeout(() => cartCount.classList.remove("cart-bump"), 260);
         }
 
         btnAdd.classList.add("btn-add-pulse");
-        setTimeout(
-          () => btnAdd.classList.remove("btn-add-pulse"),
-          220
-        );
+        setTimeout(() => btnAdd.classList.remove("btn-add-pulse"), 220);
 
         toast("Добавлено в корзину");
 
+        // сбрасываем матрицу
         sizeState.forEach((_, key) => sizeState.set(key, 0));
         if (modal) {
           matrixSizes.forEach(s => {
@@ -1061,10 +1031,10 @@ function renderProduct() {
         return;
       }
 
+      // если ни одна схема не подошла
       toast("Невозможно определить схему размеров для товара");
     };
   }
-}
 
 /* === КОРЗИНА: ОБЩИЙ СПИСОК (группировка по артикулу) === */
 
