@@ -499,7 +499,7 @@ if (filterState.inStock) {
 /* === КАРТОЧКА ТОВАРА === */
 
 function renderProduct() {
-  const box = $("#product"); // используем тот же селектор, что и в router-е
+  const box = $("#product"); // тот же селектор, что и в router-е
   if (!box) return;
 
   const sku = getSkuFromUrl();
@@ -518,7 +518,7 @@ function renderProduct() {
 
   const cat = prod.category;
 
-  // Определяем тип изделия и русский ярлык
+  // Тип изделия → человеческий заголовок
   const TYPE_LABELS = {
     rings: "Кольцо",
     earrings: "Серьги",
@@ -541,7 +541,7 @@ function renderProduct() {
     cat === "pendants" ||
     cat === "pins";
 
-  // Базовые линейки размеров (как было)
+  // Базовые линейки размеров (как было раньше)
   const baseSizes = (isRing && Array.isArray(SIZES))
     ? SIZES
     : (isBracelet && Array.isArray(BRACELET_SIZES))
@@ -553,6 +553,10 @@ function renderProduct() {
     prod.stockBySize && typeof prod.stockBySize === "object"
       ? prod.stockBySize
       : null;
+
+  // Общий остаток для безразмерных изделий (серьги / подвески / булавки)
+  const stockTotal =
+    typeof prod.stockTotal === "number" ? prod.stockTotal : null;
 
   // Массив размеров для матрицы:
   // 1) если есть stockBySize → только размеры с qty > 0
@@ -567,6 +571,9 @@ function renderProduct() {
     if (!matrixSizes.length) {
       matrixSizes = baseSizes.map(s => String(s));
     }
+
+    // 🔢 СОРТИРУЕМ размеры по возрастанию (18, 18.5, 19, 20.5 ...)
+    matrixSizes.sort((a, b) => parseFloat(a) - parseFloat(b));
   }
 
   // Состояние выбранных количеств по размерам
@@ -625,6 +632,9 @@ function renderProduct() {
   const qtySpan = $("#qtyNoSize", box);
   const btnQtyDec = $("#qtyDec", box);
   const btnQtyInc = $("#qtyInc", box);
+  const stockLabelNoSize = box.querySelector(
+    ".qty-block-no-size .size-row-weight"
+  );
 
   function preventDoubleTapZoom(btn) {
     if (!btn) return;
@@ -642,10 +652,16 @@ function renderProduct() {
     // Показываем простой блок количества
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
+    // Показать "В наличии: N шт"
+    if (stockLabelNoSize && stockTotal != null) {
+      stockLabelNoSize.textContent = `В наличии: ${stockTotal} шт`;
+    }
+
     if (btnQtyInc && qtySpan) {
       btnQtyInc.onclick = () => {
         let v = parseInt(qtySpan.textContent, 10) || 1;
-        v = Math.min(999, v + 1);
+        const max = stockTotal != null ? stockTotal : 999;
+        v = Math.min(max, v + 1);
         qtySpan.textContent = String(v);
       };
     }
@@ -672,20 +688,32 @@ function renderProduct() {
       <div class="size-matrix-sheet">
         <div class="size-matrix-header">Размеры · Арт. ${prod.sku}</div>
         <div class="size-matrix-list">
-          ${matrixSizes
-            .map(
-              s => `
-            <div class="size-row" data-size="${s}">
-              <div class="size-row-size">р-р ${s}</div>
-              <div class="size-row-qty">
-                <button type="button" data-act="dec" data-size="${s}">−</button>
-                <span data-size="${s}">0</span>
-                <button type="button" data-act="inc" data-size="${s}">+</button>
-              </div>
-            </div>
-          `
-            )
-            .join("")}
+          ${
+            matrixSizes
+              .map(size => {
+                const key = String(size);
+                const maxForSize =
+                  stockMap && stockMap[key] != null
+                    ? Number(stockMap[key]) || 0
+                    : null;
+                const stockText =
+                  maxForSize != null
+                    ? \`В наличии: \${maxForSize} шт\`
+                    : "";
+                return `
+                  <div class="size-row" data-size="${key}">
+                    <div class="size-row-size">р-р ${key}</div>
+                    <div class="size-row-qty">
+                      <button type="button" data-act="dec" data-size="${key}">−</button>
+                      <span data-size="${key}">0</span>
+                      <button type="button" data-act="inc" data-size="${key}">+</button>
+                    </div>
+                    <div class="size-row-weight">${stockText}</div>
+                  </div>
+                `;
+              })
+              .join("")
+          }
         </div>
         <button type="button" class="btn-primary size-matrix-done" id="sizeMatrixDone">
           Готово
@@ -794,13 +822,16 @@ function renderProduct() {
         }
 
         if (existing) {
-          const newQty = (existing.qty || 0) + qty;
-          existing.qty = Math.min(maxForSize, Math.min(999, newQty));
+          const current = existing.qty || 0;
+          const newTotal = Math.min(maxForSize, current + qty);
+          existing.qty = Math.min(999, newTotal);
         } else {
+          const initial = Math.min(maxForSize, qty);
+          if (initial <= 0) return;
           cart.push({
             sku: prod.sku,
             size: key,
-            qty: Math.min(maxForSize, qty),
+            qty: initial,
             avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
             image: img,
             title: prod.title || `${typeLabel} ${prod.sku}`
@@ -827,13 +858,27 @@ function renderProduct() {
             (it.size == null || it.size === "")
         );
 
+        const max = stockTotal != null ? stockTotal : 999;
+
+        if (stockTotal === 0) {
+          toast("Нет остатка по этой модели");
+          return;
+        }
+
         if (existing) {
-          existing.qty = Math.min(999, (existing.qty || 0) + qty);
+          const current = existing.qty || 0;
+          const newTotal = Math.min(max, current + qty);
+          existing.qty = newTotal;
         } else {
+          const initial = Math.min(max, qty);
+          if (initial <= 0) {
+            toast("Нет остатка по этой модели");
+            return;
+          }
           cart.push({
             sku: prod.sku,
             size: null,
-            qty,
+            qty: initial,
             avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
             image: img,
             title: prod.title || `${typeLabel} ${prod.sku}`
