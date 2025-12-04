@@ -731,10 +731,12 @@ function renderProduct() {
                   stockMap && stockMap[key] != null
                     ? Number(stockMap[key]) || 0
                     : null;
+                
                 const stockText =
                   maxForSize != null
-                    ? \`В наличии: \${maxForSize} шт\`
+                    ? `В наличии: ${maxForSize} шт`
                     : "";
+                
                 return `
                   <div class="size-row" data-size="${key}">
                     <div class="size-row-size">р-р ${key}</div>
@@ -1962,5 +1964,15 @@ function readFilterControls() {
   filterState.isNew = !!(cbNew && cbNew.checked);
   filterState.inStock = !!(cbInStock && cbInStock.checked);
 }
+
+  // Запоминаем чекбокс "В наличии" между страницами
+  try {
+    localStorage.setItem(
+      "zhem_filter_inStock",
+      filterState.inStock ? "1" : "0"
+    );
+  } catch (e) {
+    // тихо игнорируем, если localStorage недоступен
+  }
 
 window.addEventListener("load", initFilterSheet);
