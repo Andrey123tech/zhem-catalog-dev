@@ -663,13 +663,61 @@ function renderProduct() {
   const qtySpan = $("#qtyNoSize", box);
   const btnQtyDec = $("#qtyDec", box);
   const btnQtyInc = $("#qtyInc", box);
-  const stockLabelNoSize = box.querySelector(
+    const stockLabelNoSize = box.querySelector(
     ".qty-block-no-size .size-row-weight"
   );
+
+  // Вспомогательная функция для лимита безразмерных
+  function getMaxNoSizeQty() {
+    // stockTotal мы посчитали выше:
+    //   const rawTotal = prod.stockTotal;
+    //   const stockTotal = ...
+    if (stockTotal == null || isNaN(stockTotal)) {
+      // Если остаток не указан — считаем максимум 1 шт,
+      // чтобы серьги не улетали в 120+ штук
+      return 1;
+    }
+    return Math.max(0, Number(stockTotal));
+  }
 
   function preventDoubleTapZoom(btn) {
     if (!btn) return;
     btn.style.touchAction = "manipulation";
+  }
+
+  preventDoubleTapZoom(btnQtyDec);
+  preventDoubleTapZoom(btnQtyInc);
+
+  /* === БЕЗРАЗМЕРНЫЕ: серьги / подвески / булавки === */
+  if (isNoSize) {
+    if (btnSizeOpen) btnSizeOpen.style.display = "none";
+    if (qtyBlock) qtyBlock.classList.remove("hidden");
+
+    const maxNoSize = getMaxNoSizeQty();
+
+    if (stockLabelNoSize) {
+      if (stockTotal != null && !isNaN(stockTotal)) {
+        stockLabelNoSize.textContent = `В наличии: ${maxNoSize} шт`;
+      } else {
+        stockLabelNoSize.textContent = `Остаток не указан`;
+      }
+    }
+
+    if (btnQtyInc && qtySpan) {
+      btnQtyInc.onclick = () => {
+        let v = parseInt(qtySpan.textContent, 10) || 1;
+        v = Math.min(maxNoSize, v + 1);
+        qtySpan.textContent = String(v);
+      };
+    }
+
+    if (btnQtyDec && qtySpan) {
+      btnQtyDec.onclick = () => {
+        let v = parseInt(qtySpan.textContent, 10) || 1;
+        v = Math.max(1, v - 1);
+        qtySpan.textContent = String(v);
+      };
+    }
   }
 
   preventDoubleTapZoom(btnQtyDec);
