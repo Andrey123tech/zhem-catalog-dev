@@ -547,7 +547,7 @@ if (filterState.inStock) {
 /* === КАРТОЧКА ТОВАРА === */
 
 function renderProduct() {
-  const box = $("#product"); // тот же селектор, что и в router-е
+  const box = $("#product");
   if (!box) return;
 
   const sku = getSkuFromUrl();
@@ -566,7 +566,7 @@ function renderProduct() {
 
   const cat = prod.category;
 
-  // Тип изделия → человеческий заголовок
+  // Человеческий тип
   const TYPE_LABELS = {
     rings: "Кольцо",
     earrings: "Серьги",
@@ -576,39 +576,33 @@ function renderProduct() {
   };
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
-  // Типы
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
-
-  // Размерные изделия: кольца + браслеты
   const isRingSized = isRing || isBracelet;
 
-  // Изделия без размеров — серьги / подвески / булавки
   const isNoSize =
     cat === "earrings" ||
     cat === "pendants" ||
     cat === "pins";
 
-  // Базовые линейки размеров (как было раньше)
   const baseSizes = (isRing && Array.isArray(SIZES))
     ? SIZES
     : (isBracelet && Array.isArray(BRACELET_SIZES))
       ? BRACELET_SIZES
       : [];
 
-  // Карта остатков по размерам из products.json (если есть)
   const stockMap =
     prod.stockBySize && typeof prod.stockBySize === "object"
       ? prod.stockBySize
       : null;
 
-  // Общий остаток для безразмерных изделий (серьги / подвески / булавки)
+  const rawTotal = prod.stockTotal;
   const stockTotal =
-    typeof prod.stockTotal === "number" ? prod.stockTotal : null;
+    rawTotal != null && !isNaN(Number(rawTotal))
+      ? Number(rawTotal)
+      : null;
 
-  // Массив размеров для матрицы:
-  // 1) если есть stockBySize → только размеры с qty > 0
-  // 2) если нет stockBySize → fallback к полной линейке (как раньше)
+  // Размеры для матрицы
   let matrixSizes = [];
   if (isRingSized) {
     if (stockMap) {
@@ -620,11 +614,9 @@ function renderProduct() {
       matrixSizes = baseSizes.map(s => String(s));
     }
 
-    // 🔢 СОРТИРУЕМ размеры по возрастанию (18, 18.5, 19, 20.5 ...)
     matrixSizes.sort((a, b) => parseFloat(a) - parseFloat(b));
   }
 
-  // Состояние выбранных количеств по размерам
   const sizeState = new Map();
   matrixSizes.forEach(s => sizeState.set(String(s), 0));
 
@@ -651,7 +643,7 @@ function renderProduct() {
               </button>
             </div>
 
-            <!-- Блок количества для изделий БЕЗ размеров (серьги, подвески, булавки) -->
+            <!-- Для изделий БЕЗ размеров -->
             <div class="qty-block-no-size hidden">
               <div class="size-row" data-size="">
                 <div class="size-row-size"></div>
@@ -692,15 +684,11 @@ function renderProduct() {
   preventDoubleTapZoom(btnQtyDec);
   preventDoubleTapZoom(btnQtyInc);
 
-  /* === РЕЖИМ БЕЗ РАЗМЕРОВ (СЕРЬГИ / ПОДВЕСКИ / БУЛАВКИ) === */
+  /* === БЕЗРАЗМЕРНЫЕ: серьги / подвески / булавки === */
   if (isNoSize) {
-    // Прячем кнопку "Выбрать размеры"
     if (btnSizeOpen) btnSizeOpen.style.display = "none";
-
-    // Показываем простой блок количества
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
-    // Показать "В наличии: N шт"
     if (stockLabelNoSize && stockTotal != null) {
       stockLabelNoSize.textContent = `В наличии: ${stockTotal} шт`;
     }
@@ -723,8 +711,7 @@ function renderProduct() {
     }
   }
 
-  /* === МОДАЛЬНОЕ ОКНО С МАТРИЦЕЙ РАЗМЕРОВ (КОЛЬЦА + БРАСЛЕТЫ) === */
-
+  /* === МАТРИЦА РАЗМЕРОВ: кольца + браслеты === */
   let modal = null;
   let addStateToCart = null;
 
@@ -756,7 +743,10 @@ function renderProduct() {
                       <span data-size="${key}">0</span>
                       <button type="button" data-act="inc" data-size="${key}">+</button>
                     </div>
-                    <div class="size-row-weight">${stockText}</div>
+                    <div class="size-row-weight"
+                         style="min-width:120px;text-align:right;font-size:13px;opacity:0.75;">
+                      ${stockText}
+                    </div>
                   </div>
                 `;
               })
@@ -805,14 +795,12 @@ function renderProduct() {
       btnSizeOpen.addEventListener("click", openModal);
     }
 
-    // Закрытие по клику по фону
     modal.addEventListener("click", e => {
       if (e.target === modal) {
         closeModal();
       }
     });
 
-    // Логика +/- с учётом максимума по складу
     modal.addEventListener("click", e => {
       const btn = e.target.closest("button");
       if (!btn) return;
@@ -851,7 +839,6 @@ function renderProduct() {
       updateSummary();
     });
 
-    // Добавление выбранного state в корзину
     addStateToCart = () => {
       const cart = loadCart();
 
@@ -895,7 +882,7 @@ function renderProduct() {
 
   if (btnAdd) {
     btnAdd.onclick = () => {
-      // 1) Изделия без размеров (серьги, подвески, булавки)
+      // 1) Безразмерные
       if (isNoSize) {
         const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 1) : 1;
 
@@ -955,7 +942,7 @@ function renderProduct() {
         return;
       }
 
-      // 2) Кольца / браслеты с матрицей размеров
+      // 2) Размерные (кольца / браслеты)
       if (isRingSized && matrixSizes.length > 0 && addStateToCart) {
         let hasQty = false;
         sizeState.forEach(q => {
@@ -987,7 +974,6 @@ function renderProduct() {
 
         toast("Добавлено в корзину");
 
-        // Сбрасываем выбранные количества
         sizeState.forEach((_, key) => sizeState.set(key, 0));
         if (modal) {
           matrixSizes.forEach(s => {
@@ -1001,7 +987,6 @@ function renderProduct() {
         return;
       }
 
-      // Fallback
       toast("Невозможно определить схему размеров для товара");
     };
   }
