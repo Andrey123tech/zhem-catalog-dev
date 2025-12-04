@@ -68,36 +68,84 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
-// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ПОКА ТОЛЬКО ВЕС) ===
-function applyFiltersByWeight(list) {
-  // Если фильтры по весу не заданы – возвращаем список как есть
-  if (
-    (filterState.weightMin == null || isNaN(filterState.weightMin)) &&
-    (filterState.weightMax == null || isNaN(filterState.weightMax))
-  ) {
-    return list;
+// Проверка остатков по модели (с учётом размера, если задан)
+function productHasStock(p, sizeFilter) {
+  const stockBySize =
+    p.stockBySize && typeof p.stockBySize === "object"
+      ? p.stockBySize
+      : null;
+
+  const rawTotal = p.stockTotal;
+  const stockTotal =
+    rawTotal != null && !isNaN(Number(rawTotal))
+      ? Number(rawTotal)
+      : null;
+
+  // Если выбран конкретный размер — интересует только он
+  if (sizeFilter) {
+    if (stockBySize) {
+      const key = String(sizeFilter).replace(",", ".");
+      const qty = stockBySize[key];
+      return (Number(qty) || 0) > 0;
+    }
+    // нет карты размеров — считаем, что модель не подходит под этот размер
+    return false;
   }
 
-  return list.filter(p => {
-    // Берём основной вес: avgWeight (как в buildOrderText), если нет — запасной weight
-    const w = p.avgWeight ?? p.weight;
+  // Без sizeFilter: есть ли вообще что-то на складе
+  if (stockBySize) {
+    return Object.values(stockBySize).some(q => (Number(q) || 0) > 0);
+  }
+  if (stockTotal != null) {
+    return stockTotal > 0;
+  }
 
-    // Если веса нет – сейчас не выбрасываем модель, чтобы не терять позиции
-    if (w == null || isNaN(w)) {
-      return true;
-    }
+  // Если вообще нет инфы про остатки — не режем
+  return true;
+}
 
-    let ok = true;
+// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ВЕС + РАЗМЕР + НАЛИЧИЕ) ===
+function applyFiltersByWeight(list) {
+  let result = Array.isArray(list) ? list.slice() : [];
 
-    if (filterState.weightMin != null && !isNaN(filterState.weightMin)) {
-      ok = ok && w >= filterState.weightMin;
-    }
-    if (filterState.weightMax != null && !isNaN(filterState.weightMax)) {
-      ok = ok && w <= filterState.weightMax;
-    }
+  const wMin = filterState.weightMin;
+  const wMax = filterState.weightMax;
 
-    return ok;
-  });
+  // 1) Фильтр по весу
+  if (
+    (wMin != null && !isNaN(wMin)) ||
+    (wMax != null && !isNaN(wMax))
+  ) {
+    result = result.filter(p => {
+      const w = p.avgWeight ?? p.weight;
+      if (w == null || isNaN(w)) return true;
+
+      let ok = true;
+      if (wMin != null && !isNaN(wMin)) ok = ok && w >= wMin;
+      if (wMax != null && !isNaN(wMax)) ok = ok && w <= wMax;
+      return ok;
+    });
+  }
+
+  // 2) Фильтр по размеру (имеет смысл только для колец и браслетов)
+  const sizeFilter = filterState.size;
+  if (sizeFilter) {
+    result = result.filter(p => {
+      if (p.category === "rings" || p.category === "bracelets") {
+        return productHasStock(p, sizeFilter);
+      }
+      // если выбран размер — серьги/подвески/булавки скрываем
+      return false;
+    });
+  }
+
+  // 3) Фильтр "В наличии"
+  if (filterState.inStock) {
+    result = result.filter(p => productHasStock(p, null));
+  }
+
+  // isPopular / isNew пока не трогаем — фундамент сначала
+  return result;
 }
 
 /* === Формирование текста заявки для WhatsApp + Excel === */
