@@ -445,7 +445,6 @@ function renderGrid() {
           c.key
         )}">
           <div class="square">
-            <!-- пока без реальных иконок категорий, можно потом добавить -->
             <div class="category-icon-placeholder"></div>
           </div>
           <div class="tile-body">
@@ -462,7 +461,7 @@ function renderGrid() {
     return;
   }
 
-     // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
+  // === РЕЖИМ 2: ЕСТЬ category → ПОКАЗЫВАЕМ СЕТКУ МОДЕЛЕЙ ===
 
   // фильтрация по категории
   let list = PRODUCTS.filter(p => p.category === category);
@@ -471,7 +470,6 @@ function renderGrid() {
   const searchInput = $("#skuSearch");
   let query = "";
   if (searchInput) {
-    // Вешаем обработчик только один раз
     if (!searchInput.dataset.bound) {
       searchInput.dataset.bound = "1";
       searchInput.addEventListener("input", () => {
@@ -487,27 +485,8 @@ function renderGrid() {
     list = list.filter(p => String(p.sku).toLowerCase().includes(q));
   }
 
-  // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
+  // ПРИМЕНЯЕМ ВСЕ ФИЛЬТРЫ (вес + размер + в наличии)
   list = applyFiltersByWeight(list);
-
-if (filterState.inStock) {
-  list = list.filter(p => {
-    // если есть totalStock — считаем по нему
-    if (typeof p.totalStock === "number") {
-      return p.totalStock > 0;
-    }
-    // запасной вариант: если есть stockBySize — суммируем
-    if (p.stockBySize) {
-      const sum = Object.values(p.stockBySize).reduce(
-        (s, v) => s + (v || 0),
-        0
-      );
-      return sum > 0;
-    }
-    // если ничего нет — считаем, что нет в наличии
-    return false;
-  });
-}
 
   // сортировка:
   // 1) сначала по sortOrder (если есть),
@@ -522,7 +501,6 @@ if (filterState.inStock) {
     });
 
   // заголовки
-
   const label = CATEGORY_LABELS[category];
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = `${label} · текущая подборка`;
