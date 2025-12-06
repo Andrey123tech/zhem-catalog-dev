@@ -719,7 +719,11 @@ preventDoubleTapZoom(btnQtyInc);
       NO_SIZE_KEY,
       cartQtyMap
     );
-    const maxNoSize = remainingNoSize == null ? 999 : remainingNoSize;
+    const maxNoSize = inStockOnly
+      ? remainingNoSize == null
+        ? 999
+        : remainingNoSize
+      : 999;
 
     if (qtySpan) {
       const initial = Math.min(maxNoSize == null ? 999 : maxNoSize, 1);
@@ -731,7 +735,7 @@ preventDoubleTapZoom(btnQtyInc);
         let v = parseInt(qtySpan.textContent, 10);
         if (isNaN(v)) v = 0;
         const limit = maxNoSize == null ? 999 : maxNoSize;
-        if (limit <= 0) return;
+        if (inStockOnly && limit <= 0) return;
         v = Math.min(limit, v + 1);
         qtySpan.textContent = String(v);
       };
@@ -763,7 +767,9 @@ preventDoubleTapZoom(btnQtyInc);
             .map(s => {
               const stockVal = getStockForSize(stockInfo, s);
               const isZero =
-                stockInfo.hasData && (stockVal == null || stockVal <= 0);
+                inStockOnly &&
+                stockInfo.hasData &&
+                (stockVal == null || stockVal <= 0);
               const rowClass = isZero ? "size-row no-stock" : "size-row";
               const btnDis = isZero ? "disabled" : "";
               return `
@@ -843,7 +849,9 @@ preventDoubleTapZoom(btnQtyInc);
       const key = String(size);
       let current = sizeState.get(key) || 0;
 
-      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap);
+      const remaining = inStockOnly
+        ? getRemainingStockForSize(stockInfo, key, cartQtyMap)
+        : null;
       const maxAllowed = remaining == null ? 999 : remaining;
 
       if (act === "inc") {
@@ -872,13 +880,15 @@ preventDoubleTapZoom(btnQtyInc);
         );
 
         const currentQty = existing ? existing.qty || 0 : 0;
-        const stockCap = getStockForSize(stockInfo, size);
+        const stockCap = inStockOnly ? getStockForSize(stockInfo, size) : null;
         let finalTotal = currentQty + qty;
 
         if (stockCap != null) {
           const cap = Math.max(0, stockCap);
           finalTotal =
             currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
+        } else {
+          finalTotal = Math.min(999, finalTotal);
         }
 
         const added = finalTotal - currentQty;
@@ -926,14 +936,14 @@ preventDoubleTapZoom(btnQtyInc);
             (it.size == null || it.size === "")
         );
 
-        const remaining = getRemainingStockForSize(
-          stockInfo,
-          NO_SIZE_KEY,
-          cartQtyMap
-        );
-        const stockCap = getStockForSize(stockInfo, NO_SIZE_KEY);
+        const remaining = inStockOnly
+          ? getRemainingStockForSize(stockInfo, NO_SIZE_KEY, cartQtyMap)
+          : null;
+        const stockCap = inStockOnly
+          ? getStockForSize(stockInfo, NO_SIZE_KEY)
+          : null;
 
-        if (remaining !== null && remaining <= 0) {
+        if (inStockOnly && remaining !== null && remaining <= 0) {
           toast("Нет в наличии");
           return;
         }
@@ -947,6 +957,8 @@ preventDoubleTapZoom(btnQtyInc);
           const cap = Math.max(0, stockCap);
           finalTotal =
             currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
+        } else {
+          finalTotal = Math.min(999, finalTotal);
         }
 
         const added = finalTotal - currentQty;
