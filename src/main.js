@@ -118,15 +118,11 @@ function applyFiltersByWeight(list) {
 function productHasStock(p) {
   const cat = p.category;
 
-  // Нормально парсим stockTotal: и number, и "3", и "3.0"
-  let stockTotal = null;
+  // === ЖЁСТКАЯ нормализация stockTotal ===
+  let stockTotal = 0;
   if (p.stockTotal != null) {
-    if (typeof p.stockTotal === "number") {
-      stockTotal = p.stockTotal;
-    } else {
-      const parsed = parseFloat(p.stockTotal);
-      stockTotal = isNaN(parsed) ? null : parsed;
-    }
+    const parsed = parseFloat(p.stockTotal);
+    stockTotal = isNaN(parsed) ? 0 : parsed;
   }
 
   const stockBySize =
