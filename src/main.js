@@ -428,7 +428,24 @@ function renderGrid() {
 
   // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
   list = applyFiltersByWeight(list);
-
+if (filterState.inStock) {
+  list = list.filter(p => {
+    // если есть totalStock — считаем по нему
+    if (typeof p.totalStock === "number") {
+      return p.totalStock > 0;
+    }
+    // запасной вариант: если есть stockBySize — суммируем
+    if (p.stockBySize) {
+      const sum = Object.values(p.stockBySize).reduce(
+        (s, v) => s + (v || 0),
+        0
+      );
+      return sum > 0;
+    }
+    // если ничего нет — считаем, что нет в наличии
+    return false;
+  });
+}
   // сортировка:
   // 1) сначала по sortOrder (если есть),
   // 2) потом по артикулу — чтобы список был стабильным.
