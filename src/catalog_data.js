@@ -11,6 +11,7 @@ for (let v = 15.0; v <= 23.5; v += 0.5) {
 
 // Размеры браслетов — общая линейка
 const BRACELET_SIZES = ["17.0", "18.0", "19.0"];
+const DEFAULT_BRACELET_SIZE = "18.0";
 
 // Экспортируем данные
-export { PRODUCTS, SIZES, BRACELET_SIZES };
+export { PRODUCTS, SIZES, BRACELET_SIZES, DEFAULT_BRACELET_SIZE };
