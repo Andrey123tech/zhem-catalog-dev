@@ -84,36 +84,65 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
-// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ПОКА ТОЛЬКО ВЕС) ===
-function applyFiltersByWeight(list) {
-  // Если фильтры по весу не заданы – возвращаем список как есть
-  if (
-    (filterState.weightMin == null || isNaN(filterState.weightMin)) &&
-    (filterState.weightMax == null || isNaN(filterState.weightMax))
-  ) {
-    return list;
+// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (вес + размер + наличие) ===
+function applyFilters(list, category) {
+  let result = list.slice();
+
+  // --- 1. Фильтр по весу (как было раньше) ---
+  const hasMin =
+    filterState.weightMin != null && !isNaN(filterState.weightMin);
+  const hasMax =
+    filterState.weightMax != null && !isNaN(filterState.weightMax);
+
+  if (hasMin || hasMax) {
+    result = result.filter(p => {
+      const w = p.avgWeight ?? p.weight;
+
+      // веса нет — не режем модель
+      if (w == null || isNaN(w)) return true;
+
+      let ok = true;
+      if (hasMin) ok = ok && w >= filterState.weightMin;
+      if (hasMax) ok = ok && w <= filterState.weightMax;
+      return ok;
+    });
   }
 
-  return list.filter(p => {
-    // Берём основной вес: avgWeight (как в buildOrderText), если нет — запасной weight
-    const w = p.avgWeight ?? p.weight;
+  // --- 2. Фильтр "В наличии" ---
+  if (filterState.inStock) {
+    result = result.filter(p => hasStock(p));
+  }
 
-    // Если веса нет – сейчас не выбрасываем модель, чтобы не терять позиции
-    if (w == null || isNaN(w)) {
+  // --- 3. Фильтр по размеру (только для кольца / браслеты) ---
+  if (
+    filterState.size &&
+    (category === "rings" || category === "bracelets")
+  ) {
+    const targetSize = String(filterState.size).trim();
+
+    result = result.filter(p => {
+      // Для размерных моделей должны быть остатки по размерам
+      if (!p.stockBySize || typeof p.stockBySize !== "object") {
+        return false;
+      }
+
+      const val = p.stockBySize[targetSize];
+
+      // Если такого размера вообще нет в матрице — отбрасываем
+      if (val == null) return false;
+
+      // Если включён "В наличии" — оставляем только те,
+      // где по этому размеру количество > 0
+      if (filterState.inStock) {
+        return Number(val) > 0;
+      }
+
+      // Если "В наличии" выключен — достаточно, что размер существует
       return true;
-    }
+    });
+  }
 
-    let ok = true;
-
-    if (filterState.weightMin != null && !isNaN(filterState.weightMin)) {
-      ok = ok && w >= filterState.weightMin;
-    }
-    if (filterState.weightMax != null && !isNaN(filterState.weightMax)) {
-      ok = ok && w <= filterState.weightMax;
-    }
-
-    return ok;
-  });
+  return result;
 }
 
 /* === Формирование текста заявки для WhatsApp + Excel === */
