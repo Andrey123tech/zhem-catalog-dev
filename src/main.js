@@ -68,127 +68,36 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
-// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ВЕС + НАЛИЧИЕ/РАЗМЕР) ===
+// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ПОКА ТОЛЬКО ВЕС) ===
 function applyFiltersByWeight(list) {
-  const needWeightFilter =
-    (filterState.weightMin != null && !isNaN(filterState.weightMin)) ||
-    (filterState.weightMax != null && !isNaN(filterState.weightMax));
-
-  const needStockFilter = !!(filterState.inStock || filterState.size);
-
-  // Если вообще никаких фильтров (ни вес, ни наличие/размер) — возвращаем как есть
-  if (!needWeightFilter && !needStockFilter) {
+  // Если фильтры по весу не заданы – возвращаем список как есть
+  if (
+    (filterState.weightMin == null || isNaN(filterState.weightMin)) &&
+    (filterState.weightMax == null || isNaN(filterState.weightMax))
+  ) {
     return list;
   }
 
   return list.filter(p => {
-    // --- 1. Фильтр по весу ---
-    if (needWeightFilter) {
-      const w = p.avgWeight ?? p.weight;
+    // Берём основной вес: avgWeight (как в buildOrderText), если нет — запасной weight
+    const w = p.avgWeight ?? p.weight;
 
-      // Если веса нет — модель не выбрасываем, как и раньше
-      if (w != null && !isNaN(w)) {
-        if (
-          filterState.weightMin != null &&
-          !isNaN(filterState.weightMin) &&
-          w < filterState.weightMin
-        ) {
-          return false;
-        }
-
-        if (
-          filterState.weightMax != null &&
-          !isNaN(filterState.weightMax) &&
-          w > filterState.weightMax
-        ) {
-          return false;
-        }
-      }
+    // Если веса нет – сейчас не выбрасываем модель, чтобы не терять позиции
+    if (w == null || isNaN(w)) {
+      return true;
     }
 
-    // --- 2. Фильтр по наличию / размеру ---
-    if (needStockFilter) {
-      return productHasStock(p);
+    let ok = true;
+
+    if (filterState.weightMin != null && !isNaN(filterState.weightMin)) {
+      ok = ok && w >= filterState.weightMin;
+    }
+    if (filterState.weightMax != null && !isNaN(filterState.weightMax)) {
+      ok = ok && w <= filterState.weightMax;
     }
 
-    return true;
+    return ok;
   });
-}
-
-function productHasStock(p) {
-  const cat = p.category;
-
-  // === ЖЁСТКАЯ нормализация stockTotal ===
-  let stockTotal = 0;
-  if (p.stockTotal != null) {
-    const parsed = parseFloat(p.stockTotal);
-    stockTotal = isNaN(parsed) ? 0 : parsed;
-  }
-
-  const stockBySize =
-    p.stockBySize && typeof p.stockBySize === "object"
-      ? p.stockBySize
-      : null;
-
-  const sizeFilter = filterState.size;
-  const inStock = !!filterState.inStock;
-
-  const isRingOrBracelet = cat === "rings" || cat === "bracelets";
-  const isNoSize =
-    cat === "earrings" ||
-    cat === "pendants" ||
-    cat === "pins";
-
-  // --- 1. Фильтр по РАЗМЕРУ (только кольца и браслеты) ---
-  if (sizeFilter && isRingOrBracelet) {
-    if (!stockBySize) {
-      // карты размеров нет — по ТЗ для фильтра по размеру модель не показываем
-      return false;
-    }
-
-    const raw = stockBySize[sizeFilter];
-    const qty =
-      typeof raw === "number" ? raw : parseFloat(raw);
-    return qty > 0;
-  }
-
-  // Если размер выбран, но категория БЕЗ размеров (серьги/подвески/булавки),
-  // мы просто игнорируем sizeFilter, чтобы каталог не пустел.
-  // Работает только inStock.
-
-  // --- 2. Фильтр "В наличии" ---
-  if (inStock) {
-    // Кольца / браслеты
-    if (isRingOrBracelet) {
-      if (stockBySize) {
-        for (const key in stockBySize) {
-          const val = stockBySize[key];
-          const qty =
-            typeof val === "number" ? val : parseFloat(val);
-          if (qty > 0) return true;
-        }
-      }
-
-      if (stockTotal != null && stockTotal > 0) {
-        return true;
-      }
-
-      return false;
-    }
-
-    // Серьги / подвески / булавки — только по stockTotal
-    if (isNoSize) {
-      return stockTotal != null && stockTotal > 0;
-    }
-
-    // На всякий случай для прочих категорий
-    if (stockTotal != null) {
-      return stockTotal > 0;
-    }
-  }
-
-  // Если ни inStock, ни sizeFilter по факту не применяются — модель проходим
-  return true;
 }
 
 /* === Формирование текста заявки для WhatsApp + Excel === */
