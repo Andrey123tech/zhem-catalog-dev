@@ -471,8 +471,8 @@ function renderGrid() {
     list = list.filter(p => String(p.sku).toLowerCase().includes(q));
   }
 
-  // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
-  list = applyFiltersByWeight(list);
+    // ПРИМЕНЯЕМ ФИЛЬТРЫ (вес / размер / наличие)
+  list = applyFilters(list, category);
 if (filterState.inStock) {
   list = list.filter(p => {
     // если есть totalStock — считаем по нему
