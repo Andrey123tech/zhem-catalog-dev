@@ -2,7 +2,12 @@
 // Каталог, карточка, корзина. Vite-версия.
 
 // Подключаем данные каталога
-import { PRODUCTS, SIZES, BRACELET_SIZES } from "./catalog_data.js";
+import {
+  PRODUCTS,
+  SIZES,
+  BRACELET_SIZES,
+  DEFAULT_BRACELET_SIZE
+} from "./catalog_data.js";
 
 // === СОСТОЯНИЕ ФИЛЬТРОВ (ФИЛЬТРЫ 1.0) ===
 const filterState = {
@@ -14,21 +19,8 @@ const filterState = {
   inStock: false
 };
 
-// Проверка: есть ли вообще остатки по модели
-function hasStock(prod) {
-  // 1) Остатки по размерам (кольца / браслеты)
-  if (prod.stockBySize && typeof prod.stockBySize === "object") {
-    return Object.values(prod.stockBySize).some(q => Number(q) > 0);
-  }
-
-  // 2) Единственное число остатков (серьги / подвески / булавки и т.п.)
-  if (typeof prod.stockTotal === "number") {
-    return prod.stockTotal > 0;
-  }
-
-  // 3) Если данных нет — НЕ режем модель
-  return true;
-}
+// Специальный ключ для изделий без размерной сетки
+const NO_SIZE_KEY = "__no_size__";
 
 /* УТИЛИТЫ DOM */
 
@@ -84,65 +76,117 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
-// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (вес + размер + наличие) ===
-function applyFilters(list, category) {
-  let result = list.slice();
+// === Запасы (общее) ===
+function getStandardSizesForProduct(prod) {
+  if (!prod) return [];
+  if (prod.category === "rings") return Array.isArray(SIZES) ? SIZES : [];
+  if (prod.category === "bracelets")
+    return Array.isArray(BRACELET_SIZES) ? BRACELET_SIZES : [];
+  return [NO_SIZE_KEY]; // безразмерные изделия
+}
 
-  // --- 1. Фильтр по весу (как было раньше) ---
-  const hasMin =
-    filterState.weightMin != null && !isNaN(filterState.weightMin);
-  const hasMax =
-    filterState.weightMax != null && !isNaN(filterState.weightMax);
+function getStockMap(prod) {
+  const map = {};
+  let hasData = false;
 
-  if (hasMin || hasMax) {
-    result = result.filter(p => {
-      const w = p.avgWeight ?? p.weight;
-
-      // веса нет — не режем модель
-      if (w == null || isNaN(w)) return true;
-
-      let ok = true;
-      if (hasMin) ok = ok && w >= filterState.weightMin;
-      if (hasMax) ok = ok && w <= filterState.weightMax;
-      return ok;
+  if (prod && typeof prod.stockBySize === "object" && prod.stockBySize !== null) {
+    Object.entries(prod.stockBySize).forEach(([size, qty]) => {
+      const n = Number(qty);
+      if (!isNaN(n)) {
+        map[String(size)] = n;
+        hasData = true;
+      }
     });
   }
 
-  // --- 2. Фильтр "В наличии" ---
-  if (filterState.inStock) {
-    result = result.filter(p => hasStock(p));
+  // Поддержка единого числа для браслетов (тогда считаем это размером 18.0)
+  if (prod && typeof prod.stock === "number" && !isNaN(prod.stock)) {
+    if (prod.category === "bracelets") {
+      map[DEFAULT_BRACELET_SIZE] = Number(prod.stock);
+      hasData = true;
+    } else if (prod.category !== "rings") {
+      map[NO_SIZE_KEY] = Number(prod.stock);
+      hasData = true;
+    }
   }
 
-  // --- 3. Фильтр по размеру (только для кольца / браслеты) ---
+  return { map, hasData };
+}
+
+function getStockForSize(stockInfo, size) {
+  if (!stockInfo) return null;
+  const val = stockInfo.map[String(size)];
+  if (val == null || isNaN(val)) return null;
+  return Math.max(0, Number(val));
+}
+
+function productHasAnyStock(prod) {
+  const stockInfo = getStockMap(prod);
+  const sizes = getStandardSizesForProduct(prod);
+  if (!stockInfo.hasData) return true; // нет данных — не блокируем показ
+  return sizes.some(size => (getStockForSize(stockInfo, size) || 0) > 0);
+}
+
+function normalizeSizeKey(size) {
+  if (size == null || size === "") return NO_SIZE_KEY;
+  return String(size);
+}
+
+function getCartQtyBySize(sku) {
+  const map = new Map();
+  const cart = loadCart();
+  cart.forEach(it => {
+    if (it.sku !== sku) return;
+    const key = normalizeSizeKey(it.size);
+    map.set(key, (map.get(key) || 0) + (it.qty || 0));
+  });
+  return map;
+}
+
+function getRemainingStockForSize(stockInfo, size, cartQtyMap) {
+  const stock = getStockForSize(stockInfo, size);
+  if (stock == null) return null; // нет данных → нет ограничения
+  const already = cartQtyMap.get(normalizeSizeKey(size)) || 0;
+  return Math.max(0, stock - already);
+}
+
+function getVisibleSizesForProduct(prod, stockInfo, inStockOnly) {
+  const stdSizes = getStandardSizesForProduct(prod);
+  if (!inStockOnly) return stdSizes;
+  if (!stockInfo.hasData) return stdSizes; // нет данных — показываем всё
+  return stdSizes.filter(size => (getStockForSize(stockInfo, size) || 0) > 0);
+}
+
+// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ПОКА ТОЛЬКО ВЕС) ===
+function applyFiltersByWeight(list) {
+  // Если фильтры по весу не заданы – возвращаем список как есть
   if (
-    filterState.size &&
-    (category === "rings" || category === "bracelets")
+    (filterState.weightMin == null || isNaN(filterState.weightMin)) &&
+    (filterState.weightMax == null || isNaN(filterState.weightMax))
   ) {
-    const targetSize = String(filterState.size).trim();
-
-    result = result.filter(p => {
-      // Для размерных моделей должны быть остатки по размерам
-      if (!p.stockBySize || typeof p.stockBySize !== "object") {
-        return false;
-      }
-
-      const val = p.stockBySize[targetSize];
-
-      // Если такого размера вообще нет в матрице — отбрасываем
-      if (val == null) return false;
-
-      // Если включён "В наличии" — оставляем только те,
-      // где по этому размеру количество > 0
-      if (filterState.inStock) {
-        return Number(val) > 0;
-      }
-
-      // Если "В наличии" выключен — достаточно, что размер существует
-      return true;
-    });
+    return list;
   }
 
-  return result;
+  return list.filter(p => {
+    // Берём основной вес: avgWeight (как в buildOrderText), если нет — запасной weight
+    const w = p.avgWeight ?? p.weight;
+
+    // Если веса нет – сейчас не выбрасываем модель, чтобы не терять позиции
+    if (w == null || isNaN(w)) {
+      return true;
+    }
+
+    let ok = true;
+
+    if (filterState.weightMin != null && !isNaN(filterState.weightMin)) {
+      ok = ok && w >= filterState.weightMin;
+    }
+    if (filterState.weightMax != null && !isNaN(filterState.weightMax)) {
+      ok = ok && w <= filterState.weightMax;
+    }
+
+    return ok;
+  });
 }
 
 /* === Формирование текста заявки для WhatsApp + Excel === */
@@ -395,6 +439,9 @@ function renderGrid() {
   const grid = $("#grid");
   if (!grid || !Array.isArray(PRODUCTS)) return;
 
+  // Синхронизируем filterState с UI (если фильтры уже заданы на странице)
+  readFilterControls();
+
   const category = getCategoryFromUrl();
 
   const CATEGORY_LABELS = {
@@ -471,26 +518,14 @@ function renderGrid() {
     list = list.filter(p => String(p.sku).toLowerCase().includes(q));
   }
 
-    // ПРИМЕНЯЕМ ФИЛЬТРЫ (вес / размер / наличие)
-  list = applyFilters(list, category);
-if (filterState.inStock) {
-  list = list.filter(p => {
-    // если есть totalStock — считаем по нему
-    if (typeof p.totalStock === "number") {
-      return p.totalStock > 0;
-    }
-    // запасной вариант: если есть stockBySize — суммируем
-    if (p.stockBySize) {
-      const sum = Object.values(p.stockBySize).reduce(
-        (s, v) => s + (v || 0),
-        0
-      );
-      return sum > 0;
-    }
-    // если ничего нет — считаем, что нет в наличии
-    return false;
-  });
-}
+  // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
+  list = applyFiltersByWeight(list);
+
+  // Фильтр "В наличии" — оставляем только модели, у которых есть запас
+  if (filterState.inStock) {
+    list = list.filter(productHasAnyStock);
+  }
+
   // сортировка:
   // 1) сначала по sortOrder (если есть),
   // 2) потом по артикулу — чтобы список был стабильным.
@@ -520,9 +555,12 @@ if (filterState.inStock) {
       const fullTitle = p.title || `Кольцо ${p.sku}`;
       let shortTitle = fullTitle.replace(p.sku, "").trim();
       if (!shortTitle) shortTitle = "Кольцо";
+      const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
       return `
-        <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
+        <a class="tile" href="product.html?sku=${encodeURIComponent(
+          p.sku
+        )}${inStockParam}">
           <div class="square">
             <img src="${img}" alt="${p.title || p.sku}">
           </div>
@@ -542,7 +580,7 @@ if (filterState.inStock) {
 /* === КАРТОЧКА ТОВАРА === */
 
 function renderProduct() {
-  const box = $("#product"); // используем тот же селектор, что и в router-е
+  const box = $("#product");
   if (!box) return;
 
   const sku = getSkuFromUrl();
@@ -552,15 +590,20 @@ function renderProduct() {
     return;
   }
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const inStockOnly =
+    urlParams.get("inStock") === "1" || urlParams.get("inStock") === "true";
+  const stockInfo = getStockMap(prod);
+  const cartQtyMap = getCartQtyBySize(prod.sku);
+
   const img =
     (prod.images && prod.images[0]) ||
     "https://picsum.photos/seed/placeholder/900";
-
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
-  const cat = prod.category;
-
+  const cat = prod.category; // ← ЭТО ДОБАВИТЬ
+  
   // Определяем тип изделия и русский ярлык
   const TYPE_LABELS = {
     rings: "Кольцо",
@@ -571,11 +614,11 @@ function renderProduct() {
   };
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
-  // Типы
+    // Подготовка к логике размеров
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
 
-  // Размерные изделия: кольца + браслеты
+  // Теперь и кольца, и браслеты считаем размерными
   const isRingSized = isRing || isBracelet;
 
   // Изделия без размеров — серьги / подвески / булавки
@@ -584,37 +627,13 @@ function renderProduct() {
     cat === "pendants" ||
     cat === "pins";
 
-  // Базовые линейки размеров (как было)
-  const baseSizes = (isRing && Array.isArray(SIZES))
-    ? SIZES
-    : (isBracelet && Array.isArray(BRACELET_SIZES))
-      ? BRACELET_SIZES
-      : [];
+  // Размерная логика: кольца — SIZES, браслеты — BRACELET_SIZES
+  const sizes = isRingSized
+    ? getVisibleSizesForProduct(prod, stockInfo, inStockOnly)
+    : [];
 
-  // Карта остатков по размерам из products.json (если есть)
-  const stockMap =
-    prod.stockBySize && typeof prod.stockBySize === "object"
-      ? prod.stockBySize
-      : null;
-
-  // Массив размеров для матрицы:
-  // 1) если есть stockBySize → только размеры с qty > 0
-  // 2) если нет stockBySize → fallback к полной линейке (как раньше)
-  let matrixSizes = [];
-  if (isRingSized) {
-    if (stockMap) {
-      matrixSizes = Object.entries(stockMap)
-        .filter(([, qty]) => (Number(qty) || 0) > 0)
-        .map(([size]) => String(size));
-    }
-    if (!matrixSizes.length) {
-      matrixSizes = baseSizes.map(s => String(s));
-    }
-  }
-
-  // Состояние выбранных количеств по размерам
   const sizeState = new Map();
-  matrixSizes.forEach(s => sizeState.set(String(s), 0));
+  sizes.forEach(s => sizeState.set(String(s), 0));
 
   box.innerHTML = `
     <div class="product-main">
@@ -639,7 +658,7 @@ function renderProduct() {
               </button>
             </div>
 
-            <!-- Блок количества для изделий БЕЗ размеров (серьги, подвески, булавки) -->
+            <!-- Блок количества для изделий БЕЗ размеров (серьги, подвески, булавки, браслеты) -->
             <div class="qty-block-no-size hidden">
               <div class="size-row" data-size="">
                 <div class="size-row-size"></div>
@@ -670,14 +689,24 @@ function renderProduct() {
   const btnQtyInc = $("#qtyInc", box);
 
   function preventDoubleTapZoom(btn) {
-    if (!btn) return;
-    btn.style.touchAction = "manipulation";
+  if (!btn) return;
+  btn.style.touchAction = "manipulation";
+}
+
+preventDoubleTapZoom(btnQtyDec);
+preventDoubleTapZoom(btnQtyInc);
+
+  if (isRingSized && sizes.length === 0) {
+    if (summaryEl) {
+      summaryEl.textContent = stockInfo.hasData
+        ? "Нет размеров в наличии"
+        : "Нет данных о наличии";
+    }
+    if (btnSizeOpen) btnSizeOpen.disabled = true;
   }
 
-  preventDoubleTapZoom(btnQtyDec);
-  preventDoubleTapZoom(btnQtyInc);
+   /* === РЕЖИМ БЕЗ РАЗМЕРОВ (СЕРЬГИ / ПОДВЕСКИ / БУЛАВКИ) === */
 
-  /* === РЕЖИМ БЕЗ РАЗМЕРОВ (СЕРЬГИ / ПОДВЕСКИ / БУЛАВКИ) === */
   if (isNoSize) {
     // Прячем кнопку "Выбрать размеры"
     if (btnSizeOpen) btnSizeOpen.style.display = "none";
@@ -685,29 +714,44 @@ function renderProduct() {
     // Показываем простой блок количества
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
+    const remainingNoSize = getRemainingStockForSize(
+      stockInfo,
+      NO_SIZE_KEY,
+      cartQtyMap
+    );
+    const maxNoSize = remainingNoSize == null ? 999 : remainingNoSize;
+
+    if (qtySpan) {
+      const initial = Math.min(maxNoSize == null ? 999 : maxNoSize, 1);
+      qtySpan.textContent = String(initial);
+    }
+
     if (btnQtyInc && qtySpan) {
       btnQtyInc.onclick = () => {
-        let v = parseInt(qtySpan.textContent, 10) || 1;
-        v = Math.min(999, v + 1);
+        let v = parseInt(qtySpan.textContent, 10);
+        if (isNaN(v)) v = 0;
+        const limit = maxNoSize == null ? 999 : maxNoSize;
+        if (limit <= 0) return;
+        v = Math.min(limit, v + 1);
         qtySpan.textContent = String(v);
       };
     }
 
     if (btnQtyDec && qtySpan) {
       btnQtyDec.onclick = () => {
-        let v = parseInt(qtySpan.textContent, 10) || 1;
-        v = Math.max(1, v - 1);
+        let v = parseInt(qtySpan.textContent, 10);
+        if (isNaN(v)) v = 0;
+        v = Math.max(0, v - 1);
         qtySpan.textContent = String(v);
       };
     }
   }
 
-  /* === МОДАЛЬНОЕ ОКНО С МАТРИЦЕЙ РАЗМЕРОВ (КОЛЬЦА + БРАСЛЕТЫ) === */
+  /* === МОДАЛЬНОЕ ОКНО С МАТРИЦЕЙ РАЗМЕРОВ (ТОЛЬКО ДЛЯ КОЛЕЦ) === */
 
   let modal = null;
-  let addStateToCart = null;
 
-  if (isRingSized && matrixSizes.length > 0) {
+  if (isRingSized && sizes.length > 0) {
     modal = document.createElement("div");
     modal.id = "sizeMatrixModal";
     modal.className = "size-matrix-backdrop hidden";
@@ -715,19 +759,24 @@ function renderProduct() {
       <div class="size-matrix-sheet">
         <div class="size-matrix-header">Размеры · Арт. ${prod.sku}</div>
         <div class="size-matrix-list">
-          ${matrixSizes
-            .map(
-              s => `
-            <div class="size-row" data-size="${s}">
-              <div class="size-row-size">р-р ${s}</div>
-              <div class="size-row-qty">
-                <button type="button" data-act="dec" data-size="${s}">−</button>
-                <span data-size="${s}">0</span>
-                <button type="button" data-act="inc" data-size="${s}">+</button>
-              </div>
-            </div>
-          `
-            )
+          ${sizes
+            .map(s => {
+              const stockVal = getStockForSize(stockInfo, s);
+              const isZero =
+                stockInfo.hasData && (stockVal == null || stockVal <= 0);
+              const rowClass = isZero ? "size-row no-stock" : "size-row";
+              const btnDis = isZero ? "disabled" : "";
+              return `
+                <div class="${rowClass}" data-size="${s}">
+                  <div class="size-row-size">р-р ${s}</div>
+                  <div class="size-row-qty">
+                    <button type="button" data-act="dec" data-size="${s}" ${btnDis}>−</button>
+                    <span data-size="${s}">0</span>
+                    <button type="button" data-act="inc" data-size="${s}" ${btnDis}>+</button>
+                  </div>
+                </div>
+              `;
+            })
             .join("")}
         </div>
         <button type="button" class="btn-primary size-matrix-done" id="sizeMatrixDone">
@@ -748,7 +797,7 @@ function renderProduct() {
     };
 
     const syncDomFromState = () => {
-      matrixSizes.forEach(s => {
+      sizes.forEach(s => {
         const span = modal.querySelector(
           `.size-row-qty span[data-size="${s}"]`
         );
@@ -772,14 +821,12 @@ function renderProduct() {
       btnSizeOpen.addEventListener("click", openModal);
     }
 
-    // Закрытие по клику по фону
     modal.addEventListener("click", e => {
       if (e.target === modal) {
         closeModal();
       }
     });
 
-    // Логика +/- с учётом максимума по складу
     modal.addEventListener("click", e => {
       const btn = e.target.closest("button");
       if (!btn) return;
@@ -796,17 +843,14 @@ function renderProduct() {
       const key = String(size);
       let current = sizeState.get(key) || 0;
 
-      if (act === "inc") {
-        let maxForSize = 999;
-        if (stockMap && stockMap[key] != null) {
-          maxForSize = Number(stockMap[key]) || 0;
-        }
-        current = Math.min(maxForSize, current + 1);
-      }
+      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap);
+      const maxAllowed = remaining == null ? 999 : remaining;
 
-      if (act === "dec") {
-        current = Math.max(0, current - 1);
+      if (act === "inc") {
+        if (maxAllowed <= 0) return;
+        current = Math.min(maxAllowed, current + 1);
       }
+      if (act === "dec") current = Math.max(0, current - 1);
 
       sizeState.set(key, current);
 
@@ -814,41 +858,49 @@ function renderProduct() {
         `.size-row-qty span[data-size="${key}"]`
       );
       if (span) span.textContent = String(current);
-
-      updateSummary();
     });
 
-    // Добавление выбранного state в корзину
-    addStateToCart = () => {
+    // вспомогательная для добавления в корзину
+    var addStateToCart = () => {
       const cart = loadCart();
 
-      matrixSizes.forEach(size => {
-        const key = String(size);
-        const qty = sizeState.get(key) || 0;
+      sizeState.forEach((qty, size) => {
         if (!qty) return;
 
         const existing = cart.find(
-          it => it.sku === prod.sku && String(it.size) === key
+          it => it.sku === prod.sku && String(it.size) === String(size)
         );
 
-        let maxForSize = 999;
-        if (stockMap && stockMap[key] != null) {
-          maxForSize = Number(stockMap[key]) || 0;
+        const currentQty = existing ? existing.qty || 0 : 0;
+        const stockCap = getStockForSize(stockInfo, size);
+        let finalTotal = currentQty + qty;
+
+        if (stockCap != null) {
+          const cap = Math.max(0, stockCap);
+          finalTotal =
+            currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
         }
 
+        const added = finalTotal - currentQty;
+        if (added <= 0) return;
+
         if (existing) {
-          const newQty = (existing.qty || 0) + qty;
-          existing.qty = Math.min(maxForSize, Math.min(999, newQty));
+          existing.qty = finalTotal;
         } else {
           cart.push({
             sku: prod.sku,
-            size: key,
-            qty: Math.min(maxForSize, qty),
+            size,
+            qty: finalTotal,
             avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
             image: img,
             title: prod.title || `${typeLabel} ${prod.sku}`
           });
         }
+
+        cartQtyMap.set(
+          normalizeSizeKey(size),
+          (cartQtyMap.get(normalizeSizeKey(size)) || 0) + added
+        );
       });
 
       saveCart(cart);
@@ -859,9 +911,13 @@ function renderProduct() {
 
   if (btnAdd) {
     btnAdd.onclick = () => {
-      // 1) Изделия без размеров (серьги, подвески, булавки)
+      // 1) Изделия без размеров (серьги, подвески, булавки, браслеты)
       if (isNoSize) {
-        const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 1) : 1;
+        const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 0) : 0;
+        if (qty <= 0) {
+          toast("Укажите количество");
+          return;
+        }
 
         const cart = loadCart();
         const existing = cart.find(
@@ -870,18 +926,52 @@ function renderProduct() {
             (it.size == null || it.size === "")
         );
 
+        const remaining = getRemainingStockForSize(
+          stockInfo,
+          NO_SIZE_KEY,
+          cartQtyMap
+        );
+        const stockCap = getStockForSize(stockInfo, NO_SIZE_KEY);
+
+        if (remaining !== null && remaining <= 0) {
+          toast("Нет в наличии");
+          return;
+        }
+
+        const allowedToAdd =
+          remaining == null ? qty : Math.min(qty, Math.max(0, remaining));
+
+        const currentQty = existing ? existing.qty || 0 : 0;
+        let finalTotal = currentQty + allowedToAdd;
+        if (stockCap != null) {
+          const cap = Math.max(0, stockCap);
+          finalTotal =
+            currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
+        }
+
+        const added = finalTotal - currentQty;
+        if (added <= 0) {
+          toast("Нет в наличии");
+          return;
+        }
+
         if (existing) {
-          existing.qty = Math.min(999, (existing.qty || 0) + qty);
+          existing.qty = finalTotal;
         } else {
           cart.push({
             sku: prod.sku,
             size: null,
-            qty,
+            qty: finalTotal,
             avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
             image: img,
             title: prod.title || `${typeLabel} ${prod.sku}`
           });
         }
+
+        cartQtyMap.set(
+          NO_SIZE_KEY,
+          (cartQtyMap.get(NO_SIZE_KEY) || 0) + added
+        );
 
         saveCart(cart);
         animateAddToCart(btnAdd);
@@ -905,8 +995,13 @@ function renderProduct() {
         return;
       }
 
-      // 2) Кольца / браслеты с матрицей размеров
-      if (isRingSized && matrixSizes.length > 0 && addStateToCart) {
+      // 2) Кольца с размерной матрицей
+      if (isRingSized) {
+        if (sizes.length === 0) {
+          toast("Нет доступных размеров");
+          return;
+        }
+
         let hasQty = false;
         sizeState.forEach(q => {
           if (q > 0) hasQty = true;
@@ -937,10 +1032,9 @@ function renderProduct() {
 
         toast("Добавлено в корзину");
 
-        // Сбрасываем выбранные количества
         sizeState.forEach((_, key) => sizeState.set(key, 0));
         if (modal) {
-          matrixSizes.forEach(s => {
+          sizes.forEach(s => {
             const span = modal.querySelector(
               `.size-row-qty span[data-size="${s}"]`
             );
@@ -951,7 +1045,7 @@ function renderProduct() {
         return;
       }
 
-      // Fallback
+      // На всякий случай fallback (если тип не определён)
       toast("Невозможно определить схему размеров для товара");
     };
   }
