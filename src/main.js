@@ -14,6 +14,22 @@ const filterState = {
   inStock: false
 };
 
+// Проверка: есть ли вообще остатки по модели
+function hasStock(prod) {
+  // 1) Остатки по размерам (кольца / браслеты)
+  if (prod.stockBySize && typeof prod.stockBySize === "object") {
+    return Object.values(prod.stockBySize).some(q => Number(q) > 0);
+  }
+
+  // 2) Единственное число остатков (серьги / подвески / булавки и т.п.)
+  if (typeof prod.stockTotal === "number") {
+    return prod.stockTotal > 0;
+  }
+
+  // 3) Если данных нет — НЕ режем модель
+  return true;
+}
+
 /* УТИЛИТЫ DOM */
 
 const $ = (sel, root = document) => root.querySelector(sel);
