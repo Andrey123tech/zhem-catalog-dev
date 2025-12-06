@@ -68,35 +68,50 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
-// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ПОКА ТОЛЬКО ВЕС) ===
+// === ПРИМЕНЕНИЕ ФИЛЬТРОВ К СПИСКУ ТОВАРОВ (ВЕС + НАЛИЧИЕ/РАЗМЕР) ===
 function applyFiltersByWeight(list) {
-  // Если фильтры по весу не заданы – возвращаем список как есть
-  if (
-    (filterState.weightMin == null || isNaN(filterState.weightMin)) &&
-    (filterState.weightMax == null || isNaN(filterState.weightMax))
-  ) {
+  const needWeightFilter =
+    (filterState.weightMin != null && !isNaN(filterState.weightMin)) ||
+    (filterState.weightMax != null && !isNaN(filterState.weightMax));
+
+  const needStockFilter = !!(filterState.inStock || filterState.size);
+
+  // Если вообще никаких фильтров (ни вес, ни наличие/размер) — возвращаем как есть
+  if (!needWeightFilter && !needStockFilter) {
     return list;
   }
 
   return list.filter(p => {
-    // Берём основной вес: avgWeight (как в buildOrderText), если нет — запасной weight
-    const w = p.avgWeight ?? p.weight;
+    // --- 1. Фильтр по весу ---
+    if (needWeightFilter) {
+      const w = p.avgWeight ?? p.weight;
 
-    // Если веса нет – сейчас не выбрасываем модель, чтобы не терять позиции
-    if (w == null || isNaN(w)) {
-      return true;
+      // Если веса нет — модель не выбрасываем, как и раньше
+      if (w != null && !isNaN(w)) {
+        if (
+          filterState.weightMin != null &&
+          !isNaN(filterState.weightMin) &&
+          w < filterState.weightMin
+        ) {
+          return false;
+        }
+
+        if (
+          filterState.weightMax != null &&
+          !isNaN(filterState.weightMax) &&
+          w > filterState.weightMax
+        ) {
+          return false;
+        }
+      }
     }
 
-    let ok = true;
-
-    if (filterState.weightMin != null && !isNaN(filterState.weightMin)) {
-      ok = ok && w >= filterState.weightMin;
-    }
-    if (filterState.weightMax != null && !isNaN(filterState.weightMax)) {
-      ok = ok && w <= filterState.weightMax;
+    // --- 2. Фильтр по наличию / размеру ---
+    if (needStockFilter) {
+      return productHasStock(p);
     }
 
-    return ok;
+    return true;
   });
 }
 
