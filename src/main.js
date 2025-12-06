@@ -209,6 +209,26 @@ function getRemainingStockForSize(stockInfo, size, cartQtyMap) {
   return Math.max(0, stock - already);
 }
 
+function getNoSizeCapInfo(prod, cartQtyMapInput) {
+  const map =
+    cartQtyMapInput instanceof Map
+      ? cartQtyMapInput
+      : getCartQtyBySize(prod && prod.sku);
+
+  const totalStock = Number(prod && prod.stock);
+  const fallbackCap = 999;
+  const cap =
+    Number.isFinite(totalStock) && totalStock > 0 ? totalStock : fallbackCap;
+  const alreadyInCart = map.get(NO_SIZE_KEY) || 0;
+
+  return {
+    cap,
+    fallbackCap,
+    alreadyInCart,
+    remaining: Math.max(cap - alreadyInCart, 0)
+  };
+}
+
 function getVisibleSizesForProduct(prod, stockInfo, inStockOnly) {
   const stdSizes = getStandardSizesForProduct(prod);
   if (!inStockOnly) return stdSizes;
@@ -780,30 +800,11 @@ preventDoubleTapZoom(btnQtyInc);
     // Показываем простой блок количества
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
-    // Общий остаток по артикулу (если есть данные)
-    let totalStock = null;
-    if (typeof prod.stock === "number" && !isNaN(prod.stock)) {
-      totalStock = Math.max(0, Number(prod.stock));
-    } else if (stockInfo.hasData) {
-      totalStock = Object.values(stockInfo.map).reduce(
-        (s, v) => (isNaN(v) ? s : s + Math.max(0, Number(v))),
-        0
-      );
-    }
-
-    const alreadyInCartNoSize = loadCart()
-      .filter(it => it.sku === prod.sku && (it.size == null || it.size === ""))
-      .reduce((s, it) => s + (it.qty || 0), 0);
-
-    const remainingNoSize =
-      inStockOnly && totalStock != null
-        ? Math.max(0, totalStock - alreadyInCartNoSize)
-        : null;
-
-    const maxNoSize = remainingNoSize == null ? 999 : remainingNoSize;
+    const getNoSizeLimits = () => getNoSizeCapInfo(prod, cartQtyMap);
 
     if (qtySpan) {
-      const initial = Math.min(maxNoSize == null ? 999 : maxNoSize, 1);
+      const { remaining } = getNoSizeLimits();
+      const initial = Math.min(remaining || 0, 1);
       qtySpan.textContent = String(initial);
     }
 
@@ -811,7 +812,8 @@ preventDoubleTapZoom(btnQtyInc);
       btnQtyInc.onclick = () => {
         let v = parseInt(qtySpan.textContent, 10);
         if (isNaN(v)) v = 0;
-        const limit = maxNoSize == null ? 999 : maxNoSize;
+        const { remaining } = getNoSizeLimits();
+        const limit = remaining;
         if (limit <= 0) return;
         v = Math.min(limit, v + 1);
         qtySpan.textContent = String(v);
@@ -1010,48 +1012,21 @@ preventDoubleTapZoom(btnQtyInc);
         const existing = cartNow.find(
           it =>
             it.sku === prod.sku &&
-            (it.size == null || it.size === "")
+            normalizeSizeKey(it.size) === NO_SIZE_KEY
         );
 
-        // Общий остаток по артикулу (если есть данные)
-        let totalStock = null;
-        if (typeof prod.stock === "number" && !isNaN(prod.stock)) {
-          totalStock = Math.max(0, Number(prod.stock));
-        } else if (stockInfo.hasData) {
-          totalStock = Object.values(stockInfo.map).reduce(
-            (s, v) => (isNaN(v) ? s : s + Math.max(0, Number(v))),
-            0
-          );
-        }
+        const { cap, remaining } = getNoSizeCapInfo(prod, cartQtyMap);
 
-        const alreadyInCartNoSize = cartNow
-          .filter(it => it.sku === prod.sku && (it.size == null || it.size === ""))
-          .reduce((s, it) => s + (it.qty || 0), 0);
-
-        const remaining =
-          inStockOnly && totalStock != null
-            ? Math.max(0, totalStock - alreadyInCartNoSize)
-            : null;
-
-        const stockCap = inStockOnly ? totalStock : null;
-
-        if (remaining !== null && remaining <= 0) {
+        if (remaining <= 0) {
           toast("Нет в наличии");
           return;
         }
 
-        const allowedToAdd =
-          remaining == null ? qty : Math.min(qty, Math.max(0, remaining));
+        const allowedToAdd = Math.min(qty, Math.max(0, remaining));
 
         const currentQty = existing ? existing.qty || 0 : 0;
         let finalTotal = currentQty + allowedToAdd;
-        if (stockCap != null) {
-          const cap = Math.max(0, stockCap);
-          finalTotal =
-            currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
-        } else {
-          finalTotal = Math.min(999, finalTotal);
-        }
+        finalTotal = Math.min(cap, finalTotal);
 
         const added = finalTotal - currentQty;
         if (added <= 0) {
@@ -1641,17 +1616,27 @@ function renderOrderItem() {
       const act = btn.dataset.act;
       let cartNow = loadCart();
       const it = cartNow.find(
-        it => it.sku === sku && (it.size == null || it.size === "")
+        it => it.sku === sku && normalizeSizeKey(it.size) === NO_SIZE_KEY
       );
       if (!it) return;
 
+      const capInfo = getNoSizeCapInfo(prod, getCartQtyBySize(sku));
+      const inCartOther = Math.max(
+        0,
+        capInfo.alreadyInCart - (it.qty || 0)
+      );
+      const allowedTotal = Math.max(0, capInfo.cap - inCartOther);
+
       let q = it.qty || 0;
-      if (act === "inc") q = Math.min(999, q + 1);
+      if (act === "inc") q = Math.min(allowedTotal, q + 1);
       if (act === "dec") q = Math.max(0, q - 1);
 
       if (q === 0) {
         cartNow = cartNow.filter(
-          it => !(it.sku === sku && (it.size == null || it.size === ""))
+          it =>
+            !(
+              it.sku === sku && normalizeSizeKey(it.size) === NO_SIZE_KEY
+            )
         );
         saveCart(cartNow);
         window.location.href = backUrl;
