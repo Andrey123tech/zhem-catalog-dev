@@ -1952,6 +1952,15 @@ function initFilterSheet() {
     return;
   }
 
+  const category = getCategoryFromUrl();
+  if (!category) {
+    // На странице выбора категории скрываем фильтры и выходим
+    btnToggle.style.display = "none";
+    overlay.classList.remove("visible");
+    sheet.classList.remove("open");
+    return;
+  }
+
   function openSheet() {
     overlay.classList.add("visible");
     sheet.classList.add("open");
