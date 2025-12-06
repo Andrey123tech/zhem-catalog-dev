@@ -637,12 +637,16 @@ function renderProduct() {
     cat === "pins";
 
   // Размерная логика: кольца — SIZES, браслеты — BRACELET_SIZES
-  const sizes = isRingSized
-    ? getVisibleSizesForProduct(prod, stockInfo, inStockOnly)
-    : [];
+  const baseSizes = isRingSized ? getStandardSizesForProduct(prod) : [];
+  let sizes = baseSizes;
+  if (isRingSized && inStockOnly) {
+    sizes = baseSizes.filter(size => (getStockForSize(stockInfo, size) || 0) > 0);
+  }
+  // нормализуем ключи размеров и убираем дубли
+  sizes = Array.from(new Set(sizes.map(normalizeSizeKey)));
 
   const sizeState = new Map();
-  sizes.forEach(s => sizeState.set(String(s), 0));
+  sizes.forEach(s => sizeState.set(normalizeSizeKey(s), 0));
 
   box.innerHTML = `
     <div class="product-main">
@@ -774,7 +778,8 @@ preventDoubleTapZoom(btnQtyInc);
         <div class="size-matrix-list">
           ${sizes
             .map(s => {
-              const stockVal = getStockForSize(stockInfo, s);
+              const key = normalizeSizeKey(s);
+              const stockVal = getStockForSize(stockInfo, key);
               const isZero =
                 inStockOnly &&
                 stockInfo.hasData &&
@@ -782,12 +787,12 @@ preventDoubleTapZoom(btnQtyInc);
               const rowClass = isZero ? "size-row no-stock" : "size-row";
               const btnDis = isZero ? "disabled" : "";
               return `
-                <div class="${rowClass}" data-size="${s}">
-                  <div class="size-row-size">р-р ${s}</div>
+                <div class="${rowClass}" data-size="${key}">
+                  <div class="size-row-size">р-р ${key}</div>
                   <div class="size-row-qty">
-                    <button type="button" data-act="dec" data-size="${s}" ${btnDis}>−</button>
-                    <span data-size="${s}">0</span>
-                    <button type="button" data-act="inc" data-size="${s}" ${btnDis}>+</button>
+                    <button type="button" data-act="dec" data-size="${key}" ${btnDis}>−</button>
+                    <span data-size="${key}">0</span>
+                    <button type="button" data-act="inc" data-size="${key}" ${btnDis}>+</button>
                   </div>
                 </div>
               `;
@@ -813,10 +818,11 @@ preventDoubleTapZoom(btnQtyInc);
 
     const syncDomFromState = () => {
       sizes.forEach(s => {
+        const key = normalizeSizeKey(s);
         const span = modal.querySelector(
-          `.size-row-qty span[data-size="${s}"]`
+          `.size-row-qty span[data-size="${key}"]`
         );
-        if (span) span.textContent = String(sizeState.get(String(s)) || 0);
+        if (span) span.textContent = String(sizeState.get(key) || 0);
       });
     };
 
@@ -852,10 +858,10 @@ preventDoubleTapZoom(btnQtyInc);
       }
 
       const act = btn.dataset.act;
-      const size = btn.dataset.size;
-      if (!act || !size) return;
+      const sizeAttr = btn.dataset.size;
+      if (!act || !sizeAttr) return;
 
-      const key = String(size);
+      const key = normalizeSizeKey(sizeAttr);
       let current = sizeState.get(key) || 0;
 
       const remaining = inStockOnly
@@ -885,7 +891,7 @@ preventDoubleTapZoom(btnQtyInc);
         if (!qty) return;
 
         const existing = cart.find(
-          it => it.sku === prod.sku && String(it.size) === String(size)
+          it => it.sku === prod.sku && normalizeSizeKey(it.size) === normalizeSizeKey(size)
         );
 
         const currentQty = existing ? existing.qty || 0 : 0;
@@ -1056,8 +1062,9 @@ preventDoubleTapZoom(btnQtyInc);
         sizeState.forEach((_, key) => sizeState.set(key, 0));
         if (modal) {
           sizes.forEach(s => {
+            const key = normalizeSizeKey(s);
             const span = modal.querySelector(
-              `.size-row-qty span[data-size="${s}"]`
+              `.size-row-qty span[data-size="${key}"]`
             );
             if (span) span.textContent = "0";
           });
