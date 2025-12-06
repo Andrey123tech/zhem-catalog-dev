@@ -634,8 +634,7 @@ function renderProduct() {
   }
 
   const urlParams = new URLSearchParams(window.location.search);
-  const inStockOnly =
-    urlParams.get("inStock") === "1" || urlParams.get("inStock") === "true";
+  const inStockOnly = urlParams.get("inStock") === "1";
   const stockInfo = getStockMap(prod);
   const cartQtyMap = getCartQtyBySize(prod.sku);
 
@@ -766,11 +765,7 @@ preventDoubleTapZoom(btnQtyInc);
       NO_SIZE_KEY,
       cartQtyMap
     );
-    const maxNoSize = inStockOnly
-      ? remainingNoSize == null
-        ? 999
-        : remainingNoSize
-      : 999;
+    const maxNoSize = remainingNoSize == null ? 999 : remainingNoSize;
 
     if (qtySpan) {
       const initial = Math.min(maxNoSize == null ? 999 : maxNoSize, 1);
@@ -782,7 +777,7 @@ preventDoubleTapZoom(btnQtyInc);
         let v = parseInt(qtySpan.textContent, 10);
         if (isNaN(v)) v = 0;
         const limit = maxNoSize == null ? 999 : maxNoSize;
-        if (inStockOnly && limit <= 0) return;
+        if (limit <= 0) return;
         v = Math.min(limit, v + 1);
         qtySpan.textContent = String(v);
       };
@@ -898,9 +893,7 @@ preventDoubleTapZoom(btnQtyInc);
       const key = normalizeSizeKey(sizeAttr);
       let current = sizeState.get(key) || 0;
 
-      const remaining = inStockOnly
-        ? getRemainingStockForSize(stockInfo, key, cartQtyMap)
-        : null;
+      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap);
       const maxAllowed = remaining == null ? 999 : remaining;
 
       if (act === "inc") {
@@ -929,7 +922,7 @@ preventDoubleTapZoom(btnQtyInc);
         );
 
         const currentQty = existing ? existing.qty || 0 : 0;
-        const stockCap = inStockOnly ? getStockForSize(stockInfo, size) : null;
+        const stockCap = getStockForSize(stockInfo, size);
         let finalTotal = currentQty + qty;
 
         if (stockCap != null) {
@@ -985,14 +978,14 @@ preventDoubleTapZoom(btnQtyInc);
             (it.size == null || it.size === "")
         );
 
-        const remaining = inStockOnly
-          ? getRemainingStockForSize(stockInfo, NO_SIZE_KEY, cartQtyMap)
-          : null;
-        const stockCap = inStockOnly
-          ? getStockForSize(stockInfo, NO_SIZE_KEY)
-          : null;
+        const remaining = getRemainingStockForSize(
+          stockInfo,
+          NO_SIZE_KEY,
+          cartQtyMap
+        );
+        const stockCap = getStockForSize(stockInfo, NO_SIZE_KEY);
 
-        if (inStockOnly && remaining !== null && remaining <= 0) {
+        if (remaining !== null && remaining <= 0) {
           toast("Нет в наличии");
           return;
         }
@@ -1717,19 +1710,28 @@ function renderOrderItem() {
     const btn = e.target.closest("button");
     if (!btn || !btn.dataset.act) return;
 
-    const act = btn.dataset.act;
-    const size = btn.dataset.size;
-    if (!size) return;
+      const act = btn.dataset.act;
+      const size = btn.dataset.size;
+      if (!size) return;
 
-    let cartNow = loadCart();
-    const item = cartNow.find(
-      it => it.sku === sku && String(it.size) === String(size)
-    );
-    if (!item) return;
+      const sizeKey = normalizeSizeKey(size);
+      let cartNow = loadCart();
+      const item = cartNow.find(
+        it => it.sku === sku && normalizeSizeKey(it.size) === sizeKey
+      );
+      if (!item) return;
 
-    let qty = item.qty || 0;
-    if (act === "inc") qty = Math.min(999, qty + 1);
-    if (act === "dec") qty = Math.max(0, qty - 1);
+      const stockCap = getStockForSize(getStockMap(prod), sizeKey);
+      const inCartOther = cartNow
+        .filter(it => it.sku === sku && normalizeSizeKey(it.size) === sizeKey)
+        .reduce((s, it) => s + (it.qty || 0), 0) - (item.qty || 0);
+
+      let qty = item.qty || 0;
+      const allowedTotal =
+        stockCap == null ? 999 : Math.max(0, stockCap - inCartOther);
+
+      if (act === "inc") qty = Math.min(allowedTotal, qty + 1);
+      if (act === "dec") qty = Math.max(0, qty - 1);
 
     const row = box.querySelector(`.size-row[data-size="${size}"]`);
     if (!row) return;
