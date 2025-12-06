@@ -615,7 +615,7 @@ function renderProduct() {
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
     // Подготовка к логике размеров
-  const isRing = cat === "rings";
+    const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
 
   // Теперь и кольца, и браслеты считаем размерными
@@ -627,10 +627,30 @@ function renderProduct() {
     cat === "pendants" ||
     cat === "pins";
 
-  // Размерная логика: кольца — SIZES, браслеты — BRACELET_SIZES
-  const sizes = isRingSized
-    ? getVisibleSizesForProduct(prod, stockInfo, inStockOnly)
-    : [];
+  // Режим "в наличии" берём из URL (?inStock=1)
+  const params = new URLSearchParams(window.location.search);
+  const inStockMode = params.get("inStock") === "1";
+
+  // Базовый список размеров (как и раньше)
+  let sizes = [];
+  if (isRing && Array.isArray(SIZES)) {
+    sizes = SIZES.slice();
+  } else if (isBracelet && Array.isArray(BRACELET_SIZES)) {
+    sizes = BRACELET_SIZES.slice();
+  }
+
+  // Если включён режим "в наличии" и есть карта остатков по размерам —
+  // показываем ТОЛЬКО те размеры, где остаток > 0
+  if (inStockMode && isRingSized && prod.stockBySize) {
+    const stockMap = prod.stockBySize;
+
+    sizes = sizes.filter((s) => {
+      const key1 = String(s);
+      const key2 = String(s).replace(",", "."); // на всякий случай, если где-то точка/запятая
+      const raw = stockMap[key1] ?? stockMap[key2] ?? 0;
+      return Number(raw) > 0;
+    });
+  }
 
   const sizeState = new Map();
   sizes.forEach(s => sizeState.set(String(s), 0));
