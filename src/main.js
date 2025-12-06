@@ -115,11 +115,20 @@ function applyFiltersByWeight(list) {
   });
 }
 
-// === ЛОГИКА НАЛИЧИЯ / РАЗМЕРОВ ДЛЯ КАТАЛОГА ===
 function productHasStock(p) {
   const cat = p.category;
-  const stockTotal =
-    typeof p.stockTotal === "number" ? p.stockTotal : null;
+
+  // Нормально парсим stockTotal: и number, и "3", и "3.0"
+  let stockTotal = null;
+  if (p.stockTotal != null) {
+    if (typeof p.stockTotal === "number") {
+      stockTotal = p.stockTotal;
+    } else {
+      const parsed = parseFloat(p.stockTotal);
+      stockTotal = isNaN(parsed) ? null : parsed;
+    }
+  }
+
   const stockBySize =
     p.stockBySize && typeof p.stockBySize === "object"
       ? p.stockBySize
@@ -148,8 +157,8 @@ function productHasStock(p) {
   }
 
   // Если размер выбран, но категория БЕЗ размеров (серьги/подвески/булавки),
-  // мы просто игнорируем sizeFilter, чтобы каталог не пустел. Работает только inStock.
-  // (ТЗ: "Фильтр по размеру работает только для rings и bracelets")
+  // мы просто игнорируем sizeFilter, чтобы каталог не пустел.
+  // Работает только inStock.
 
   // --- 2. Фильтр "В наличии" ---
   if (inStock) {
