@@ -19,6 +19,8 @@ const filterState = {
   inStock: false
 };
 
+const FILTER_STORAGE_KEY = "zhem_filters_v1";
+
 // Специальный ключ для изделий без размерной сетки
 const NO_SIZE_KEY = "__no_size__";
 
@@ -57,6 +59,38 @@ function loadCart() {
 function saveCart(cart) {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
   updateCartBadge();
+}
+
+/* === ХРАНЕНИЕ ФИЛЬТРОВ === */
+
+function saveFilterStateToStorage() {
+  try {
+    const payload = {
+      weightMin: filterState.weightMin,
+      weightMax: filterState.weightMax,
+      isPopular: filterState.isPopular,
+      isNew: filterState.isNew,
+      inStock: filterState.inStock
+    };
+    localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(payload));
+  } catch (e) {
+    // silent fail
+  }
+}
+
+function loadFilterStateFromStorage() {
+  try {
+    const raw = localStorage.getItem(FILTER_STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.hasOwnProperty("weightMin")) filterState.weightMin = data.weightMin;
+    if (data.hasOwnProperty("weightMax")) filterState.weightMax = data.weightMax;
+    if (data.hasOwnProperty("isPopular")) filterState.isPopular = !!data.isPopular;
+    if (data.hasOwnProperty("isNew")) filterState.isNew = !!data.isNew;
+    if (data.hasOwnProperty("inStock")) filterState.inStock = !!data.inStock;
+  } catch (e) {
+    // ignore parse errors
+  }
 }
 
 /* === БЕЙДЖ КОРЗИНЫ === */
@@ -1961,6 +1995,9 @@ function initFilterSheet() {
     return;
   }
 
+  loadFilterStateFromStorage();
+  syncFilterControlsFromState();
+
   function openSheet() {
     overlay.classList.add("visible");
     sheet.classList.add("open");
@@ -2009,6 +2046,7 @@ function initFilterSheet() {
       filterState.isNew = false;
       filterState.inStock = false;
 
+      saveFilterStateToStorage();
       // Перерисовываем каталог, если мы на странице с сеткой
       renderGrid();
     });
@@ -2018,6 +2056,7 @@ function initFilterSheet() {
     if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
+      saveFilterStateToStorage();
       closeSheet();
       renderGrid();           // перерисовали каталог с учётом фильтров
     });
@@ -2057,6 +2096,20 @@ function readFilterControls() {
   filterState.isPopular = !!(cbPopular && cbPopular.checked);
   filterState.isNew = !!(cbNew && cbNew.checked);
   filterState.inStock = !!(cbInStock && cbInStock.checked);
+}
+
+function syncFilterControlsFromState() {
+  const wMin = document.getElementById("filterWeightMin");
+  const wMax = document.getElementById("filterWeightMax");
+  const cbPopular = document.getElementById("filterPopular");
+  const cbNew = document.getElementById("filterNew");
+  const cbInStock = document.getElementById("filterInStock");
+
+  if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
+  if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
+  if (cbPopular) cbPopular.checked = !!filterState.isPopular;
+  if (cbNew) cbNew.checked = !!filterState.isNew;
+  if (cbInStock) cbInStock.checked = !!filterState.inStock;
 }
 
 window.addEventListener("load", initFilterSheet);
