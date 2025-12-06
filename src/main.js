@@ -780,11 +780,26 @@ preventDoubleTapZoom(btnQtyInc);
     // Показываем простой блок количества
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
-    const remainingNoSize = getRemainingStockForSize(
-      stockInfo,
-      NO_SIZE_KEY,
-      cartQtyMap
-    );
+    // Общий остаток по артикулу (если есть данные)
+    let totalStock = null;
+    if (typeof prod.stock === "number" && !isNaN(prod.stock)) {
+      totalStock = Math.max(0, Number(prod.stock));
+    } else if (stockInfo.hasData) {
+      totalStock = Object.values(stockInfo.map).reduce(
+        (s, v) => (isNaN(v) ? s : s + Math.max(0, Number(v))),
+        0
+      );
+    }
+
+    const alreadyInCartNoSize = loadCart()
+      .filter(it => it.sku === prod.sku && (it.size == null || it.size === ""))
+      .reduce((s, it) => s + (it.qty || 0), 0);
+
+    const remainingNoSize =
+      inStockOnly && totalStock != null
+        ? Math.max(0, totalStock - alreadyInCartNoSize)
+        : null;
+
     const maxNoSize = remainingNoSize == null ? 999 : remainingNoSize;
 
     if (qtySpan) {
@@ -991,19 +1006,34 @@ preventDoubleTapZoom(btnQtyInc);
           return;
         }
 
-        const cart = loadCart();
-        const existing = cart.find(
+        const cartNow = loadCart();
+        const existing = cartNow.find(
           it =>
             it.sku === prod.sku &&
             (it.size == null || it.size === "")
         );
 
-        const remaining = getRemainingStockForSize(
-          stockInfo,
-          NO_SIZE_KEY,
-          cartQtyMap
-        );
-        const stockCap = getStockForSize(stockInfo, NO_SIZE_KEY);
+        // Общий остаток по артикулу (если есть данные)
+        let totalStock = null;
+        if (typeof prod.stock === "number" && !isNaN(prod.stock)) {
+          totalStock = Math.max(0, Number(prod.stock));
+        } else if (stockInfo.hasData) {
+          totalStock = Object.values(stockInfo.map).reduce(
+            (s, v) => (isNaN(v) ? s : s + Math.max(0, Number(v))),
+            0
+          );
+        }
+
+        const alreadyInCartNoSize = cartNow
+          .filter(it => it.sku === prod.sku && (it.size == null || it.size === ""))
+          .reduce((s, it) => s + (it.qty || 0), 0);
+
+        const remaining =
+          inStockOnly && totalStock != null
+            ? Math.max(0, totalStock - alreadyInCartNoSize)
+            : null;
+
+        const stockCap = inStockOnly ? totalStock : null;
 
         if (remaining !== null && remaining <= 0) {
           toast("Нет в наличии");
@@ -1032,7 +1062,7 @@ preventDoubleTapZoom(btnQtyInc);
         if (existing) {
           existing.qty = finalTotal;
         } else {
-          cart.push({
+          cartNow.push({
             sku: prod.sku,
             size: null,
             qty: finalTotal,
@@ -1047,7 +1077,7 @@ preventDoubleTapZoom(btnQtyInc);
           (cartQtyMap.get(NO_SIZE_KEY) || 0) + added
         );
 
-        saveCart(cart);
+        saveCart(cartNow);
         animateAddToCart(btnAdd);
 
         const cartCount = document.querySelector("#cartCount");
