@@ -115,6 +115,77 @@ function applyFiltersByWeight(list) {
   });
 }
 
+// === ЛОГИКА НАЛИЧИЯ / РАЗМЕРОВ ДЛЯ КАТАЛОГА ===
+function productHasStock(p) {
+  const cat = p.category;
+  const stockTotal =
+    typeof p.stockTotal === "number" ? p.stockTotal : null;
+  const stockBySize =
+    p.stockBySize && typeof p.stockBySize === "object"
+      ? p.stockBySize
+      : null;
+
+  const sizeFilter = filterState.size;
+  const inStock = !!filterState.inStock;
+
+  const isRingOrBracelet = cat === "rings" || cat === "bracelets";
+  const isNoSize =
+    cat === "earrings" ||
+    cat === "pendants" ||
+    cat === "pins";
+
+  // --- 1. Фильтр по РАЗМЕРУ (только кольца и браслеты) ---
+  if (sizeFilter && isRingOrBracelet) {
+    if (!stockBySize) {
+      // карты размеров нет — по ТЗ для фильтра по размеру модель не показываем
+      return false;
+    }
+
+    const raw = stockBySize[sizeFilter];
+    const qty =
+      typeof raw === "number" ? raw : parseFloat(raw);
+    return qty > 0;
+  }
+
+  // Если размер выбран, но категория БЕЗ размеров (серьги/подвески/булавки),
+  // мы просто игнорируем sizeFilter, чтобы каталог не пустел. Работает только inStock.
+  // (ТЗ: "Фильтр по размеру работает только для rings и bracelets")
+
+  // --- 2. Фильтр "В наличии" ---
+  if (inStock) {
+    // Кольца / браслеты
+    if (isRingOrBracelet) {
+      if (stockBySize) {
+        for (const key in stockBySize) {
+          const val = stockBySize[key];
+          const qty =
+            typeof val === "number" ? val : parseFloat(val);
+          if (qty > 0) return true;
+        }
+      }
+
+      if (stockTotal != null && stockTotal > 0) {
+        return true;
+      }
+
+      return false;
+    }
+
+    // Серьги / подвески / булавки — только по stockTotal
+    if (isNoSize) {
+      return stockTotal != null && stockTotal > 0;
+    }
+
+    // На всякий случай для прочих категорий
+    if (stockTotal != null) {
+      return stockTotal > 0;
+    }
+  }
+
+  // Если ни inStock, ни sizeFilter по факту не применяются — модель проходим
+  return true;
+}
+
 /* === Формирование текста заявки для WhatsApp + Excel === */
 function buildOrderText(cart, products) {
   if (!Array.isArray(cart) || !cart.length) return "";
