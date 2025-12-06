@@ -79,9 +79,12 @@ function formatWeight(w) {
 // === Запасы (общее) ===
 function getStandardSizesForProduct(prod) {
   if (!prod) return [];
-  if (prod.category === "rings") return Array.isArray(SIZES) ? SIZES : [];
+  if (prod.category === "rings")
+    return Array.isArray(SIZES) ? SIZES.map(normalizeSizeKey) : [];
   if (prod.category === "bracelets")
-    return Array.isArray(BRACELET_SIZES) ? BRACELET_SIZES : [];
+    return Array.isArray(BRACELET_SIZES)
+      ? BRACELET_SIZES.map(normalizeSizeKey)
+      : [];
   return [NO_SIZE_KEY]; // безразмерные изделия
 }
 
@@ -91,9 +94,12 @@ function getStockMap(prod) {
 
   if (prod && typeof prod.stockBySize === "object" && prod.stockBySize !== null) {
     Object.entries(prod.stockBySize).forEach(([size, qty]) => {
-      const n = Number(qty);
-      if (!isNaN(n)) {
-        map[String(size)] = n;
+      const key = normalizeSizeKey(size);
+      const n = Number(
+        typeof qty === "string" ? qty.replace(",", ".") : qty
+      );
+      if (!isNaN(n) && key) {
+        map[key] = n;
         hasData = true;
       }
     });
@@ -115,7 +121,7 @@ function getStockMap(prod) {
 
 function getStockForSize(stockInfo, size) {
   if (!stockInfo) return null;
-  const val = stockInfo.map[String(size)];
+  const val = stockInfo.map[normalizeSizeKey(size)];
   if (val == null || isNaN(val)) return null;
   return Math.max(0, Number(val));
 }
@@ -129,7 +135,10 @@ function productHasAnyStock(prod) {
 
 function normalizeSizeKey(size) {
   if (size == null || size === "") return NO_SIZE_KEY;
-  return String(size);
+  const str = String(size).trim().replace(",", ".");
+  const num = parseFloat(str);
+  if (!isNaN(num)) return num.toFixed(1);
+  return str;
 }
 
 function getCartQtyBySize(sku) {
