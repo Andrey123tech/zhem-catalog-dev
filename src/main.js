@@ -24,6 +24,14 @@ const FILTER_STORAGE_KEY = "zhem_filters_v1";
 // Специальный ключ для изделий без размерной сетки
 const NO_SIZE_KEY = "__no_size__";
 
+function getInStockCheckboxes() {
+  return Array.from(
+    document.querySelectorAll(
+      '#filterInStock, #filterInStockInline, input[data-filter="inStock"]'
+    )
+  );
+}
+
 /* УТИЛИТЫ DOM */
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -91,6 +99,14 @@ function loadFilterStateFromStorage() {
   } catch (e) {
     // ignore parse errors
   }
+}
+
+function setInStockFlag(value, opts = {}) {
+  const { skipRender = false, skipSave = false } = opts;
+  filterState.inStock = !!value;
+  syncFilterControlsFromState();
+  if (!skipSave) saveFilterStateToStorage();
+  if (!skipRender) renderGrid();
 }
 
 /* === БЕЙДЖ КОРЗИНЫ === */
@@ -482,8 +498,12 @@ function renderGrid() {
   const grid = $("#grid");
   if (!grid || !Array.isArray(PRODUCTS)) return;
 
-  // Синхронизируем filterState с UI (если фильтры уже заданы на странице)
+  loadFilterStateFromStorage();
+  syncFilterControlsFromState();
   readFilterControls();
+
+  // Синхронизируем filterState с UI (если фильтры уже заданы на странице)
+  // (оставлено для совместимости)
 
   const category = getCategoryFromUrl();
 
@@ -2046,8 +2066,7 @@ function initFilterSheet() {
       filterState.size = null;
       filterState.isPopular = false;
       filterState.isNew = false;
-      filterState.inStock = false;
-
+      setInStockFlag(false, { skipRender: true });
       saveFilterStateToStorage();
       // Перерисовываем каталог, если мы на странице с сеткой
       renderGrid();
@@ -2058,6 +2077,7 @@ function initFilterSheet() {
     if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
+      setInStockFlag(filterState.inStock, { skipRender: true });
       saveFilterStateToStorage();
       closeSheet();
       renderGrid();           // перерисовали каталог с учётом фильтров
@@ -2074,6 +2094,13 @@ function initFilterSheet() {
       }
     });
   });
+
+  // Быстрое переключение "В наличии" (если есть любой чекбокс)
+  getInStockCheckboxes().forEach(cb => {
+    cb.addEventListener("change", () => {
+      setInStockFlag(cb.checked);
+    });
+  });
 }
 
 // НЕ трогаем твои DOMContentLoaded и старый init.
@@ -2083,8 +2110,7 @@ function readFilterControls() {
   const wMax = document.getElementById("filterWeightMax");
   const cbPopular = document.getElementById("filterPopular");
   const cbNew = document.getElementById("filterNew");
-  const cbInStock = document.getElementById("filterInStock");
-
+  const inStockCbs = getInStockCheckboxes();
   const activeSizeChip = document.querySelector(".filter-size-chip.active");
 
   // Вес
@@ -2097,7 +2123,7 @@ function readFilterControls() {
   // Флаги
   filterState.isPopular = !!(cbPopular && cbPopular.checked);
   filterState.isNew = !!(cbNew && cbNew.checked);
-  filterState.inStock = !!(cbInStock && cbInStock.checked);
+  filterState.inStock = inStockCbs.some(cb => cb.checked);
 }
 
 function syncFilterControlsFromState() {
@@ -2105,13 +2131,13 @@ function syncFilterControlsFromState() {
   const wMax = document.getElementById("filterWeightMax");
   const cbPopular = document.getElementById("filterPopular");
   const cbNew = document.getElementById("filterNew");
-  const cbInStock = document.getElementById("filterInStock");
+  const inStockCbs = getInStockCheckboxes();
 
   if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
   if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
   if (cbPopular) cbPopular.checked = !!filterState.isPopular;
   if (cbNew) cbNew.checked = !!filterState.isNew;
-  if (cbInStock) cbInStock.checked = !!filterState.inStock;
+  inStockCbs.forEach(cb => (cb.checked = !!filterState.inStock));
 }
 
 window.addEventListener("load", initFilterSheet);
