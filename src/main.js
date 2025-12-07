@@ -8,7 +8,6 @@ import {
   BRACELET_SIZES,
   DEFAULT_BRACELET_SIZE
 } from "./catalog_data.js";
-console.log("ZHEM BUILD v1.13-test");
 
 // === СОСТОЯНИЕ ФИЛЬТРОВ (ФИЛЬТРЫ 1.0) ===
 const filterState = {
@@ -157,12 +156,14 @@ function getStockMap(prod) {
   }
 
   // Поддержка единого числа для браслетов (тогда считаем это размером 18.0)
-  if (prod && typeof prod.stock === "number" && !isNaN(prod.stock)) {
-    if (prod.category === "bracelets") {
-      map[DEFAULT_BRACELET_SIZE] = Number(prod.stock);
+  const total = getTotalStock(prod);
+  if (total != null && !isNaN(total)) {
+    const num = Number(total);
+    if (prod && prod.category === "bracelets") {
+      map[DEFAULT_BRACELET_SIZE] = num;
       hasData = true;
-    } else if (prod.category !== "rings") {
-      map[NO_SIZE_KEY] = Number(prod.stock);
+    } else if (prod && prod.category !== "rings") {
+      map[NO_SIZE_KEY] = num;
       hasData = true;
     }
   }
@@ -210,13 +211,17 @@ function getRemainingStockForSize(stockInfo, size, cartQtyMap) {
   return Math.max(0, stock - already);
 }
 
+function getTotalStock(prod) {
+  return prod ? prod.totalStock ?? prod.stock ?? null : null;
+}
+
 function getNoSizeCapInfo(prod, cartQtyMapInput) {
   const map =
     cartQtyMapInput instanceof Map
       ? cartQtyMapInput
       : getCartQtyBySize(prod && prod.sku);
 
-  const totalStock = Number(prod && prod.stock);
+  const totalStock = Number(getTotalStock(prod));
   const fallbackCap = 999;
   const cap =
     Number.isFinite(totalStock) && totalStock > 0 ? totalStock : fallbackCap;
@@ -2151,9 +2156,3 @@ function syncFilterControlsFromState() {
 
   if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
   if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
-  if (cbPopular) cbPopular.checked = !!filterState.isPopular;
-  if (cbNew) cbNew.checked = !!filterState.isNew;
-  inStockCbs.forEach(cb => (cb.checked = !!filterState.inStock));
-}
-
-window.addEventListener("load", initFilterSheet);
