@@ -141,22 +141,28 @@ function getStandardSizesForProduct(prod) {
 function getStockMap(prod) {
   const map = {};
   let hasData = false;
+  let hasAnyStock = false;
+  let totalStock = null;
 
   if (prod && typeof prod.stockBySize === "object" && prod.stockBySize !== null) {
     Object.entries(prod.stockBySize).forEach(([size, qty]) => {
       const key = normalizeSizeKey(size);
-      const n = Number(
-        typeof qty === "string" ? qty.replace(",", ".") : qty
-      );
-      if (!isNaN(n) && key) {
+      const nRaw = Number(typeof qty === "string" ? qty.replace(",", ".") : qty);
+      if (!isNaN(nRaw) && key) {
+        const n = nRaw;
         map[key] = n;
         hasData = true;
+        if (n > 0) hasAnyStock = true;
       }
     });
   }
 
-  // Поддержка единого числа для браслетов (тогда считаем это размером 18.0)
   const total = getTotalStock(prod);
+  if (Number.isFinite(total)) {
+    totalStock = Math.max(total, 0);
+  }
+
+  // Поддержка единого числа для браслетов (тогда считаем это размером 18.0)
   if (total != null && !isNaN(total)) {
     const num = Number(total);
     if (prod && prod.category === "bracelets") {
@@ -168,7 +174,18 @@ function getStockMap(prod) {
     }
   }
 
-  return { map, hasData };
+  if (totalStock == null) {
+    const sum = Object.values(map).reduce((s, v) => s + (Number(v) > 0 ? Number(v) : 0), 0);
+    if (sum > 0) totalStock = sum;
+  }
+
+  if (!hasAnyStock) {
+    hasAnyStock =
+      Object.values(map).some(v => Number(v) > 0) ||
+      (Number.isFinite(totalStock) && totalStock > 0);
+  }
+
+  return { map, hasData, totalStock, hasAnyStock };
 }
 
 function getStockForSize(stockInfo, size) {
@@ -181,9 +198,8 @@ function getStockForSize(stockInfo, size) {
 function productHasAnyStock(prod, opts = {}) {
   const { allowUnknown = true } = opts;
   const stockInfo = getStockMap(prod);
-  const sizes = getStandardSizesForProduct(prod);
   if (!stockInfo.hasData) return !!allowUnknown;
-  return sizes.some(size => (getStockForSize(stockInfo, size) || 0) > 0);
+  return !!stockInfo.hasAnyStock;
 }
 
 function normalizeSizeKey(size) {
@@ -206,6 +222,8 @@ function getCartQtyBySize(sku) {
 }
 
 function getRemainingStockForSize(stockInfo, size, cartQtyMap) {
+  const useStock = !(arguments.length > 3 && arguments[3] && arguments[3].useStock === false);
+  if (!useStock) return null;
   const stock = getStockForSize(stockInfo, size);
   if (stock == null) return null; // нет данных → нет ограничения
   const already = cartQtyMap.get(normalizeSizeKey(size)) || 0;
@@ -216,7 +234,8 @@ function getTotalStock(prod) {
   return prod ? prod.totalStock ?? prod.stock ?? null : null;
 }
 
-function getNoSizeCapInfo(prod, cartQtyMapInput) {
+function getNoSizeCapInfo(prod, cartQtyMapInput, opts = {}) {
+  const { useStock = true } = opts;
   const map =
     cartQtyMapInput instanceof Map
       ? cartQtyMapInput
@@ -224,7 +243,9 @@ function getNoSizeCapInfo(prod, cartQtyMapInput) {
 
   const totalStock = Number(getTotalStock(prod));
   const fallbackCap = 999;
-  const cap = Number.isFinite(totalStock)
+  const cap = !useStock
+    ? fallbackCap
+    : Number.isFinite(totalStock)
     ? Math.max(totalStock, 0)
     : fallbackCap;
   const alreadyInCart = map.get(NO_SIZE_KEY) || 0;
@@ -674,6 +695,8 @@ function renderProduct() {
   const box = $("#product");
   if (!box) return;
 
+  loadFilterStateFromStorage();
+
   const sku = getSkuFromUrl();
   const prod = PRODUCTS.find(p => p.sku === sku);
   if (!prod) {
@@ -683,6 +706,7 @@ function renderProduct() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const inStockOnly = urlParams.get("inStock") === "1";
+  const enforceStock = filterState.inStock || inStockOnly;
   const stockInfo = getStockMap(prod);
   const cartQtyMap = getCartQtyBySize(prod.sku);
 
@@ -808,7 +832,8 @@ preventDoubleTapZoom(btnQtyInc);
     // Показываем простой блок количества
     if (qtyBlock) qtyBlock.classList.remove("hidden");
 
-    const getNoSizeLimits = () => getNoSizeCapInfo(prod, cartQtyMap);
+    const getNoSizeLimits = () =>
+      getNoSizeCapInfo(prod, cartQtyMap, { useStock: enforceStock });
 
     if (qtySpan) {
       const { remaining } = getNoSizeLimits();
@@ -938,7 +963,9 @@ preventDoubleTapZoom(btnQtyInc);
       const key = normalizeSizeKey(sizeAttr);
       let current = sizeState.get(key) || 0;
 
-      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap);
+      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap, {
+        useStock: enforceStock
+      });
       const maxAllowed = remaining == null ? 999 : remaining;
 
       if (act === "inc") {
@@ -967,7 +994,7 @@ preventDoubleTapZoom(btnQtyInc);
         );
 
         const currentQty = existing ? existing.qty || 0 : 0;
-        const stockCap = getStockForSize(stockInfo, size);
+        const stockCap = enforceStock ? getStockForSize(stockInfo, size) : null;
         let finalTotal = currentQty + qty;
 
         if (stockCap != null) {
@@ -1023,7 +1050,9 @@ preventDoubleTapZoom(btnQtyInc);
             normalizeSizeKey(it.size) === NO_SIZE_KEY
         );
 
-        const { cap, remaining } = getNoSizeCapInfo(prod, cartQtyMap);
+        const { cap, remaining } = getNoSizeCapInfo(prod, cartQtyMap, {
+          useStock: enforceStock
+        });
 
         if (remaining <= 0) {
           toast("Нет в наличии");
@@ -1519,6 +1548,8 @@ function renderOrderItem() {
     return;
   }
 
+  loadFilterStateFromStorage();
+
   const params = new URLSearchParams(window.location.search);
   const sku = params.get("sku");
   if (!sku) {
@@ -1555,6 +1586,7 @@ function renderOrderItem() {
   const title = prod.title || `Модель ${sku}`;
 
   const cat = prod.category;
+  const enforceStock = filterState.inStock;
 
   // НОВАЯ ЛОГИКА ❗  
   // Размеров НЕТ — только серьги, подвески, булавки
@@ -1628,7 +1660,9 @@ function renderOrderItem() {
       );
       if (!it) return;
 
-      const capInfo = getNoSizeCapInfo(prod, getCartQtyBySize(sku));
+      const capInfo = getNoSizeCapInfo(prod, getCartQtyBySize(sku), {
+        useStock: enforceStock
+      });
       const inCartOther = Math.max(
         0,
         capInfo.alreadyInCart - (it.qty || 0)
@@ -1764,7 +1798,9 @@ function renderOrderItem() {
       );
       if (!item) return;
 
-      const stockCap = getStockForSize(getStockMap(prod), sizeKey);
+      const stockCap = enforceStock
+        ? getStockForSize(getStockMap(prod), sizeKey)
+        : null;
       const inCartOther = cartNow
         .filter(it => it.sku === sku && normalizeSizeKey(it.size) === sizeKey)
         .reduce((s, it) => s + (it.qty || 0), 0) - (item.qty || 0);
