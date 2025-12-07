@@ -9,17 +9,19 @@ import {
   DEFAULT_BRACELET_SIZE
 } from "./catalog_data.js";
 
-// === СОСТОЯНИЕ ФИЛЬТРОВ (ФИЛЬТРЫ 1.0) ===
+// === СОСТОЯНИЕ ФИЛЬТРОВ (ФИЛЬТРЫ 2.0) ===
 const filterState = {
   weightMin: null,
   weightMax: null,
-  size: null,
+  sizes: [],
   isPopular: false,
   isNew: false,
   inStock: false
 };
 
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
+const NON_SIZE_CATEGORIES = new Set(["earrings", "pendants", "pins"]);
+const SIZE_FILTER_CATEGORIES = new Set(["rings", "bracelets"]);
 
 // Специальный ключ для изделий без размерной сетки
 const NO_SIZE_KEY = "__no_size__";
@@ -76,6 +78,7 @@ function saveFilterStateToStorage() {
     const payload = {
       weightMin: filterState.weightMin,
       weightMax: filterState.weightMax,
+      sizes: Array.isArray(filterState.sizes) ? filterState.sizes : [],
       isPopular: filterState.isPopular,
       isNew: filterState.isNew,
       inStock: filterState.inStock
@@ -93,6 +96,12 @@ function loadFilterStateFromStorage() {
     const data = JSON.parse(raw);
     if (data.hasOwnProperty("weightMin")) filterState.weightMin = data.weightMin;
     if (data.hasOwnProperty("weightMax")) filterState.weightMax = data.weightMax;
+    if (Array.isArray(data.sizes)) {
+      filterState.sizes = data.sizes.map(normalizeSizeKey).filter(Boolean);
+    } else if (data.size) {
+      // обратная совместимость с одиночным размером
+      filterState.sizes = [normalizeSizeKey(data.size)].filter(Boolean);
+    }
     if (data.hasOwnProperty("isPopular")) filterState.isPopular = !!data.isPopular;
     if (data.hasOwnProperty("isNew")) filterState.isNew = !!data.isNew;
     if (data.hasOwnProperty("inStock")) filterState.inStock = !!data.inStock;
@@ -186,6 +195,36 @@ function getStockMap(prod) {
   }
 
   return { map, hasData, totalStock, hasAnyStock };
+}
+
+function getStockSummary(stockInfo) {
+  const totalRaw = stockInfo ? stockInfo.totalStock : null;
+  const hasData = !!(stockInfo && stockInfo.hasData);
+  let total =
+    totalRaw != null && !isNaN(totalRaw)
+      ? Math.max(0, Math.floor(Number(totalRaw)))
+      : null;
+  if (total == null && hasData) total = 0;
+  const hasStock = total != null ? total > 0 : !!(stockInfo && stockInfo.hasAnyStock);
+  const display =
+    total == null ? "" : total < 10 ? `${total} pcs` : "10+ pcs";
+  return { total, hasStock, display };
+}
+
+function renderStockIndicator(stockInfo, opts = {}) {
+  const { align = "row" } = opts;
+  const summary = getStockSummary(stockInfo);
+  const dotColor = summary.hasStock ? "#16a34a" : "#9ca3af";
+  const dot =
+    `<span class="stock-dot" style="display:inline-block;width:10px;height:10px;border-radius:999px;background:${dotColor};"></span>`;
+  const text = summary.display
+    ? `<span class="stock-text" style="font-size:12px;color:#4b5563;">${summary.display}</span>`
+    : "";
+  const baseStyle =
+    align === "right"
+      ? "position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:14px;background:rgba(255,255,255,0.92);"
+      : "display:inline-flex;align-items:center;gap:6px;";
+  return `<div class="stock-indicator" style="${baseStyle}">${dot}${text}</div>`;
 }
 
 function getStockForSize(stockInfo, size) {
@@ -295,6 +334,62 @@ function applyFiltersByWeight(list) {
 
     return ok;
   });
+}
+
+function isSizeFilterAllowed(category) {
+  return !!category && SIZE_FILTER_CATEGORIES.has(category);
+}
+
+function applyCatalogFilters(list, category) {
+  let result = list;
+  const stockCache = new Map();
+  const getStockInfo = prod => {
+    const key = prod && prod.sku;
+    if (key && stockCache.has(key)) return stockCache.get(key);
+    const info = getStockMap(prod);
+    if (key) stockCache.set(key, info);
+    return info;
+  };
+
+  if (filterState.inStock) {
+    result = result.filter(prod => {
+      const info = getStockInfo(prod);
+      if (!info.hasData) return false;
+      return info.hasAnyStock || (info.totalStock != null && info.totalStock > 0);
+    });
+  }
+
+  const canFilterBySize = isSizeFilterAllowed(category);
+  const selectedSizes = canFilterBySize
+    ? filterState.sizes.map(normalizeSizeKey).filter(Boolean)
+    : [];
+
+  if (selectedSizes.length) {
+    result = result.filter(prod => {
+      const info = getStockInfo(prod);
+      const stdSizes = getStandardSizesForProduct(prod).map(normalizeSizeKey);
+      return selectedSizes.some(sizeKey => {
+        const stockVal = getStockForSize(info, sizeKey);
+        if (filterState.inStock) return stockVal != null && stockVal > 0;
+        if (stockVal != null) return true;
+        return stdSizes.includes(sizeKey);
+      });
+    });
+  }
+
+  result = applyFiltersByWeight(result);
+
+  if (filterState.isPopular) {
+    result = result.filter(
+      prod => typeof prod.sortOrder === "number" && prod.sortOrder <= 3
+    );
+  }
+
+  if (filterState.isNew) {
+    result = result.filter(prod => prod.isNew === true);
+  }
+
+  return result;
 }
 
 /* === Формирование текста заявки для WhatsApp + Excel === */
@@ -630,13 +725,7 @@ function renderGrid() {
     list = list.filter(p => String(p.sku).toLowerCase().includes(q));
   }
 
-  // ПРИМЕНЯЕМ ФИЛЬТР ПО ВЕСУ (и в будущем другие фильтры)
-  list = applyFiltersByWeight(list);
-
-  // Фильтр "В наличии" — оставляем только модели, у которых есть запас
-  if (filterState.inStock) {
-    list = list.filter(p => productHasAnyStock(p, { allowUnknown: false }));
-  }
+  list = applyCatalogFilters(list, category);
 
   // сортировка:
   // 1) сначала по sortOrder (если есть),
@@ -662,6 +751,7 @@ function renderGrid() {
       const img =
         (p.images && p.images[0]) ||
         "https://picsum.photos/seed/placeholder/900";
+      const stockInfo = getStockMap(p);
       const w =
         p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
       const fullTitle = p.title || `Кольцо ${p.sku}`;
@@ -670,9 +760,10 @@ function renderGrid() {
       const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
       return `
-        <a class="tile" href="product.html?sku=${encodeURIComponent(
+        <a class="tile" style="position:relative;" href="product.html?sku=${encodeURIComponent(
           p.sku
         )}${inStockParam}">
+          ${renderStockIndicator(stockInfo, { align: "right" })}
           <div class="square">
             <img src="${img}" alt="${p.title || p.sku}">
           </div>
@@ -716,7 +807,7 @@ function renderProduct() {
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
-  const cat = prod.category; // ← ЭТО ДОБАВИТЬ
+  const cat = prod.category;
   
   // Определяем тип изделия и русский ярлык
   const TYPE_LABELS = {
@@ -764,6 +855,9 @@ function renderProduct() {
           ${typeLabel} · Арт. ${prod.sku}
         </h1>
         ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
+        <div class="product-stock-line">
+          ${renderStockIndicator(stockInfo)}
+        </div>
       </div>
 
       <div class="product-controls">
@@ -2062,6 +2156,7 @@ function initFilterSheet() {
   const btnClose = document.getElementById("filterCloseBtn");
   const btnReset = document.getElementById("filterResetBtn");
   const btnApply = document.getElementById("filterApplyBtn");
+  const sizeBlock = document.getElementById("filterSizeBlock");
 
   if (!btnToggle || !overlay || !sheet) {
     return;
@@ -2077,7 +2172,14 @@ function initFilterSheet() {
   }
 
   loadFilterStateFromStorage();
+  const hideSizeFilter = NON_SIZE_CATEGORIES.has(category);
+  if (hideSizeFilter) {
+    filterState.sizes = [];
+  }
   syncFilterControlsFromState();
+  if (sizeBlock) {
+    sizeBlock.style.display = hideSizeFilter ? "none" : "";
+  }
 
   function openSheet() {
     overlay.classList.add("visible");
@@ -2101,7 +2203,7 @@ function initFilterSheet() {
   }
 
   // Сброс — чистим поля + состояние filterState
-    if (btnReset) {
+  if (btnReset) {
     btnReset.addEventListener("click", () => {
       const wMin = document.getElementById("filterWeightMin");
       const wMax = document.getElementById("filterWeightMax");
@@ -2122,7 +2224,7 @@ function initFilterSheet() {
       // Сбрасываем и внутреннее состояние
       filterState.weightMin = null;
       filterState.weightMax = null;
-      filterState.size = null;
+      filterState.sizes = [];
       filterState.isPopular = false;
       filterState.isNew = false;
       setInStockFlag(false, { skipRender: true });
@@ -2133,7 +2235,7 @@ function initFilterSheet() {
   }
 
   // Применить — читаем значения в filterState и закрываем шторку
-    if (btnApply) {
+  if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
       setInStockFlag(filterState.inStock, { skipRender: true });
@@ -2143,14 +2245,12 @@ function initFilterSheet() {
     });
   }
 
-  // Переключение размера: одна активная "таблетка"
+  // Переключение размеров: мультивыбор "таблеток"
   document.querySelectorAll(".filter-size-chip").forEach(chip => {
     chip.addEventListener("click", () => {
-      const isActive = chip.classList.contains("active");
-      document.querySelectorAll(".filter-size-chip").forEach(c => c.classList.remove("active"));
-      if (!isActive) {
-        chip.classList.add("active");
-      }
+      const catNow = getCategoryFromUrl();
+      if (!isSizeFilterAllowed(catNow)) return;
+      chip.classList.toggle("active");
     });
   });
 
@@ -2170,14 +2270,21 @@ function readFilterControls() {
   const cbPopular = document.getElementById("filterPopular");
   const cbNew = document.getElementById("filterNew");
   const inStockCbs = getInStockCheckboxes();
-  const activeSizeChip = document.querySelector(".filter-size-chip.active");
+  const activeSizeChips = Array.from(
+    document.querySelectorAll(".filter-size-chip.active")
+  );
+  const category = getCategoryFromUrl();
 
   // Вес
   filterState.weightMin = wMin && wMin.value ? parseFloat(wMin.value) : null;
   filterState.weightMax = wMax && wMax.value ? parseFloat(wMax.value) : null;
 
   // Размер
-  filterState.size = activeSizeChip ? activeSizeChip.textContent.trim() : null;
+  filterState.sizes = isSizeFilterAllowed(category)
+    ? activeSizeChips
+        .map(chip => normalizeSizeKey(chip.textContent.trim()))
+        .filter(Boolean)
+    : [];
 
   // Флаги
   filterState.isPopular = !!(cbPopular && cbPopular.checked);
@@ -2191,12 +2298,25 @@ function syncFilterControlsFromState() {
   const cbPopular = document.getElementById("filterPopular");
   const cbNew = document.getElementById("filterNew");
   const inStockCbs = getInStockCheckboxes();
+  const category = getCategoryFromUrl();
+  const sizeSet =
+    isSizeFilterAllowed(category) && Array.isArray(filterState.sizes)
+      ? new Set(filterState.sizes.map(normalizeSizeKey))
+      : new Set();
 
   if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
   if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
   if (cbPopular) cbPopular.checked = !!filterState.isPopular;
   if (cbNew) cbNew.checked = !!filterState.isNew;
   inStockCbs.forEach(cb => (cb.checked = !!filterState.inStock));
+  document.querySelectorAll(".filter-size-chip").forEach(chip => {
+    const key = normalizeSizeKey(chip.textContent.trim());
+    if (sizeSet.size && sizeSet.has(key)) {
+      chip.classList.add("active");
+    } else {
+      chip.classList.remove("active");
+    }
+  });
 }
 
 window.addEventListener("load", initFilterSheet);
