@@ -8,6 +8,7 @@ import {
   BRACELET_SIZES,
   DEFAULT_BRACELET_SIZE
 } from "./catalog_data.js";
+console.log("ZHEM BUILD v1.13-test");
 
 // === СОСТОЯНИЕ ФИЛЬТРОВ (ФИЛЬТРЫ 1.0) ===
 const filterState = {
