@@ -20,6 +20,7 @@ const filterState = {
 };
 
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
+let filterStateLoaded = false;
 const NON_SIZE_CATEGORIES = new Set(["earrings", "pendants", "pins"]);
 const SIZE_FILTER_CATEGORIES = new Set(["rings", "bracelets"]);
 
@@ -90,9 +91,13 @@ function saveFilterStateToStorage() {
 }
 
 function loadFilterStateFromStorage() {
+  if (filterStateLoaded) return;
   try {
     const raw = localStorage.getItem(FILTER_STORAGE_KEY);
-    if (!raw) return;
+    if (!raw) {
+      filterStateLoaded = true;
+      return;
+    }
     const data = JSON.parse(raw);
     if (data.hasOwnProperty("weightMin")) filterState.weightMin = data.weightMin;
     if (data.hasOwnProperty("weightMax")) filterState.weightMax = data.weightMax;
@@ -105,8 +110,10 @@ function loadFilterStateFromStorage() {
     if (data.hasOwnProperty("isPopular")) filterState.isPopular = !!data.isPopular;
     if (data.hasOwnProperty("isNew")) filterState.isNew = !!data.isNew;
     if (data.hasOwnProperty("inStock")) filterState.inStock = !!data.inStock;
+    filterStateLoaded = true;
   } catch (e) {
     // ignore parse errors
+    filterStateLoaded = true;
   }
 }
 
@@ -197,34 +204,91 @@ function getStockMap(prod) {
   return { map, hasData, totalStock, hasAnyStock };
 }
 
-function getStockSummary(stockInfo) {
-  const totalRaw = stockInfo ? stockInfo.totalStock : null;
+function formatStockCount(value) {
+  if (value == null || isNaN(value)) return "";
+  const num = Math.max(0, Math.floor(Number(value)));
+  return num < 10 ? `${num} шт` : "10+шт";
+}
+
+function getStockSummary(stockInfo, opts = {}) {
+  const { sizeKey = null } = opts;
   const hasData = !!(stockInfo && stockInfo.hasData);
-  let total =
-    totalRaw != null && !isNaN(totalRaw)
-      ? Math.max(0, Math.floor(Number(totalRaw)))
-      : null;
-  if (total == null && hasData) total = 0;
-  const hasStock = total != null ? total > 0 : !!(stockInfo && stockInfo.hasAnyStock);
-  const display =
-    total == null ? "" : total < 10 ? `${total} pcs` : "10+ pcs";
+  let total = null;
+
+  if (sizeKey) {
+    if (hasData) {
+      const sizeVal = getStockForSize(stockInfo, sizeKey);
+      total =
+        sizeVal == null ? 0 : Math.max(0, Math.floor(Number(sizeVal)));
+    }
+  } else {
+    const totalRaw = stockInfo ? stockInfo.totalStock : null;
+    total =
+      totalRaw != null && !isNaN(totalRaw)
+        ? Math.max(0, Math.floor(Number(totalRaw)))
+        : null;
+    if (total == null && hasData) total = 0;
+  }
+
+  const hasStock =
+    total != null ? total > 0 : sizeKey ? false : !!(stockInfo && stockInfo.hasAnyStock);
+  const display = total == null ? "" : formatStockCount(total);
   return { total, hasStock, display };
 }
 
 function renderStockIndicator(stockInfo, opts = {}) {
-  const { align = "row" } = opts;
-  const summary = getStockSummary(stockInfo);
+  const { align = "row", sizeKey = null, showText = true } = opts;
+  const summary = getStockSummary(stockInfo, { sizeKey });
   const dotColor = summary.hasStock ? "#16a34a" : "#9ca3af";
   const dot =
     `<span class="stock-dot" style="display:inline-block;width:10px;height:10px;border-radius:999px;background:${dotColor};"></span>`;
-  const text = summary.display
+  const text = showText && summary.display
     ? `<span class="stock-text" style="font-size:12px;color:#4b5563;">${summary.display}</span>`
     : "";
-  const baseStyle =
-    align === "right"
-      ? "position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:14px;background:rgba(255,255,255,0.92);"
-      : "display:inline-flex;align-items:center;gap:6px;";
+  let baseStyle = "display:inline-flex;align-items:center;gap:6px;";
+  if (align === "right" || align === "corner") {
+    baseStyle =
+      "position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:14px;background:rgba(255,255,255,0.92);z-index:2;";
+  }
+  if (align === "corner-dot") {
+    baseStyle =
+      "position:absolute;top:8px;right:8px;display:flex;align-items:center;gap:6px;z-index:2;";
+  }
   return `<div class="stock-indicator" style="${baseStyle}">${dot}${text}</div>`;
+}
+
+function getPreferredFilterSizeKey(prod, stockInfo) {
+  if (!prod || !isSizeFilterAllowed(prod.category)) return null;
+  const selected =
+    Array.isArray(filterState.sizes) && filterState.sizes.length
+      ? filterState.sizes.map(normalizeSizeKey).filter(Boolean)
+      : [];
+  if (!selected.length) return null;
+
+  const stdSizes = new Set(getStandardSizesForProduct(prod).map(normalizeSizeKey));
+
+  // 1) сначала размер из фильтра, у которого точно есть запас
+  for (const key of selected) {
+    const val = getStockForSize(stockInfo, key);
+    if (val != null && val > 0) return key;
+  }
+
+  // 2) затем — любой размер из фильтра, который присутствует в матрице
+  for (const key of selected) {
+    if (stdSizes.has(key)) return key;
+    if (getStockForSize(stockInfo, key) != null) return key;
+  }
+
+  // 3) иначе берём первый выбранный размер как есть
+  return selected[0];
+}
+
+function getSizeStockDisplay(stockInfo, sizeKey) {
+  if (!sizeKey || !stockInfo) return "";
+  if (!stockInfo.hasData) return "";
+  const val = getStockForSize(stockInfo, sizeKey);
+  if (val == null) return "0 шт";
+  return formatStockCount(val);
 }
 
 function getStockForSize(stockInfo, size) {
@@ -583,10 +647,13 @@ function setupBreadcrumbs() {
     return;
   }
 
-  // 4) Корзина (order.html) — верхний уровень или категория
+  // 4) Корзина (order.html)
   if ($("#order")) {
     const params = new URLSearchParams(window.location.search);
     const cat = params.get("cat");
+    const artLabel = params.get("sku")
+      ? `Арт. ${params.get("sku")}`
+      : "Корзина";
 
     if (cat && CATEGORY_LABELS[cat]) {
       renderBreadcrumbs([
@@ -752,6 +819,7 @@ function renderGrid() {
         (p.images && p.images[0]) ||
         "https://picsum.photos/seed/placeholder/900";
       const stockInfo = getStockMap(p);
+      const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
       const w =
         p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
       const fullTitle = p.title || `Кольцо ${p.sku}`;
@@ -763,7 +831,10 @@ function renderGrid() {
         <a class="tile" style="position:relative;" href="product.html?sku=${encodeURIComponent(
           p.sku
         )}${inStockParam}">
-          ${renderStockIndicator(stockInfo, { align: "right" })}
+          ${renderStockIndicator(stockInfo, {
+            align: "corner",
+            sizeKey: sizeForDisplay
+          })}
           <div class="square">
             <img src="${img}" alt="${p.title || p.sku}">
           </div>
@@ -778,6 +849,8 @@ function renderGrid() {
       `;
     })
     .join("");
+
+  updateCartBadge();
 }
 
 /* === КАРТОЧКА ТОВАРА === */
@@ -799,6 +872,7 @@ function renderProduct() {
   const inStockOnly = urlParams.get("inStock") === "1";
   const enforceStock = filterState.inStock || inStockOnly;
   const stockInfo = getStockMap(prod);
+  const preferredFilterSize = getPreferredFilterSizeKey(prod, stockInfo);
   const cartQtyMap = getCartQtyBySize(prod.sku);
 
   const img =
@@ -856,7 +930,7 @@ function renderProduct() {
         </h1>
         ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
         <div class="product-stock-line">
-          ${renderStockIndicator(stockInfo)}
+          ${renderStockIndicator(stockInfo, { sizeKey: preferredFilterSize })}
         </div>
       </div>
 
@@ -868,6 +942,7 @@ function renderProduct() {
                 <span id="sizeMatrixSummary">Выбрать размеры</span>
                 <span class="size-picker-arrow">▾</span>
               </button>
+              <div id="sizeActiveStock" class="size-active-stock"></div>
             </div>
 
             <!-- Блок количества для изделий БЕЗ размеров (серьги, подвески, булавки, браслеты) -->
@@ -895,18 +970,59 @@ function renderProduct() {
   const btnAdd = $("#addToCart", box);
   const btnSizeOpen = $("#sizeMatrixOpen", box);
   const summaryEl = $("#sizeMatrixSummary", box);
+  const sizeActiveStockEl = $("#sizeActiveStock", box);
   const qtyBlock = $(".qty-block-no-size", box);
   const qtySpan = $("#qtyNoSize", box);
   const btnQtyDec = $("#qtyDec", box);
   const btnQtyInc = $("#qtyInc", box);
+  let activeSizeKey = preferredFilterSize || null;
 
   function preventDoubleTapZoom(btn) {
-  if (!btn) return;
-  btn.style.touchAction = "manipulation";
-}
+    if (!btn) return;
+    btn.style.touchAction = "manipulation";
+  }
 
-preventDoubleTapZoom(btnQtyDec);
-preventDoubleTapZoom(btnQtyInc);
+  preventDoubleTapZoom(btnQtyDec);
+  preventDoubleTapZoom(btnQtyInc);
+
+  const calcSelectedQty = () => {
+    if (isNoSize) {
+      return qtySpan ? parseInt(qtySpan.textContent, 10) || 0 : 0;
+    }
+    if (isRingSized) {
+      let total = 0;
+      sizeState.forEach(q => {
+        total += q || 0;
+      });
+      return total;
+    }
+    return 0;
+  };
+
+  const updateAddButtonState = () => {
+    if (!btnAdd) return;
+    btnAdd.disabled = calcSelectedQty() <= 0;
+  };
+
+  const updateActiveSizeStock = sizeKey => {
+    activeSizeKey = sizeKey || null;
+    if (!sizeActiveStockEl) return;
+    if (!isRingSized || !sizeKey) {
+      sizeActiveStockEl.textContent = "";
+      sizeActiveStockEl.style.display = "none";
+      return;
+    }
+    const stockText = getSizeStockDisplay(stockInfo, sizeKey);
+    if (stockText) {
+      sizeActiveStockEl.textContent = `Арт. ${prod.sku} · р-р ${sizeKey} · ${stockText}`;
+      sizeActiveStockEl.style.display = "block";
+    } else {
+      sizeActiveStockEl.textContent = "";
+      sizeActiveStockEl.style.display = "none";
+    }
+  };
+
+  updateActiveSizeStock(activeSizeKey);
 
   if (isRingSized && sizes.length === 0) {
     if (summaryEl) {
@@ -933,6 +1049,7 @@ preventDoubleTapZoom(btnQtyInc);
       const { remaining } = getNoSizeLimits();
       const initial = Math.min(remaining || 0, 1);
       qtySpan.textContent = String(initial);
+      updateAddButtonState();
     }
 
     if (btnQtyInc && qtySpan) {
@@ -944,6 +1061,7 @@ preventDoubleTapZoom(btnQtyInc);
         if (limit <= 0) return;
         v = Math.min(limit, v + 1);
         qtySpan.textContent = String(v);
+        updateAddButtonState();
       };
     }
 
@@ -953,6 +1071,7 @@ preventDoubleTapZoom(btnQtyInc);
         if (isNaN(v)) v = 0;
         v = Math.max(0, v - 1);
         qtySpan.textContent = String(v);
+        updateAddButtonState();
       };
     }
   }
@@ -960,6 +1079,12 @@ preventDoubleTapZoom(btnQtyInc);
   /* === МОДАЛЬНОЕ ОКНО С МАТРИЦЕЙ РАЗМЕРОВ (ТОЛЬКО ДЛЯ КОЛЕЦ) === */
 
   let modal = null;
+  let resetRingSelection = () => {};
+
+  const resetNoSizeQty = () => {
+    if (qtySpan) qtySpan.textContent = "0";
+    updateAddButtonState();
+  };
 
   if (isRingSized && sizes.length > 0) {
     modal = document.createElement("div");
@@ -974,14 +1099,17 @@ preventDoubleTapZoom(btnQtyInc);
               const key = normalizeSizeKey(s);
               const stockVal = getStockForSize(stockInfo, key);
               const isZero =
-                inStockOnly &&
                 stockInfo.hasData &&
                 (stockVal == null || stockVal <= 0);
+              const stockLabel = getSizeStockDisplay(stockInfo, key);
               const rowClass = isZero ? "size-row no-stock" : "size-row";
               const btnDis = isZero ? "disabled" : "";
               return `
                 <div class="${rowClass}" data-size="${key}">
-                  <div class="size-row-size">р-р ${key}</div>
+                  <div class="size-row-size">
+                    <div>р-р ${key}</div>
+                    ${stockLabel ? `<div class="size-row-stock">${stockLabel}</div>` : ""}
+                  </div>
                   <div class="size-row-qty">
                     <button type="button" data-act="dec" data-size="${key}" ${btnDis}>−</button>
                     <span data-size="${key}">0</span>
@@ -1074,6 +1202,9 @@ preventDoubleTapZoom(btnQtyInc);
         `.size-row-qty span[data-size="${key}"]`
       );
       if (span) span.textContent = String(current);
+      updateActiveSizeStock(key);
+      updateAddButtonState();
+      updateSummary();
     });
 
     // вспомогательная для добавления в корзину
@@ -1123,7 +1254,25 @@ preventDoubleTapZoom(btnQtyInc);
 
       saveCart(cart);
     };
+
+    resetRingSelection = () => {
+      sizeState.forEach((_, key) => sizeState.set(key, 0));
+      if (modal) {
+        sizes.forEach(s => {
+          const key = normalizeSizeKey(s);
+          const span = modal.querySelector(
+            `.size-row-qty span[data-size="${key}"]`
+          );
+          if (span) span.textContent = "0";
+        });
+      }
+      if (summaryEl) summaryEl.textContent = "Выбрать размеры";
+      updateActiveSizeStock(null);
+      updateAddButtonState();
+    };
   }
+
+  updateAddButtonState();
 
   /* === КНОПКА "В КОРЗИНУ" === */
 
@@ -1202,6 +1351,7 @@ preventDoubleTapZoom(btnQtyInc);
         );
 
         toast("Добавлено в корзину");
+        resetNoSizeQty();
         return;
       }
 
@@ -1212,12 +1362,7 @@ preventDoubleTapZoom(btnQtyInc);
           return;
         }
 
-        let hasQty = false;
-        sizeState.forEach(q => {
-          if (q > 0) hasQty = true;
-        });
-
-        if (!hasQty) {
+        if (calcSelectedQty() <= 0) {
           toast("Выберите хотя бы один размер");
           return;
         }
@@ -1242,17 +1387,7 @@ preventDoubleTapZoom(btnQtyInc);
 
         toast("Добавлено в корзину");
 
-        sizeState.forEach((_, key) => sizeState.set(key, 0));
-        if (modal) {
-          sizes.forEach(s => {
-            const key = normalizeSizeKey(s);
-            const span = modal.querySelector(
-              `.size-row-qty span[data-size="${key}"]`
-            );
-            if (span) span.textContent = "0";
-          });
-        }
-        if (summaryEl) summaryEl.textContent = "Выбрать размеры";
+        resetRingSelection();
         return;
       }
 
@@ -2238,7 +2373,7 @@ function initFilterSheet() {
   if (btnApply) {
     btnApply.addEventListener("click", () => {
       readFilterControls();   // обновили filterState из UI
-      setInStockFlag(filterState.inStock, { skipRender: true });
+      setInStockFlag(filterState.inStock, { skipRender: true, skipSave: true });
       saveFilterStateToStorage();
       closeSheet();
       renderGrid();           // перерисовали каталог с учётом фильтров
@@ -2251,13 +2386,19 @@ function initFilterSheet() {
       const catNow = getCategoryFromUrl();
       if (!isSizeFilterAllowed(catNow)) return;
       chip.classList.toggle("active");
+      readFilterControls();
+      saveFilterStateToStorage();
+      renderGrid();
     });
   });
 
   // Быстрое переключение "В наличии" (если есть любой чекбокс)
   getInStockCheckboxes().forEach(cb => {
     cb.addEventListener("change", () => {
-      setInStockFlag(cb.checked);
+      readFilterControls();
+      setInStockFlag(cb.checked, { skipRender: true, skipSave: true });
+      saveFilterStateToStorage();
+      renderGrid();
     });
   });
 }
