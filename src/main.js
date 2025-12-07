@@ -178,10 +178,11 @@ function getStockForSize(stockInfo, size) {
   return Math.max(0, Number(val));
 }
 
-function productHasAnyStock(prod) {
+function productHasAnyStock(prod, opts = {}) {
+  const { allowUnknown = true } = opts;
   const stockInfo = getStockMap(prod);
   const sizes = getStandardSizesForProduct(prod);
-  if (!stockInfo.hasData) return true; // нет данных — не блокируем показ
+  if (!stockInfo.hasData) return !!allowUnknown;
   return sizes.some(size => (getStockForSize(stockInfo, size) || 0) > 0);
 }
 
@@ -223,8 +224,9 @@ function getNoSizeCapInfo(prod, cartQtyMapInput) {
 
   const totalStock = Number(getTotalStock(prod));
   const fallbackCap = 999;
-  const cap =
-    Number.isFinite(totalStock) && totalStock > 0 ? totalStock : fallbackCap;
+  const cap = Number.isFinite(totalStock)
+    ? Math.max(totalStock, 0)
+    : fallbackCap;
   const alreadyInCart = map.get(NO_SIZE_KEY) || 0;
 
   return {
@@ -612,7 +614,7 @@ function renderGrid() {
 
   // Фильтр "В наличии" — оставляем только модели, у которых есть запас
   if (filterState.inStock) {
-    list = list.filter(productHasAnyStock);
+    list = list.filter(p => productHasAnyStock(p, { allowUnknown: false }));
   }
 
   // сортировка:
@@ -2156,3 +2158,9 @@ function syncFilterControlsFromState() {
 
   if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
   if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
+  if (cbPopular) cbPopular.checked = !!filterState.isPopular;
+  if (cbNew) cbNew.checked = !!filterState.isNew;
+  inStockCbs.forEach(cb => (cb.checked = !!filterState.inStock));
+}
+
+window.addEventListener("load", initFilterSheet);
