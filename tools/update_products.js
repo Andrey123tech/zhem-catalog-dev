@@ -37,6 +37,19 @@ const stock = xlsx.utils.sheet_to_json(stockSheet, { header: 1 });
 // expected columns:
 // SKU | totalWeight | totalQty | size | sizeWeight | sizeQty
 
+function parseSizeValue(value) {
+  if (typeof value === "number") return value.toString();
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    const normalized = trimmed.replace(",", ".");
+    const num = Number(normalized);
+    if (Number.isNaN(num)) return null;
+    return num.toString();
+  }
+  return null;
+}
+
 function parseStockTable(rows) {
   const result = {};
   let currentSku = null;
@@ -53,22 +66,38 @@ function parseStockTable(rows) {
       result[currentSku] = {
         totalWeight,
         totalQty,
-        sizes: {}
+        sizes: {},
+        sizeQtySum: 0,
+        sizeWeightSum: 0,
+        hasSizes: false
       };
       continue;
     }
 
     // size rows under SKU
-    if (currentSku && row[0] && typeof row[0] === "number") {
-      const size = row[0].toString().replace(",", ".");
+    if (currentSku) {
+      const size = parseSizeValue(col0);
+      if (size == null) continue;
+
       const w = Number(row[1]) || 0;
       const q = Number(row[2]) || 0;
 
-      if (!result[currentSku].sizes) result[currentSku].sizes = {};
-      result[currentSku].sizes[size] = q;
+      const entry = result[currentSku];
+      entry.hasSizes = true;
+      entry.sizes[size] = (entry.sizes[size] || 0) + q;
+      entry.sizeQtySum += q;
+      entry.sizeWeightSum += w;
       continue;
     }
   }
+
+  Object.values(result).forEach((entry) => {
+    if (entry.hasSizes) {
+      entry.totalQty = entry.sizeQtySum;
+      entry.totalWeight = entry.sizeWeightSum || entry.totalWeight;
+    }
+    if (!entry.hasSizes) entry.sizes = null;
+  });
 
   return result;
 }
@@ -99,6 +128,7 @@ if (newRows.length) {
 }
 
 console.log("Новинок найдено:", noveltySkus.length);
+const noveltySet = new Set(noveltySkus);
 
 // === 4. Load sales (для сортировки / popular) ===
 const salesBook = loadXLS(FILE_SALES);
@@ -125,15 +155,15 @@ noveltySkus.forEach((sku) => {
     map.set(sku, {
       sku,
       title: `Модель ${sku}`,
-      category: detectCategory(sku),
+      category: detectCategory(sku, stockData[sku]),
       metal: "Au585",
       color: "rose",
-      avgWeight: null,
+      avgWeight: -1,
       images: [],
-      sortOrder: 999,
+      sortOrder: 9,
       isNew: true,
       newSince: new Date().toISOString().slice(0, 10),
-      stockBySize: {},
+      stockBySize: null,
       stock: 0
     });
   }
@@ -144,14 +174,32 @@ noveltySkus.forEach((sku) => {
   if (!p.newSince) p.newSince = new Date().toISOString().slice(0, 10);
 });
 
-// detect category by prefix (твой вариант)
-function detectCategory(sku) {
-  if (sku.includes("190")) return "rings";
-  if (sku.includes("023")) return "earrings";
-  if (sku.includes("177")) return "bracelets";
-  if (sku.includes("180")) return "pendants";
-  if (sku.includes("178")) return "pins";
-  return "rings";
+function detectCategory(sku, stockInfo, existingCategory) {
+  if (existingCategory) return existingCategory;
+
+  const sizeKeys = stockInfo?.sizes ? Object.keys(stockInfo.sizes) : [];
+  const hasSizes = sizeKeys.length > 0;
+
+  if (hasSizes) {
+    if (sku.startsWith("Au19")) return "rings";
+
+    if (sizeKeys.length === 1) {
+      const sizeNum = Number(sizeKeys[0]);
+      if (!Number.isNaN(sizeNum)) {
+        if (sizeNum >= 18 && sizeNum <= 21) return "rings";
+        if (sizeNum > 15) return "bracelets";
+      }
+    }
+
+    return "rings";
+  }
+
+  const lastChar = sku.slice(-1).toLowerCase();
+  if (lastChar === "r" || lastChar === "p") return "pendants";
+  if (lastChar === "m" || lastChar === "k" || lastChar === "s") return "earrings";
+  if (lastChar === "f") return "pins";
+
+  return "unknown";
 }
 
 // === 6. Apply stock data ===
@@ -160,44 +208,52 @@ for (const [sku, info] of Object.entries(stockData)) {
     map.set(sku, {
       sku,
       title: `Модель ${sku}`,
-      category: detectCategory(sku),
+      category: detectCategory(sku, info),
       metal: "Au585",
       color: "rose",
-      avgWeight: null,
+      avgWeight: -1,
       images: [],
-      sortOrder: 999,
-      stockBySize: {},
+      sortOrder: 9,
+      stockBySize: null,
       stock: 0
     });
   }
 
   const p = map.get(sku);
 
-  p.stock = info.totalQty;
-  p.stockBySize = info.sizes || {};
+  p.category = detectCategory(sku, info, p.category);
 
-  // fix avgWeight
-  const avg = Number(p.avgWeight);
-  if (
-    p.avgWeight == null ||
-    p.avgWeight === "" ||
-    p.avgWeight === "?" ||
-    Number.isNaN(avg) ||
-    avg < 0
-  ) {
-    if (info.totalQty > 0 && info.totalWeight > 0) {
-      p.avgWeight = Number((info.totalWeight / info.totalQty).toFixed(3));
-    } else {
-      p.avgWeight = "?";
-    }
+  p.stock = Number(info.totalQty) || 0;
+  p.stockBySize = info.sizes || null;
+
+  if (info.totalQty > 0 && info.totalWeight > 0) {
+    p.avgWeight = Number((info.totalWeight / info.totalQty).toFixed(3));
+  } else {
+    p.avgWeight = -1;
   }
 }
 
-// === 7. Popular sorting by grams ===
+// === 7. Mark novelties ===
+map.forEach((p, sku) => {
+  if (noveltySet.has(sku)) {
+    p.isNew = true;
+    if (!p.newSince) p.newSince = new Date().toISOString().slice(0, 10);
+  } else {
+    if ("isNew" in p) delete p.isNew;
+    if ("newSince" in p) delete p.newSince;
+  }
+});
+
+// === 8. Popular sorting by grams ===
 const gramsList = [];
 map.forEach((p, sku) => {
-  const grams = salesMap.get(sku) || 0;
-  gramsList.push({ sku, grams });
+  if (salesMap.has(sku)) {
+    const grams = salesMap.get(sku) || 0;
+    gramsList.push({ sku, grams });
+  } else {
+    p.sortOrder = 9;
+    p.isHit = false;
+  }
 });
 
 gramsList.sort((a, b) => b.grams - a.grams);
@@ -205,6 +261,8 @@ gramsList.sort((a, b) => b.grams - a.grams);
 // Top 10% → sortOrder=1
 // Next 20% → sortOrder=2
 // Next 30% → sortOrder=3
+// Others (with sales data) → 5
+// No sales data → 9
 
 const n = gramsList.length;
 const t10 = Math.floor(n * 0.1);
@@ -215,13 +273,30 @@ gramsList.forEach((row, i) => {
   const p = map.get(row.sku);
   if (!p) return;
 
-  if (i < t10) p.sortOrder = 1;
-  else if (i < t30) p.sortOrder = 2;
-  else if (i < t60) p.sortOrder = 3;
-  else p.sortOrder = 999;
+  let order = 5;
+  if (i < t10) order = 1;
+  else if (i < t30) order = 2;
+  else if (i < t60) order = 3;
+
+  p.sortOrder = order;
+  p.isHit = order === 1;
 });
 
-// === 8. Save output ===
+// === 9. Finalize defaults ===
+map.forEach((p) => {
+  const avg = Number(p.avgWeight);
+  if (
+    p.avgWeight == null ||
+    p.avgWeight === "" ||
+    p.avgWeight === "?" ||
+    Number.isNaN(avg) ||
+    avg < 0
+  ) {
+    p.avgWeight = -1;
+  }
+});
+
+// === 10. Save output ===
 const out = Array.from(map.values());
 writeJSON(FILE_PRODUCTS, out);
 
