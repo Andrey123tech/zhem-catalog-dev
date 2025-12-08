@@ -18,7 +18,9 @@
       "20": 4,
       "21": 2
     },
-    "stock": 11
+    "stock": 11,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0237165",
@@ -31,7 +33,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 1,
-    "stock": 20
+    "stock": 20,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177628",
@@ -47,7 +51,9 @@
     "stockBySize": {
       "18.0": 12
     },
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180572p",
@@ -60,7 +66,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 1,
-    "stock": 45
+    "stock": 45,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178175",
@@ -73,7 +81,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 1,
-    "stock": 17
+    "stock": 17,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190131",
@@ -98,7 +108,9 @@
       "20.5": 2,
       "21": 1
     },
-    "stock": 30
+    "stock": 30,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0237168M",
@@ -111,7 +123,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 2,
-    "stock": 22
+    "stock": 22,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177785",
@@ -127,7 +141,9 @@
     "stockBySize": {
       "18.0": 17
     },
-    "stock": 17
+    "stock": 17,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180574p",
@@ -140,7 +156,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 2,
-    "stock": 47
+    "stock": 47,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178176",
@@ -153,7 +171,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 2,
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190023",
@@ -170,7 +190,9 @@
       "20.5": 1,
       "21": 1
     },
-    "stock": 2
+    "stock": 2,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0237168",
@@ -183,7 +205,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 3,
-    "stock": 26
+    "stock": 26,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177602",
@@ -199,7 +223,9 @@
     "stockBySize": {
       "18.0": 13
     },
-    "stock": 13
+    "stock": 13,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180573p",
@@ -212,7 +238,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 3,
-    "stock": 43
+    "stock": 43,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178174",
@@ -225,7 +253,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 3,
-    "stock": 71
+    "stock": 71,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185800Kk",
@@ -248,7 +278,9 @@
       "21": 6,
       "21.5": 1
     },
-    "stock": 52
+    "stock": 52,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180007",
@@ -261,7 +293,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 4,
-    "stock": 31
+    "stock": 31,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177787",
@@ -277,7 +311,9 @@
     "stockBySize": {
       "18.0": 12
     },
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178604",
@@ -290,7 +326,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 4,
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190059",
@@ -306,7 +344,9 @@
     "stockBySize": {
       "19.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0237162",
@@ -319,7 +359,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 6,
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177601",
@@ -335,7 +377,9 @@
     "stockBySize": {
       "18.0": 13
     },
-    "stock": 13
+    "stock": 13,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178605",
@@ -348,7 +392,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 5,
-    "stock": 7
+    "stock": 7,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190037",
@@ -361,7 +407,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 13,
-    "stock": 2
+    "stock": 2,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180483",
@@ -374,7 +422,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 7,
-    "stock": 14
+    "stock": 14,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177630",
@@ -390,7 +440,9 @@
     "stockBySize": {
       "18.0": 7
     },
-    "stock": 7
+    "stock": 7,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180575p",
@@ -403,7 +455,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 6,
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190020",
@@ -421,7 +475,9 @@
       "20": 1,
       "20.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au077724",
@@ -434,7 +490,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 8,
-    "stock": 18
+    "stock": 18,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177623",
@@ -450,7 +508,9 @@
     "stockBySize": {
       "18.0": 6
     },
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180555",
@@ -463,7 +523,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 7,
-    "stock": 7
+    "stock": 7,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190024",
@@ -476,7 +538,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 20,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au016075",
@@ -489,7 +553,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 12,
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0757705",
@@ -505,7 +571,9 @@
     "stockBySize": {
       "18.0": 14
     },
-    "stock": 14
+    "stock": 14,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180405p",
@@ -518,7 +586,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 9,
-    "stock": 23
+    "stock": 23,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190548",
@@ -534,7 +604,9 @@
     "stockBySize": {
       "16.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au077167",
@@ -547,7 +619,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 13,
-    "stock": 22
+    "stock": 22,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179001",
@@ -563,7 +637,9 @@
     "stockBySize": {
       "18.0": 8
     },
-    "stock": 8
+    "stock": 8,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177731",
@@ -576,7 +652,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 10,
-    "stock": 74
+    "stock": 74,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190056",
@@ -598,7 +676,9 @@
       "20.5": 6,
       "21": 2
     },
-    "stock": 24
+    "stock": 24,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au016167",
@@ -611,7 +691,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 14,
-    "stock": 15
+    "stock": 15,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177834",
@@ -624,7 +706,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 9,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180562p",
@@ -637,7 +721,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 11,
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190573",
@@ -660,7 +746,9 @@
       "20.5": 1,
       "21": 1
     },
-    "stock": 28
+    "stock": 28,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178075",
@@ -673,7 +761,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 16,
-    "stock": 21
+    "stock": 21,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177622",
@@ -689,7 +779,9 @@
     "stockBySize": {
       "18.0": 8
     },
-    "stock": 8
+    "stock": 8,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190314p",
@@ -702,7 +794,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 8,
-    "stock": 116
+    "stock": 116,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190567",
@@ -724,7 +818,9 @@
       "20": 1,
       "20.5": 2
     },
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0237210",
@@ -737,7 +833,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 17,
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177621",
@@ -753,7 +851,9 @@
     "stockBySize": {
       "18.0": 3
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180634p",
@@ -766,7 +866,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 12,
-    "stock": 35
+    "stock": 35,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190026",
@@ -782,7 +884,9 @@
     "stockBySize": {
       "16.5": -1
     },
-    "stock": -1
+    "stock": -1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180590",
@@ -795,7 +899,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 18,
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177620",
@@ -808,7 +914,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 12,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185583",
@@ -821,7 +929,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 13,
-    "stock": 23
+    "stock": 23,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190132",
@@ -834,7 +944,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 35,
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au080167",
@@ -847,7 +959,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 20,
-    "stock": 22
+    "stock": 22,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177629",
@@ -863,7 +977,9 @@
     "stockBySize": {
       "18.0": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190156",
@@ -879,7 +995,9 @@
     "stockBySize": {
       "20": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0757719",
@@ -892,7 +1010,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 21,
-    "stock": 11
+    "stock": 11,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177617",
@@ -908,7 +1028,9 @@
     "stockBySize": {
       "18.0": 3
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190144",
@@ -928,7 +1050,9 @@
       "20": 1,
       "20.5": 1
     },
-    "stock": 8
+    "stock": 8,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0237210M",
@@ -941,7 +1065,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 22,
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180602",
@@ -954,7 +1080,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 15,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190141",
@@ -967,7 +1095,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 43,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180359",
@@ -980,7 +1110,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 23,
-    "stock": 13
+    "stock": 13,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180600",
@@ -993,7 +1125,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 16,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190574",
@@ -1009,7 +1143,9 @@
     "stockBySize": {
       "18.5": 3
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0507739",
@@ -1022,7 +1158,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 24,
-    "stock": 41
+    "stock": 41,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0657706",
@@ -1038,7 +1176,9 @@
     "stockBySize": {
       "18.0": 12
     },
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190542",
@@ -1058,7 +1198,9 @@
       "18": 1,
       "19.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179329",
@@ -1071,7 +1213,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 25,
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178984",
@@ -1087,7 +1231,9 @@
     "stockBySize": {
       "18.0": 7
     },
-    "stock": 7
+    "stock": 7,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190569",
@@ -1100,7 +1246,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 48,
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0407756",
@@ -1113,7 +1261,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 27,
-    "stock": 23
+    "stock": 23,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179006",
@@ -1129,7 +1279,9 @@
     "stockBySize": {
       "18.0": 5
     },
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190155",
@@ -1149,7 +1301,9 @@
       "19.5": 1,
       "21.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185702",
@@ -1162,7 +1316,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 28,
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190174",
@@ -1175,7 +1331,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 20,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190142",
@@ -1188,7 +1346,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 53,
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177208",
@@ -1201,7 +1361,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 29,
-    "stock": 23
+    "stock": 23,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178985",
@@ -1217,7 +1379,9 @@
     "stockBySize": {
       "18.0": 5
     },
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190543",
@@ -1230,7 +1394,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 54,
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0357734",
@@ -1243,7 +1409,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 30,
-    "stock": 15
+    "stock": 15,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177554",
@@ -1259,7 +1427,9 @@
     "stockBySize": {
       "18.0": 8
     },
-    "stock": 8
+    "stock": 8,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190572",
@@ -1283,7 +1453,9 @@
       "20": 10,
       "21": 2
     },
-    "stock": 40
+    "stock": 40,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179349",
@@ -1296,7 +1468,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 31,
-    "stock": 15
+    "stock": 15,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178998",
@@ -1312,7 +1486,9 @@
     "stockBySize": {
       "18.0": 3
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190129",
@@ -1325,7 +1501,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 60,
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185853",
@@ -1338,7 +1516,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 32,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178994",
@@ -1354,7 +1534,9 @@
     "stockBySize": {
       "18.0": 4
     },
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190133",
@@ -1370,7 +1552,9 @@
     "stockBySize": {
       "19": 2
     },
-    "stock": 2
+    "stock": 2,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0207109",
@@ -1383,7 +1567,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 33,
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0357716",
@@ -1399,7 +1585,9 @@
     "stockBySize": {
       "18.0": 10
     },
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190159",
@@ -1412,7 +1600,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 65,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190196",
@@ -1425,7 +1615,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 34,
-    "stock": 14
+    "stock": 14,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190140",
@@ -1441,7 +1633,9 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180395",
@@ -1454,7 +1648,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 35,
-    "stock": 19
+    "stock": 19,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190561",
@@ -1467,7 +1663,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 68,
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0407107",
@@ -1480,7 +1678,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 37,
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190134",
@@ -1503,7 +1703,9 @@
       "20": 3,
       "21": 3
     },
-    "stock": 27
+    "stock": 27,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180402",
@@ -1516,7 +1718,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 38,
-    "stock": 18
+    "stock": 18,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190052",
@@ -1532,7 +1736,9 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180667",
@@ -1545,7 +1751,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 40,
-    "stock": 27
+    "stock": 27,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190014",
@@ -1567,7 +1775,9 @@
       "19": 6,
       "19.5": 3
     },
-    "stock": 23
+    "stock": 23,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180653",
@@ -1580,7 +1790,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 41,
-    "stock": 14
+    "stock": 14,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190163K",
@@ -1598,7 +1810,9 @@
       "19": 1,
       "20.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0307108",
@@ -1611,7 +1825,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 42,
-    "stock": 19
+    "stock": 19,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190016",
@@ -1627,7 +1843,9 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180659",
@@ -1640,7 +1858,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 43,
-    "stock": 22
+    "stock": 22,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190365K",
@@ -1664,7 +1884,9 @@
       "19.5": 3,
       "20": 2
     },
-    "stock": 31
+    "stock": 31,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180387",
@@ -1677,7 +1899,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 44,
-    "stock": 34
+    "stock": 34,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190562",
@@ -1693,7 +1917,9 @@
     "stockBySize": {
       "17.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177760",
@@ -1706,7 +1932,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 45,
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190064",
@@ -1728,7 +1956,9 @@
       "20.5": 2,
       "21": 1
     },
-    "stock": 20
+    "stock": 20,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178110",
@@ -1741,7 +1971,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 46,
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190555",
@@ -1763,7 +1995,9 @@
       "19.5": 2,
       "21": 1
     },
-    "stock": 14
+    "stock": 14,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177039",
@@ -1776,7 +2010,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 48,
-    "stock": 11
+    "stock": 11,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190546",
@@ -1789,7 +2025,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 88,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180635C",
@@ -1802,7 +2040,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 49,
-    "stock": 17
+    "stock": 17,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178850",
@@ -1823,7 +2063,9 @@
       "20": 2,
       "21": 3
     },
-    "stock": 13
+    "stock": 13,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180392",
@@ -1836,7 +2078,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 51,
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180381K",
@@ -1849,7 +2093,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 86,
-    "stock": 17
+    "stock": 17,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180668M",
@@ -1862,7 +2108,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 52,
-    "stock": 19
+    "stock": 19,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au077460F",
@@ -1886,7 +2134,9 @@
       "22.5": 2,
       "23": 2
     },
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180002",
@@ -1899,7 +2149,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 53,
-    "stock": 9
+    "stock": 9,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190125",
@@ -1922,7 +2174,9 @@
       "22.5": 4,
       "23": 1
     },
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177758",
@@ -1935,7 +2189,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 54,
-    "stock": 7
+    "stock": 7,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190119",
@@ -1956,7 +2212,9 @@
       "21.5": 2,
       "23": 2
     },
-    "stock": 11
+    "stock": 11,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179317",
@@ -1969,7 +2227,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 55,
-    "stock": 15
+    "stock": 15,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190124",
@@ -1985,7 +2245,9 @@
     "stockBySize": {
       "20.5": 2
     },
-    "stock": 2
+    "stock": 2,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180658",
@@ -1998,7 +2260,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 56,
-    "stock": 8
+    "stock": 8,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190126",
@@ -2018,7 +2282,9 @@
       "22": 1,
       "23.5": 2
     },
-    "stock": 7
+    "stock": 7,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179320",
@@ -2031,7 +2297,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 57,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190121",
@@ -2044,7 +2312,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 28,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180003",
@@ -2057,7 +2327,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 58,
-    "stock": 20
+    "stock": 20,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au1407386F",
@@ -2070,7 +2342,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 32,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179305G",
@@ -2083,7 +2357,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 59,
-    "stock": 27
+    "stock": 27,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au1409391F",
@@ -2107,7 +2383,9 @@
       "23.5": 1,
       "24": 1
     },
-    "stock": 25
+    "stock": 25,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au179305",
@@ -2120,7 +2398,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 60,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190122",
@@ -2138,7 +2418,9 @@
       "23": 1,
       "24": 2
     },
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au010102",
@@ -2151,7 +2433,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 61,
-    "stock": 26
+    "stock": 26,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177446F",
@@ -2174,7 +2458,9 @@
       "22.5": 1,
       "23": 1
     },
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185684",
@@ -2187,7 +2473,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 5,
-    "stock": 93
+    "stock": 93,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0407708",
@@ -2214,7 +2502,9 @@
       "21": 1,
       "21.5": 1
     },
-    "stock": 21
+    "stock": 21,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180570",
@@ -2227,7 +2517,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 9,
-    "stock": 12
+    "stock": 12,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0407709",
@@ -2260,7 +2552,9 @@
       "23.5": 1,
       "24": 1
     },
-    "stock": 24
+    "stock": 24,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180553",
@@ -2273,7 +2567,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 10,
-    "stock": 35
+    "stock": 35,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0407712",
@@ -2286,7 +2582,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 34,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0407397",
@@ -2299,7 +2597,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 11,
-    "stock": 72
+    "stock": 72,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0507708",
@@ -2322,7 +2622,9 @@
       "20": 1,
       "21.5": 1
     },
-    "stock": 9
+    "stock": 9,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0507397",
@@ -2335,7 +2637,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 15,
-    "stock": 102
+    "stock": 102,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au04007",
@@ -2366,7 +2670,9 @@
       "23.5": 1,
       "24": 1
     },
-    "stock": 21
+    "stock": 21,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177916",
@@ -2379,7 +2685,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 19,
-    "stock": 44
+    "stock": 44,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0307709",
@@ -2392,7 +2700,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 62,
-    "stock": 11
+    "stock": 11,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180381",
@@ -2405,7 +2715,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 26,
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0607708",
@@ -2418,7 +2730,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 71,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178923",
@@ -2431,7 +2745,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 36,
-    "stock": 10
+    "stock": 10,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0507709",
@@ -2444,7 +2760,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 77,
-    "stock": 0
+    "stock": 0,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180634C",
@@ -2457,7 +2775,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 39,
-    "stock": 26
+    "stock": 26,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au077454F",
@@ -2480,7 +2800,9 @@
       "22.5": 2,
       "23": 3
     },
-    "stock": 26
+    "stock": 26,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185807",
@@ -2493,7 +2815,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 47,
-    "stock": 21
+    "stock": 21,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au1407452F",
@@ -2512,7 +2836,9 @@
       "23.5": 1,
       "24": 1
     },
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185813",
@@ -2525,7 +2851,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 50,
-    "stock": 1
+    "stock": 1,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0507429F",
@@ -2542,7 +2870,9 @@
       "19.5": 2,
       "20.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177260F",
@@ -2567,7 +2897,9 @@
       "21.5": 7,
       "22": 6
     },
-    "stock": 100
+    "stock": 100,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178854",
@@ -2591,7 +2923,9 @@
       "21.5": 4,
       "22": 3
     },
-    "stock": 76
+    "stock": 76,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178846",
@@ -2614,7 +2948,9 @@
       "21": 2,
       "21.5": 3
     },
-    "stock": 31
+    "stock": 31,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au185800K",
@@ -2634,7 +2970,9 @@
       "20": 7,
       "20.5": 6
     },
-    "stock": 21
+    "stock": 21,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177249",
@@ -2658,7 +2996,9 @@
       "21.5": 2,
       "22": 1
     },
-    "stock": 26
+    "stock": 26,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178852",
@@ -2678,7 +3018,9 @@
       "19.5": 3,
       "20": 3
     },
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177249F",
@@ -2697,7 +3039,9 @@
       "21": 1,
       "22": 1
     },
-    "stock": 5
+    "stock": 5,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180503",
@@ -2718,7 +3062,9 @@
       "20": 4,
       "20.5": 3
     },
-    "stock": 15
+    "stock": 15,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au178648",
@@ -2741,7 +3087,9 @@
       "21": 1,
       "21.5": 1
     },
-    "stock": 19
+    "stock": 19,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190560",
@@ -2754,7 +3102,9 @@
     "isHit": true,
     "images": [],
     "sortOrder": 44,
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190502",
@@ -2779,7 +3129,9 @@
       "21.5": 1,
       "22": 1
     },
-    "stock": 50
+    "stock": 50,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190593",
@@ -2802,7 +3154,9 @@
       "20.5": 3,
       "21.5": 1
     },
-    "stock": 23
+    "stock": 23,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190503",
@@ -2826,7 +3180,9 @@
       "21": 2,
       "21.5": 2
     },
-    "stock": 48
+    "stock": 48,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au177260",
@@ -2850,7 +3206,9 @@
       "21.5": 4,
       "22": 1
     },
-    "stock": 47
+    "stock": 47,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190136",
@@ -2870,7 +3228,9 @@
       "19": 1,
       "21": 1
     },
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190039",
@@ -2888,7 +3248,9 @@
       "18": 1,
       "19": 1
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190599",
@@ -2907,7 +3269,9 @@
       "19.5": 4,
       "20": 5
     },
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190554",
@@ -2928,7 +3292,9 @@
       "18.5": 2,
       "19": 3
     },
-    "stock": 16
+    "stock": 16,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190070",
@@ -2950,7 +3316,9 @@
       "20.5": 1,
       "21": 3
     },
-    "stock": 17
+    "stock": 17,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au180590",
@@ -2969,7 +3337,9 @@
       "19": 1,
       "21.5": 1
     },
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190556",
@@ -2994,7 +3364,9 @@
       "20": 1,
       "20.5": 1
     },
-    "stock": 20
+    "stock": 20,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au0757755",
@@ -3017,7 +3389,9 @@
       "20": 3,
       "20.5": 1
     },
-    "stock": 22
+    "stock": 22,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190524",
@@ -3035,7 +3409,9 @@
       "17.5": 1,
       "19": 1
     },
-    "stock": 3
+    "stock": 3,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190018",
@@ -3053,7 +3429,9 @@
       "18": 2,
       "18.5": 2
     },
-    "stock": 6
+    "stock": 6,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190638",
@@ -3071,7 +3449,9 @@
       "18.5": 1,
       "20.5": 1
     },
-    "stock": 4
+    "stock": 4,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190137",
@@ -3090,7 +3470,9 @@
       "20": 3,
       "21": 2
     },
-    "stock": 11
+    "stock": 11,
+    "isNew": false,
+    "newSince": null
   },
   {
     "sku": "Au190552",
@@ -3114,6 +3496,8 @@
       "20.5": 3,
       "21": 2
     },
-    "stock": 30
+    "stock": 30,
+    "isNew": false,
+    "newSince": null
   }
 ]
