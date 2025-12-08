@@ -115,6 +115,64 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
+function resolveTypeLabel(product) {
+  const normalize = value => {
+    if (typeof value === "string") return value.toLowerCase();
+    if (value == null) return "";
+    return String(value).toLowerCase();
+  };
+
+  const title = normalize(product && product.title);
+  const category = normalize(product && product.category);
+
+  const rules = [
+    {
+      label: "Кольцо",
+      titleNeedle: "кольц",
+      categoryValues: ["rings"],
+      categoryNeedle: "кольц"
+    },
+    {
+      label: "Серьги",
+      titleNeedle: "серьг",
+      categoryValues: ["earrings"],
+      categoryNeedle: "серьг"
+    },
+    {
+      label: "Браслет",
+      titleNeedle: "браслет",
+      categoryValues: ["bracelets"],
+      categoryNeedle: "браслет"
+    },
+    {
+      label: "Подвеска",
+      titleNeedle: "подвес",
+      categoryValues: ["pendants"],
+      categoryNeedle: "подвес"
+    },
+    {
+      label: "Булавка",
+      titleNeedle: "булавк",
+      categoryValues: ["pins"],
+      categoryNeedle: "булавк"
+    }
+  ];
+
+  for (const rule of rules) {
+    if (title && title.includes(rule.titleNeedle)) return rule.label;
+  }
+
+  for (const rule of rules) {
+    const matchByCategoryValue =
+      category && rule.categoryValues && rule.categoryValues.includes(category);
+    const matchByCategoryNeedle =
+      category && rule.categoryNeedle && category.includes(rule.categoryNeedle);
+    if (matchByCategoryValue || matchByCategoryNeedle) return rule.label;
+  }
+
+  return "Модель";
+}
+
 function normalizeSizeKey(size) {
   if (size == null || size === "") return NO_SIZE_KEY;
   const str = String(size).trim().replace(",", ".");
@@ -953,14 +1011,7 @@ function renderProduct() {
 
   const cat = prod.category;
 
-  const TYPE_LABELS = {
-    rings: "Кольцо",
-    earrings: "Серьги",
-    bracelets: "Браслет",
-    pendants: "Подвеска",
-    pins: "Булавка"
-  };
-  const typeLabel = TYPE_LABELS[cat] || "Модель";
+  const typeLabel = resolveTypeLabel(prod);
 
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
@@ -1475,26 +1526,7 @@ function renderOrder() {
 
     let g = skuMap.get(it.sku);
     if (!g) {
-      let baseTitle;
-      switch (cat) {
-        case "rings":
-          baseTitle = "Кольцо";
-          break;
-        case "earrings":
-          baseTitle = "Серьги";
-          break;
-        case "bracelets":
-          baseTitle = "Браслет";
-          break;
-        case "pendants":
-          baseTitle = "Подвеска";
-          break;
-        case "pins":
-          baseTitle = "Булавка";
-          break;
-        default:
-          baseTitle = "Модель";
-      }
+      const baseTitle = resolveTypeLabel(prod);
 
       g = {
         sku: it.sku,
@@ -1831,7 +1863,8 @@ function renderOrderItem() {
     "https://picsum.photos/seed/placeholder/900";
   const avgW =
     items[0].avgWeight != null ? items[0].avgWeight : prod.avgWeight;
-  const title = prod.title || `Модель ${sku}`;
+  const titleLabel = resolveTypeLabel(prod);
+  const title = prod.title || `${titleLabel} ${sku}`;
 
   const cat = prod.category;
   const enforceStock =
