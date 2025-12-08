@@ -921,7 +921,7 @@ function renderProduct() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const inStockOnly = urlParams.get("inStock") === "1";
-  const enforceStock = filterState.inStock || inStockOnly;
+  const enforceStock = filterState.inStock === true || inStockOnly === true;
   const stockInfo = getStockMap(prod);
   const preferredFilterSize = getPreferredFilterSizeKey(prod, stockInfo);
   const cartQtyMap = getCartQtyBySize(prod.sku);
@@ -960,9 +960,6 @@ function renderProduct() {
   // Размерная логика: кольца — SIZES, браслеты — BRACELET_SIZES
   const baseSizes = isRingSized ? getStandardSizesForProduct(prod) : [];
   let sizes = baseSizes;
-  if (isRingSized && inStockOnly) {
-    sizes = baseSizes.filter(size => (getStockForSize(stockInfo, size) || 0) > 0);
-  }
   // нормализуем ключи размеров и убираем дубли
   sizes = Array.from(new Set(sizes.map(normalizeSizeKey)));
 
@@ -1148,12 +1145,13 @@ function renderProduct() {
             .map(s => {
               const key = normalizeSizeKey(s);
               const stockVal = getStockForSize(stockInfo, key);
-              const isZero =
+              const isZeroStock =
                 stockInfo.hasData &&
                 (stockVal == null || stockVal <= 0);
+              const shouldDisable = enforceStock && isZeroStock;
               const stockLabel = getSizeStockDisplay(stockInfo, key);
-              const rowClass = isZero ? "size-row no-stock" : "size-row";
-              const btnDis = isZero ? "disabled" : "";
+              const rowClass = shouldDisable ? "size-row no-stock" : "size-row";
+              const btnDis = shouldDisable ? "disabled" : "";
               return `
                 <div class="${rowClass}" data-size="${key}">
                   <div class="size-row-size">
@@ -1865,7 +1863,8 @@ function renderOrderItem() {
   const title = prod.title || `Модель ${sku}`;
 
   const cat = prod.category;
-  const enforceStock = filterState.inStock;
+  const enforceStock =
+    filterState.inStock === true || params.get("inStock") === "1";
 
   // НОВАЯ ЛОГИКА ❗
   // Размеров НЕТ — только серьги, подвески, булавки
