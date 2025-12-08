@@ -950,6 +950,8 @@ function renderProduct() {
 
   // Теперь и кольца, и браслеты считаем размерными
   const isRingSized = isRing || isBracelet;
+  const showInStockSizesOnly =
+    filterState.inStock === true && isRingSized;
 
   // Изделия без размеров — серьги / подвески / булавки
   const isNoSize =
@@ -958,8 +960,9 @@ function renderProduct() {
     cat === "pins";
 
   // Размерная логика: кольца — SIZES, браслеты — BRACELET_SIZES
-  const baseSizes = isRingSized ? getStandardSizesForProduct(prod) : [];
-  let sizes = baseSizes;
+  let sizes = isRingSized
+    ? getVisibleSizesForProduct(prod, stockInfo, showInStockSizesOnly)
+    : [];
   // нормализуем ключи размеров и убираем дубли
   sizes = Array.from(new Set(sizes.map(normalizeSizeKey)));
 
@@ -1865,6 +1868,9 @@ function renderOrderItem() {
   const cat = prod.category;
   const enforceStock =
     filterState.inStock === true || params.get("inStock") === "1";
+  const stockInfo = getStockMap(prod);
+  const showInStockSizeRows =
+    filterState.inStock === true && SIZE_FILTER_CATEGORIES.has(cat);
 
   // НОВАЯ ЛОГИКА ❗
   // Размеров НЕТ — только серьги, подвески, булавки
@@ -2003,7 +2009,15 @@ function renderOrderItem() {
     return { totalQty, totalWeight };
   }
 
-  const rowsHtml = items
+  const itemsForRender =
+    showInStockSizeRows && stockInfo.hasData
+      ? items.filter(it => {
+          const stockVal = getStockForSize(stockInfo, normalizeSizeKey(it.size));
+          return stockVal != null && stockVal > 0;
+        })
+      : items;
+
+  const rowsHtml = itemsForRender
     .map(it => {
       const size = it.size;
       const qty = it.qty || 0;
@@ -2024,7 +2038,7 @@ function renderOrderItem() {
     })
     .join("");
 
-  const summary = calcSummary(items);
+  const summary = calcSummary(itemsForRender);
   const totalLine =
     summary.totalWeight != null
       ? `Всего: ${summary.totalQty} шт · ~ ${formatWeight(summary.totalWeight)} г`
