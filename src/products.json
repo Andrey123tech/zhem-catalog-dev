@@ -890,16 +890,22 @@
   },
   {
     "sku": "Au180590",
-    "title": "Серьги Au180590",
-    "category": "earrings",
+    "title": "Кольцо Au180590",
+    "category": "rings",
     "metal": "Au585",
     "color": "rose",
-    "avgWeight": 3.523,
-    "sizes": null,
+    "avgWeight": 2.246,
+    "sizes": "ring",
     "isHit": true,
     "images": [],
     "sortOrder": 2,
-    "stock": 6,
+    "stockBySize": {
+      "18": 1,
+      "18.5": 1,
+      "19": 1,
+      "21.5": 1
+    },
+    "stock": 4,
     "isNew": false,
     "newSince": null
   },
@@ -1664,8 +1670,8 @@
     "images": [],
     "sortOrder": 5,
     "stock": 1,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au0407107",
@@ -1996,8 +2002,8 @@
       "21": 1
     },
     "stock": 14,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au177039",
@@ -3103,8 +3109,8 @@
     "images": [],
     "sortOrder": 5,
     "stock": 16,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au190502",
@@ -3155,8 +3161,8 @@
       "21.5": 1
     },
     "stock": 23,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au190503",
@@ -3270,8 +3276,8 @@
       "20": 5
     },
     "stock": 16,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au190554",
@@ -3293,8 +3299,8 @@
       "19": 3
     },
     "stock": 16,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au190070",
@@ -3317,27 +3323,6 @@
       "21": 3
     },
     "stock": 17,
-    "isNew": false,
-    "newSince": null
-  },
-  {
-    "sku": "Au180590",
-    "title": "Кольцо Au180590",
-    "category": "rings",
-    "metal": "Au585",
-    "color": "rose",
-    "avgWeight": 2.246,
-    "sizes": "ring",
-    "isHit": true,
-    "images": [],
-    "sortOrder": 2,
-    "stockBySize": {
-      "18": 1,
-      "18.5": 1,
-      "19": 1,
-      "21.5": 1
-    },
-    "stock": 4,
     "isNew": false,
     "newSince": null
   },
@@ -3365,8 +3350,8 @@
       "20.5": 1
     },
     "stock": 20,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au0757755",
@@ -3450,8 +3435,8 @@
       "20.5": 1
     },
     "stock": 4,
-    "isNew": false,
-    "newSince": null
+    "isNew": true,
+    "newSince": "2025-12-01"
   },
   {
     "sku": "Au190137",
