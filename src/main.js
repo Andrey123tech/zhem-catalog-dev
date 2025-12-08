@@ -19,6 +19,7 @@ const filterState = {
   inStock: false
 };
 
+const TODAY = new Date();
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
 let filterStateLoaded = false;
 const NON_SIZE_CATEGORIES = new Set(["earrings", "pendants", "pins"]);
@@ -140,6 +141,33 @@ function formatWeight(w) {
   if (w == null || isNaN(w)) return "";
   const num = Number(w);
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
+}
+
+function isPopular(product) {
+  if (!product) return false;
+  const hasSortOrder = product.sortOrder !== undefined && product.sortOrder !== null;
+  const sortVal = Number(product.sortOrder);
+  if (hasSortOrder && Number.isFinite(sortVal)) {
+    return sortVal >= 1 && sortVal <= 3;
+  }
+  return !hasSortOrder && product.isHit === true;
+}
+
+function isNewProduct(product, today) {
+  if (!product || product.isNew !== true) return false;
+  const now = today instanceof Date ? today : new Date(today);
+  if (!now || isNaN(now.getTime())) return false;
+
+  const since = product.newSince;
+  if (since == null || since === "") return true;
+
+  const sinceDate = new Date(since);
+  if (isNaN(sinceDate.getTime())) return false;
+
+  const diffDays =
+    (now.getTime() - sinceDate.getTime()) / (1000 * 60 * 60 * 24);
+
+  return Number.isFinite(diffDays) && diffDays <= 90;
 }
 
 // === Запасы (общее) ===
@@ -444,13 +472,11 @@ function applyCatalogFilters(list, category) {
   result = applyFiltersByWeight(result);
 
   if (filterState.isPopular) {
-    result = result.filter(
-      prod => typeof prod.sortOrder === "number" && prod.sortOrder <= 3
-    );
+    result = result.filter(prod => isPopular(prod));
   }
 
   if (filterState.isNew) {
-    result = result.filter(prod => prod.isNew === true);
+    result = result.filter(prod => isNewProduct(prod, TODAY));
   }
 
   return result;
