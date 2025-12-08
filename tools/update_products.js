@@ -50,16 +50,55 @@ function parseSizeValue(value) {
   return null;
 }
 
+function looksLikeSku(value) {
+  const s = String(value).trim();
+  return /^Au\d+/i.test(s);
+}
+
+function looksLikeSize(value) {
+  const s = String(value).replace(",", ".").trim();
+  return s !== "" && !Number.isNaN(parseFloat(s));
+}
+
+function detectCategoryFromSection(label) {
+  if (!label) return null;
+  const text = String(label).toLowerCase();
+
+  if (text.includes("кольц")) return "rings";
+  if (text.includes("подвес")) return "pendants";
+  if (text.includes("серьг")) return "earrings";
+  if (text.includes("браслет")) return "bracelets";
+  if (text.includes("булавк")) return "pins";
+
+  return null;
+}
+
+const categoryBySku = new Map();
+
 function parseStockTable(rows) {
   const result = {};
   let currentSku = null;
+  let currentCategory = null;
 
   for (const row of rows) {
     const col0 = row[0];
+    if (col0 == null || (typeof col0 === "string" && !col0.trim())) continue;
+    const label = typeof col0 === "string" ? col0.trim() : col0;
+
+    const isHeader =
+      typeof label === "string" &&
+      !looksLikeSku(label) &&
+      !looksLikeSize(label);
+    if (isHeader) {
+      const cat = detectCategoryFromSection(label);
+      currentCategory = cat || currentCategory;
+      currentSku = null;
+      continue;
+    }
 
     // row with SKU
-    if (typeof col0 === "string" && col0.startsWith("Au")) {
-      currentSku = col0.trim();
+    if (looksLikeSku(label)) {
+      currentSku = String(label).trim();
       const totalWeight = Number(row[1]) || 0;
       const totalQty = Number(row[2]) || 0;
 
@@ -69,8 +108,10 @@ function parseStockTable(rows) {
         sizes: {},
         sizeQtySum: 0,
         sizeWeightSum: 0,
-        hasSizes: false
+        hasSizes: false,
+        category: currentCategory || null
       };
+      if (currentCategory) categoryBySku.set(currentSku, currentCategory);
       continue;
     }
 
@@ -97,6 +138,9 @@ function parseStockTable(rows) {
       entry.totalWeight = entry.sizeWeightSum || entry.totalWeight;
     }
     if (!entry.hasSizes) entry.sizes = null;
+    delete entry.sizeQtySum;
+    delete entry.sizeWeightSum;
+    delete entry.hasSizes;
   });
 
   return result;
@@ -155,7 +199,7 @@ noveltySkus.forEach((sku) => {
     map.set(sku, {
       sku,
       title: `Модель ${sku}`,
-      category: detectCategory(sku, stockData[sku]),
+      category: resolveCategory(sku, stockData[sku]),
       metal: "Au585",
       color: "rose",
       avgWeight: -1,
@@ -174,31 +218,10 @@ noveltySkus.forEach((sku) => {
   if (!p.newSince) p.newSince = new Date().toISOString().slice(0, 10);
 });
 
-function detectCategory(sku, stockInfo, existingCategory) {
+function resolveCategory(sku, stockInfo, existingCategory) {
+  const fromStock = categoryBySku.get(sku) || stockInfo?.category;
+  if (fromStock) return fromStock;
   if (existingCategory) return existingCategory;
-
-  const sizeKeys = stockInfo?.sizes ? Object.keys(stockInfo.sizes) : [];
-  const hasSizes = sizeKeys.length > 0;
-
-  if (hasSizes) {
-    if (sku.startsWith("Au19")) return "rings";
-
-    if (sizeKeys.length === 1) {
-      const sizeNum = Number(sizeKeys[0]);
-      if (!Number.isNaN(sizeNum)) {
-        if (sizeNum >= 18 && sizeNum <= 21) return "rings";
-        if (sizeNum > 15) return "bracelets";
-      }
-    }
-
-    return "rings";
-  }
-
-  const lastChar = sku.slice(-1).toLowerCase();
-  if (lastChar === "r" || lastChar === "p") return "pendants";
-  if (lastChar === "m" || lastChar === "k" || lastChar === "s") return "earrings";
-  if (lastChar === "f") return "pins";
-
   return "unknown";
 }
 
@@ -208,7 +231,7 @@ for (const [sku, info] of Object.entries(stockData)) {
     map.set(sku, {
       sku,
       title: `Модель ${sku}`,
-      category: detectCategory(sku, info),
+      category: resolveCategory(sku, info),
       metal: "Au585",
       color: "rose",
       avgWeight: -1,
@@ -221,7 +244,7 @@ for (const [sku, info] of Object.entries(stockData)) {
 
   const p = map.get(sku);
 
-  p.category = detectCategory(sku, info, p.category);
+  p.category = resolveCategory(sku, info, p.category);
 
   p.stock = Number(info.totalQty) || 0;
   p.stockBySize = info.sizes || null;
