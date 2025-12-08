@@ -953,29 +953,14 @@ function renderProduct() {
 
   const cat = prod.category;
 
-  function resolveTypeLabel(cat) {
-  const c = (cat || "").toLowerCase().trim();
-
-  // Кольца: "rings" или любые варианты "Кольца", "Женские кольца" и т.п.
-  if (c === "rings" || c.includes("кольц")) return "Кольцо";
-
-  // Серьги
-  if (c === "earrings" || c.includes("серьг")) return "Серьги";
-
-  // Браслеты
-  if (c === "bracelets" || c.includes("браслет")) return "Браслет";
-
-  // Подвески
-  if (c === "pendants" || c.includes("подвес")) return "Подвеска";
-
-  // Булавки
-  if (c === "pins" || c.includes("булавк")) return "Булавка";
-
-  // На всякий пожарный
-  return "Модель";
-}
-
-const typeLabel = resolveTypeLabel(cat);
+  const TYPE_LABELS = {
+    rings: "Кольцо",
+    earrings: "Серьги",
+    bracelets: "Браслет",
+    pendants: "Подвеска",
+    pins: "Булавка"
+  };
+  const typeLabel = TYPE_LABELS[cat] || "Модель";
 
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
