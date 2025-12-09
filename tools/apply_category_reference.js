@@ -7,6 +7,10 @@ const ROOT = path.resolve(process.cwd());
 const FILE_PRODUCTS = path.join(ROOT, "src/products.json");
 const FILE_EXCEL = path.join(ROOT, "data/category_reference.xlsx");
 const FILE_SKU_MAP = path.join(ROOT, "data/sku_category_map.json");
+const FILE_MISSING = path.join(
+  ROOT,
+  "data/missing_in_category_reference.json"
+);
 
 const CATEGORY_BY_SHEET = {
   "Кольца": "rings",
@@ -94,6 +98,7 @@ function classify(headers, baseCategory) {
 
 function buildSkuInfo() {
   const skuInfo = {};
+  const excelSkus = new Set();
 
   workbook.SheetNames.forEach((sheetName) => {
     const baseCategory = CATEGORY_BY_SHEET[sheetName];
@@ -120,29 +125,38 @@ function buildSkuInfo() {
         }
 
         skuInfo[sku] = classify(headers, baseCategory);
+        excelSkus.add(sku);
       });
     }
   });
 
-  return skuInfo;
+  return { skuInfo, excelSkus };
 }
 
 function applyClassification() {
   const products = readJSON(FILE_PRODUCTS);
   const productMap = new Map(products.map((p) => [p.sku, p]));
 
-  const skuInfo = buildSkuInfo();
+  const { skuInfo, excelSkus } = buildSkuInfo();
   const updated = new Set();
+  const missingInExcel = [];
 
-  Object.entries(skuInfo).forEach(([sku, info]) => {
-    if (!productMap.has(sku)) return;
-    const product = productMap.get(sku);
-    product.category = info.category;
-    product.gender = info.gender;
-    product.ringType = info.ringType;
-    product.hasStones = info.hasStones;
-    product.stoneType = info.stoneType;
-    updated.add(sku);
+  products.forEach((product) => {
+    const sku = product.sku;
+    if (excelSkus.has(sku)) {
+      const info = skuInfo[sku];
+      product.category = info.category;
+      product.gender = info.gender;
+      product.ringType = info.ringType;
+      product.hasStones = info.hasStones;
+      product.stoneType = info.stoneType;
+      if ("unclassified" in product) delete product.unclassified;
+      updated.add(sku);
+    } else {
+      product.category = "other";
+      product.unclassified = true;
+      missingInExcel.push(sku);
+    }
   });
 
   writeJSON(FILE_PRODUCTS, products);
@@ -154,14 +168,18 @@ function applyClassification() {
   );
   writeJSON(FILE_SKU_MAP, sortedSkuInfo);
 
-  const missing = Object.keys(skuInfo).filter((sku) => !productMap.has(sku));
+  writeJSON(FILE_MISSING, {
+    count: missingInExcel.length,
+    skus: missingInExcel.sort()
+  });
 
   console.log("Total products in JSON:", products.length);
-  console.log("SKUs updated:", updated.size);
+  console.log("SKUs found in Excel:", excelSkus.size);
+  console.log("SKUs updated (matched in Excel):", updated.size);
   console.log(
-    "SKUs in Excel but not in products.json:",
-    missing.length,
-    missing.length ? `→ ${missing.join(", ")}` : ""
+    "SKUs in products.json but NOT in Excel:",
+    missingInExcel.length,
+    '→ See data/missing_in_category_reference.json'
   );
 }
 
