@@ -1,16 +1,11 @@
-import fs from "fs";
-import path from "path";
-import xlsx from "xlsx";
+const fs = require("fs");
+const path = require("path");
+const xlsx = require("xlsx");
 
 const ROOT = path.resolve(process.cwd());
-
 const FILE_PRODUCTS = path.join(ROOT, "src/products.json");
 const FILE_EXCEL = path.join(ROOT, "data/category_reference.xlsx");
 const FILE_SKU_MAP = path.join(ROOT, "data/sku_category_map.json");
-const FILE_MISSING = path.join(
-  ROOT,
-  "data/missing_in_category_reference.json"
-);
 
 const CATEGORY_BY_SHEET = {
   "Кольца": "rings",
@@ -22,42 +17,47 @@ const CATEGORY_BY_SHEET = {
   "Броши": "brooches"
 };
 
-const readJSON = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
-const writeJSON = (file, obj) =>
-  fs.writeFileSync(file, JSON.stringify(obj, null, 2), "utf8");
+const normalizeText = (value) => {
+  if (value === null || value === undefined) return "";
+  return String(value).trim();
+};
 
-const workbook = xlsx.readFile(FILE_EXCEL);
+const isCyrillicString = (value) =>
+  typeof value === "string" && /[А-Яа-яЁё]/.test(value);
 
-function looksLikeSku(value) {
-  if (value == null) return false;
-  const text = String(value).trim();
+const isSkuCandidate = (value) => {
+  if (value === null || value === undefined) return false;
+  const text = normalizeText(value);
   if (!text) return false;
-  return /^Au\S*/i.test(text);
-}
+  if (isCyrillicString(text)) return false;
+  return true;
+};
 
-function normalizeMatrix(ws) {
+const readJSON = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
+const writeJSON = (file, data) =>
+  fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+
+function normalizeRows(ws) {
   const rows = xlsx.utils.sheet_to_json(ws, { header: 1, defval: null });
-
   let maxCols = 0;
   rows.forEach((r) => {
-    if (r.length > maxCols) maxCols = r.length;
+    if (r && r.length > maxCols) maxCols = r.length;
   });
+
   rows.forEach((r) => {
-    for (let i = 0; i < maxCols; i += 1) {
-      if (!(i in r)) r[i] = null;
+    if (!r) return;
+    for (let c = 0; c < maxCols; c += 1) {
+      if (typeof r[c] === "undefined") r[c] = null;
     }
   });
 
   const merges = ws["!merges"] || [];
   merges.forEach((merge) => {
-    const value =
-      rows[merge.s.r] && merge.s.c < rows[merge.s.r].length
-        ? rows[merge.s.r][merge.s.c]
-        : null;
+    const value = rows[merge.s.r]?.[merge.s.c] ?? null;
     for (let r = merge.s.r; r <= merge.e.r; r += 1) {
       for (let c = merge.s.c; c <= merge.e.c; c += 1) {
         if (!rows[r]) rows[r] = [];
-        if (rows[r][c] == null) rows[r][c] = value;
+        if (rows[r][c] === null) rows[r][c] = value;
       }
     }
   });
@@ -65,122 +65,185 @@ function normalizeMatrix(ws) {
   return rows;
 }
 
-function detectHeaderDepth(rows) {
-  for (let i = 0; i < rows.length; i += 1) {
-    if (rows[i].some((cell) => looksLikeSku(cell))) return i;
-  }
-  return rows.length;
-}
-
-function classify(headers, baseCategory) {
-  const info = {
-    category: baseCategory,
+function ringColumnMeta(rows, colIndex) {
+  const meta = {
+    category: "rings",
     gender: null,
     ringType: null,
     hasStones: null,
     stoneType: null
   };
 
-  headers.forEach((raw) => {
-    const text = String(raw || "").toLowerCase();
-    if (text.includes("женск")) info.gender = "female";
-    if (text.includes("мужск")) info.gender = "male";
-    if (text.includes("обручаль")) info.ringType = "wedding";
-    if (text.includes("с камн")) info.hasStones = true;
-    if (text.includes("без камн")) info.hasStones = false;
-    if (text.includes("фианит")) info.stoneType = "cubic";
-    if (text.includes("брилл")) info.stoneType = "diamond";
-    if (text.includes("полудраг")) info.stoneType = "semi";
-  });
+  const header2 = normalizeText(rows[1]?.[colIndex]).toLowerCase();
+  const header3 = normalizeText(rows[2]?.[colIndex]).toLowerCase();
+  const header4Raw = rows[3]?.[colIndex];
+  const header4 = normalizeText(header4Raw).toLowerCase();
 
-  return info;
+  if (header2.includes("женск")) meta.gender = "female";
+  if (header2.includes("мужск")) meta.gender = "male";
+  if (header2.includes("обручаль")) meta.gender = "wedding";
+
+  if (header3.includes("обручаль")) meta.ringType = "wedding";
+  if (header3.includes("печат")) meta.ringType = "signet";
+
+  if (header3.includes("без камн")) meta.hasStones = false;
+  if (header3.includes("с камн")) meta.hasStones = true;
+
+  const stoneHeader =
+    (typeof header4Raw === "string" && isCyrillicString(header4Raw)) ||
+    /фианит|брилл|полудр/i.test(header4)
+      ? header4
+      : "";
+
+  if (stoneHeader.includes("фианит")) meta.stoneType = "cubic";
+  if (stoneHeader.includes("брилл")) meta.stoneType = "diamond";
+  if (stoneHeader.includes("полудр")) meta.stoneType = "semi";
+
+  return meta;
 }
 
-function buildSkuInfo() {
-  const skuInfo = {};
+function simpleColumnMeta(headerText, category) {
+  const lower = normalizeText(headerText).toLowerCase();
+  const meta = {
+    category,
+    gender: null,
+    ringType: null,
+    hasStones: null,
+    stoneType: null
+  };
+
+  if (lower.includes("с камн")) meta.hasStones = true;
+  else if (lower.includes("без камн")) meta.hasStones = false;
+
+  return meta;
+}
+
+function buildSkuMetaFromExcel() {
+  const workbook = xlsx.readFile(FILE_EXCEL);
+  const skuMeta = {};
   const excelSkus = new Set();
 
   workbook.SheetNames.forEach((sheetName) => {
-    const baseCategory = CATEGORY_BY_SHEET[sheetName];
-    if (!baseCategory) return;
+    const category = CATEGORY_BY_SHEET[sheetName];
+    if (!category) return;
 
     const ws = workbook.Sheets[sheetName];
-    const matrix = normalizeMatrix(ws);
-    const headerDepth = detectHeaderDepth(matrix);
+    if (!ws) return;
+    const rows = normalizeRows(ws);
+    const maxCols = rows.reduce(
+      (max, r) => (r && r.length > max ? r.length : max),
+      0
+    );
 
-    for (let r = headerDepth; r < matrix.length; r += 1) {
-      const row = matrix[r];
-      if (!row) continue;
+    if (category === "rings") {
+      const columnMeta = [];
+      for (let c = 0; c < maxCols; c += 1) {
+        columnMeta[c] = ringColumnMeta(rows, c);
+      }
 
-      row.forEach((cell, c) => {
-        if (!looksLikeSku(cell)) return;
-        const sku = String(cell).trim();
-        const headers = [];
+      for (let r = 3; r < rows.length; r += 1) {
+        const row = rows[r];
+        if (!row) continue;
 
-        for (let hr = 0; hr < headerDepth; hr += 1) {
-          const headerCell = matrix[hr]?.[c];
-          if (headerCell != null && String(headerCell).trim() !== "") {
-            headers.push(headerCell);
-          }
+        for (let c = 0; c < maxCols; c += 1) {
+          const cell = row[c];
+          if (!isSkuCandidate(cell)) continue;
+          const sku = normalizeText(cell);
+          if (!sku) continue;
+          skuMeta[sku] = columnMeta[c];
+          excelSkus.add(sku);
         }
+      }
+      return;
+    }
 
-        skuInfo[sku] = classify(headers, baseCategory);
+    const headerRow = rows[1] || [];
+    const columnMeta = [];
+    for (let c = 0; c < maxCols; c += 1) {
+      columnMeta[c] = simpleColumnMeta(headerRow[c], category);
+    }
+
+    for (let r = 2; r < rows.length; r += 1) {
+      const row = rows[r];
+      if (!row) continue;
+      for (let c = 0; c < maxCols; c += 1) {
+        const cell = row[c];
+        if (!isSkuCandidate(cell)) continue;
+        const sku = normalizeText(cell);
+        if (!sku) continue;
+        skuMeta[sku] = columnMeta[c];
         excelSkus.add(sku);
-      });
+      }
     }
   });
 
-  return { skuInfo, excelSkus };
+  return { skuMeta, excelSkus };
 }
 
-function applyClassification() {
-  const products = readJSON(FILE_PRODUCTS);
-  const productMap = new Map(products.map((p) => [p.sku, p]));
+function applyMetaToProducts(products, skuMeta) {
+  const excelSkus = new Set(Object.keys(skuMeta));
+  const missingInProducts = [];
+  const unusedInExcel = [];
+  let updatedCount = 0;
 
-  const { skuInfo, excelSkus } = buildSkuInfo();
-  const updated = new Set();
-  const missingInExcel = [];
+  const productSkuSet = new Set();
 
   products.forEach((product) => {
-    const sku = product.sku;
-    if (excelSkus.has(sku)) {
-      const info = skuInfo[sku];
-      product.category = info.category;
-      product.gender = info.gender;
-      product.ringType = info.ringType;
-      product.hasStones = info.hasStones;
-      product.stoneType = info.stoneType;
-      if ("unclassified" in product) delete product.unclassified;
-      updated.add(sku);
+    const key = normalizeText(product.sku);
+    productSkuSet.add(key);
+    const meta = skuMeta[key];
+
+    if (meta) {
+      product.category = meta.category;
+      if (meta.category === "rings") {
+        product.gender = meta.gender;
+        product.ringType = meta.ringType;
+        product.hasStones = meta.hasStones;
+        product.stoneType = meta.stoneType;
+      } else {
+        if (Object.prototype.hasOwnProperty.call(meta, "hasStones")) {
+          product.hasStones = meta.hasStones;
+        }
+      }
+      updatedCount += 1;
     } else {
-      product.category = "other";
-      product.unclassified = true;
-      missingInExcel.push(sku);
+      unusedInExcel.push(key);
     }
   });
 
-  writeJSON(FILE_PRODUCTS, products);
-
-  const sortedSkuInfo = Object.fromEntries(
-    Object.keys(skuInfo)
-      .sort()
-      .map((sku) => [sku, skuInfo[sku]])
-  );
-  writeJSON(FILE_SKU_MAP, sortedSkuInfo);
-
-  writeJSON(FILE_MISSING, {
-    count: missingInExcel.length,
-    skus: missingInExcel.sort()
+  excelSkus.forEach((sku) => {
+    if (!productSkuSet.has(sku)) {
+      missingInProducts.push(sku);
+    }
   });
 
-  console.log("Total products in JSON:", products.length);
-  console.log("SKUs found in Excel:", excelSkus.size);
-  console.log("SKUs updated (matched in Excel):", updated.size);
+  return { updatedCount, missingInProducts, unusedInExcel };
+}
+
+function main() {
+  const products = readJSON(FILE_PRODUCTS);
+  const { skuMeta, excelSkus } = buildSkuMetaFromExcel();
+  const { updatedCount, missingInProducts, unusedInExcel } =
+    applyMetaToProducts(products, skuMeta);
+
+  writeJSON(FILE_PRODUCTS, products);
+  writeJSON(FILE_SKU_MAP, {
+    totalProducts: products.length,
+    excelSkuCount: excelSkus.size,
+    updatedProducts: updatedCount,
+    missingInProducts,
+    unusedInExcel
+  });
+
+  console.log(`Всего моделей: ${products.length}`);
+  console.log(`SKU в Excel: ${excelSkus.size}`);
+  console.log(`Обновлено моделей: ${updatedCount}`);
   console.log(
-    "SKUs in products.json but NOT in Excel:",
-    missingInExcel.length,
-    '→ See data/missing_in_category_reference.json'
+    `В Excel есть, но нет в products.json: ${missingInProducts.length}`
+  );
+  console.log(
+    `В products.json есть, но нет в Excel: ${unusedInExcel.length}`
   );
 }
 
-applyClassification();
+main();
