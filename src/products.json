@@ -15,7 +15,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0237165",
@@ -31,7 +35,11 @@
     "stock": 20,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177628",
@@ -49,7 +57,11 @@
     },
     "stock": 18,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180572p",
@@ -65,7 +77,11 @@
     "stock": 43,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178175",
@@ -81,7 +97,11 @@
     "stock": 17,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190131",
@@ -124,7 +144,11 @@
     "stock": 21,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177785",
@@ -142,7 +166,11 @@
     },
     "stock": 17,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180574p",
@@ -158,7 +186,11 @@
     "stock": 45,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178176",
@@ -174,7 +206,11 @@
     "stock": 6,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190023",
@@ -209,7 +245,11 @@
     "stock": 34,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177602",
@@ -227,7 +267,11 @@
     },
     "stock": 13,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180573p",
@@ -243,7 +287,11 @@
     "stock": 38,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178174",
@@ -259,7 +307,11 @@
     "stock": 71,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185800Kk",
@@ -283,7 +335,11 @@
     },
     "stock": 38,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180007",
@@ -299,7 +355,11 @@
     "stock": 31,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177787",
@@ -317,7 +377,11 @@
     },
     "stock": 12,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178604",
@@ -333,7 +397,11 @@
     "stock": 8,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190059",
@@ -352,7 +420,11 @@
     },
     "stock": 6,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0237162",
@@ -368,7 +440,11 @@
     "stock": 10,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177601",
@@ -386,7 +462,11 @@
     },
     "stock": 12,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178605",
@@ -402,7 +482,11 @@
     "stock": 5,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190037",
@@ -421,7 +505,11 @@
     "stockBySize": {
       "20": 1,
       "18.5": 1
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180483",
@@ -437,7 +525,11 @@
     "stock": 14,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177630",
@@ -455,7 +547,11 @@
     },
     "stock": 7,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180575p",
@@ -471,7 +567,11 @@
     "stock": 9,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190020",
@@ -507,7 +607,11 @@
     "stock": 18,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177623",
@@ -525,7 +629,11 @@
     },
     "stock": 6,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180555",
@@ -541,7 +649,11 @@
     "stock": 5,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190024",
@@ -572,7 +684,11 @@
     "stock": 12,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0757705",
@@ -590,7 +706,11 @@
     },
     "stock": 13,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180405p",
@@ -606,7 +726,11 @@
     "stock": 22,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190548",
@@ -625,7 +749,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au077167",
@@ -641,7 +769,11 @@
     "stock": 35,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179001",
@@ -659,7 +791,11 @@
     },
     "stock": 7,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177731",
@@ -675,7 +811,11 @@
     "stock": 72,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190056",
@@ -693,7 +833,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au016167",
@@ -709,7 +853,11 @@
     "stock": 12,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177834",
@@ -727,7 +875,11 @@
     "newSince": null,
     "stockBySize": {
       "180": 5
-    }
+    },
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180562p",
@@ -743,7 +895,11 @@
     "stock": 14,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190573",
@@ -784,7 +940,11 @@
     "stock": 34,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177622",
@@ -802,7 +962,11 @@
     },
     "stock": 8,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190314p",
@@ -818,7 +982,11 @@
     "stock": 113,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190567",
@@ -841,7 +1009,11 @@
     },
     "stock": 21,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0237210",
@@ -857,7 +1029,11 @@
     "stock": 5,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177621",
@@ -875,7 +1051,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180634p",
@@ -891,7 +1071,11 @@
     "stock": 35,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190026",
@@ -909,12 +1093,16 @@
     },
     "stock": -1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180590",
     "title": "Кольцо Au180590",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.246,
@@ -931,7 +1119,11 @@
     },
     "stock": 13,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177620",
@@ -962,7 +1154,11 @@
     "stock": 21,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190132",
@@ -980,7 +1176,11 @@
     "newSince": null,
     "stockBySize": {
       "17.5": 3
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au080167",
@@ -996,7 +1196,11 @@
     "stock": 20,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177629",
@@ -1014,7 +1218,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190156",
@@ -1035,7 +1243,11 @@
     },
     "stock": 6,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0757719",
@@ -1051,7 +1263,11 @@
     "stock": 17,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177617",
@@ -1069,7 +1285,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190144",
@@ -1107,7 +1327,11 @@
     "stock": 2,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180602",
@@ -1153,7 +1377,11 @@
     "stock": 13,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180600",
@@ -1202,7 +1430,11 @@
     "stock": 40,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0657706",
@@ -1220,7 +1452,11 @@
     },
     "stock": 11,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190542",
@@ -1241,7 +1477,11 @@
     },
     "stock": 6,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au179329",
@@ -1257,7 +1497,11 @@
     "stock": 9,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178984",
@@ -1275,7 +1519,11 @@
     },
     "stock": 7,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190569",
@@ -1295,7 +1543,11 @@
       "18": 1,
       "17.5": 2,
       "19.5": 1
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0407756",
@@ -1311,7 +1563,11 @@
     "stock": 23,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179006",
@@ -1329,7 +1585,11 @@
     },
     "stock": 5,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190155",
@@ -1367,7 +1627,11 @@
     "stock": 16,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190174",
@@ -1413,7 +1677,11 @@
     "stock": 37,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178985",
@@ -1431,7 +1699,11 @@
     },
     "stock": 5,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190543",
@@ -1449,7 +1721,11 @@
     "newSince": null,
     "stockBySize": {
       "20.5": 2
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0357734",
@@ -1465,7 +1741,11 @@
     "stock": 13,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177554",
@@ -1483,7 +1763,11 @@
     },
     "stock": 7,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190572",
@@ -1508,7 +1792,11 @@
     },
     "stock": 35,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au179349",
@@ -1524,7 +1812,11 @@
     "stock": 16,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178998",
@@ -1542,7 +1834,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190129",
@@ -1560,7 +1856,11 @@
     "newSince": null,
     "stockBySize": {
       "18": 1
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185853",
@@ -1593,7 +1893,11 @@
     },
     "stock": 4,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190133",
@@ -1611,7 +1915,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0207109",
@@ -1627,7 +1935,11 @@
     "stock": 29,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0357716",
@@ -1645,7 +1957,11 @@
     },
     "stock": 9,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190159",
@@ -1676,7 +1992,11 @@
     "stock": 14,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190140",
@@ -1710,7 +2030,11 @@
     "stock": 19,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190561",
@@ -1728,7 +2052,11 @@
     "newSince": "2025-12-01",
     "stockBySize": {
       "21": 1
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0407107",
@@ -1744,7 +2072,11 @@
     "stock": 9,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190134",
@@ -1764,7 +2096,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180402",
@@ -1780,7 +2116,11 @@
     "stock": 18,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190052",
@@ -1814,7 +2154,11 @@
     "stock": 25,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190014",
@@ -1833,7 +2177,11 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180653",
@@ -1849,7 +2197,11 @@
     "stock": 14,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190163K",
@@ -1873,7 +2225,11 @@
     },
     "stock": 15,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0307108",
@@ -1889,7 +2245,11 @@
     "stock": 17,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190016",
@@ -1923,7 +2283,11 @@
     "stock": 21,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190365K",
@@ -1965,7 +2329,11 @@
     "stock": 34,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190562",
@@ -1999,7 +2367,11 @@
     "stock": 15,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190064",
@@ -2022,7 +2394,11 @@
     },
     "stock": 12,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178110",
@@ -2038,7 +2414,11 @@
     "stock": 15,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190555",
@@ -2057,7 +2437,11 @@
     },
     "stock": 2,
     "isNew": true,
-    "newSince": "2025-12-01"
+    "newSince": "2025-12-01",
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au177039",
@@ -2073,7 +2457,11 @@
     "stock": 11,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190546",
@@ -2104,7 +2492,11 @@
     "stock": 16,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178850",
@@ -2126,7 +2518,11 @@
     },
     "stock": 10,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180392",
@@ -2142,7 +2538,11 @@
     "stock": 3,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180381K",
@@ -2166,7 +2566,11 @@
       "18.5": 3,
       "20.5": 2,
       "19.5": 1
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180668M",
@@ -2182,7 +2586,11 @@
     "stock": 18,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077460F",
@@ -2208,7 +2616,11 @@
     },
     "stock": 23,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180002",
@@ -2224,7 +2636,11 @@
     "stock": 9,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190125",
@@ -2265,7 +2681,11 @@
     "stock": 7,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190119",
@@ -2284,7 +2704,11 @@
     },
     "stock": 2,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179317",
@@ -2300,7 +2724,11 @@
     "stock": 15,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190124",
@@ -2318,7 +2746,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180658",
@@ -2334,7 +2766,11 @@
     "stock": 8,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190126",
@@ -2372,7 +2808,11 @@
     "stock": 19,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190121",
@@ -2403,7 +2843,11 @@
     "stock": 20,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au1407386F",
@@ -2434,7 +2878,11 @@
     "stock": 25,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au1409391F",
@@ -2459,7 +2907,11 @@
     },
     "stock": 13,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179305",
@@ -2510,7 +2962,11 @@
     "stock": 25,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177446F",
@@ -2536,7 +2992,11 @@
     },
     "stock": 42,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185684",
@@ -2552,7 +3012,11 @@
     "stock": 89,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0407708",
@@ -2578,7 +3042,11 @@
     },
     "stock": 25,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180570",
@@ -2594,7 +3062,11 @@
     "stock": 12,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0407709",
@@ -2629,7 +3101,11 @@
     },
     "stock": 20,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180553",
@@ -2645,7 +3121,11 @@
     "stock": 20,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0407712",
@@ -2676,7 +3156,11 @@
     "stock": 70,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0507708",
@@ -2701,7 +3185,11 @@
     },
     "stock": 9,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0507397",
@@ -2717,7 +3205,11 @@
     "stock": 102,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au04007",
@@ -2748,7 +3240,11 @@
     },
     "stock": 17,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177916",
@@ -2764,7 +3260,11 @@
     "stock": 147,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0307709",
@@ -2787,7 +3287,11 @@
       "21": 2,
       "15.5": 2,
       "17.5": 2
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180381",
@@ -2803,7 +3307,11 @@
     "stock": 5,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0607708",
@@ -2834,7 +3342,11 @@
     "stock": 9,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0507709",
@@ -2865,7 +3377,11 @@
     "stock": 26,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au077454F",
@@ -2890,7 +3406,11 @@
     },
     "stock": 20,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185807",
@@ -2906,7 +3426,11 @@
     "stock": 15,
     "isNew": false,
     "newSince": null,
-    "stockBySize": {}
+    "stockBySize": {},
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au1407452F",
@@ -2929,7 +3453,11 @@
     },
     "stock": 8,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185813",
@@ -2962,7 +3490,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au177260F",
@@ -2990,7 +3522,11 @@
     },
     "stock": 113,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178854",
@@ -3014,7 +3550,11 @@
     },
     "stock": 59,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178846",
@@ -3039,7 +3579,11 @@
     },
     "stock": 24,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185800K",
@@ -3066,7 +3610,11 @@
     },
     "stock": 45,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177249",
@@ -3088,7 +3636,11 @@
     },
     "stock": 11,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178852",
@@ -3114,7 +3666,11 @@
     },
     "stock": 25,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177249F",
@@ -3132,7 +3688,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180503",
@@ -3153,7 +3713,11 @@
     },
     "stock": 7,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178648",
@@ -3179,7 +3743,11 @@
     },
     "stock": 17,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190560",
@@ -3202,7 +3770,11 @@
       "16.5": 2,
       "17.5": 2,
       "18.5": 2
-    }
+    },
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190502",
@@ -3227,7 +3799,11 @@
     },
     "stock": 41,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190593",
@@ -3245,7 +3821,11 @@
     },
     "stock": 3,
     "isNew": true,
-    "newSince": "2025-12-01"
+    "newSince": "2025-12-01",
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190503",
@@ -3270,7 +3850,11 @@
     },
     "stock": 30,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177260",
@@ -3296,7 +3880,11 @@
     },
     "stock": 41,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190136",
@@ -3357,7 +3945,11 @@
     },
     "stock": 2,
     "isNew": true,
-    "newSince": "2025-12-01"
+    "newSince": "2025-12-01",
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190554",
@@ -3398,7 +3990,11 @@
     },
     "stock": 2,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190556",
@@ -3420,7 +4016,11 @@
     },
     "stock": 9,
     "isNew": true,
-    "newSince": "2025-12-01"
+    "newSince": "2025-12-01",
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0757755",
@@ -3445,7 +4045,11 @@
     },
     "stock": 19,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190524",
@@ -3485,7 +4089,11 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190638",
@@ -3528,7 +4136,11 @@
     },
     "stock": 12,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190552",
@@ -3551,1747 +4163,2331 @@
     },
     "stock": 11,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179347",
     "title": "Модель Au179347",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.505,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 28
+    "stock": 28,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180504M",
     "title": "Модель Au180504M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.495,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 21
+    "stock": 21,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177809",
     "title": "Модель Au177809",
-    "category": "bracelets",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.135,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 17
+    "stock": 17,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180388",
     "title": "Модель Au180388",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.15,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 17
+    "stock": 17,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au20020",
     "title": "Модель Au20020",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.946,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 17
+    "stock": 17,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180453M",
     "title": "Модель Au180453M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.853,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 16
+    "stock": 16,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077209",
     "title": "Модель Au077209",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.023,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 15
+    "stock": 15,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180657",
     "title": "Модель Au180657",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.631,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 15
+    "stock": 15,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180521",
     "title": "Модель Au180521",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.688,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180400",
     "title": "Модель Au180400",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.706,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077709",
     "title": "Модель Au077709",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.979,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178621",
     "title": "Модель Au178621",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.451,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180386",
     "title": "Модель Au180386",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.458,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180668",
     "title": "Модель Au180668",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.783,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au020533",
     "title": "Модель Au020533",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.384,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 11
+    "stock": 11,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0507202",
     "title": "Модель Au0507202",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.589,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 11
+    "stock": 11,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177808",
     "title": "Модель Au177808",
-    "category": "bracelets",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.52,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180384",
     "title": "Модель Au180384",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.521,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185853г",
     "title": "Модель Au185853г",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.525,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au020622",
     "title": "Модель Au020622",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.294,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au050535",
     "title": "Модель Au050535",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.158,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179319",
     "title": "Модель Au179319",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.506,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190645C",
     "title": "Модель Au190645C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.898,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178934",
     "title": "Модель Au178934",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.041,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 8
+    "stock": 8,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180493M",
     "title": "Модель Au180493M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.531,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 8
+    "stock": 8,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178208",
     "title": "Модель Au178208",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.796,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190208",
     "title": "Модель Au190208",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.684,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178209",
     "title": "Модель Au178209",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.815,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 6
+    "stock": 6,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178465",
     "title": "Модель Au178465",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.573,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 6
+    "stock": 6,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180447M",
     "title": "Модель Au180447M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.84,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 6
+    "stock": 6,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185717",
     "title": "Модель Au185717",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.018,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 6
+    "stock": 6,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185803",
     "title": "Модель Au185803",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.878,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 6
+    "stock": 6,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0507103",
     "title": "Модель Au0507103",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.03,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178206",
     "title": "Модель Au178206",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.854,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180450M",
     "title": "Модель Au180450M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.146,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180484",
     "title": "Модель Au180484",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 6.88,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180652",
     "title": "Модель Au180652",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.612,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185660",
     "title": "Модель Au185660",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.71,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185800C",
     "title": "Модель Au185800C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.654,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190274",
     "title": "Модель Au190274",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.68,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0307203",
     "title": "Модель Au0307203",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.423,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180520",
     "title": "Модель Au180520",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.718,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180527",
     "title": "Модель Au180527",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.357,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au0407204",
     "title": "Модель Au0407204",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.407,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178073",
     "title": "Модель Au178073",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.093,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180456M",
     "title": "Модель Au180456M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.183,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180493",
     "title": "Модель Au180493",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.77,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180528",
     "title": "Модель Au180528",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.543,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190578",
     "title": "Модель Au190578",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.823,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190627",
     "title": "Модель Au190627",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.753,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190644C",
     "title": "Модель Au190644C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.437,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178656",
     "title": "Модель Au178656",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.82,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178657",
     "title": "Модель Au178657",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.91,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179318",
     "title": "Модель Au179318",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.58,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185714",
     "title": "Модель Au185714",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.49,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190576",
     "title": "Модель Au190576",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.29,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190620",
     "title": "Модель Au190620",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.675,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190633",
     "title": "Модель Au190633",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.56,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au030621",
     "title": "Модель Au030621",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.67,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077100",
     "title": "Модель Au077100",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.3,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077416",
     "title": "Модель Au077416",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.62,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177251",
     "title": "Модель Au177251",
-    "category": "bracelets",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.31,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178221",
     "title": "Модель Au178221",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.23,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178658",
     "title": "Модель Au178658",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.95,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179346",
     "title": "Модель Au179346",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.53,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179365",
     "title": "Модель Au179365",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.71,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180385",
     "title": "Модель Au180385",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.76,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180391",
     "title": "Модель Au180391",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.73,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180398",
     "title": "Модель Au180398",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.73,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180451M",
     "title": "Модель Au180451M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.65,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180454M",
     "title": "Модель Au180454M",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.94,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185666",
     "title": "Модель Au185666",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.14,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185819",
     "title": "Модель Au185819",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.49,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190007C",
     "title": "Модель Au190007C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190515M",
     "title": "Модель Au190515M",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.78,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190591C",
     "title": "Модель Au190591C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.02,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190631",
     "title": "Модель Au190631",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.25,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au20010",
     "title": "Модель Au20010",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.91,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178207",
     "title": "Модель Au178207",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": "?",
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": -1
+    "stock": -1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185694",
     "title": "Модель Au185694",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.75,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 29
+    "stock": 29,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185700",
     "title": "Модель Au185700",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.177,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185983C",
     "title": "Модель Au185983C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.313,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 19
+    "stock": 19,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185535",
     "title": "Модель Au185535",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.389,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 15
+    "stock": 15,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185699",
     "title": "Модель Au185699",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.487,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au050522",
     "title": "Модель Au050522",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.444,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180403",
     "title": "Модель Au180403",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.763,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190170",
     "title": "Модель Au190170",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.702,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185696",
     "title": "Модель Au185696",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.512,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185825",
     "title": "Модель Au185825",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.145,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 11
+    "stock": 11,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au030522",
     "title": "Модель Au030522",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.086,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au040522",
     "title": "Модель Au040522",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.306,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185800Ck",
     "title": "Модель Au185800Ck",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.386,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190171",
     "title": "Модель Au190171",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.211,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0507397c",
     "title": "Модель Au0507397c",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.39,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185810",
     "title": "Модель Au185810",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.868,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190272",
     "title": "Модель Au190272",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.996,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190351C",
     "title": "Модель Au190351C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.832,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185852г",
     "title": "Модель Au185852г",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.8,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190577",
     "title": "Модель Au190577",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.647,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190632",
     "title": "Модель Au190632",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.93,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190701C",
     "title": "Модель Au190701C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.248,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au20050",
     "title": "Модель Au20050",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.02,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180001",
     "title": "Модель Au180001",
-    "category": "pendants",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.467,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185753C",
     "title": "Модель Au185753C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.44,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185857",
     "title": "Модель Au185857",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.507,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185902C",
     "title": "Модель Au185902C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.22,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190184",
     "title": "Модель Au190184",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.33,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0307349",
     "title": "Модель Au0307349",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.7,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185695",
     "title": "Модель Au185695",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.54,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185697",
     "title": "Модель Au185697",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.855,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185979C",
     "title": "Модель Au185979C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.98,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190185",
     "title": "Модель Au190185",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.515,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190288",
     "title": "Модель Au190288",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.565,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190685C",
     "title": "Модель Au190685C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.255,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au0407349",
     "title": "Модель Au0407349",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.85,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178933",
     "title": "Модель Au178933",
-    "category": "pins",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.59,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185528",
     "title": "Модель Au185528",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.42,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185585",
     "title": "Модель Au185585",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.37,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185671",
     "title": "Модель Au185671",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.67,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185711",
     "title": "Модель Au185711",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.92,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185745ж",
     "title": "Модель Au185745ж",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.73,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185776",
     "title": "Модель Au185776",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.77,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185784",
     "title": "Модель Au185784",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.56,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185826",
     "title": "Модель Au185826",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.43,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190212C",
     "title": "Модель Au190212C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.21,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190249C",
     "title": "Модель Au190249C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.94,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190268C",
     "title": "Модель Au190268C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.26,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190276",
     "title": "Модель Au190276",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.18,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190277",
     "title": "Модель Au190277",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.55,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190296",
     "title": "Модель Au190296",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.56,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190344",
     "title": "Модель Au190344",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.09,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190348C",
     "title": "Модель Au190348C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.8,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190359C",
     "title": "Модель Au190359C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.46,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190365C",
     "title": "Модель Au190365C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.42,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190634C",
     "title": "Модель Au190634C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.74,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au20090",
     "title": "Модель Au20090",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.01,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190372C",
     "title": "Модель Au190372C",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.247,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": null,
+    "stoneType": "diamond"
   },
   {
     "sku": "Au 1902Ч И 80327",
     "title": "Модель Au 1902Ч И 80327",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.9,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": null,
+    "stoneType": "diamond"
   },
   {
     "sku": "Au185795C Бр",
     "title": "Модель Au185795C Бр",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.26,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": null,
+    "stoneType": "diamond"
   },
   {
     "sku": "Au185820C Бр",
     "title": "Модель Au185820C Бр",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.16,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": null,
+    "stoneType": "diamond"
   },
   {
     "sku": "Au185956CБр",
     "title": "Модель Au185956CБр",
-    "category": "rings",
+    "category": "earrings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.93,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": null,
+    "stoneType": "diamond"
   },
   {
     "sku": "Au190649p",
     "title": "Модель Au190649p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.497,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 54
+    "stock": 54,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077126p",
     "title": "Модель Au077126p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.392,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 33
+    "stock": 33,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077127p",
     "title": "Модель Au077127p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.773,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 31
+    "stock": 31,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179228",
     "title": "Модель Au179228",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.842,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 30
+    "stock": 30,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180538",
@@ -5303,7 +6499,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 26
+    "stock": 26,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180466p",
@@ -5315,7 +6515,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 24
+    "stock": 24,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180427",
@@ -5327,7 +6531,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 22
+    "stock": 22,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180480",
@@ -5339,55 +6547,75 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 22
+    "stock": 22,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179320p",
     "title": "Модель Au179320p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.927,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 21
+    "stock": 21,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178010p",
     "title": "Модель Au178010p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.607,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178585",
     "title": "Модель Au178585",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.734,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179226",
     "title": "Модель Au179226",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.134,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180359p",
@@ -5399,7 +6627,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180360p",
@@ -5411,7 +6643,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180445p",
@@ -5423,19 +6659,27 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179221",
     "title": "Модель Au179221",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.076,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 19
+    "stock": 19,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180430",
@@ -5447,7 +6691,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 19
+    "stock": 19,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180459p",
@@ -5459,7 +6707,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 17
+    "stock": 17,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180590p",
@@ -5471,67 +6723,91 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 17
+    "stock": 17,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185908p",
     "title": "Модель Au185908p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.708,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 17
+    "stock": 17,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178007p",
     "title": "Модель Au178007p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.646,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 16
+    "stock": 16,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179227",
     "title": "Модель Au179227",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.165,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 16
+    "stock": 16,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179235",
     "title": "Модель Au179235",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.961,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 16
+    "stock": 16,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179230",
     "title": "Модель Au179230",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.987,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 15
+    "stock": 15,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180410p",
@@ -5543,7 +6819,11 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 15
+    "stock": 15,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180429",
@@ -5555,199 +6835,267 @@
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 15
+    "stock": 15,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178584",
     "title": "Модель Au178584",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.189,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178586",
     "title": "Модель Au178586",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.386,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179233",
     "title": "Модель Au179233",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.238,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179234",
     "title": "Модель Au179234",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.898,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179317p",
     "title": "Модель Au179317p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.931,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 14
+    "stock": 14,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178004p",
     "title": "Модель Au178004p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.505,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178006p",
     "title": "Модель Au178006p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.557,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179229",
     "title": "Модель Au179229",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.587,
     "images": [],
     "sortOrder": 3,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178009p",
     "title": "Модель Au178009p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.94,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179238",
     "title": "Модель Au179238",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.592,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 11
+    "stock": 11,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190645p",
     "title": "Модель Au190645p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.086,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 11
+    "stock": 11,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179026p",
     "title": "Модель Au179026p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.703,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179029p",
     "title": "Модель Au179029p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.61,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179237",
     "title": "Модель Au179237",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.167,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179243",
     "title": "Модель Au179243",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.716,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179318p",
     "title": "Модель Au179318p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.829,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180453p",
@@ -5759,7 +7107,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180468",
@@ -5771,43 +7123,59 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190644p",
     "title": "Модель Au190644p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.869,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 10
+    "stock": 10,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178091p",
     "title": "Модель Au178091p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.991,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178496",
     "title": "Модель Au178496",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.921,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180447p",
@@ -5819,7 +7187,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180458p",
@@ -5831,79 +7203,107 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au186002p",
     "title": "Модель Au186002p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.993,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178067p",
     "title": "Модель Au178067p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.95,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 8
+    "stock": 8,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179025p",
     "title": "Модель Au179025p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.583,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 8
+    "stock": 8,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177251p",
     "title": "Модель Au177251p",
-    "category": "bracelets",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.229,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178090p",
     "title": "Модель Au178090p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.747,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178583",
     "title": "Модель Au178583",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.501,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180467p",
@@ -5915,7 +7315,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180513p",
@@ -5927,7 +7331,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180598p",
@@ -5939,31 +7347,43 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178603",
     "title": "Модель Au178603",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.822,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190647p",
     "title": "Модель Au190647p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.09,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180450p",
@@ -5975,7 +7395,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180525p",
@@ -5987,19 +7411,27 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178008p",
     "title": "Модель Au178008p",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.7,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180577p",
@@ -6011,19 +7443,27 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179242",
     "title": "Модель Au179242",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.29,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180479",
@@ -6035,7 +7475,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180524p",
@@ -6047,7 +7491,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180579M",
@@ -6059,7 +7507,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180409p",
@@ -6071,7 +7523,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 32
+    "stock": 32,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180381p",
@@ -6083,151 +7539,203 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 27
+    "stock": 27,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185858",
     "title": "Модель Au185858",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.125,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 23
+    "stock": 23,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185924p",
     "title": "Модель Au185924p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.532,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 22
+    "stock": 22,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185664p",
     "title": "Модель Au185664p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.519,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 16
+    "stock": 16,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185486p",
     "title": "Модель Au185486p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.668,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185738p",
     "title": "Модель Au185738p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.058,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 13
+    "stock": 13,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178667",
     "title": "Модель Au178667",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.706,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 12
+    "stock": 12,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178666",
     "title": "Модель Au178666",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.611,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 11
+    "stock": 11,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178668",
     "title": "Модель Au178668",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.644,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 9
+    "stock": 9,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185736p",
     "title": "Модель Au185736p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.25,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 6
+    "stock": 6,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178669",
     "title": "Модель Au178669",
-    "category": "pins",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.768,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185764p",
     "title": "Модель Au185764p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.8,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185879p",
     "title": "Модель Au185879p",
-    "category": "rings",
+    "category": "pendants",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.81,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180629",
@@ -6239,7 +7747,11 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190553",
@@ -6261,12 +7773,16 @@
       "20.5": 5,
       "19.5": 3
     },
-    "stock": 50
+    "stock": 50,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178649",
     "title": "Модель Au178649",
-    "category": "pins",
+    "category": "rings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.75,
@@ -6283,7 +7799,11 @@
       "21.5": 3,
       "17.5": 2
     },
-    "stock": 41
+    "stock": 41,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190551",
@@ -6303,7 +7823,11 @@
       "18.5": 4,
       "20.5": 3
     },
-    "stock": 26
+    "stock": 26,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190528",
@@ -6322,7 +7846,11 @@
       "20.5": 3,
       "18.5": 2
     },
-    "stock": 24
+    "stock": 24,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190512",
@@ -6342,7 +7870,11 @@
       "19.5": 1,
       "20.5": 1
     },
-    "stock": 22
+    "stock": 22,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190608",
@@ -6362,7 +7894,11 @@
       "18.5": 3,
       "20.5": 3
     },
-    "stock": 20
+    "stock": 20,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190597",
@@ -6381,7 +7917,11 @@
       "19.5": 1,
       "20.5": 1
     },
-    "stock": 9
+    "stock": 9,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190531",
@@ -6398,7 +7938,11 @@
       "18.5": 3,
       "17.5": 2
     },
-    "stock": 8
+    "stock": 8,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190504",
@@ -6414,7 +7958,11 @@
       "19.5": 3,
       "18.5": 1
     },
-    "stock": 6
+    "stock": 6,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190526",
@@ -6431,7 +7979,11 @@
       "17.5": 2,
       "20.5": 2
     },
-    "stock": 6
+    "stock": 6,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190427",
@@ -6447,7 +7999,11 @@
       "19": 1,
       "18.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190537",
@@ -6464,7 +8020,11 @@
       "19.5": 2,
       "17.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190591",
@@ -6480,7 +8040,11 @@
       "21": 1,
       "20.5": 2
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190605",
@@ -6496,7 +8060,11 @@
       "20.5": 2,
       "19.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190044",
@@ -6513,7 +8081,11 @@
       "21": 1,
       "17.5": 1
     },
-    "stock": 4
+    "stock": 4,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190138",
@@ -6528,7 +8100,11 @@
       "18": 1,
       "20": 3
     },
-    "stock": 4
+    "stock": 4,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190636",
@@ -6543,7 +8119,11 @@
       "17.5": 3,
       "18.5": 1
     },
-    "stock": 4
+    "stock": 4,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190530",
@@ -6557,7 +8137,11 @@
     "stockBySize": {
       "20.5": 3
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190587",
@@ -6575,7 +8159,11 @@
       "21": 1,
       "20.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190590",
@@ -6590,7 +8178,11 @@
       "18": 1,
       "20.5": 2
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190618K",
@@ -6606,7 +8198,11 @@
       "18": 1,
       "18.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190043",
@@ -6620,7 +8216,11 @@
     "stockBySize": {
       "18": 2
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190676",
@@ -6635,7 +8235,11 @@
       "18.5": 1,
       "19.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190695",
@@ -6650,7 +8254,11 @@
       "18": 1,
       "18.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190696",
@@ -6665,7 +8273,11 @@
       "20": 1,
       "20.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au077727",
@@ -6679,7 +8291,11 @@
     "stockBySize": {
       "20.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190005",
@@ -6693,7 +8309,11 @@
     "stockBySize": {
       "20.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190008",
@@ -6707,7 +8327,11 @@
     "stockBySize": {
       "18.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190010",
@@ -6721,7 +8345,11 @@
     "stockBySize": {
       "20": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190040",
@@ -6735,7 +8363,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190071",
@@ -6749,7 +8381,11 @@
     "stockBySize": {
       "17.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190428",
@@ -6763,7 +8399,11 @@
     "stockBySize": {
       "20.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190538",
@@ -6777,7 +8417,11 @@
     "stockBySize": {
       "20.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190669",
@@ -6791,7 +8435,11 @@
     "stockBySize": {
       "17.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190688",
@@ -6805,7 +8453,11 @@
     "stockBySize": {
       "18.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190691",
@@ -6827,7 +8479,11 @@
       "19.5": 2,
       "16.5": 1
     },
-    "stock": 23
+    "stock": 23,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190062",
@@ -6845,7 +8501,11 @@
       "20.5": 5,
       "18.5": 3
     },
-    "stock": 21
+    "stock": 21,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190158",
@@ -6863,7 +8523,11 @@
       "17.5": 5,
       "18.5": 4
     },
-    "stock": 19
+    "stock": 19,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190145",
@@ -6884,7 +8548,11 @@
       "19.5": 1,
       "20.5": 1
     },
-    "stock": 16
+    "stock": 16,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190698",
@@ -6901,7 +8569,11 @@
       "19.5": 4,
       "18.5": 3
     },
-    "stock": 9
+    "stock": 9,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190544",
@@ -6917,7 +8589,11 @@
       "20.5": 2,
       "19.5": 1
     },
-    "stock": 8
+    "stock": 8,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190372K",
@@ -6933,7 +8609,11 @@
       "17.5": 3,
       "18.5": 1
     },
-    "stock": 7
+    "stock": 7,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190547",
@@ -6950,7 +8630,11 @@
       "20.5": 3,
       "17.5": 1
     },
-    "stock": 7
+    "stock": 7,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190357K",
@@ -6966,7 +8650,11 @@
       "17.5": 1,
       "18.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190130",
@@ -6981,7 +8669,11 @@
       "19": 1,
       "18.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190373K",
@@ -6996,7 +8688,11 @@
       "19": 1,
       "20": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190685",
@@ -7011,7 +8707,11 @@
       "17": 1,
       "17.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190022",
@@ -7025,7 +8725,11 @@
     "stockBySize": {
       "19.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190053",
@@ -7039,7 +8743,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190055",
@@ -7053,7 +8761,11 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190063",
@@ -7067,7 +8779,11 @@
     "stockBySize": {
       "18.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190336",
@@ -7081,7 +8797,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190347K",
@@ -7095,7 +8815,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190354K",
@@ -7109,7 +8833,11 @@
     "stockBySize": {
       "17.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190545",
@@ -7123,7 +8851,11 @@
     "stockBySize": {
       "20.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190558",
@@ -7137,7 +8869,11 @@
     "stockBySize": {
       "19.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190699",
@@ -7151,7 +8887,11 @@
     "stockBySize": {
       "21.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190702",
@@ -7165,7 +8905,11 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190689",
@@ -7186,7 +8930,11 @@
       "19.5": 7,
       "20.5": 6
     },
-    "stock": 71
+    "stock": 71,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190690",
@@ -7204,7 +8952,11 @@
       "18.5": 1,
       "19.5": 1
     },
-    "stock": 10
+    "stock": 10,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190348K",
@@ -7220,7 +8972,11 @@
       "17.5": 5,
       "20.5": 1
     },
-    "stock": 9
+    "stock": 9,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190355K",
@@ -7238,7 +8994,11 @@
       "19.5": 2,
       "17.5": 1
     },
-    "stock": 7
+    "stock": 7,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au179859",
@@ -7255,7 +9015,11 @@
       "18.5": 1,
       "20.5": 1
     },
-    "stock": 6
+    "stock": 6,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185933K",
@@ -7273,7 +9037,11 @@
       "17.5": 1,
       "18.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190564",
@@ -7290,12 +9058,16 @@
       "18.5": 2,
       "16.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178855",
     "title": "Модель Au178855",
-    "category": "pins",
+    "category": "rings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.22,
@@ -7305,7 +9077,11 @@
       "18": 1,
       "18.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185979K",
@@ -7320,7 +9096,11 @@
       "17.5": 1,
       "18.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190351K",
@@ -7334,7 +9114,11 @@
     "stockBySize": {
       "20": 2
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190366K",
@@ -7348,7 +9132,11 @@
     "stockBySize": {
       "19.5": 2
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au179357",
@@ -7362,7 +9150,11 @@
     "stockBySize": {
       "19.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au179861",
@@ -7376,7 +9168,11 @@
     "stockBySize": {
       "21.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185499",
@@ -7390,7 +9186,11 @@
     "stockBySize": {
       "17.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185570",
@@ -7404,7 +9204,11 @@
     "stockBySize": {
       "18.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185606",
@@ -7418,7 +9222,11 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185793K",
@@ -7432,7 +9240,11 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185794K",
@@ -7446,7 +9258,11 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185978K",
@@ -7460,7 +9276,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185985K",
@@ -7474,7 +9294,11 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190057",
@@ -7488,7 +9312,11 @@
     "stockBySize": {
       "19.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190372KБр",
@@ -7505,7 +9333,11 @@
       "19": 1,
       "18.5": 1
     },
-    "stock": 5
+    "stock": 5,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185742K Бр",
@@ -7521,7 +9353,11 @@
       "17": 1,
       "16.5": 2
     },
-    "stock": 4
+    "stock": 4,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185791K Бр",
@@ -7538,7 +9374,11 @@
       "18": 1,
       "17.5": 1
     },
-    "stock": 4
+    "stock": 4,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190370KБр",
@@ -7554,7 +9394,11 @@
       "19": 2,
       "17.5": 1
     },
-    "stock": 4
+    "stock": 4,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190373KБр",
@@ -7570,7 +9414,11 @@
       "17.5": 1,
       "18.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185708B",
@@ -7585,7 +9433,11 @@
       "16": 1,
       "18": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185795K Бр",
@@ -7599,7 +9451,11 @@
     "stockBySize": {
       "17": 2
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190355KБр",
@@ -7614,7 +9470,11 @@
       "17.5": 1,
       "18.5": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au YZ306",
@@ -7628,12 +9488,16 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178043",
     "title": "Модель Au178043",
-    "category": "pins",
+    "category": "rings",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.35,
@@ -7642,7 +9506,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185793K Бр",
@@ -7656,7 +9524,11 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185794K Бр",
@@ -7670,7 +9542,11 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185799K Бр",
@@ -7684,7 +9560,11 @@
     "stockBySize": {
       "16": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au185904K Бр",
@@ -7698,7 +9578,11 @@
     "stockBySize": {
       "17": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190358KБр",
@@ -7712,7 +9596,11 @@
     "stockBySize": {
       "16.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au111461",
@@ -7726,7 +9614,11 @@
     "stockBySize": {
       "18.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "female",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au1407795F",
@@ -7747,7 +9639,11 @@
       "20.5": 1,
       "22.5": 1
     },
-    "stock": 8
+    "stock": 8,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au1407387F",
@@ -7764,7 +9660,11 @@
       "22.5": 2,
       "23.5": 1
     },
-    "stock": 7
+    "stock": 7,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190117",
@@ -7782,7 +9682,11 @@
       "20.5": 2,
       "19.5": 1
     },
-    "stock": 7
+    "stock": 7,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190120",
@@ -7799,7 +9703,11 @@
       "19.5": 1,
       "22.5": 1
     },
-    "stock": 6
+    "stock": 6,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185653",
@@ -7815,7 +9723,11 @@
       "18.5": 1,
       "20.5": 1
     },
-    "stock": 3
+    "stock": 3,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au1407375F",
@@ -7829,7 +9741,11 @@
     "stockBySize": {
       "19.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185652",
@@ -7843,7 +9759,11 @@
     "stockBySize": {
       "20.5": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au185642",
@@ -7859,7 +9779,11 @@
       "20": 2,
       "19.5": 2
     },
-    "stock": 8
+    "stock": 8,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au077453F",
@@ -7876,7 +9800,11 @@
       "23": 2,
       "19.5": 1
     },
-    "stock": 6
+    "stock": 6,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190088",
@@ -7895,7 +9823,11 @@
       "20.5": 2,
       "19.5": 1
     },
-    "stock": 12
+    "stock": 12,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190089",
@@ -7913,7 +9845,11 @@
       "20.5": 3,
       "21.5": 3
     },
-    "stock": 10
+    "stock": 10,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190085",
@@ -7932,7 +9868,11 @@
       "20.5": 2,
       "21.5": 2
     },
-    "stock": 9
+    "stock": 9,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au190084",
@@ -7947,12 +9887,16 @@
       "23": 1,
       "24": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": "male",
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au178990",
     "title": "Модель Au178990",
-    "category": "pins",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.439,
@@ -7961,7 +9905,11 @@
     "stockBySize": {
       "180": 7
     },
-    "stock": 7
+    "stock": 7,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177558",
@@ -7975,12 +9923,16 @@
     "stockBySize": {
       "180": 5
     },
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178986",
     "title": "Модель Au178986",
-    "category": "pins",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.352,
@@ -7989,7 +9941,11 @@
     "stockBySize": {
       "180": 5
     },
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177606",
@@ -8003,12 +9959,16 @@
     "stockBySize": {
       "180": 3
     },
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au Бр409",
     "title": "Модель Au Бр409",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.185,
@@ -8018,12 +9978,16 @@
       "17": 1,
       "19": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-203ПГ",
     "title": "Модель Au НБ 12-203ПГ",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.525,
@@ -8032,12 +9996,16 @@
     "stockBySize": {
       "19": 2
     },
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "AuБр050120",
     "title": "Модель AuБр050120",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.665,
@@ -8047,12 +10015,16 @@
       "18": 1,
       "19": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "AuБр050247",
     "title": "Модель AuБр050247",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.21,
@@ -8062,12 +10034,16 @@
       "18": 1,
       "19": 1
     },
-    "stock": 2
+    "stock": 2,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au 7050155П-19",
     "title": "Модель Au 7050155П-19",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.49,
@@ -8076,12 +10052,16 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au Бр050127",
     "title": "Модель Au Бр050127",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.03,
@@ -8090,12 +10070,16 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au Бр050130",
     "title": "Модель Au Бр050130",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.25,
@@ -8104,12 +10088,16 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au Бр050167/1",
     "title": "Модель Au Бр050167/1",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.52,
@@ -8118,12 +10106,16 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au Бр050246",
     "title": "Модель Au Бр050246",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.44,
@@ -8132,12 +10124,16 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-076ПГ",
     "title": "Модель Au НБ 12-076ПГ",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.82,
@@ -8146,12 +10142,16 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-087",
     "title": "Модель Au НБ 12-087",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.55,
@@ -8160,12 +10160,16 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-087ПГ",
     "title": "Модель Au НБ 12-087ПГ",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.91,
@@ -8174,12 +10178,16 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-200ПГ",
     "title": "Модель Au НБ 12-200ПГ",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.57,
@@ -8188,12 +10196,16 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-205",
     "title": "Модель Au НБ 12-205",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.67,
@@ -8202,12 +10214,16 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-206",
     "title": "Модель Au НБ 12-206",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.56,
@@ -8216,12 +10232,16 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au НБ 12-320ПГ",
     "title": "Модель Au НБ 12-320ПГ",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.12,
@@ -8230,7 +10250,11 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177121",
@@ -8244,7 +10268,11 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177552",
@@ -8258,7 +10286,11 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177577",
@@ -8272,7 +10304,11 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au177627",
@@ -8286,48 +10322,64 @@
     "stockBySize": {
       "180": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190149",
     "title": "Модель Au190149",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.58,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190176",
     "title": "Модель Au190176",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 7.02,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190179",
     "title": "Модель Au190179",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.09,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au552060502",
     "title": "Модель Au552060502",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.02,
@@ -8336,12 +10388,16 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au552060602",
     "title": "Модель Au552060602",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.05,
@@ -8350,12 +10406,16 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au7050154П-18",
     "title": "Модель Au7050154П-18",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.3,
@@ -8364,12 +10424,16 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au7060155П-19",
     "title": "Модель Au7060155П-19",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.94,
@@ -8378,12 +10442,16 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "AuБр050124",
     "title": "Модель AuБр050124",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.13,
@@ -8392,12 +10460,16 @@
     "stockBySize": {
       "18": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "AuБр050127",
     "title": "Модель AuБр050127",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.92,
@@ -8406,12 +10478,16 @@
     "stockBySize": {
       "20": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190384",
     "title": "Модель Au190384",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 9,
@@ -8420,12 +10496,16 @@
     "stockBySize": {
       "20": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190388",
     "title": "Модель Au190388",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 8.4,
@@ -8434,12 +10514,16 @@
     "stockBySize": {
       "20": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190389",
     "title": "Модель Au190389",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 8.6,
@@ -8448,12 +10532,16 @@
     "stockBySize": {
       "20": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190626",
     "title": "Модель Au190626",
-    "category": "rings",
+    "category": "bracelets",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 7.39,
@@ -8462,7 +10550,11 @@
     "stockBySize": {
       "19": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au178172",
@@ -8474,156 +10566,208 @@
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 37
+    "stock": 37,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au077343",
     "title": "Модель Au077343",
-    "category": "rings",
+    "category": "pins",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.712,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 20
+    "stock": 20,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179262",
     "title": "Модель Au179262",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.49,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179312",
     "title": "Модель Au179312",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.654,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179313",
     "title": "Модель Au179313",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.63,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179314",
     "title": "Модель Au179314",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.774,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180432",
     "title": "Модель Au180432",
-    "category": "pendants",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.12,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179261",
     "title": "Модель Au179261",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.39,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179309",
     "title": "Модель Au179309",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.972,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 4
+    "stock": 4,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au190612",
     "title": "Модель Au190612",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.52,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 3
+    "stock": 3,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179253",
     "title": "Модель Au179253",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.08,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au179315",
     "title": "Модель Au179315",
-    "category": "rings",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.15,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": false,
+    "stoneType": null
   },
   {
     "sku": "Au180434",
     "title": "Модель Au180434",
-    "category": "pendants",
+    "category": "brooches",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.59,
     "images": [],
     "sortOrder": 999,
     "stockBySize": {},
-    "stock": 5
+    "stock": 5,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "Au180666",
     "title": "Модель Au180666",
-    "category": "pendants",
+    "category": "necklaces",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 6.6,
@@ -8632,7 +10776,11 @@
     "stockBySize": {
       "45": 1
     },
-    "stock": 1
+    "stock": 1,
+    "gender": null,
+    "ringType": null,
+    "hasStones": true,
+    "stoneType": null
   },
   {
     "sku": "190701",

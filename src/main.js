@@ -115,46 +115,6 @@ function formatWeight(w) {
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
 }
 
-function resolveTypeLabel(product) {
-  const normalize = value => {
-    if (typeof value === "string") return value.toLowerCase();
-    if (value == null) return "";
-    return String(value).toLowerCase();
-  };
-
-  const title = normalize(product && product.title);
-  const category = normalize(product && product.category);
-
-  const titleRules = [
-    { label: "Кольцо", needle: "кольц" },
-    { label: "Серьги", needle: "серьг" },
-    { label: "Браслет", needle: "браслет" },
-    { label: "Подвеска", needle: "подвес" },
-    { label: "Булавка", needle: "булавк" }
-  ];
-
-  for (const rule of titleRules) {
-    if (title && title.includes(rule.needle)) return rule.label;
-  }
-
-  const categoryRules = [
-    { label: "Кольцо", values: ["rings"], needle: "кольц" },
-    { label: "Серьги", values: ["earrings"], needle: "серьг" },
-    { label: "Браслет", values: ["bracelets"], needle: "браслет" },
-    { label: "Подвеска", values: ["pendants"], needle: "подвес" },
-    { label: "Булавка", values: ["pins"], needle: "булавк" }
-  ];
-
-  for (const rule of categoryRules) {
-    const matchesValue =
-      category && Array.isArray(rule.values) && rule.values.includes(category);
-    const matchesNeedle = category && rule.needle && category.includes(rule.needle);
-    if (matchesValue || matchesNeedle) return rule.label;
-  }
-
-  return "Модель";
-}
-
 function normalizeSizeKey(size) {
   if (size == null || size === "") return NO_SIZE_KEY;
   const str = String(size).trim().replace(",", ".");
@@ -934,10 +894,9 @@ function renderGrid() {
       const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
       const w =
         p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
-      const typeLabel = resolveTypeLabel(p);
-      const fullTitle = p.title || `${typeLabel} ${p.sku}`;
+      const fullTitle = p.title || `Кольцо ${p.sku}`;
       let shortTitle = fullTitle.replace(p.sku, "").trim();
-      if (!shortTitle) shortTitle = typeLabel;
+      if (!shortTitle) shortTitle = "Кольцо";
       const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
       return `
@@ -994,7 +953,14 @@ function renderProduct() {
 
   const cat = prod.category;
 
-  const typeLabel = resolveTypeLabel(prod);
+  const TYPE_LABELS = {
+    rings: "Кольцо",
+    earrings: "Серьги",
+    bracelets: "Браслет",
+    pendants: "Подвеска",
+    pins: "Булавка"
+  };
+  const typeLabel = TYPE_LABELS[cat] || "Модель";
 
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
@@ -1509,7 +1475,26 @@ function renderOrder() {
 
     let g = skuMap.get(it.sku);
     if (!g) {
-      const baseTitle = resolveTypeLabel(prod);
+      let baseTitle;
+      switch (cat) {
+        case "rings":
+          baseTitle = "Кольцо";
+          break;
+        case "earrings":
+          baseTitle = "Серьги";
+          break;
+        case "bracelets":
+          baseTitle = "Браслет";
+          break;
+        case "pendants":
+          baseTitle = "Подвеска";
+          break;
+        case "pins":
+          baseTitle = "Булавка";
+          break;
+        default:
+          baseTitle = "Модель";
+      }
 
       g = {
         sku: it.sku,
@@ -1846,8 +1831,7 @@ function renderOrderItem() {
     "https://picsum.photos/seed/placeholder/900";
   const avgW =
     items[0].avgWeight != null ? items[0].avgWeight : prod.avgWeight;
-  const titleLabel = resolveTypeLabel(prod);
-  const title = prod.title || `${titleLabel} ${sku}`;
+  const title = prod.title || `Модель ${sku}`;
 
   const cat = prod.category;
   const enforceStock =
