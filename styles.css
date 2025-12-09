@@ -1,142 +1,1645 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <title>Каталог · Жемчужина</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header class="topbar">
-    <div class="topbar-left">
-      <img src="logo_zhem.svg" alt="Жемчужина" class="logo-img">
-    </div>
+/* ============= БАЗА ============= */
 
-    <a href="order.html" class="cart-link">
-      Заказ
-      <span id="cartCount" class="cart-count">0</span>
-    </a>
-  </header>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  <nav class="main-tabs">
-    <a href="index.html" class="tab-link">Главная</a>
-  </nav>
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
-  <main class="container">
-    <section class="hero">
-      <h1 class="hero-title" id="heroTitle">Каталог</h1>
-    </section>
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #0f172a;
+  background: #f1f5f9;
+}
 
-   <section>
-  <div class="catalog-section-header">
-    <h2 class="section-title" id="catalogTitle">Каталог</h2>
-    <button type="button" class="filter-btn" id="filterToggleBtn">
-      Фильтры
-    </button>
-  </div>
+img {
+  max-width: 100%;
+  display: block;
+}
 
-  <div id="category-subfilters" class="category-subfilters"></div>
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 12px 110px;
+}
 
-  <div class="catalog-controls">
-    <input
-      id="skuSearch"
-      type="search"
-      inputmode="numeric"
-      autocomplete="off"
-      placeholder="Поиск по артикулу (например, 135)"
-      class="sku-search"
-    >
-  </div>
+/* ============= ШАПКА ============= */
 
-  <div id="grid" class="grid"></div>
-</section>
-      </main>
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #ffffff;
+  border-bottom: 1px solid #d8d8d8;  /* тоньше и светлее */
+  padding: 6px 16px;                  /* аккуратные отступы */
+  display: flex;
+  align-items: center;                /* центрируем логотип и кнопку по вертикали */
+  justify-content: space-between;
+}
 
-  <!-- Панель фильтров -->
-  <div id="filterOverlay" class="filter-overlay"></div>
+.topbar-left {
+  display: flex;
+  align-items: center;
+  padding-top: 6px; /* 1–2 мм на мобильных */
+}
 
-  <div id="filterSheet" class="filter-sheet">
-    <div class="filter-sheet-header">
-      <span class="filter-sheet-title">Фильтры</span>
-      <button class="filter-sheet-close" id="filterCloseBtn">×</button>
-    </div>
+.logo-img {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
 
-    <div class="filter-sheet-content">
-      <div class="filter-block">
-        <span class="filter-label">Вес, г</span>
-        <div class="filter-weight-row">
-          <input
-            type="number"
-            inputmode="decimal"
-            step="0.01"
-            min="0"
-            id="filterWeightMin"
-            class="filter-input small"
-            placeholder="от"
-          >
-          <span class="filter-weight-sep">—</span>
-          <input
-            type="number"
-            inputmode="decimal"
-            step="0.01"
-            min="0"
-            id="filterWeightMax"
-            class="filter-input small"
-            placeholder="до"
-          >
-        </div>
-      </div>
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #111827;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.7);
+  background: #ffffff;
+}
 
-      <div class="filter-block" id="filterSizeBlock">
-        <span class="filter-label">Размер</span>
-        <div class="filter-size-grid" id="filterSizeGrid">
-          <button type="button" class="filter-size-chip">15</button>
-          <button type="button" class="filter-size-chip">15.5</button>
-          <button type="button" class="filter-size-chip">16</button>
-          <button type="button" class="filter-size-chip">16.5</button>
-          <button type="button" class="filter-size-chip">17</button>
-          <button type="button" class="filter-size-chip">17.5</button>
-          <button type="button" class="filter-size-chip">18</button>
-          <button type="button" class="filter-size-chip">18.5</button>
-          <button type="button" class="filter-size-chip">19</button>
-          <button type="button" class="filter-size-chip">19.5</button>
-          <button type="button" class="filter-size-chip">20</button>
-          <button type="button" class="filter-size-chip">20.5</button>
-          <button type="button" class="filter-size-chip">21</button>
-          <button type="button" class="filter-size-chip">21.5</button>
-          <button type="button" class="filter-size-chip">22</button>
-          <button type="button" class="filter-size-chip">22.5</button>
-          <button type="button" class="filter-size-chip">23</button>
-        </div>
-      </div>
+.cart-count {
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #6A1F2A;
+  color: #f9fafb;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
-      <div class="filter-block">
-        <span class="filter-label">Дополнительно</span>
+/* ============= ГЕРОЙ / ТЕКСТ ============= */
 
-        <label class="filter-switch-row">
-          <input type="checkbox" id="filterPopular">
-          <span>Популярные</span>
-        </label>
+.hero {
+  margin-bottom: 18px;
+}
 
-        <label class="filter-switch-row">
-          <input type="checkbox" id="filterNew">
-          <span>Новинки</span>
-        </label>
+.hero-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
 
-        <label class="filter-switch-row">
-          <input type="checkbox" id="filterInStock">
-          <span>В наличии</span>
-        </label>
-      </div>
-    </div>
+.hero-sub {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
 
-    <div class="filter-sheet-footer">
-      <button class="btn-outline" type="button" id="filterResetBtn">Сбросить</button>
-      <button class="btn-primary" type="button" id="filterApplyBtn">Применить</button>
-    </div>
-  </div>
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
 
-  <div class="toast"></div>
-  <script type="module" src="./src/main.js"></script>
-</body>
-</html>
+/* ============= КАТЕГОРИИ (главная) ============= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.category-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 14px 30px rgba(15,23,42,0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.category-image {
+  background: #f8fafc;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-image .stub {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.category-body {
+  padding: 10px 12px 12px;
+}
+
+.category-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.category-disabled {
+  opacity: 0.65;
+}
+
+/* ============= КАТАЛОГ: СЕТКА ============= */
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+/* На телефоне — 3 карточки в ряд, но ближе друг к другу */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px; /* ещё чуть меньше */
+  }
+
+  .tile {
+    border-radius: 18px; /* уменьшили, даёт визуальное расширение */
+  }
+
+  .tile-body {
+    padding: 6px 4px 8px;  
+    /* было: 8px 8px 10px
+       стало: 6px сверху, 4px слева/справа — максимум полезного места */
+  }
+
+  .tile-title {
+    margin-bottom: 0px;
+  }
+}
+
+.tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.14);
+  overflow: hidden;
+}
+
+.square {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: #f8fafc;
+}
+
+.square img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-body {
+  padding: 10px 12px 12px;
+}
+
+.tile-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.tile-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.tile-sub span {
+  white-space: nowrap;
+}
+
+.tile-art {
+  opacity: 0.95;
+}
+
+.tile-weight {
+  opacity: 0.95;
+}
+
+/* ============= КАРТОЧКА ТОВАРА ============= */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 16px 16px 18px;
+  box-shadow: 0 16px 38px rgba(15,23,42,0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-breadcrumbs {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.product-breadcrumbs a {
+  color: #64748b;
+  text-decoration: none;
+}
+
+.product-breadcrumbs span {
+  color: #111827;
+}
+
+.product-photo-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.product-photo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-art {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.product-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: #0f172a;
+}
+
+.product-weight {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.product-controls {
+  margin-top: 4px;
+  border-radius: 20px;
+  padding: 12px 12px 14px;
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-controls-row {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .product-controls-row {
+    gap: 8px;
+  }
+}
+
+.field {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+}
+
+.field-control {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* select размера */
+
+.size-select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  padding: 2px 0;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align-last: left;
+}
+
+.field-control.size-control {
+  position: relative;
+}
+
+.field-control.size-control::after {
+  content: "▾";
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.field-control.size-control.active {
+  border-color: #6A1F2A;
+  box-shadow: 0 0 0 1px rgba(106,31,42,0.25);
+}
+
+/* количество в карточке */
+
+.qty-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.qty-inline button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qty-inline span {
+  min-width: 22px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* кнопка "В корзину" */
+
+/* ============= КОРЗИНА ============= */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-item {
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1px solid #e2e8f0;
+  padding: 10px 12px;
+  box-shadow: 0 14px 32px rgba(15,23,42,0.12);
+  display: flex;
+  gap: 10px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cart-thumb {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f8fafc;
+}
+
+.cart-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-meta {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.cart-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cart-title {
+  font-size: 15px;        /* ближе к каталогу, не орёт */
+  font-weight: 500;       /* вместо 600 – заметно спокойнее */
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+.cart-sub {
+  font-size: 11px;        /* как "Арт. … 2,62 г" в плитках */
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #555555;         /* мягче, не спорит с заголовком */
+}
+
+.cart-header-row .qty-inline {
+  gap: 10px;
+}
+
+.cart-header-row .qty-inline button {
+  font-size: 18px;
+  padding: 0 3px;
+}
+
+.cart-header-row .qty-inline span {
+  min-width: 20px;
+  font-size: 16px;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+.btn.icon {
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+  font-size: 13px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* низ корзины */
+
+.btn-row {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+/* ============= ПРОЧЕЕ ============= */
+
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 12px 14px;
+  box-shadow: 0 12px 28px rgba(15,23,42,0.12);
+}
+
+/* тост */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.9);
+  color: #f9fafb;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 50;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* "улетающий" маркер */
+
+.fly-dot {
+  pointer-events: none;
+}
+
+/* ==== ЛЁГКАЯ НАВИГАЦИЯ ПОД ШАПКОЙ ==== */
+
+.main-tabs {
+  display: flex;
+  gap: 16px;
+  padding: 6px 12px 4px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-link {
+  font-size: 14px;
+  color: #4b5563;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-link.active {
+  border-bottom-color: #6A1F2A;
+  color: #111827;
+}
+
+/* === Полировка: сетка 3 в ряд на телефоне === */
+
+@media (max-width: 540px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* === Полировка: карточка изделия === */
+
+/* Чуть компактнее общая карточка (каталог + продукт) */
+.product-card {
+  padding: 12px 12px 14px;
+  gap: 10px;
+}
+
+/* Блок размеров + количества делаем плотнее и собраннее */
+.product-controls {
+  padding: 10px 10px 12px;
+  gap: 8px;
+}
+
+/* Кнопка "Добавить в заказ" — чуть крупнее и приятнее */
+
+/* === Полировка: корзина === */
+
+/* Чуть меньше воздуха вокруг карточки позиции */
+.list-item {
+  padding: 8px 10px;
+  gap: 8px;
+}
+
+/* Фото немного уменьшаем, чтобы больше места было под текст */
+.cart-thumb {
+  width: 100px;
+  height: 100px;
+}
+
+/* Кнопки внизу корзины (Очистить / Продолжить / Менеджеру) — немного крупнее */
+
+/* === Детальное редактирование модели в корзине === */
+
+.model-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - 140px);
+}
+
+.model-photo-wrap {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f8fafc;
+  flex-shrink: 0;
+}
+
+.model-photo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.model-edit-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+
+.model-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.model-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.model-avg {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.model-sizes-list {
+  flex: 1 1 auto;
+  margin-top: 6px;
+  padding: 4px 0;
+  overflow-y: auto;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.size-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.size-row:last-child {
+  border-bottom: none;
+}
+
+.size-row-size {
+  color: #111827;
+}
+
+.size-row-stock {
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.size-row.no-stock {
+  opacity: 0.6;
+}
+
+.size-row.no-stock .size-row-qty button {
+  color: #9ca3af;
+  cursor: default;
+}
+
+.size-row.no-stock .size-row-stock {
+  color: #9ca3af;
+}
+
+.size-row-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.size-row-qty button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 3px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.size-row-qty span {
+  min-width: 20px;
+  text-align: center;
+}
+
+.size-row-weight {
+  font-size: 13px;
+  color: #4b5563;
+  text-align: right;
+}
+
+.model-summary {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#modelDone {
+  margin-top: 10px;
+}
+
+/* === Матричный выбор размеров из карточки товара === */
+
+.size-picker-display {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 9px 12px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.size-picker-display:active {
+  background: #f3f4f6;
+}
+
+.size-picker-arrow {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* затемнённый фон */
+
+.size-matrix-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 40;
+}
+
+.size-matrix-backdrop.hidden {
+  display: none !important;
+}
+
+/* "лист" как на скрине выбора размера */
+
+.size-matrix-sheet {
+  width: 100%;
+  max-width: 480px;
+  max-height: 70vh;
+  background: #ffffff;
+  border-radius: 18px 18px 0 0;
+  padding: 12px 14px 16px;
+  box-shadow: 0 -10px 25px rgba(15, 23, 42, 0.18);
+}
+
+.size-matrix-header {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.size-matrix-list {
+  max-height: 52vh;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* кнопка "Готово" внизу листа */
+
+.size-matrix-done {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* чтобы фон под модалкой не скроллился */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* универсальный helper */
+
+.hidden {
+  display: none !important;
+}
+
+/* === Фиксированная кнопка "В корзину" только на карточке товара === */
+@media (max-width: 900px) {
+  /* Чтобы контент не уезжал под кнопку при прокрутке */
+  .product-controls {
+    padding-bottom: 80px;
+  }
+
+  /* Кнопка остаётся той же, просто закрепляем её внизу экрана */
+  #addToCart {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    width: calc(100% - 32px);   /* те же поля, что у контента (по 16px слева/справа) */
+    max-width: 980px;           /* ширина как у контентной области */
+    z-index: 50;
+  }
+}
+
+/* === Корзина: компактный блок "Итого" и кнопки === */
+.order-summary-card {
+  margin-top: 8px;
+}
+
+.order-summary-text {
+  margin: 8px 0 12px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.order-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.order-action-btn {
+  flex: 1;
+}
+
+/* Немного запаса под фиксированной кнопкой */
+.order-bottom-space {
+  height: 90px;
+}
+
+/* Фиксированная нижняя кнопка "Менеджеру" (как "В корзину") */
+.order-footer-btn {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+  width: calc(100% - 32px);
+  max-width: 980px;
+  z-index: 50;
+}
+
+/* На больших экранах ведём себя как обычная кнопка */
+@media (min-width: 901px) {
+  .order-footer-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin: 12px auto 0;
+  }
+
+  .order-bottom-space {
+    height: 0;
+  }
+}
+
+/* === Экран модели в заказе: фиксированная кнопка "Готово" === */
+@media (max-width: 900px) {
+  /* чтобы список размеров не уезжал под кнопку */
+  .model-edit-body {
+    padding-bottom: 90px;
+  }
+
+  #modelDone {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    width: calc(100% - 32px);   /* те же поля, что у контента */
+    max-width: 980px;
+    z-index: 50;
+  }
+}
+
+/* === ТИПОГРАФИКА И ФИНАЛЬНАЯ ПОЛИРОВКА (ЕДИНЫЙ БЛОК) === */
+
+/* 1. Базовые размеры шрифтов — тут один пульт для всего */
+:root {
+  --fs-body: 15px;
+
+  --fs-hero-title: 22px;
+  --fs-hero-sub: 14px;
+
+  --fs-section-title: 18px;
+  --fs-tab: 15px;
+
+  --fs-card-title: 15px;
+  --fs-card-sub: 10px;
+
+  --fs-breadcrumb: 13px;
+
+  --fs-main-section-title: 15px;
+  --fs-main-section-sub: 13px;
+
+  --fs-product-title: 18px;
+  --fs-product-art: 13px;
+  --fs-product-weight: 13px;
+
+  --fs-cart-title: 15px;
+  --fs-cart-sub: 11px;
+  --fs-cart-summary: 15px;
+
+  --fs-model-title: 16px;
+  --fs-model-avg: 13px;
+  --fs-model-summary: 14px;
+
+  --fs-size-row: 14px;
+  --fs-size-row-weight: 13px;
+
+  --fs-button: 16px;
+}
+
+/* 2. Базовый текст */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "SF Pro Display", sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: #1a1a1a;
+}
+
+/* 3. Вкладки под шапкой */
+.tab-link {
+  font-size: var(--fs-tab);
+}
+
+/* 4. Крупные заголовки (hero: "Каталог", "Корзина") */
+.hero-title {
+  font-size: var(--fs-hero-title);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #222222;
+}
+
+.hero-sub {
+  font-size: var(--fs-hero-sub);
+  font-weight: 400;
+  color: #6b7280;
+}
+
+/* 5. Заголовки разделов ("Кольца · текущая подборка" и т.п.) */
+.section-title,
+.cart-group-title {
+  font-size: var(--fs-section-title);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #222222;
+}
+
+/* 6. Хлебные крошки */
+.breadcrumb,
+.breadcrumbs {
+  font-size: var(--fs-breadcrumb);
+  font-weight: 400;
+  color: #6b7280;
+  padding: 6px 16px 0;
+}
+
+.breadcrumbs a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* активная (последняя) часть крошек */
+.breadcrumbs > *:last-child {
+  color: #1e1e1e;
+  font-weight: 500;
+}
+
+/* 7. Главные карточки на главной */
+.main-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.main-section-card {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  text-decoration: none;
+  color: #111827;
+}
+
+.main-section-title {
+  font-size: var(--fs-main-section-title);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.main-section-sub {
+  font-size: var(--fs-main-section-sub);
+  color: #6b7280;
+}
+
+/* 8. Плитки каталога (сеткой 3×4) */
+.tile-title {
+  font-size: var(--fs-card-title);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+.tile-sub {
+  font-size: var(--fs-card-sub);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 9. Карточка товара */
+.product-title {
+  font-size: var(--fs-product-title);
+  font-weight: 500;
+  margin: 0;
+}
+
+.product-art {
+  font-size: var(--fs-product-art);
+  color: #6b7280;
+}
+
+.product-weight {
+  font-size: var(--fs-product-weight);
+  color: #6b7280;
+}
+
+/* подписи "Размер", "Кол-во" */
+.field-label {
+  font-size: 13px;
+}
+
+/* 10. Корзина: список позиций */
+.cart-title {
+  font-size: var(--fs-cart-title);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #222222;
+}
+
+.cart-sub {
+  font-size: var(--fs-cart-sub);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #555555;
+}
+
+.cart-meta {
+  font-size: 13px;
+}
+
+/* итоговый текст "Итого по заказу" */
+.order-summary-text {
+  font-size: var(--fs-cart-summary);
+}
+
+/* 11. Экран модели в заказе */
+.model-title {
+  font-size: var(--fs-model-title);
+  font-weight: 600;
+}
+
+.model-avg {
+  font-size: var(--fs-model-avg);
+  color: #6b7280;
+}
+
+.model-summary {
+  font-size: var(--fs-model-summary);
+}
+
+/* строки размеров */
+.size-row {
+  font-size: var(--fs-size-row);
+}
+
+.size-row-size {
+  font-size: var(--fs-size-row);
+}
+
+.size-row-weight {
+  font-size: var(--fs-size-row-weight);
+}
+
+/* 12. Основные кнопки (В корзину / Менеджеру / Готово) */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 46px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: var(--fs-button);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  background: linear-gradient(135deg, #7B2331, #5A1722);
+  color: #f9fafb;
+
+  box-shadow: 0 12px 26px rgba(90, 23, 34, 0.42);
+
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #842736, #5F1824);
+  box-shadow: 0 14px 30px rgba(90, 23, 34, 0.55);
+}
+
+.btn-primary:active {
+  box-shadow: 0 6px 14px rgba(90, 23, 34, 0.32);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+/* На маленьких экранах — компактнее */
+@media (max-width: 480px) {
+  .btn-primary {
+    min-height: 44px;
+    font-size: 15px;
+    padding: 0 16px;
+  }
+}
+
+/* Вспомогательная кнопка (Очистить / Скопировать и т.п.) */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 14px;
+  min-height: 36px;
+
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+
+  background: #ffffff;
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.12s ease;
+}
+
+.btn-secondary:hover {
+  background: #f3f4f6;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.16);
+}
+
+.btn-secondary:disabled,
+.btn-secondary[disabled] {
+  opacity: 0.5;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Кнопка "Менеджеру" — центрируем на мобильных */
+.order-footer-btn {
+  display: block;
+  width: min(420px, 85%);
+  margin: 16px auto 24px;
+}
+
+/* 13. Поле поиска по артикулу */
+.catalog-controls {
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.sku-search {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  outline: none;
+}
+
+.sku-search:focus {
+  border-color: #0f172a;
+}
+
+/* 14. Мобильная сетка карточек */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .tile {
+    border-radius: 18px;
+  }
+
+  .tile-body {
+    padding: 6px 4px 8px;
+  }
+
+  .tile-sub {
+    padding: 0 2px;
+  }
+
+  .tile-weight {
+    font-size: 12.5px;
+  }
+}
+
+/* 15. Кнопка "Выбрать размеры" — стили и позиционирование */
+.size-picker-display {
+  position: relative;
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 9px 12px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.size-picker-display:active {
+  background: #f3f4f6;
+}
+
+.size-picker-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.size-active-stock {
+  display: none;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* убираем фон у обёрток вокруг кнопки размеров */
+.field-control,
+.field,
+.product-controls-row .field {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 16. Увеличиваем высоту строк размера в матрице */
+.size-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 44px;
+}
+
+/* 17. Модальное окно размеров поверх фиксированной кнопки "В корзину" */
+.size-matrix-backdrop {
+  z-index: 80;
+}
+
+/* === ЕДИНАЯ СИСТЕМА СЕРЫХ ПОДЛОЖЕК И ТЕКСТА === */
+
+:root {
+  /* Фон страницы, карточек и "мягких" блоков */
+  --bg-page:   #f1f5f9;  /* общий фон (как сейчас) */
+  --bg-card:   #ffffff;  /* белые карточки */
+  --bg-muted:  #f3f4f6;  /* мягкий серый фон для "внутренних" блоков */
+
+  /* Бордеры */
+  --border-soft: #e2e8f0;
+
+  /* Текст */
+  --text-main:   #1a1a1a;
+  --text-muted:  #6b7280;  /* единый серый для подписи/описаний */
+}
+
+/* Фон страницы */
+body {
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+/* Белые карточки: категории, плитки, товар, позиции в корзине, универсальные карточки */
+.category-card,
+.tile,
+.product-card,
+.list-item,
+.card,
+.size-matrix-sheet {
+  background: var(--bg-card);
+  border-color: var(--border-soft);
+}
+
+/* Мягкие серые подложки внутри (контейнеры, где "второй слой") */
+.category-image,
+.product-controls,
+.model-sizes-list,
+.size-matrix-list,
+.product-photo-wrap,
+.model-photo-wrap {
+  background: var(--bg-muted);
+}
+
+/* Описания и "вторичный" текст: приводим к одному серому */
+.hero-sub,
+.category-sub,
+.main-section-sub,
+.product-art,
+.product-weight,
+.model-avg,
+.size-row-weight,
+.tile-sub,
+.cart-sub {
+  color: var(--text-muted);
+}
+
+/* === Главная: белые карточки разделов, как в корзине === */
+
+.main-sections {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main-section-card {
+  background: #ffffff;                       /* белый, как блоки в корзине */
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #111827;
+}
+
+.main-section-title {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-bottom: 2px;
+  color: #111827;
+}
+
+.main-section-sub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* лёгкий отклик на тап */
+.main-section-card:active {
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.14);
+  transform: translateY(1px);
+}
+
+.catalog-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* === ФИЛЬТРЫ: bottom sheet === */
+
+.filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out;
+  z-index: 900;
+}
+
+.filter-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.filter-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 70vh;
+  background: #ffffff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.25s ease-out;
+  z-index: 901;
+}
+
+.filter-sheet.open {
+  transform: translateY(0);
+}
+
+.filter-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 8px;
+}
+
+.filter-sheet-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filter-sheet-close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.filter-sheet-content {
+  padding: 4px 16px 12px;
+  overflow-y: auto;
+}
+
+.filter-placeholder {
+  font-size: 13px;
+  color: #777;
+}
+
+.filter-sheet-footer {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.filter-sheet-footer .btn-outline,
+.filter-sheet-footer .btn-primary {
+  flex: 1;
+}
+
+.filter-block {
+  margin-bottom: 12px;
+}
+
+.filter-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.filter-weight-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 13px;
+}
+
+.filter-input.small {
+  max-width: 120px;
+}
+
+.filter-weight-sep {
+  font-size: 13px;
+  color: #777;
+}
+
+.filter-size-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-size-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f8f8fa;
+  font-size: 16px;
+  line-height: 1.1;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.filter-size-chip:active {
+  transform: none;
+}
+
+.filter-size-chip.active {
+  border-color: #00897b;
+  background: #e0f2f1;
+}
+
+.filter-switch-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
