@@ -37,6 +37,7 @@ const TYPE_LABELS = {
 };
 let ringGenderFilter = null; // "female" | "male" | null
 let ringStonesFilter = null; // "with" | "without" | null
+let ringTypeFilter = null; // "wedding" | null
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -475,6 +476,10 @@ function applyCatalogFilters(list, category) {
       result = result.filter(prod => prod.hasStones === true);
     } else if (ringStonesFilter === "without") {
       result = result.filter(prod => prod.hasStones === false);
+    }
+
+    if (ringTypeFilter === "wedding") {
+      result = result.filter(prod => prod.ringType === "wedding");
     }
   }
 
@@ -974,54 +979,65 @@ function renderGrid() {
     })
     .join("");
 
-  let subfiltersHtml = "";
-  if (category === "rings") {
-    const genderActive = val =>
-      ringGenderFilter === val ? " active" : "";
-    const stonesActive = val =>
-      ringStonesFilter === val ? " active" : "";
-    subfiltersHtml = `
-      <div class="ring-subfilters">
-        <div class="ring-subfilters-row">
-          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
-            "female"
-          )}" data-ring-gender="female">Женские</button>
-          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
-            "male"
-          )}" data-ring-gender="male">Мужские</button>
-        </div>
-        <div class="ring-subfilters-row">
-          <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
-            "with"
-          )}" data-ring-stones="with">С камнями</button>
-          <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
-            "without"
-          )}" data-ring-stones="without">Без камней</button>
-        </div>
-      </div>
-    `;
-  }
+  grid.innerHTML = tilesHtml;
 
-  grid.innerHTML = subfiltersHtml + tilesHtml;
+  const subfiltersBox = document.getElementById("category-subfilters");
+  if (subfiltersBox) {
+    if (category !== "rings") {
+      subfiltersBox.innerHTML = "";
+    } else {
+      const genderActive = val =>
+        ringGenderFilter === val ? " active" : "";
+      const stonesActive = val =>
+        ringStonesFilter === val ? " active" : "";
+      const typeActive = val =>
+        ringTypeFilter === val ? " active" : "";
 
-  if (category === "rings") {
-    const genderChips = grid.querySelectorAll("[data-ring-gender]");
-    genderChips.forEach(chip => {
-      chip.onclick = () => {
-        const val = chip.dataset.ringGender || null;
-        ringGenderFilter = ringGenderFilter === val ? null : val;
-        renderGrid();
-      };
-    });
+      subfiltersBox.innerHTML = `
+        <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
+          "female"
+        )}" data-ring-gender="female">Женские</button>
+        <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
+          "male"
+        )}" data-ring-gender="male">Мужские</button>
+        <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
+          "with"
+        )}" data-ring-stones="with">С камнями</button>
+        <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
+          "without"
+        )}" data-ring-stones="without">Без камней</button>
+        <button type="button" class="filter-size-chip ring-subfilter-chip${typeActive(
+          "wedding"
+        )}" data-ring-type="wedding">Обручальные</button>
+      `;
 
-    const stoneChips = grid.querySelectorAll("[data-ring-stones]");
-    stoneChips.forEach(chip => {
-      chip.onclick = () => {
-        const val = chip.dataset.ringStones || null;
-        ringStonesFilter = ringStonesFilter === val ? null : val;
-        renderGrid();
-      };
-    });
+      const genderChips = subfiltersBox.querySelectorAll("[data-ring-gender]");
+      genderChips.forEach(chip => {
+        chip.onclick = () => {
+          const val = chip.dataset.ringGender || null;
+          ringGenderFilter = ringGenderFilter === val ? null : val;
+          renderGrid();
+        };
+      });
+
+      const stoneChips = subfiltersBox.querySelectorAll("[data-ring-stones]");
+      stoneChips.forEach(chip => {
+        chip.onclick = () => {
+          const val = chip.dataset.ringStones || null;
+          ringStonesFilter = ringStonesFilter === val ? null : val;
+          renderGrid();
+        };
+      });
+
+      const typeChips = subfiltersBox.querySelectorAll("[data-ring-type]");
+      typeChips.forEach(chip => {
+        chip.onclick = () => {
+          const val = chip.dataset.ringType || null;
+          ringTypeFilter = ringTypeFilter === val ? null : val;
+          renderGrid();
+        };
+      });
+    }
   }
 
   updateCartBadge();
