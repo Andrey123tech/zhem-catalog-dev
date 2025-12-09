@@ -125,49 +125,31 @@ function resolveTypeLabel(product) {
   const title = normalize(product && product.title);
   const category = normalize(product && product.category);
 
-  const rules = [
-    {
-      label: "Кольцо",
-      titleNeedle: "кольц",
-      categoryValues: ["rings"],
-      categoryNeedle: "кольц"
-    },
-    {
-      label: "Серьги",
-      titleNeedle: "серьг",
-      categoryValues: ["earrings"],
-      categoryNeedle: "серьг"
-    },
-    {
-      label: "Браслет",
-      titleNeedle: "браслет",
-      categoryValues: ["bracelets"],
-      categoryNeedle: "браслет"
-    },
-    {
-      label: "Подвеска",
-      titleNeedle: "подвес",
-      categoryValues: ["pendants"],
-      categoryNeedle: "подвес"
-    },
-    {
-      label: "Булавка",
-      titleNeedle: "булавк",
-      categoryValues: ["pins"],
-      categoryNeedle: "булавк"
-    }
+  const titleRules = [
+    { label: "Кольцо", needle: "кольц" },
+    { label: "Серьги", needle: "серьг" },
+    { label: "Браслет", needle: "браслет" },
+    { label: "Подвеска", needle: "подвес" },
+    { label: "Булавка", needle: "булавк" }
   ];
 
-  for (const rule of rules) {
-    if (title && title.includes(rule.titleNeedle)) return rule.label;
+  for (const rule of titleRules) {
+    if (title && title.includes(rule.needle)) return rule.label;
   }
 
-  for (const rule of rules) {
-    const matchByCategoryValue =
-      category && rule.categoryValues && rule.categoryValues.includes(category);
-    const matchByCategoryNeedle =
-      category && rule.categoryNeedle && category.includes(rule.categoryNeedle);
-    if (matchByCategoryValue || matchByCategoryNeedle) return rule.label;
+  const categoryRules = [
+    { label: "Кольцо", values: ["rings"], needle: "кольц" },
+    { label: "Серьги", values: ["earrings"], needle: "серьг" },
+    { label: "Браслет", values: ["bracelets"], needle: "браслет" },
+    { label: "Подвеска", values: ["pendants"], needle: "подвес" },
+    { label: "Булавка", values: ["pins"], needle: "булавк" }
+  ];
+
+  for (const rule of categoryRules) {
+    const matchesValue =
+      category && Array.isArray(rule.values) && rule.values.includes(category);
+    const matchesNeedle = category && rule.needle && category.includes(rule.needle);
+    if (matchesValue || matchesNeedle) return rule.label;
   }
 
   return "Модель";
