@@ -122,6 +122,7 @@ function buildSkuMetaFromExcel() {
   const workbook = xlsx.readFile(FILE_EXCEL);
   const skuMeta = {};
   const excelSkus = new Set();
+  const seenInExcel = new Set();
 
   workbook.SheetNames.forEach((sheetName) => {
     const category = CATEGORY_BY_SHEET[sheetName];
@@ -150,7 +151,10 @@ function buildSkuMetaFromExcel() {
           if (!isSkuCandidate(cell)) continue;
           const sku = normalizeText(cell);
           if (!sku) continue;
-          skuMeta[sku] = columnMeta[c];
+          if (!seenInExcel.has(sku)) {
+            skuMeta[sku] = columnMeta[c];
+            seenInExcel.add(sku);
+          }
           excelSkus.add(sku);
         }
       }
@@ -171,7 +175,10 @@ function buildSkuMetaFromExcel() {
         if (!isSkuCandidate(cell)) continue;
         const sku = normalizeText(cell);
         if (!sku) continue;
-        skuMeta[sku] = columnMeta[c];
+        if (!seenInExcel.has(sku)) {
+          skuMeta[sku] = columnMeta[c];
+          seenInExcel.add(sku);
+        }
         excelSkus.add(sku);
       }
     }
@@ -226,9 +233,16 @@ function main() {
   const { updatedCount, missingInProducts, unusedInExcel } =
     applyMetaToProducts(products, skuMeta);
 
+  const totalRings = products.filter((p) => p.category === "rings").length;
+  const weddingRings = products.filter(
+    (p) => p.category === "rings" && p.ringType === "wedding"
+  ).length;
+
   writeJSON(FILE_PRODUCTS, products);
   writeJSON(FILE_SKU_MAP, {
     totalProducts: products.length,
+    totalRings,
+    weddingRings,
     excelSkuCount: excelSkus.size,
     updatedProducts: updatedCount,
     missingInProducts,
@@ -243,6 +257,9 @@ function main() {
   );
   console.log(
     `В products.json есть, но нет в Excel: ${unusedInExcel.length}`
+  );
+  console.log(
+    `Сводка колец: всего ${totalRings}, обручальные ${weddingRings}`
   );
 }
 
