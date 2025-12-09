@@ -106,7 +106,7 @@
   {
     "sku": "Au190131",
     "title": "Кольцо Au190131",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.723,
@@ -128,7 +128,8 @@
     },
     "stock": 30,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au0237168M",
@@ -215,7 +216,7 @@
   {
     "sku": "Au190023",
     "title": "Кольцо Au190023",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.302,
@@ -229,7 +230,8 @@
     },
     "stock": 2,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au0237168",
@@ -576,7 +578,7 @@
   {
     "sku": "Au190020",
     "title": "Кольцо Au190020",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.134,
@@ -591,7 +593,8 @@
     },
     "stock": 5,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au077724",
@@ -658,7 +661,7 @@
   {
     "sku": "Au190024",
     "title": "Кольцо Au190024",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.966,
@@ -668,7 +671,8 @@
     "sortOrder": 1,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au016075",
@@ -904,7 +908,7 @@
   {
     "sku": "Au190573",
     "title": "Кольцо Au190573",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.394,
@@ -924,7 +928,8 @@
     },
     "stock": 28,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au178075",
@@ -1128,7 +1133,7 @@
   {
     "sku": "Au177620",
     "title": "Браслет Au177620",
-    "category": "bracelets",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 11.712,
@@ -1138,7 +1143,8 @@
     "sortOrder": 1,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au185583",
@@ -1294,7 +1300,7 @@
   {
     "sku": "Au190144",
     "title": "Кольцо Au190144",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.394,
@@ -1311,7 +1317,8 @@
     },
     "stock": 8,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au0237210M",
@@ -1336,7 +1343,7 @@
   {
     "sku": "Au180602",
     "title": "Браслет Au180602",
-    "category": "bracelets",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 9.352,
@@ -1346,12 +1353,13 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190141",
     "title": "Кольцо Au190141",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.216,
@@ -1361,7 +1369,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180359",
@@ -1386,7 +1395,7 @@
   {
     "sku": "Au180600",
     "title": "Браслет Au180600",
-    "category": "bracelets",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 9.485,
@@ -1396,12 +1405,13 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190574",
     "title": "Кольцо Au190574",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.455,
@@ -1414,7 +1424,8 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au0507739",
@@ -1594,7 +1605,7 @@
   {
     "sku": "Au190155",
     "title": "Кольцо Au190155",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.749,
@@ -1611,7 +1622,8 @@
     },
     "stock": 5,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au185702",
@@ -1636,7 +1648,7 @@
   {
     "sku": "Au190174",
     "title": "Браслет Au190174",
-    "category": "bracelets",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 7.293,
@@ -1646,12 +1658,13 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190142",
     "title": "Кольцо Au190142",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.247,
@@ -1661,7 +1674,8 @@
     "sortOrder": 2,
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au177208",
@@ -1865,7 +1879,7 @@
   {
     "sku": "Au185853",
     "title": "Серьги Au185853",
-    "category": "earrings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.233,
@@ -1875,7 +1889,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au178994",
@@ -1966,7 +1981,7 @@
   {
     "sku": "Au190159",
     "title": "Кольцо Au190159",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.348,
@@ -1976,7 +1991,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190196",
@@ -2001,7 +2017,7 @@
   {
     "sku": "Au190140",
     "title": "Кольцо Au190140",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.236,
@@ -2014,7 +2030,8 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180395",
@@ -2125,7 +2142,7 @@
   {
     "sku": "Au190052",
     "title": "Кольцо Au190052",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.256,
@@ -2138,7 +2155,8 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180667",
@@ -2254,7 +2272,7 @@
   {
     "sku": "Au190016",
     "title": "Кольцо Au190016",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.209,
@@ -2267,7 +2285,8 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180659",
@@ -2292,7 +2311,7 @@
   {
     "sku": "Au190365K",
     "title": "Кольцо Au190365K",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.461,
@@ -2313,7 +2332,8 @@
     },
     "stock": 31,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180387",
@@ -2338,7 +2358,7 @@
   {
     "sku": "Au190562",
     "title": "Кольцо Au190562",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.889,
@@ -2351,7 +2371,8 @@
     },
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au177760",
@@ -2466,7 +2487,7 @@
   {
     "sku": "Au190546",
     "title": "Кольцо Au190546",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.116,
@@ -2476,7 +2497,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180635C",
@@ -2645,7 +2667,7 @@
   {
     "sku": "Au190125",
     "title": "Кольцо Au190125",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.038,
@@ -2665,7 +2687,8 @@
     },
     "stock": 16,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au177758",
@@ -2775,7 +2798,7 @@
   {
     "sku": "Au190126",
     "title": "Кольцо Au190126",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.239,
@@ -2792,7 +2815,8 @@
     },
     "stock": 7,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au179320",
@@ -2817,7 +2841,7 @@
   {
     "sku": "Au190121",
     "title": "Кольцо Au190121",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 3.075,
@@ -2827,7 +2851,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180003",
@@ -2852,7 +2877,7 @@
   {
     "sku": "Au1407386F",
     "title": "Кольцо Au1407386F",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.827,
@@ -2862,7 +2887,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au179305G",
@@ -2916,7 +2942,7 @@
   {
     "sku": "Au179305",
     "title": "Серьги Au179305",
-    "category": "earrings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.091,
@@ -2926,12 +2952,13 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190122",
     "title": "Кольцо Au190122",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 5.138,
@@ -2946,7 +2973,8 @@
     },
     "stock": 4,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au010102",
@@ -3130,7 +3158,7 @@
   {
     "sku": "Au0407712",
     "title": "Кольцо Au0407712",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.4,
@@ -3140,7 +3168,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au0407397",
@@ -3316,7 +3345,7 @@
   {
     "sku": "Au0607708",
     "title": "Кольцо Au0607708",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.719,
@@ -3326,7 +3355,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au178923",
@@ -3351,7 +3381,7 @@
   {
     "sku": "Au0507709",
     "title": "Кольцо Au0507709",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.881,
@@ -3361,7 +3391,8 @@
     "sortOrder": 2,
     "stock": 0,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au180634C",
@@ -3462,7 +3493,7 @@
   {
     "sku": "Au185813",
     "title": "Серьги Au185813",
-    "category": "earrings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.998,
@@ -3472,7 +3503,8 @@
     "sortOrder": 2,
     "stock": 1,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au0507429F",
@@ -3889,7 +3921,7 @@
   {
     "sku": "Au190136",
     "title": "Кольцо Au190136",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.242,
@@ -3906,12 +3938,13 @@
     },
     "stock": 6,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190039",
     "title": "Кольцо Au190039",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.033,
@@ -3926,7 +3959,8 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190599",
@@ -3954,7 +3988,7 @@
   {
     "sku": "Au190554",
     "title": "Кольцо Au190554",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.48,
@@ -3972,7 +4006,8 @@
     },
     "stock": 16,
     "isNew": true,
-    "newSince": "2025-12-01"
+    "newSince": "2025-12-01",
+    "unclassified": true
   },
   {
     "sku": "Au190070",
@@ -4054,7 +4089,7 @@
   {
     "sku": "Au190524",
     "title": "Кольцо Au190524",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 0.967,
@@ -4069,7 +4104,8 @@
     },
     "stock": 3,
     "isNew": false,
-    "newSince": null
+    "newSince": null,
+    "unclassified": true
   },
   {
     "sku": "Au190018",
@@ -4098,7 +4134,7 @@
   {
     "sku": "Au190638",
     "title": "Кольцо Au190638",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.095,
@@ -4113,7 +4149,8 @@
     },
     "stock": 4,
     "isNew": true,
-    "newSince": "2025-12-01"
+    "newSince": "2025-12-01",
+    "unclassified": true
   },
   {
     "sku": "Au190137",
@@ -10785,7 +10822,7 @@
   {
     "sku": "190701",
     "title": "Модель 190701",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10794,12 +10831,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190699",
     "title": "Модель 190699",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10808,12 +10846,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190698",
     "title": "Модель 190698",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10822,12 +10861,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190691",
     "title": "Модель 190691",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10836,12 +10876,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190687",
     "title": "Модель 190687",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10850,12 +10891,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190688",
     "title": "Модель 190688",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10864,12 +10906,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190676",
     "title": "Модель 190676",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10878,12 +10921,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190673",
     "title": "Модель 190673",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10892,12 +10936,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190651",
     "title": "Модель 190651",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10906,12 +10951,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190619K",
     "title": "Модель 190619K",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10920,12 +10966,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190515k",
     "title": "Модель 190515k",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10934,12 +10981,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190616K",
     "title": "Модель 190616K",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10948,12 +10996,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190641",
     "title": "Модель 190641",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10962,12 +11011,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190638",
     "title": "Модель 190638",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10976,12 +11026,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190618k",
     "title": "Модель 190618k",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -10990,12 +11041,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190560",
     "title": "Модель 190560",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11004,12 +11056,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190561",
     "title": "Модель 190561",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11018,12 +11071,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190551",
     "title": "Модель 190551",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11032,12 +11086,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190553",
     "title": "Модель 190553",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11046,12 +11101,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190554",
     "title": "Модель 190554",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11060,12 +11116,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190555",
     "title": "Модель 190555",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11074,12 +11131,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190556",
     "title": "Модель 190556",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11088,12 +11146,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190689",
     "title": "Модель 190689",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11102,12 +11161,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190690",
     "title": "Модель 190690",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11116,12 +11176,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190695",
     "title": "Модель 190695",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11130,12 +11191,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190634K",
     "title": "Модель 190634K",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11144,12 +11206,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190640",
     "title": "Модель 190640",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11158,12 +11221,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190643",
     "title": "Модель 190643",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11172,12 +11236,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190512",
     "title": "Модель 190512",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11186,12 +11251,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190518",
     "title": "Модель 190518",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11200,12 +11266,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190587",
     "title": "Модель 190587",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11214,12 +11281,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190589",
     "title": "Модель 190589",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11228,12 +11296,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190593",
     "title": "Модель 190593",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11242,12 +11311,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190597",
     "title": "Модель 190597",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11256,12 +11326,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190599",
     "title": "Модель 190599",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11270,12 +11341,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190603",
     "title": "Модель 190603",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11284,12 +11356,13 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   },
   {
     "sku": "190606",
     "title": "Модель 190606",
-    "category": "rings",
+    "category": "other",
     "metal": "Au585",
     "color": "rose",
     "avgWeight": null,
@@ -11298,6 +11371,7 @@
     "isNew": true,
     "newSince": "2025-12-08",
     "stockBySize": {},
-    "stock": 0
+    "stock": 0,
+    "unclassified": true
   }
 ]

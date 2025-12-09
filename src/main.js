@@ -17,6 +17,24 @@ const NO_SIZE_KEY = "__no_size__";
 const MANAGER_PHONE = "77012271519"; // номер для WhatsApp (без +)
 const TODAY = new Date();
 const SWIPE_CLICK_SUPPRESS_MS = 300;
+const ALLOWED_CATEGORIES = new Set([
+  "rings",
+  "earrings",
+  "bracelets",
+  "pendants",
+  "pins",
+  "necklaces",
+  "brooches"
+]);
+const TYPE_LABELS = {
+  rings: "Кольцо",
+  earrings: "Серьги",
+  bracelets: "Браслет",
+  pendants: "Подвеска",
+  pins: "Булавка",
+  necklaces: "Колье",
+  brooches: "Брошь"
+};
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -809,13 +827,15 @@ function renderGrid() {
     earrings: "Серьги",
     bracelets: "Браслеты",
     pendants: "Подвески",
-    pins: "Булавки"
+    pins: "Булавки",
+    necklaces: "Колье",
+    brooches: "Броши"
   };
 
   const titleEl = $("#catalogTitle");
   const heroTitleEl = $("#heroTitle");
 
-  if (!category || !CATEGORY_LABELS[category]) {
+  if (!category || !CATEGORY_LABELS[category] || !ALLOWED_CATEGORIES.has(category)) {
     if (heroTitleEl) heroTitleEl.textContent = "Каталог";
     if (titleEl) titleEl.textContent = "Выберите категорию";
 
@@ -824,7 +844,9 @@ function renderGrid() {
       { key: "earrings", label: "Серьги" },
       { key: "bracelets", label: "Браслеты" },
       { key: "pendants", label: "Подвески" },
-      { key: "pins", label: "Булавки" }
+      { key: "pins", label: "Булавки" },
+      { key: "necklaces", label: "Колье" },
+      { key: "brooches", label: "Броши" }
     ];
 
     grid.innerHTML = cats
@@ -850,7 +872,9 @@ function renderGrid() {
     return;
   }
 
-  let list = PRODUCTS.filter(p => p.category === category);
+  let list = PRODUCTS.filter(
+    p => p.category === category && ALLOWED_CATEGORIES.has(p.category)
+  );
 
   const searchInput = $("#skuSearch");
   let query = "";
@@ -894,9 +918,10 @@ function renderGrid() {
       const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
       const w =
         p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
-      const fullTitle = p.title || `Кольцо ${p.sku}`;
+      const typeLabel = TYPE_LABELS[category] || "Модель";
+      const fullTitle = p.title || `${typeLabel} ${p.sku}`;
       let shortTitle = fullTitle.replace(p.sku, "").trim();
-      if (!shortTitle) shortTitle = "Кольцо";
+      if (!shortTitle) shortTitle = typeLabel;
       const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
       return `
@@ -953,13 +978,6 @@ function renderProduct() {
 
   const cat = prod.category;
 
-  const TYPE_LABELS = {
-    rings: "Кольцо",
-    earrings: "Серьги",
-    bracelets: "Браслет",
-    pendants: "Подвеска",
-    pins: "Булавка"
-  };
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
   const isRing = cat === "rings";
@@ -1475,26 +1493,7 @@ function renderOrder() {
 
     let g = skuMap.get(it.sku);
     if (!g) {
-      let baseTitle;
-      switch (cat) {
-        case "rings":
-          baseTitle = "Кольцо";
-          break;
-        case "earrings":
-          baseTitle = "Серьги";
-          break;
-        case "bracelets":
-          baseTitle = "Браслет";
-          break;
-        case "pendants":
-          baseTitle = "Подвеска";
-          break;
-        case "pins":
-          baseTitle = "Булавка";
-          break;
-        default:
-          baseTitle = "Модель";
-      }
+      const baseTitle = TYPE_LABELS[cat] || "Модель";
 
       g = {
         sku: it.sku,
@@ -1517,13 +1516,23 @@ function renderOrder() {
 
   const groups = Array.from(skuMap.values());
 
-  const CATEGORY_ORDER = ["rings", "earrings", "bracelets", "pendants", "pins"];
+  const CATEGORY_ORDER = [
+    "rings",
+    "earrings",
+    "bracelets",
+    "pendants",
+    "pins",
+    "necklaces",
+    "brooches"
+  ];
   const CATEGORY_LABELS = {
     rings: "Кольца",
     earrings: "Серьги",
     bracelets: "Браслеты",
     pendants: "Подвески",
     pins: "Булавки",
+    necklaces: "Колье",
+    brooches: "Броши",
     other: "Другие"
   };
 
