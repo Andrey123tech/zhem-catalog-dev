@@ -919,9 +919,20 @@ function renderGrid() {
       const w =
         p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
       const typeLabel = TYPE_LABELS[category] || "Модель";
-      const fullTitle = p.title || `${typeLabel} ${p.sku}`;
-      let shortTitle = fullTitle.replace(p.sku, "").trim();
-      if (!shortTitle) shortTitle = typeLabel;
+      const baseType = TYPE_LABELS[p.category] || "Модель";
+      let shortTitle = "";
+      if (p.title) {
+        const cleaned = p.title.replace(p.sku, "").trim();
+        const startsWithModel = cleaned
+          ? /^модель/i.test(cleaned.trim())
+          : false;
+        if (cleaned && !startsWithModel) {
+          shortTitle = cleaned;
+        }
+      }
+      if (!shortTitle || /^модель/i.test(shortTitle)) {
+        shortTitle = baseType;
+      }
       const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
       return `
