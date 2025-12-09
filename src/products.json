@@ -19,7 +19,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0237165",
@@ -341,7 +341,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180007",
@@ -426,7 +426,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0237162",
@@ -511,7 +511,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180483",
@@ -757,7 +757,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au077167",
@@ -841,7 +841,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au016167",
@@ -1018,7 +1018,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0237210",
@@ -1102,7 +1102,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180590",
@@ -1186,7 +1186,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au080167",
@@ -1253,7 +1253,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0757719",
@@ -1492,7 +1492,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au179329",
@@ -1558,7 +1558,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0407756",
@@ -1739,7 +1739,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0357734",
@@ -1810,7 +1810,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au179349",
@@ -1874,7 +1874,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185853",
@@ -1934,7 +1934,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0207109",
@@ -2073,7 +2073,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0407107",
@@ -2117,7 +2117,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180402",
@@ -2199,7 +2199,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180653",
@@ -2247,7 +2247,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au0307108",
@@ -2419,7 +2419,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au178110",
@@ -2462,7 +2462,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au177039",
@@ -2544,7 +2544,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180392",
@@ -2592,7 +2592,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au180668M",
@@ -2640,7 +2640,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -2729,7 +2729,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -2771,7 +2771,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -2935,7 +2935,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -3022,7 +3022,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -3439,7 +3439,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -3486,7 +3486,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -3524,7 +3524,7 @@
     "isNew": false,
     "newSince": null,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -8520,7 +8520,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190062",
@@ -8542,7 +8542,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190158",
@@ -8564,7 +8564,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190145",
@@ -8589,7 +8589,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190698",
@@ -8610,7 +8610,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190544",
@@ -8630,7 +8630,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190372K",
@@ -8650,7 +8650,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190547",
@@ -8671,7 +8671,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190357K",
@@ -8691,7 +8691,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190130",
@@ -8710,7 +8710,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190373K",
@@ -8729,7 +8729,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190685",
@@ -8748,7 +8748,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190022",
@@ -8766,7 +8766,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190053",
@@ -8784,7 +8784,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190055",
@@ -8802,7 +8802,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190063",
@@ -8820,7 +8820,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190336",
@@ -8838,7 +8838,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190347K",
@@ -8856,7 +8856,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190354K",
@@ -8874,7 +8874,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190545",
@@ -8892,7 +8892,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190558",
@@ -8910,7 +8910,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190699",
@@ -8928,7 +8928,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190702",
@@ -8946,7 +8946,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190689",
@@ -8971,7 +8971,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190690",
@@ -8993,7 +8993,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190348K",
@@ -9013,7 +9013,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190355K",
@@ -9035,7 +9035,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au179859",
@@ -9056,7 +9056,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185933K",
@@ -9078,7 +9078,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190564",
@@ -9099,7 +9099,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au178855",
@@ -9118,7 +9118,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185979K",
@@ -9137,7 +9137,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190351K",
@@ -9155,7 +9155,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190366K",
@@ -9173,7 +9173,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au179357",
@@ -9191,7 +9191,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au179861",
@@ -9209,7 +9209,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185499",
@@ -9227,7 +9227,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185570",
@@ -9245,7 +9245,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185606",
@@ -9263,7 +9263,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185793K",
@@ -9281,7 +9281,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185794K",
@@ -9299,7 +9299,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185978K",
@@ -9317,7 +9317,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au185985K",
@@ -9335,7 +9335,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190057",
@@ -9353,7 +9353,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "cubic"
   },
   {
     "sku": "Au190372KБр",
@@ -9474,7 +9474,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "diamond"
   },
   {
     "sku": "Au185795K Бр",
@@ -9529,7 +9529,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "diamond"
   },
   {
     "sku": "Au178043",
@@ -9547,7 +9547,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "diamond"
   },
   {
     "sku": "Au185793K Бр",
@@ -9655,7 +9655,7 @@
     "gender": "female",
     "ringType": null,
     "hasStones": true,
-    "stoneType": null
+    "stoneType": "semi"
   },
   {
     "sku": "Au1407795F",
@@ -9678,7 +9678,7 @@
     },
     "stock": 8,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9699,7 +9699,7 @@
     },
     "stock": 7,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9721,7 +9721,7 @@
     },
     "stock": 7,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9742,7 +9742,7 @@
     },
     "stock": 6,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9762,7 +9762,7 @@
     },
     "stock": 3,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9780,7 +9780,7 @@
     },
     "stock": 1,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9798,7 +9798,7 @@
     },
     "stock": 1,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": false,
     "stoneType": null
   },
@@ -9818,7 +9818,7 @@
     },
     "stock": 8,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -9839,7 +9839,7 @@
     },
     "stock": 6,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -9862,7 +9862,7 @@
     },
     "stock": 12,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -9884,7 +9884,7 @@
     },
     "stock": 10,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -9907,7 +9907,7 @@
     },
     "stock": 9,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
@@ -9926,7 +9926,7 @@
     },
     "stock": 2,
     "gender": "male",
-    "ringType": null,
+    "ringType": "signet",
     "hasStones": true,
     "stoneType": null
   },
