@@ -101,6 +101,12 @@ img {
   font-size: 14px;
   color: #6b7280;
 }
+.ring-subfilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 12px;
+}
 
 .section-title {
   font-size: 16px;
