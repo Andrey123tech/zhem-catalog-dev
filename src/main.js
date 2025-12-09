@@ -35,6 +35,8 @@ const TYPE_LABELS = {
   necklaces: "Колье",
   brooches: "Брошь"
 };
+let ringGenderFilter = null; // "female" | "male" | null
+let ringStonesFilter = null; // "with" | "without" | null
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -460,6 +462,20 @@ function applyCatalogFilters(list, category) {
 
   if (filterState.isNew) {
     result = result.filter(prod => isNewProduct(prod, TODAY));
+  }
+
+  if (category === "rings") {
+    if (ringGenderFilter === "female") {
+      result = result.filter(prod => prod.gender === "female");
+    } else if (ringGenderFilter === "male") {
+      result = result.filter(prod => prod.gender === "male");
+    }
+
+    if (ringStonesFilter === "with") {
+      result = result.filter(prod => prod.hasStones === true);
+    } else if (ringStonesFilter === "without") {
+      result = result.filter(prod => prod.hasStones === false);
+    }
   }
 
   return result;
@@ -909,7 +925,7 @@ function renderGrid() {
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = `${label} · текущая подборка`;
 
-  grid.innerHTML = list
+  const tilesHtml = list
     .map(p => {
       const img =
         (p.images && p.images[0]) ||
@@ -957,6 +973,56 @@ function renderGrid() {
       `;
     })
     .join("");
+
+  let subfiltersHtml = "";
+  if (category === "rings") {
+    const genderActive = val =>
+      ringGenderFilter === val ? " active" : "";
+    const stonesActive = val =>
+      ringStonesFilter === val ? " active" : "";
+    subfiltersHtml = `
+      <div class="ring-subfilters">
+        <div class="ring-subfilters-row">
+          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
+            "female"
+          )}" data-ring-gender="female">Женские</button>
+          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
+            "male"
+          )}" data-ring-gender="male">Мужские</button>
+        </div>
+        <div class="ring-subfilters-row">
+          <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
+            "with"
+          )}" data-ring-stones="with">С камнями</button>
+          <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
+            "without"
+          )}" data-ring-stones="without">Без камней</button>
+        </div>
+      </div>
+    `;
+  }
+
+  grid.innerHTML = subfiltersHtml + tilesHtml;
+
+  if (category === "rings") {
+    const genderChips = grid.querySelectorAll("[data-ring-gender]");
+    genderChips.forEach(chip => {
+      chip.onclick = () => {
+        const val = chip.dataset.ringGender || null;
+        ringGenderFilter = ringGenderFilter === val ? null : val;
+        renderGrid();
+      };
+    });
+
+    const stoneChips = grid.querySelectorAll("[data-ring-stones]");
+    stoneChips.forEach(chip => {
+      chip.onclick = () => {
+        const val = chip.dataset.ringStones || null;
+        ringStonesFilter = ringStonesFilter === val ? null : val;
+        renderGrid();
+      };
+    });
+  }
 
   updateCartBadge();
 }
