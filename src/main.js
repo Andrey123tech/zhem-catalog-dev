@@ -934,9 +934,10 @@ function renderGrid() {
       const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
       const w =
         p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
-      const fullTitle = p.title || `Кольцо ${p.sku}`;
+      const typeLabel = resolveTypeLabel(p);
+      const fullTitle = p.title || `${typeLabel} ${p.sku}`;
       let shortTitle = fullTitle.replace(p.sku, "").trim();
-      if (!shortTitle) shortTitle = "Кольцо";
+      if (!shortTitle) shortTitle = typeLabel;
       const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
       return `
