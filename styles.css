@@ -28,7 +28,7 @@ img {
 .container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 16px 12px 110px;
+  padding: 12px 12px 110px;
 }
 
 /* ============= ШАПКА ============= */
@@ -56,6 +56,13 @@ img {
   width: auto;
   object-fit: contain;
   display: block;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
 .cart-link {
@@ -1065,6 +1072,7 @@ body {
   font-weight: 400;
   color: #9ca3af;
   padding: 4px 16px 2px;
+  margin: 8px 0 6px;
 }
 
 .breadcrumbs a {
