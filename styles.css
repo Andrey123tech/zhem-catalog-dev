@@ -106,7 +106,7 @@ img {
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
-  margin: 12px auto 16px;
+  margin: 8px auto 10px;
 }
 
 .ring-subfilters-row {
@@ -981,7 +981,7 @@ body.no-scroll {
 :root {
   --fs-body: 15px;
 
-  --fs-hero-title: 22px;
+  --fs-hero-title: 21px;
   --fs-hero-sub: 14px;
 
   --fs-section-title: 18px;
@@ -990,7 +990,7 @@ body.no-scroll {
   --fs-card-title: 15px;
   --fs-card-sub: 10px;
 
-  --fs-breadcrumb: 13px;
+  --fs-breadcrumb: 12px;
 
   --fs-main-section-title: 15px;
   --fs-main-section-sub: 13px;
@@ -1033,6 +1033,8 @@ body {
   font-weight: 500;
   letter-spacing: 0.03em;
   color: #222222;
+  line-height: 1.25;
+  margin-bottom: 4px;
 }
 
 .hero-sub {
@@ -1055,12 +1057,12 @@ body {
 .breadcrumbs {
   font-size: var(--fs-breadcrumb);
   font-weight: 400;
-  color: #6b7280;
-  padding: 6px 16px 0;
+  color: #9ca3af;
+  padding: 4px 16px 2px;
 }
 
 .breadcrumbs a {
-  color: #4b5563;
+  color: #9ca3af;
   text-decoration: none;
 }
 
