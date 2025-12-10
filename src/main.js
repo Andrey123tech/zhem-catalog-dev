@@ -36,9 +36,12 @@ const TYPE_LABELS = {
   brooches: "Брошь"
 };
 const RING_SUBFILTER_STORAGE_KEY = "zhemCatalogRingSubfilters";
+const EARRING_SUBFILTER_STORAGE_KEY = "zhemCatalogEarringSubfilters";
 let ringGenderFilter = null; // "female" | "male" | "wedding" | null
 let ringStonesFilter = null; // "with" | "without" | null
 let ringSubfiltersLoaded = false;
+let earringStonesFilter = null; // "with" | "without" | null
+let earringSubfiltersLoaded = false;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -130,6 +133,10 @@ function normalizeRingStones(val) {
   return ["with", "without"].includes(val) ? val : null;
 }
 
+function normalizeEarringStones(val) {
+  return ["with", "without"].includes(val) ? val : null;
+}
+
 function loadRingSubfiltersFromStorage() {
   if (ringSubfiltersLoaded) {
     return {
@@ -169,6 +176,37 @@ function saveRingSubfiltersToStorage() {
   };
   try {
     sessionStorage.setItem(RING_SUBFILTER_STORAGE_KEY, JSON.stringify(payload));
+  } catch (e) {
+    // silent fail
+  }
+}
+
+function loadEarringSubfiltersFromStorage() {
+  if (earringSubfiltersLoaded) return normalizeEarringStones(earringStonesFilter);
+
+  try {
+    const raw = sessionStorage.getItem(EARRING_SUBFILTER_STORAGE_KEY);
+    if (!raw) {
+      earringStonesFilter = null;
+      earringSubfiltersLoaded = true;
+      return null;
+    }
+    const data = JSON.parse(raw);
+    const stones = normalizeEarringStones(data && data.stones);
+    earringStonesFilter = stones;
+    earringSubfiltersLoaded = true;
+    return stones;
+  } catch (e) {
+    earringStonesFilter = null;
+    earringSubfiltersLoaded = true;
+    return null;
+  }
+}
+
+function saveEarringSubfiltersToStorage() {
+  const payload = { stones: normalizeEarringStones(earringStonesFilter) };
+  try {
+    sessionStorage.setItem(EARRING_SUBFILTER_STORAGE_KEY, JSON.stringify(payload));
   } catch (e) {
     // silent fail
   }
@@ -532,6 +570,12 @@ function applyCatalogFilters(list, category) {
     } else if (ringStonesFilter === "without") {
       result = result.filter(prod => prod.hasStones === false);
     }
+  } else if (category === "earrings") {
+    if (earringStonesFilter === "with") {
+      result = result.filter(prod => prod.hasStones === true);
+    } else if (earringStonesFilter === "without") {
+      result = result.filter(prod => prod.hasStones === false);
+    }
   }
 
   return result;
@@ -892,7 +936,7 @@ function clearRingSubfiltersDom() {
   }
 }
 
-function ensureRingSubfilters() {
+function ensureSubfiltersContainer() {
   const mount = document.getElementById("ringSubfiltersMount");
   if (!mount) return null;
 
@@ -901,47 +945,6 @@ function ensureRingSubfilters() {
     container = document.createElement("div");
     container.id = "ringSubfiltersContainer";
     container.className = "ring-subfilters";
-    container.innerHTML = `
-      <div class="ring-subfilters-row ring-subfilters-row-top">
-        <button
-          type="button"
-          class="filter-size-chip ring-subfilter-chip"
-          data-ring-gender="female"
-        >
-          Женские
-        </button>
-        <button
-          type="button"
-          class="filter-size-chip ring-subfilter-chip"
-          data-ring-gender="male"
-        >
-          Мужские
-        </button>
-      </div>
-      <div class="ring-subfilters-row ring-subfilters-row-bottom">
-        <button
-          type="button"
-          class="filter-size-chip ring-subfilter-chip"
-          data-ring-gender="wedding"
-        >
-          Обручальные
-        </button>
-        <button
-          type="button"
-          class="filter-size-chip ring-subfilter-chip"
-          data-ring-stones="with"
-        >
-          С камнями
-        </button>
-        <button
-          type="button"
-          class="filter-size-chip ring-subfilter-chip"
-          data-ring-stones="without"
-        >
-          Без камней
-        </button>
-      </div>
-    `;
   }
 
   if (!mount.contains(container)) {
@@ -952,11 +955,112 @@ function ensureRingSubfilters() {
   return container;
 }
 
+function renderRingSubfilters(container) {
+  if (!container) return;
+  container.className = "ring-subfilters";
+  container.innerHTML = `
+    <div class="ring-subfilters-row ring-subfilters-row-top">
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="female"
+      >
+        Женские
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="male"
+      >
+        Мужские
+      </button>
+    </div>
+    <div class="ring-subfilters-row ring-subfilters-row-bottom">
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="wedding"
+      >
+        Обручальные
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-stones="with"
+      >
+        С камнями
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-stones="without"
+      >
+        Без камней
+      </button>
+    </div>
+  `;
+}
+
+function renderEarringSubfilters(container) {
+  if (!container) return;
+  container.className = "ring-subfilters";
+  container.innerHTML = `
+    <div class="ring-subfilters-row ring-subfilters-row-top">
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip${
+          earringStonesFilter === "with" ? " active" : ""
+        }"
+        data-earring-stones="with"
+      >
+        С камнями
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip${
+          earringStonesFilter === "without" ? " active" : ""
+        }"
+        data-earring-stones="without"
+      >
+        Без камней
+      </button>
+    </div>
+  `;
+}
+
+function renderSubfiltersForCategory(category) {
+  if (category === "earrings" && !earringSubfiltersLoaded) {
+    loadEarringSubfiltersFromStorage();
+  }
+
+  if (category !== "earrings" && earringStonesFilter !== null) {
+    earringStonesFilter = null;
+    saveEarringSubfiltersToStorage();
+  }
+
+  if (category !== "rings" && category !== "earrings") {
+    clearRingSubfiltersDom();
+    return null;
+  }
+
+  const container = ensureSubfiltersContainer();
+  if (!container) return null;
+
+  if (category === "rings") {
+    renderRingSubfilters(container);
+  } else if (category === "earrings") {
+    renderEarringSubfilters(container);
+  }
+
+  return container;
+}
+
 function renderGrid() {
   const grid = $("#grid");
   if (!grid || !Array.isArray(PRODUCTS)) return;
 
   loadFilterStateFromStorage();
+  loadEarringSubfiltersFromStorage();
   syncFilterControlsFromState();
   readFilterControls();
 
@@ -974,12 +1078,11 @@ function renderGrid() {
 
   const titleEl = $("#catalogTitle");
   const heroTitleEl = $("#heroTitle");
-  const ringSubfiltersMount = $("#ringSubfiltersMount");
 
   if (!category || !CATEGORY_LABELS[category] || !ALLOWED_CATEGORIES.has(category)) {
     if (heroTitleEl) heroTitleEl.textContent = "Каталог";
     if (titleEl) titleEl.textContent = "";
-    clearRingSubfiltersDom();
+    renderSubfiltersForCategory(null);
 
     const cats = [
       { key: "rings", label: "Кольца" },
@@ -1017,7 +1120,7 @@ function renderGrid() {
   let list = PRODUCTS.filter(
     p => p.category === category && ALLOWED_CATEGORIES.has(p.category)
   );
-  let ringSubfiltersEl = null;
+  let subfiltersEl = null;
 
   const searchInput = $("#skuSearch");
   let query = "";
@@ -1039,9 +1142,11 @@ function renderGrid() {
 
   if (category === "rings") {
     loadRingSubfiltersFromStorage();
-    ringSubfiltersEl = ensureRingSubfilters();
+    subfiltersEl = renderSubfiltersForCategory("rings");
+  } else if (category === "earrings") {
+    subfiltersEl = renderSubfiltersForCategory("earrings");
   } else {
-    clearRingSubfiltersDom();
+    subfiltersEl = renderSubfiltersForCategory(null);
   }
 
   list = applyCatalogFilters(list, category);
@@ -1104,44 +1209,63 @@ function renderGrid() {
             </div>
           </div>
         </a>
-      `;
+  `;
     })
     .join("");
 
   grid.innerHTML = tilesHtml;
 
-  if (category === "rings" && ringSubfiltersEl) {
-    ringSubfiltersEl.querySelectorAll("[data-ring-gender]").forEach(btn => {
+  if (category === "rings" && subfiltersEl) {
+    subfiltersEl.querySelectorAll("[data-ring-gender]").forEach(btn => {
       btn.classList.toggle(
         "active",
         ringGenderFilter === (btn.dataset.ringGender || "")
       );
     });
-    ringSubfiltersEl.querySelectorAll("[data-ring-stones]").forEach(btn => {
+    subfiltersEl.querySelectorAll("[data-ring-stones]").forEach(btn => {
       btn.classList.toggle(
         "active",
         ringStonesFilter === (btn.dataset.ringStones || "")
       );
     });
-    if (!ringSubfiltersEl.dataset.bound) {
-      ringSubfiltersEl.dataset.bound = "1";
-      ringSubfiltersEl.addEventListener("click", e => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
-        const gender = btn.dataset.ringGender;
-        const stones = btn.dataset.ringStones;
+  } else if (category === "earrings" && subfiltersEl) {
+    subfiltersEl.querySelectorAll("[data-earring-stones]").forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        earringStonesFilter === (btn.dataset.earringStones || "")
+      );
+    });
+  }
 
-        if (gender) {
-          ringGenderFilter = ringGenderFilter === gender ? null : gender;
-        }
-        if (stones) {
-          ringStonesFilter = ringStonesFilter === stones ? null : stones;
-        }
+  if (subfiltersEl && !subfiltersEl.dataset.bound) {
+    subfiltersEl.dataset.bound = "1";
+    subfiltersEl.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const ringGender = btn.dataset.ringGender;
+      const ringStones = btn.dataset.ringStones;
+      const ringWedding = btn.dataset.ringWedding;
+      const earringStones = btn.dataset.earringStones;
 
-        saveRingSubfiltersToStorage();
+      if (earringStones) {
+        earringStonesFilter =
+          earringStonesFilter === earringStones ? null : earringStones;
+        saveEarringSubfiltersToStorage();
         renderGrid();
-      });
-    }
+        return;
+      }
+
+      const genderVal = ringWedding || ringGender;
+      if (genderVal) {
+        ringGenderFilter = ringGenderFilter === genderVal ? null : genderVal;
+      }
+      if (ringStones) {
+        ringStonesFilter = ringStonesFilter === ringStones ? null : ringStones;
+      }
+
+      saveRingSubfiltersToStorage();
+      renderGrid();
+    });
   }
 
   updateCartBadge();
