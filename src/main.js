@@ -885,6 +885,69 @@ function syncFilterControlsFromState() {
   });
 }
 
+function clearRingSubfiltersDom() {
+  const mount = document.getElementById("ringSubfiltersMount");
+  if (mount) {
+    mount.innerHTML = "";
+  }
+}
+
+function ensureRingSubfilters() {
+  const mount = document.getElementById("ringSubfiltersMount");
+  if (!mount) return null;
+
+  let container = document.getElementById("ringSubfilters");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "ringSubfilters";
+    container.className = "ring-subfilters";
+    container.innerHTML = `
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="female"
+      >
+        Женские
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="male"
+      >
+        Мужские
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="wedding"
+      >
+        Обручальные
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-stones="with"
+      >
+        С камнями
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-stones="without"
+      >
+        Без камней
+      </button>
+    `;
+  }
+
+  if (!mount.contains(container)) {
+    mount.innerHTML = "";
+    mount.appendChild(container);
+  }
+
+  return container;
+}
+
 function renderGrid() {
   const grid = $("#grid");
   if (!grid || !Array.isArray(PRODUCTS)) return;
@@ -907,10 +970,12 @@ function renderGrid() {
 
   const titleEl = $("#catalogTitle");
   const heroTitleEl = $("#heroTitle");
+  const ringSubfiltersMount = $("#ringSubfiltersMount");
 
   if (!category || !CATEGORY_LABELS[category] || !ALLOWED_CATEGORIES.has(category)) {
     if (heroTitleEl) heroTitleEl.textContent = "Каталог";
-    if (titleEl) titleEl.textContent = "Выберите категорию";
+    if (titleEl) titleEl.textContent = "";
+    clearRingSubfiltersDom();
 
     const cats = [
       { key: "rings", label: "Кольца" },
@@ -948,6 +1013,7 @@ function renderGrid() {
   let list = PRODUCTS.filter(
     p => p.category === category && ALLOWED_CATEGORIES.has(p.category)
   );
+  let ringSubfiltersEl = null;
 
   const searchInput = $("#skuSearch");
   let query = "";
@@ -969,6 +1035,9 @@ function renderGrid() {
 
   if (category === "rings") {
     loadRingSubfiltersFromStorage();
+    ringSubfiltersEl = ensureRingSubfilters();
+  } else {
+    clearRingSubfiltersDom();
   }
 
   list = applyCatalogFilters(list, category);
@@ -984,7 +1053,7 @@ function renderGrid() {
 
   const label = CATEGORY_LABELS[category];
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
-  if (titleEl) titleEl.textContent = `${label} · текущая подборка`;
+  if (titleEl) titleEl.textContent = "";
 
   const tilesHtml = list
     .map(p => {
@@ -1037,40 +1106,37 @@ function renderGrid() {
 
   grid.innerHTML = tilesHtml;
 
-  if (category === "rings") {
-    const subfilters = document.querySelector("#ringSubfilters");
-    if (subfilters) {
-      subfilters.querySelectorAll("[data-ring-gender]").forEach(btn => {
-        btn.classList.toggle(
-          "active",
-          ringGenderFilter === (btn.dataset.ringGender || "")
-        );
-      });
-      subfilters.querySelectorAll("[data-ring-stones]").forEach(btn => {
-        btn.classList.toggle(
-          "active",
-          ringStonesFilter === (btn.dataset.ringStones || "")
-        );
-      });
-      if (!subfilters.dataset.bound) {
-        subfilters.dataset.bound = "1";
-        subfilters.addEventListener("click", e => {
-          const btn = e.target.closest("button");
-          if (!btn) return;
-          const gender = btn.dataset.ringGender;
-          const stones = btn.dataset.ringStones;
+  if (category === "rings" && ringSubfiltersEl) {
+    ringSubfiltersEl.querySelectorAll("[data-ring-gender]").forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        ringGenderFilter === (btn.dataset.ringGender || "")
+      );
+    });
+    ringSubfiltersEl.querySelectorAll("[data-ring-stones]").forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        ringStonesFilter === (btn.dataset.ringStones || "")
+      );
+    });
+    if (!ringSubfiltersEl.dataset.bound) {
+      ringSubfiltersEl.dataset.bound = "1";
+      ringSubfiltersEl.addEventListener("click", e => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        const gender = btn.dataset.ringGender;
+        const stones = btn.dataset.ringStones;
 
-          if (gender) {
-            ringGenderFilter = ringGenderFilter === gender ? null : gender;
-          }
-          if (stones) {
-            ringStonesFilter = ringStonesFilter === stones ? null : stones;
-          }
+        if (gender) {
+          ringGenderFilter = ringGenderFilter === gender ? null : gender;
+        }
+        if (stones) {
+          ringStonesFilter = ringStonesFilter === stones ? null : stones;
+        }
 
-          saveRingSubfiltersToStorage();
-          renderGrid();
-        });
-      }
+        saveRingSubfiltersToStorage();
+        renderGrid();
+      });
     }
   }
 
