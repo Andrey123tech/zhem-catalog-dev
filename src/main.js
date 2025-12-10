@@ -841,7 +841,6 @@ function readFilterControls() {
   const activeSizeChips = Array.from(
     document.querySelectorAll(".filter-size-chip.active")
   ).filter(chip => !chip.classList.contains("ring-subfilter-chip"));
-  );
   const category = getCategoryFromUrl();
 
   filterState.weightMin = wMin && wMin.value ? parseFloat(wMin.value) : null;
@@ -1036,66 +1035,42 @@ function renderGrid() {
     })
     .join("");
 
-  const existingSubfilters = document.querySelector(".ring-subfilters");
-  if (existingSubfilters) existingSubfilters.remove();
-
-  let subfiltersHtml = "";
-  if (category === "rings") {
-    const genderActive = val =>
-      ringGenderFilter === val ? " active" : "";
-    const stonesActive = val =>
-      ringStonesFilter === val ? " active" : "";
-    subfiltersHtml = `
-      <div id="ringSubfilters" class="ring-subfilters">
-        <div class="ring-subfilters-row">
-          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
-            "female"
-          )}" data-ring-gender="female">Женские</button>
-          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
-            "male"
-          )}" data-ring-gender="male">Мужские</button>
-          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
-            "wedding"
-          )}" data-ring-gender="wedding">Обручальные</button>
-        </div>
-        <div class="ring-subfilters-row">
-          <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
-            "with"
-          )}" data-ring-stones="with">С камнями</button>
-          <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
-            "without"
-          )}" data-ring-stones="without">Без камней</button>
-        </div>
-      </div>
-    `;
-  }
-
-  if (category === "rings" && heroTitleEl) {
-    heroTitleEl.insertAdjacentHTML("afterend", subfiltersHtml);
-  }
-
   grid.innerHTML = tilesHtml;
 
   if (category === "rings") {
     const subfilters = document.querySelector("#ringSubfilters");
-    if (subfilters && !subfilters.dataset.bound) {
-      subfilters.dataset.bound = "1";
-      subfilters.addEventListener("click", e => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
-        const gender = btn.dataset.ringGender;
-        const stones = btn.dataset.ringStones;
-
-        if (gender) {
-          ringGenderFilter = ringGenderFilter === gender ? null : gender;
-        }
-        if (stones) {
-          ringStonesFilter = ringStonesFilter === stones ? null : stones;
-        }
-
-        saveRingSubfiltersToStorage();
-        renderGrid();
+    if (subfilters) {
+      subfilters.querySelectorAll("[data-ring-gender]").forEach(btn => {
+        btn.classList.toggle(
+          "active",
+          ringGenderFilter === (btn.dataset.ringGender || "")
+        );
       });
+      subfilters.querySelectorAll("[data-ring-stones]").forEach(btn => {
+        btn.classList.toggle(
+          "active",
+          ringStonesFilter === (btn.dataset.ringStones || "")
+        );
+      });
+      if (!subfilters.dataset.bound) {
+        subfilters.dataset.bound = "1";
+        subfilters.addEventListener("click", e => {
+          const btn = e.target.closest("button");
+          if (!btn) return;
+          const gender = btn.dataset.ringGender;
+          const stones = btn.dataset.ringStones;
+
+          if (gender) {
+            ringGenderFilter = ringGenderFilter === gender ? null : gender;
+          }
+          if (stones) {
+            ringStonesFilter = ringStonesFilter === stones ? null : stones;
+          }
+
+          saveRingSubfiltersToStorage();
+          renderGrid();
+        });
+      }
     }
   }
 
