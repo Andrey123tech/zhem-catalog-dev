@@ -1066,7 +1066,7 @@ body {
   font-size: var(--fs-breadcrumb);
   font-weight: 400;
   color: #9ca3af;
-  padding: 0px 16px 0px;
+  padding: 2px 16px 0px;
   margin: 4px 0 2px;
 }
 
