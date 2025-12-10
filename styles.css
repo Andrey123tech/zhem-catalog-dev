@@ -1643,7 +1643,7 @@ body {
 .filter-size-chip {
   padding: 5px 14px;
   border-radius: 18px;
-  border: 1.5px solid rgba(107, 31, 40, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.18);
   background: #ffffff;
   color: #222222;
   font-size: 14px;
@@ -1669,12 +1669,16 @@ body {
 .filter-size-chip:not(.active):hover,
 .filter-size-chip:not(.active):active {
   background: #fafafb;
-  border-color: rgba(107, 31, 40, 0.45);
+  border-color: rgba(0, 0, 0, 0.25);
 }
 
 .filter-size-chip:not(.active):focus-visible {
-  border-color: #6b1f28;
+  border-color: rgba(0, 0, 0, 0.25);
   background: #fafafb;
+}
+
+.filter-size-chip:not(.active):active {
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 .filter-size-chip.active {
