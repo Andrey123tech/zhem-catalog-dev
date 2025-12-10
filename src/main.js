@@ -1023,6 +1023,9 @@ function renderGrid() {
     })
     .join("");
 
+  const existingSubfilters = document.querySelector(".ring-subfilters");
+  if (existingSubfilters) existingSubfilters.remove();
+
   let subfiltersHtml = "";
   if (category === "rings") {
     const genderActive = val =>
@@ -1038,6 +1041,9 @@ function renderGrid() {
           <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
             "male"
           )}" data-ring-gender="male">Мужские</button>
+          <button type="button" class="filter-size-chip ring-subfilter-chip${genderActive(
+            "wedding"
+          )}" data-ring-gender="wedding">Обручальные</button>
         </div>
         <div class="ring-subfilters-row">
           <button type="button" class="filter-size-chip ring-subfilter-chip${stonesActive(
@@ -1051,28 +1057,35 @@ function renderGrid() {
     `;
   }
 
-  grid.innerHTML = subfiltersHtml + tilesHtml;
+  if (category === "rings" && heroTitleEl) {
+    heroTitleEl.insertAdjacentHTML("afterend", subfiltersHtml);
+  }
+
+  grid.innerHTML = tilesHtml;
 
   if (category === "rings") {
-    const genderChips = grid.querySelectorAll("[data-ring-gender]");
-    genderChips.forEach(chip => {
-      chip.onclick = () => {
-        const val = chip.dataset.ringGender || null;
-        ringGenderFilter = ringGenderFilter === val ? null : val;
-        saveRingSubfiltersToStorage();
-        renderGrid();
-      };
-    });
+    const subfilters = document.querySelector(".ring-subfilters");
+    if (subfilters) {
+      const genderChips = subfilters.querySelectorAll("[data-ring-gender]");
+      genderChips.forEach(chip => {
+        chip.onclick = () => {
+          const val = chip.dataset.ringGender || null;
+          ringGenderFilter = ringGenderFilter === val ? null : val;
+          saveRingSubfiltersToStorage();
+          renderGrid();
+        };
+      });
 
-    const stoneChips = grid.querySelectorAll("[data-ring-stones]");
-    stoneChips.forEach(chip => {
-      chip.onclick = () => {
-        const val = chip.dataset.ringStones || null;
-        ringStonesFilter = ringStonesFilter === val ? null : val;
-        saveRingSubfiltersToStorage();
-        renderGrid();
-      };
-    });
+      const stoneChips = subfilters.querySelectorAll("[data-ring-stones]");
+      stoneChips.forEach(chip => {
+        chip.onclick = () => {
+          const val = chip.dataset.ringStones || null;
+          ringStonesFilter = ringStonesFilter === val ? null : val;
+          saveRingSubfiltersToStorage();
+          renderGrid();
+        };
+      });
+    }
   }
 
   updateCartBadge();
