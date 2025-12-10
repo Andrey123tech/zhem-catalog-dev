@@ -104,8 +104,9 @@ img {
 .ring-subfilters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 8px 0 12px;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px auto 16px;
 }
 
 .section-title {
@@ -1287,6 +1288,7 @@ body {
 .catalog-controls {
   margin-bottom: 12px;
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
