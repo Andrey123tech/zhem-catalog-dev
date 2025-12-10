@@ -1622,18 +1622,16 @@ body {
 .filter-size-chip {
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid #e2e3e5;
-  background: #f6f7f8;
-  color: #3a3a3a;
+  border: 1px solid #7b2330;
+  background: #ffffff;
+  color: #1a1a1a;
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.1;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
+  transition: all 0.18s ease;
 }
 
 .filter-size-chip:active {
@@ -1646,26 +1644,25 @@ body {
 
 .filter-size-chip:not(.active):hover,
 .filter-size-chip:not(.active):active {
-  border-color: #d0d1d4;
-  background: #f2f3f4;
+  border-color: #7b2330;
+  background: #f9f4f5;
 }
 
 .filter-size-chip:not(.active):focus-visible {
-  border-color: #d0d1d4;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+  border-color: #7b2330;
+  background: #f9f4f5;
 }
 
 .filter-size-chip.active {
   border-color: #7b2330;
-  background: rgba(123, 35, 48, 0.12);
-  color: #7b2330;
+  background: #7b2330;
+  color: #ffffff;
   font-weight: 500;
+  box-shadow: none;
 }
 
-.filter-size-chip.active:focus-visible,
-.filter-size-chip.active:hover,
 .filter-size-chip.active:active {
-  box-shadow: 0 0 0 2px rgba(123, 35, 48, 0.1);
+  background: #6a1e29;
 }
 
 .filter-switch-row {
