@@ -896,47 +896,51 @@ function ensureRingSubfilters() {
   const mount = document.getElementById("ringSubfiltersMount");
   if (!mount) return null;
 
-  let container = document.getElementById("ringSubfilters");
+  let container = document.getElementById("ringSubfiltersContainer");
   if (!container) {
     container = document.createElement("div");
-    container.id = "ringSubfilters";
+    container.id = "ringSubfiltersContainer";
     container.className = "ring-subfilters";
     container.innerHTML = `
-      <button
-        type="button"
-        class="filter-size-chip ring-subfilter-chip"
-        data-ring-gender="female"
-      >
-        Женские
-      </button>
-      <button
-        type="button"
-        class="filter-size-chip ring-subfilter-chip"
-        data-ring-gender="male"
-      >
-        Мужские
-      </button>
-      <button
-        type="button"
-        class="filter-size-chip ring-subfilter-chip"
-        data-ring-gender="wedding"
-      >
-        Обручальные
-      </button>
-      <button
-        type="button"
-        class="filter-size-chip ring-subfilter-chip"
-        data-ring-stones="with"
-      >
-        С камнями
-      </button>
-      <button
-        type="button"
-        class="filter-size-chip ring-subfilter-chip"
-        data-ring-stones="without"
-      >
-        Без камней
-      </button>
+      <div class="ring-subfilters-row ring-subfilters-row-top">
+        <button
+          type="button"
+          class="filter-size-chip ring-subfilter-chip"
+          data-ring-gender="female"
+        >
+          Женские
+        </button>
+        <button
+          type="button"
+          class="filter-size-chip ring-subfilter-chip"
+          data-ring-gender="male"
+        >
+          Мужские
+        </button>
+      </div>
+      <div class="ring-subfilters-row ring-subfilters-row-bottom">
+        <button
+          type="button"
+          class="filter-size-chip ring-subfilter-chip"
+          data-ring-gender="wedding"
+        >
+          Обручальные
+        </button>
+        <button
+          type="button"
+          class="filter-size-chip ring-subfilter-chip"
+          data-ring-stones="with"
+        >
+          С камнями
+        </button>
+        <button
+          type="button"
+          class="filter-size-chip ring-subfilter-chip"
+          data-ring-stones="without"
+        >
+          Без камней
+        </button>
+      </div>
     `;
   }
 
