@@ -116,6 +116,10 @@ img {
   flex-wrap: nowrap;
 }
 
+.ring-subfilters-row + .ring-subfilters-row {
+  margin-top: 8px;
+}
+
 .ring-subfilters-row-top {
   justify-content: flex-start;
 }
@@ -1643,9 +1647,9 @@ body {
 .filter-size-chip {
   padding: 6px 14px;
   border-radius: 18px;
-  border: 1px solid rgba(107, 31, 40, 0.28);
-  background: #f7f7f8;
-  color: #333;
+  border: 2px solid rgba(107, 31, 40, 0.32);
+  background: #ffffff;
+  color: #222222;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.1;
@@ -1668,24 +1672,25 @@ body {
 
 .filter-size-chip:not(.active):hover,
 .filter-size-chip:not(.active):active {
-  background: #f9f9fa;
+  background: #f8f8f9;
 }
 
 .filter-size-chip:not(.active):focus-visible {
   border-color: #6b1f28;
-  background: #f9f9fa;
+  background: #f8f8f9;
 }
 
 .filter-size-chip.active {
   border-color: #6b1f28;
-  border-width: 2px;
+  border-width: 3px;
   background: #ffffff;
-  color: #6b1f28;
+  color: #222222;
   font-weight: 600;
   box-shadow: none;
 }
 
 .filter-size-chip.active:active {
+  border-color: #5b1a23;
   background: #ffffff;
 }
 
