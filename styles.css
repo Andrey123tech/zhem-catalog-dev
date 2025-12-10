@@ -1640,16 +1640,19 @@ body {
   transform: none;
 }
 
-.filter-size-chip:hover,
-.filter-size-chip:focus-visible,
-.filter-size-chip:active {
+.filter-size-chip:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(123, 35, 48, 0.15);
 }
 
 .filter-size-chip:not(.active):hover,
+.filter-size-chip:not(.active):active {
+  border-color: #d0d1d4;
+  background: #f2f3f4;
+}
+
 .filter-size-chip:not(.active):focus-visible {
   border-color: #d0d1d4;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
 .filter-size-chip.active {
@@ -1657,6 +1660,12 @@ body {
   background: rgba(123, 35, 48, 0.12);
   color: #7b2330;
   font-weight: 500;
+}
+
+.filter-size-chip.active:focus-visible,
+.filter-size-chip.active:hover,
+.filter-size-chip.active:active {
+  box-shadow: 0 0 0 2px rgba(123, 35, 48, 0.1);
 }
 
 .filter-switch-row {
