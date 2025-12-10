@@ -104,24 +104,24 @@ img {
 .ring-subfilters {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   margin: 12px auto 16px;
 }
 
 .ring-subfilters-row {
   display: flex;
-  justify-content: center;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 10px;
   flex-wrap: nowrap;
 }
 
 .ring-subfilters-row-top {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .ring-subfilters-row-bottom {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 @media (max-width: 340px) {
@@ -1641,18 +1641,21 @@ body {
 }
 
 .filter-size-chip {
-  padding: 6px 10px;
+  padding: 6px 14px;
   border-radius: 18px;
-  border: 1.5px solid rgba(107, 31, 40, 0.35);
+  border: 1px solid rgba(107, 31, 40, 0.28);
   background: #f7f7f8;
   color: #333;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.1;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.18s ease;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .filter-size-chip:active {
@@ -1665,12 +1668,12 @@ body {
 
 .filter-size-chip:not(.active):hover,
 .filter-size-chip:not(.active):active {
-  background: #faf9fa;
+  background: #f9f9fa;
 }
 
 .filter-size-chip:not(.active):focus-visible {
   border-color: #6b1f28;
-  background: #faf9fa;
+  background: #f9f9fa;
 }
 
 .filter-size-chip.active {
@@ -1683,8 +1686,7 @@ body {
 }
 
 .filter-size-chip.active:active {
-  background: #6a1e29;
-  color: #ffffff;
+  background: #ffffff;
 }
 
 .filter-switch-row {
