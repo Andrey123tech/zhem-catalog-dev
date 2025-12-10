@@ -94,14 +94,11 @@ img {
 
 .hero {
   margin-bottom: 0;
-  background: #f6f6f7;
-  padding: 14px 20px 6px;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 12px 0 4px;
 }
 
 .hero-title {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   font-size: 22px;
   font-weight: 700;
   color: #0f172a;
@@ -116,10 +113,8 @@ img {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
-  margin: 4px auto 8px;
-  padding: 0 20px;
-  background: #f6f6f7;
+  gap: 5px;
+  margin: 6px auto 8px;
 }
 
 .ring-subfilters-row {
@@ -1323,14 +1318,11 @@ body {
 
 /* 13. Поле поиска по артикулу */
 .catalog-controls {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 20px 14px;
-  background: #f6f6f7;
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 0;
 }
 
 .sku-search {
