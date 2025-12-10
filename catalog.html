@@ -25,57 +25,10 @@
   <main class="container">
     <section class="hero">
       <h1 class="hero-title" id="heroTitle">Каталог</h1>
-      <p class="hero-sub">
-        Выберите нужные модели, размеры и количество. Заявка автоматически
-        соберётся в корзине.
-      </p>
     </section>
 
    <section>
-  <div class="catalog-section-header">
-    <h2 class="section-title" id="catalogTitle">Текущая подборка</h2>
-    <button type="button" class="filter-btn" id="filterToggleBtn">
-      Фильтры
-    </button>
-  </div>
-
-  <div id="ringSubfilters" class="ring-subfilters">
-    <button
-      type="button"
-      class="filter-size-chip ring-subfilter-chip"
-      data-ring-gender="female"
-    >
-      Женские
-    </button>
-    <button
-      type="button"
-      class="filter-size-chip ring-subfilter-chip"
-      data-ring-gender="male"
-    >
-      Мужские
-    </button>
-    <button
-      type="button"
-      class="filter-size-chip ring-subfilter-chip"
-      data-ring-gender="wedding"
-    >
-      Обручальные
-    </button>
-    <button
-      type="button"
-      class="filter-size-chip ring-subfilter-chip"
-      data-ring-stones="with"
-    >
-      С камнями
-    </button>
-    <button
-      type="button"
-      class="filter-size-chip ring-subfilter-chip"
-      data-ring-stones="without"
-    >
-      Без камней
-    </button>
-  </div>
+  <div id="ringSubfiltersMount"></div>
 
   <div class="catalog-controls">
     <input
@@ -86,6 +39,9 @@
       placeholder="Поиск по артикулу (например, 135)"
       class="sku-search"
     >
+    <button type="button" class="filter-btn" id="filterToggleBtn">
+      Фильтры
+    </button>
   </div>
 
   <div id="grid" class="grid"></div>
