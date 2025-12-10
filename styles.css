@@ -105,19 +105,15 @@ img {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 6px;
   margin: 12px auto 16px;
 }
 
 .ring-subfilters-row {
   display: flex;
   justify-content: flex-start;
-  gap: 10px;
-  flex-wrap: nowrap;
-}
-
-.ring-subfilters-row + .ring-subfilters-row {
-  margin-top: 8px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .ring-subfilters-row-top {
@@ -1645,9 +1641,9 @@ body {
 }
 
 .filter-size-chip {
-  padding: 6px 16px;
-  border-radius: 20px;
-  border: 1px solid rgba(107, 31, 40, 0.28);
+  padding: 5px 14px;
+  border-radius: 18px;
+  border: 1.5px solid rgba(107, 31, 40, 0.35);
   background: #ffffff;
   color: #222222;
   font-size: 14px;
@@ -1673,7 +1669,7 @@ body {
 .filter-size-chip:not(.active):hover,
 .filter-size-chip:not(.active):active {
   background: #fafafb;
-  border-color: rgba(107, 31, 40, 0.4);
+  border-color: rgba(107, 31, 40, 0.45);
 }
 
 .filter-size-chip:not(.active):focus-visible {
@@ -1683,7 +1679,7 @@ body {
 
 .filter-size-chip.active {
   border-color: #6b1f28;
-  border-width: 3px;
+  border-width: 2px;
   background: #ffffff;
   color: #222222;
   font-weight: 600;
