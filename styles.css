@@ -1645,21 +1645,21 @@ body {
 }
 
 .filter-size-chip {
-  padding: 6px 14px;
-  border-radius: 18px;
-  border: 2px solid rgba(107, 31, 40, 0.32);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(107, 31, 40, 0.28);
   background: #ffffff;
   color: #222222;
   font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1.1;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition:
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    color 0.18s ease;
+    border-color 0.16s ease,
+    background-color 0.16s ease;
 }
 
 .filter-size-chip:active {
@@ -1672,12 +1672,13 @@ body {
 
 .filter-size-chip:not(.active):hover,
 .filter-size-chip:not(.active):active {
-  background: #f8f8f9;
+  background: #fafafb;
+  border-color: rgba(107, 31, 40, 0.4);
 }
 
 .filter-size-chip:not(.active):focus-visible {
   border-color: #6b1f28;
-  background: #f8f8f9;
+  background: #fafafb;
 }
 
 .filter-size-chip.active {
