@@ -98,7 +98,7 @@ img {
 }
 
 .hero-title {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-size: 22px;
   font-weight: 700;
   color: #0f172a;
@@ -1318,8 +1318,8 @@ body {
 
 /* 13. Поле поиска по артикулу */
 .catalog-controls {
-  margin-top: 9px;
-  margin-bottom: 12px;
+  margin-top: 0;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
