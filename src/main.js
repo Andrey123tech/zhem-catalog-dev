@@ -38,6 +38,7 @@ const TYPE_LABELS = {
 const RING_SUBFILTER_STORAGE_KEY = "zhemCatalogRingSubfilters";
 let ringGenderFilter = null; // "female" | "male" | "wedding" | null
 let ringStonesFilter = null; // "with" | "without" | null
+let ringSubfiltersLoaded = false;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -130,12 +131,20 @@ function normalizeRingStones(val) {
 }
 
 function loadRingSubfiltersFromStorage() {
+  if (ringSubfiltersLoaded) {
+    return {
+      gender: normalizeRingGender(ringGenderFilter),
+      stones: normalizeRingStones(ringStonesFilter)
+    };
+  }
+
   const fallback = { gender: null, stones: null };
   try {
     const raw = sessionStorage.getItem(RING_SUBFILTER_STORAGE_KEY);
     if (!raw) {
       ringGenderFilter = fallback.gender;
       ringStonesFilter = fallback.stones;
+      ringSubfiltersLoaded = true;
       return fallback;
     }
     const data = JSON.parse(raw);
@@ -143,10 +152,12 @@ function loadRingSubfiltersFromStorage() {
     const stones = normalizeRingStones(data && data.stones);
     ringGenderFilter = gender;
     ringStonesFilter = stones;
+    ringSubfiltersLoaded = true;
     return { gender, stones };
   } catch (e) {
     ringGenderFilter = fallback.gender;
     ringStonesFilter = fallback.stones;
+    ringSubfiltersLoaded = true;
     return fallback;
   }
 }
