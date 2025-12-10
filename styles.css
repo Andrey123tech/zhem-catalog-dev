@@ -1622,26 +1622,41 @@ body {
 .filter-size-chip {
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #f8f8fa;
+  border: 1px solid #e2e3e5;
+  background: #f6f7f8;
+  color: #3a3a3a;
   font-size: 16px;
   line-height: 1.1;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition:
-    background-color 0.16s ease,
-    border-color 0.16s ease,
-    color 0.16s ease;
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .filter-size-chip:active {
   transform: none;
 }
 
+.filter-size-chip:hover,
+.filter-size-chip:focus-visible,
+.filter-size-chip:active {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(123, 35, 48, 0.15);
+}
+
+.filter-size-chip:not(.active):hover,
+.filter-size-chip:not(.active):focus-visible {
+  border-color: #d0d1d4;
+}
+
 .filter-size-chip.active {
-  border-color: #00897b;
-  background: #e0f2f1;
+  border-color: #7b2330;
+  background: rgba(123, 35, 48, 0.12);
+  color: #7b2330;
+  font-weight: 500;
 }
 
 .filter-switch-row {
