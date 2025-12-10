@@ -1066,8 +1066,8 @@ body {
   font-size: var(--fs-breadcrumb);
   font-weight: 400;
   color: #9ca3af;
-  padding: 4px 16px 2px;
-  margin: 12px 0 4px;
+  padding: 2px 16px 0px;
+  margin: 4px 0 2px;
 }
 
 .breadcrumbs a {
