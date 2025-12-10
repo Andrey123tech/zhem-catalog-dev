@@ -2,14 +2,16 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Корзина · Жемчужина</title>
+  <title>Каталог · Жемчужина</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="page-order">
+<body>
   <header class="topbar">
     <div class="topbar-left">
-      <img src="/logo_zhem.svg" alt="Жемчужина" class="logo-img">
+      <a href="/index.html" class="logo-link">
+        <img src="logo_zhem.svg" alt="Жемчужина" class="logo-img">
+      </a>
     </div>
 
     <a href="order.html" class="cart-link">
@@ -18,25 +20,117 @@
     </a>
   </header>
 
-  <nav class="main-tabs">
-  <a href="index.html" class="tab-link">Главная</a>
-</nav>
-
   <main class="container">
     <section class="hero">
-      <h1 class="hero-title">Корзина</h1>
-      <p class="hero-sub">
-        Проверка позиций перед отправкой заявки менеджеру.
-      </p>
+      <h1 class="hero-title" id="heroTitle">Каталог</h1>
     </section>
 
-    <section id="order"></section>
+   <section>
+  <div id="ringSubfiltersMount"></div>
 
-    <button id="sendToManager" class="btn-primary order-footer-btn" type="button">
-      Менеджеру
+  <div class="catalog-controls">
+    <input
+      id="skuSearch"
+      type="search"
+      inputmode="numeric"
+      autocomplete="off"
+      placeholder="Поиск по артикулу (например, 135)"
+      class="sku-search"
+    >
+    <button type="button" class="filter-btn" id="filterToggleBtn">
+      Фильтры
     </button>
-  </main>
+  </div>
 
-  <div class="toast"></div>  <script type="module" src="./src/main.js"></script>
+  <div id="grid" class="grid"></div>
+</section>
+      </main>
+
+  <!-- Панель фильтров -->
+  <div id="filterOverlay" class="filter-overlay"></div>
+
+  <div id="filterSheet" class="filter-sheet">
+    <div class="filter-sheet-header">
+      <span class="filter-sheet-title">Фильтры</span>
+      <button class="filter-sheet-close" id="filterCloseBtn">×</button>
+    </div>
+
+    <div class="filter-sheet-content">
+      <div class="filter-block">
+        <span class="filter-label">Вес, г</span>
+        <div class="filter-weight-row">
+          <input
+            type="number"
+            inputmode="decimal"
+            step="0.01"
+            min="0"
+            id="filterWeightMin"
+            class="filter-input small"
+            placeholder="от"
+          >
+          <span class="filter-weight-sep">—</span>
+          <input
+            type="number"
+            inputmode="decimal"
+            step="0.01"
+            min="0"
+            id="filterWeightMax"
+            class="filter-input small"
+            placeholder="до"
+          >
+        </div>
+      </div>
+
+      <div class="filter-block" id="filterSizeBlock">
+        <span class="filter-label">Размер</span>
+        <div class="filter-size-grid" id="filterSizeGrid">
+          <button type="button" class="filter-size-chip">15</button>
+          <button type="button" class="filter-size-chip">15.5</button>
+          <button type="button" class="filter-size-chip">16</button>
+          <button type="button" class="filter-size-chip">16.5</button>
+          <button type="button" class="filter-size-chip">17</button>
+          <button type="button" class="filter-size-chip">17.5</button>
+          <button type="button" class="filter-size-chip">18</button>
+          <button type="button" class="filter-size-chip">18.5</button>
+          <button type="button" class="filter-size-chip">19</button>
+          <button type="button" class="filter-size-chip">19.5</button>
+          <button type="button" class="filter-size-chip">20</button>
+          <button type="button" class="filter-size-chip">20.5</button>
+          <button type="button" class="filter-size-chip">21</button>
+          <button type="button" class="filter-size-chip">21.5</button>
+          <button type="button" class="filter-size-chip">22</button>
+          <button type="button" class="filter-size-chip">22.5</button>
+          <button type="button" class="filter-size-chip">23</button>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <span class="filter-label">Дополнительно</span>
+
+        <label class="filter-switch-row">
+          <input type="checkbox" id="filterPopular">
+          <span>Популярные</span>
+        </label>
+
+        <label class="filter-switch-row">
+          <input type="checkbox" id="filterNew">
+          <span>Новинки</span>
+        </label>
+
+        <label class="filter-switch-row">
+          <input type="checkbox" id="filterInStock">
+          <span>В наличии</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="filter-sheet-footer">
+      <button class="btn-outline" type="button" id="filterResetBtn">Сбросить</button>
+      <button class="btn-primary" type="button" id="filterApplyBtn">Применить</button>
+    </div>
+  </div>
+
+  <div class="toast"></div>
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
