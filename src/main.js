@@ -1357,14 +1357,23 @@ function renderProduct() {
 
   const isRing = cat === "rings";
   const isBracelet = cat === "bracelets";
+  const isNecklace = cat === "necklaces";
+  const isBrooch = cat === "brooches";
+
+  // Only rings and bracelets use size-based logic for now
   const isRingSized = isRing || isBracelet;
+
   const showInStockSizesOnly =
     filterState.inStock === true && isRingSized;
 
+  // Everything else is “no size” (simple qty):
+  // earrings, pendants, pins, necklaces, brooches
   const isNoSize =
     cat === "earrings" ||
     cat === "pendants" ||
-    cat === "pins";
+    cat === "pins" ||
+    cat === "necklaces" ||
+    cat === "brooches";
 
   let sizes = isRingSized
     ? getVisibleSizesForProduct(prod, stockInfo, showInStockSizesOnly)
