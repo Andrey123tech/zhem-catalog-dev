@@ -37,7 +37,7 @@ const TYPE_LABELS = {
 };
 const RING_SUBFILTER_STORAGE_KEY = "zhemCatalogRingSubfilters";
 const EARRING_SUBFILTER_STORAGE_KEY = "zhemCatalogEarringSubfilters";
-const STONES_SUBFILTER_STORAGE_KEY = "zhemCatalogStonesSubfilters";
+const STONES_STORAGE_KEY = "zhemCatalogStonesSubfilters";
 const STONE_FILTER_CATEGORIES = [
   "earrings",
   "bracelets",
@@ -214,7 +214,7 @@ function loadStonesFiltersFromStorage() {
   const fallback = getDefaultStonesFilterMap();
 
   try {
-    const rawUnified = sessionStorage.getItem(STONES_SUBFILTER_STORAGE_KEY);
+    const rawUnified = sessionStorage.getItem(STONES_STORAGE_KEY);
     const rawLegacy = sessionStorage.getItem(EARRING_SUBFILTER_STORAGE_KEY);
 
     if (!rawUnified && rawLegacy) {
@@ -254,14 +254,13 @@ function loadStonesFiltersFromStorage() {
 
 function saveStonesFiltersToStorage() {
   try {
-    sessionStorage.setItem(
-      STONES_SUBFILTER_STORAGE_KEY,
-      JSON.stringify(stonesFilterByCategory)
-    );
+    sessionStorage.setItem(STONES_STORAGE_KEY, JSON.stringify(stonesFilterByCategory));
   } catch (e) {
     // silent fail
   }
 }
+
+stonesFilterByCategory = loadStonesFiltersFromStorage();
 
 function setInStockFlag(value, opts = {}) {
   const { skipRender = false, skipSave = false } = opts;
@@ -1191,8 +1190,8 @@ function renderGrid() {
   if (category === "rings") {
     loadRingSubfiltersFromStorage();
     subfiltersEl = renderSubfiltersForCategory("rings");
-  } else if (category === "earrings") {
-    subfiltersEl = renderSubfiltersForCategory("earrings");
+  } else if (STONE_FILTER_CATEGORIES.includes(category)) {
+    subfiltersEl = renderSubfiltersForCategory(category);
   } else {
     subfiltersEl = renderSubfiltersForCategory(null);
   }
