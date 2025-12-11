@@ -62,6 +62,13 @@ let stonesSubfiltersLoaded = false;
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+function getProductMainImage(product) {
+  if (Array.isArray(product.images) && product.images.length > 0) {
+    return product.images[0];
+  }
+  return "/img/products/dummy.jpg";
+}
+
 // === 2. State & storage ===
 const filterState = {
   weightMin: null,
@@ -1211,54 +1218,27 @@ function renderGrid() {
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = "";
 
-  const tilesHtml = list
-    .map(p => {
-      const img =
-        (p.images && p.images[0]) ||
-        "https://picsum.photos/seed/placeholder/900";
-      const stockInfo = getStockMap(p);
-      const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
-      const w =
-        p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
-      const typeLabel = TYPE_LABELS[category] || "Модель";
-      const baseType = TYPE_LABELS[p.category] || "Модель";
-      let shortTitle = "";
-      if (p.title) {
-        const cleaned = p.title.replace(p.sku, "").trim();
-        const startsWithModel = cleaned
-          ? /^модель/i.test(cleaned.trim())
-          : false;
-        if (cleaned && !startsWithModel) {
-          shortTitle = cleaned;
-        }
-      }
-      if (!shortTitle || /^модель/i.test(shortTitle)) {
-        shortTitle = baseType;
-      }
-      const inStockParam = filterState.inStock ? "&inStock=1" : "";
+  let tilesHtml = "";
+  list.forEach(p => {
+    const imgUrl = getProductMainImage(p);
+    const weightText =
+      typeof p.avgWeight === "number" ? p.avgWeight.toFixed(2) + " г" : "";
 
-      return `
-        <a class="tile" style="position:relative;" href="product.html?sku=${encodeURIComponent(
-          p.sku
-        )}${inStockParam}">
-          ${renderStockIndicator(stockInfo, {
-            align: "corner",
-            sizeKey: sizeForDisplay
-          })}
-          <div class="square">
-            <img src="${img}" alt="${p.title || p.sku}">
-          </div>
-          <div class="tile-body">
-            <div class="tile-title">${shortTitle}</div>
-            <div class="tile-sub">
-              <span class="tile-art">Арт. ${p.sku}</span>
-              ${w ? `<span class="tile-weight">${w}</span>` : ""}
-            </div>
-          </div>
-        </a>
-  `;
-    })
-    .join("");
+    tilesHtml += `
+  <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
+    <div class="square">
+      <img src="${imgUrl}" alt="${p.title}" loading="lazy">
+    </div>
+    <div class="tile-body">
+      <div class="tile-title">${p.title}</div>
+      <div class="tile-sub">
+        <span class="tile-art">Арт. ${p.sku}</span>
+        ${weightText ? `<span class="tile-weight">${weightText}</span>` : ""}
+      </div>
+    </div>
+  </a>
+`;
+  });
 
   grid.innerHTML = tilesHtml;
 
@@ -1345,9 +1325,6 @@ function renderProduct() {
   const preferredFilterSize = getPreferredFilterSizeKey(prod, stockInfo);
   const cartQtyMap = getCartQtyBySize(prod.sku);
 
-  const img =
-    (prod.images && prod.images[0]) ||
-    "https://picsum.photos/seed/placeholder/900";
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
@@ -1385,9 +1362,7 @@ function renderProduct() {
 
   box.innerHTML = `
     <div class="product-main">
-      <div class="product-photo-wrap">
-        <img src="${img}" alt="${prod.title || prod.sku}">
-      </div>
+      <div class="product-photo-wrap"></div>
 
       <div class="product-meta">
         <h1 class="product-title">
@@ -1486,6 +1461,14 @@ function renderProduct() {
   };
 
   updateActiveSizeStock(activeSizeKey);
+
+  const photoWrap = $(".product-photo-wrap", box);
+  if (photoWrap) {
+    const imgUrl = getProductMainImage(prod);
+    photoWrap.innerHTML = `
+  <img src="${imgUrl}" alt="${prod.title}" loading="lazy">
+`;
+  }
 
   if (isRingSized && sizes.length === 0) {
     if (summaryEl) {
