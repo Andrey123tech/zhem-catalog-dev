@@ -257,25 +257,6 @@ img {
   object-fit: cover;
 }
 
-.photo-soon {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 12px;
-  background: rgba(15, 23, 42, 0.78);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.photo-soon::before {
-  content: "📷";
-}
 
 .tile-body {
   padding: 10px 12px 12px;
@@ -377,6 +358,12 @@ img {
   object-fit: contain;
 }
 
+.product-photo-empty {
+  background: #ffffff;
+  border-radius: 16px;
+  aspect-ratio: 1 / 1;
+}
+
 .product-thumbs {
   display: flex;
   flex-wrap: wrap;
@@ -414,28 +401,42 @@ img {
 
 .no-photo-placeholder {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-
-  padding: 14px 10px;
-
-  color: rgba(15, 23, 42, 0.35);
-  font-weight: 500;
-
-  background: rgba(255, 255, 255, 0.6);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .no-photo-placeholder img {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
-  opacity: 0.55;
+  opacity: 0.25;
 }
 
-.no-photo-text {
-  font-size: 14px;
+/* === NO PHOTO: PURE WHITE EMPTY STATE === */
+
+/* the square image area stays white */
+.square {
+  background: #ffffff !important;
+}
+
+/* if fallback/placeholder wrapper exists — make it invisible */
+.no-photo-placeholder,
+.no-photo-text,
+.photo-soon,
+.photo-badge,
+.badge-photo,
+.placeholder-badge {
+  display: none !important;
+}
+
+/* if the code still inserts an <img> for empty state — hide it */
+.square img.no-photo,
+.square img[data-placeholder="1"],
+.square img[src*="no-photo"],
+.square img[src*="no_photo"] {
+  display: none !important;
 }
 
 .product-meta {
