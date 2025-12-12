@@ -9,6 +9,8 @@ import {
   DEFAULT_BRACELET_SIZE
 } from "./catalog_data.js";
 
+const NO_PHOTO_URL = "/img/no-photo.svg";
+const IMG_ONERROR = `this.onerror=null;this.src='${NO_PHOTO_URL}';`;
 const CART_KEY = "zhem_cart_v1";
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
 const NON_SIZE_CATEGORIES = new Set(["earrings", "pendants", "pins"]);
@@ -64,9 +66,57 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 function getProductMainImage(product) {
   if (Array.isArray(product.images) && product.images.length > 0) {
-    return product.images[0];
+    const first = product.images.find(Boolean);
+    if (first) return first;
   }
-  return "/img/products/dummy.jpg";
+  return NO_PHOTO_URL;
+}
+
+function renderProductGallery(prod, container) {
+  if (!container) return;
+  const images = Array.isArray(prod.images) ? prod.images.filter(Boolean) : [];
+  const hasImages = images.length > 0;
+  const mainUrl = hasImages ? images[0] : NO_PHOTO_URL;
+
+  const thumbsHtml = hasImages
+    ? images
+        .map(
+          (url, idx) => `
+            <button class="product-thumb${idx === 0 ? " active" : ""}" type="button" data-idx="${idx}" aria-label="Фото ${idx + 1}">
+              <img src="${url}" alt="${prod.title}" loading="lazy" onerror="${IMG_ONERROR}">
+            </button>
+          `
+        )
+        .join("")
+    : `<div class="no-photo-placeholder">
+        <img src="${NO_PHOTO_URL}" alt="" aria-hidden="true" onerror="${IMG_ONERROR}">
+        <div class="no-photo-text">Фото скоро</div>
+      </div>`;
+
+  container.innerHTML = `
+    <div class="product-photo-main">
+      <img src="${mainUrl}" alt="${prod.title}" loading="lazy" data-role="product-main-photo" onerror="${IMG_ONERROR}">
+    </div>
+    <div class="product-thumbs">
+      ${thumbsHtml}
+    </div>
+  `;
+
+  if (!hasImages) return;
+
+  const mainImg = container.querySelector("[data-role=\"product-main-photo\"]");
+  const thumbButtons = container.querySelectorAll(".product-thumb");
+  thumbButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      thumbButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const idx = parseInt(btn.dataset.idx, 10);
+      const nextUrl = images[idx] || NO_PHOTO_URL;
+      if (mainImg) {
+        mainImg.src = nextUrl;
+      }
+    });
+  });
 }
 
 // === 2. State & storage ===
@@ -1220,14 +1270,17 @@ function renderGrid() {
 
   let tilesHtml = "";
   list.forEach(p => {
+    const hasImages = Array.isArray(p.images) && p.images.length > 0;
     const imgUrl = getProductMainImage(p);
+    const photoSoon = hasImages ? "" : `<div class="photo-soon">Фото скоро</div>`;
     const weightText =
       typeof p.avgWeight === "number" ? p.avgWeight.toFixed(2) + " г" : "";
 
     tilesHtml += `
   <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
     <div class="square">
-      <img src="${imgUrl}" alt="${p.title}" loading="lazy">
+      ${photoSoon}
+      <img src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="${IMG_ONERROR}">
     </div>
     <div class="tile-body">
       <div class="tile-title">${p.title}</div>
@@ -1464,10 +1517,7 @@ function renderProduct() {
 
   const photoWrap = $(".product-photo-wrap", box);
   if (photoWrap) {
-    const imgUrl = getProductMainImage(prod);
-    photoWrap.innerHTML = `
-  <img src="${imgUrl}" alt="${prod.title}" loading="lazy">
-`;
+    renderProductGallery(prod, photoWrap);
   }
 
   if (isRingSized && sizes.length === 0) {
@@ -1850,10 +1900,7 @@ function renderOrder() {
 
   cart.forEach(it => {
     const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
-    const img =
-      it.image ||
-      (prod.images && prod.images[0]) ||
-      "https://picsum.photos/seed/placeholder/200";
+    const img = it.image || getProductMainImage(prod);
     const avgW =
       it.avgWeight != null ? it.avgWeight : prod.avgWeight;
     const cat = prod.category || "other";
@@ -2098,7 +2145,7 @@ function renderOrder() {
       return `
         <div class="list-item cart-row" data-sku="${g.sku}">
           <div class="cart-thumb">
-            <img src="${g.image}" alt="">
+            <img src="${g.image}" alt="${g.title}" onerror="${IMG_ONERROR}">
           </div>
           <div class="cart-meta">
             <div class="badge">Арт. ${g.sku}</div>
@@ -2201,10 +2248,7 @@ function renderOrderItem() {
   }
 
   const prod = PRODUCTS.find(p => p.sku === sku) || {};
-  const img =
-    items[0].image ||
-    (prod.images && prod.images[0]) ||
-    "https://picsum.photos/seed/placeholder/900";
+  const img = items[0].image || getProductMainImage(prod);
   const avgW =
     items[0].avgWeight != null ? items[0].avgWeight : prod.avgWeight;
   const title = prod.title || `Модель ${sku}`;
@@ -2236,7 +2280,7 @@ function renderOrderItem() {
     box.innerHTML = `
       <div class="card model-edit">
         <div class="model-photo-wrap">
-          <img src="${img}" alt="${title}">
+          <img src="${img}" alt="${title}" onerror="${IMG_ONERROR}">
         </div>
 
         <div class="model-edit-body">
@@ -2381,7 +2425,7 @@ function renderOrderItem() {
   box.innerHTML = `
     <div class="card model-edit">
       <div class="model-photo-wrap">
-        <img src="${img}" alt="${title}">
+        <img src="${img}" alt="${title}" onerror="${IMG_ONERROR}">
       </div>
 
       <div class="model-edit-body">
