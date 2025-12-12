@@ -414,11 +414,17 @@ img {
 
 .no-photo-placeholder {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 12px;
-  color: #475569;
-  font-weight: 600;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 14px 10px;
+
+  color: rgba(15, 23, 42, 0.35);
+  font-weight: 500;
+
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .no-photo-placeholder img {
