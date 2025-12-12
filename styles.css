@@ -349,6 +349,7 @@ img {
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  touch-action: pan-y;
 }
 
 .product-photo-main img {
@@ -995,7 +996,7 @@ body.no-scroll {
 @media (max-width: 900px) {
   /* Чтобы контент не уезжал под кнопку при прокрутке */
   .product-card {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 120px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 130px);
   }
 
   .product-controls {
