@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-labelledby="title desc">
+  <title id="title">Нет фото</title>
+  <desc id="desc">Заглушка для отсутствующей фотографии</desc>
+  <rect x="8" y="8" width="144" height="144" rx="20" fill="#e2e8f0" />
+  <rect x="24" y="30" width="112" height="100" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="4" />
+  <path d="M64 54h32l6 10h10a10 10 0 0 1 10 10v40a10 10 0 0 1-10 10H48a10 10 0 0 1-10-10V74a10 10 0 0 1 10-10h10z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="4" />
+  <circle cx="80" cy="90" r="20" fill="#ffffff" stroke="#475569" stroke-width="4" />
+  <circle cx="80" cy="90" r="8" fill="#0f172a" />
+  <rect x="58" y="44" width="44" height="10" rx="4" fill="#cbd5e1" />
+  <rect x="54" y="118" width="52" height="8" rx="3" fill="#cbd5e1" />
+  <text x="80" y="148" text-anchor="middle" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="14" fill="#475569">Фото скоро</text>
+</svg>
