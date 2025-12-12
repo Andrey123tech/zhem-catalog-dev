@@ -112,7 +112,11 @@
     "avgWeight": 1.723,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190131_1.jpg",
+      "/img/products/Au190131_2.jpg",
+      "/img/products/Au190131_3.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "17": 1,
@@ -222,7 +226,11 @@
     "avgWeight": 1.302,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190023_1.jpg",
+      "/img/products/Au190023_2.jpg",
+      "/img/products/Au190023_3.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "21": 1,
@@ -414,7 +422,10 @@
     "avgWeight": 1.112,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190059_1.jpg",
+      "/img/products/Au190059_2.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "19": 4,
@@ -499,7 +510,10 @@
     "avgWeight": 1.116,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190037_1.jpg",
+      "/img/products/Au190037_2.jpg"
+    ],
     "sortOrder": 1,
     "stock": 2,
     "isNew": false,
@@ -671,7 +685,11 @@
     "avgWeight": 0.966,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190024_1.jpg",
+      "/img/products/Au190024_2.jpg",
+      "/img/products/Au190024_3.jpg"
+    ],
     "sortOrder": 1,
     "stock": 0,
     "isNew": false,
@@ -749,7 +767,11 @@
     "avgWeight": 1.151,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190548_1.jpg",
+      "/img/products/Au190548_2.jpg",
+      "/img/products/Au190548_3.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "17": 1,
@@ -834,7 +856,11 @@
     "avgWeight": 1.502,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190056_1.jpg",
+      "/img/products/Au190056_2.jpg",
+      "/img/products/Au190056_3.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "20.5": 3
@@ -918,7 +944,11 @@
     "avgWeight": 1.394,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190573_1.jpg",
+      "/img/products/Au190573_2.jpg",
+      "/img/products/Au190573_3.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "17": 4,
@@ -1006,7 +1036,11 @@
     "avgWeight": 1.846,
     "sizes": "ring",
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190567_1.jpg",
+      "/img/products/Au190567_2.jpg",
+      "/img/products/Au190567_3.jpg"
+    ],
     "sortOrder": 1,
     "stockBySize": {
       "18": 7,
@@ -4829,7 +4863,11 @@
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 4.654,
-    "images": [],
+    "images": [
+      "/img/products/Au185800C_1.jpg",
+      "/img/products/Au185800C_2.jpg",
+      "/img/products/Au185800C_3.jpg"
+    ],
     "sortOrder": 3,
     "stockBySize": {},
     "stock": 5,
