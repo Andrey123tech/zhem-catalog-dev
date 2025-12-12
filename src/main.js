@@ -135,7 +135,7 @@ function renderProductGallery(prod, container) {
     });
   }
 
-  if (hasImages && mainArea) {
+  if (hasImages && images.length > 1 && mainArea) {
     let startX = 0;
     let startY = 0;
     let isPointerDown = false;
