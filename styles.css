@@ -364,6 +364,12 @@ img {
   aspect-ratio: 1 / 1;
 }
 
+@media (max-width: 900px) {
+  .product-main {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 120px);
+  }
+}
+
 .product-thumbs {
   display: flex;
   flex-wrap: wrap;
@@ -1346,6 +1352,13 @@ body {
 .btn-primary:disabled {
   opacity: 0.55;
   box-shadow: none;
+}
+
+#addToCart:disabled,
+#addToCart[disabled] {
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: 0 12px 26px rgba(90, 23, 34, 0.42);
 }
 
 /* На маленьких экранах — компактнее */
