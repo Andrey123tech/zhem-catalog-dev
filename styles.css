@@ -1823,3 +1823,21 @@ body {
   font-size: 13px;
   margin-bottom: 6px;
 }
+
+/* === FIX: keep last controls visible above fixed #addToCart (mobile) === */
+@media (max-width: 900px) {
+  /* 1) Add scroll buffer inside the product controls area */
+  .product-controls {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 110px) !important;
+  }
+
+  /* 2) Extra safety: also add small buffer to whole product card */
+  .product-card {
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* 3) Do NOT resize the button — keep your original button style */
+  #addToCart {
+    height: auto !important;
+  }
+}
