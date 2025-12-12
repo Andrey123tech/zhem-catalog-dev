@@ -1431,6 +1431,7 @@ function renderProduct() {
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
   const cat = prod.category;
+  const img = getProductMainImage(prod);
 
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
@@ -1813,7 +1814,7 @@ function renderProduct() {
   updateAddButtonState();
 
   if (btnAdd) {
-    btnAdd.onclick = () => {
+    const handleAddToCart = () => {
       if (isNoSize) {
         const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 0) : 0;
         if (qty <= 0) {
@@ -1927,6 +1928,9 @@ function renderProduct() {
 
       toast("Невозможно определить схему размеров для товара");
     };
+
+    btnAdd.onclick = null;
+    btnAdd.addEventListener("click", handleAddToCart);
   }
 }
 
