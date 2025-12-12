@@ -1084,23 +1084,6 @@ body.no-scroll {
   }
 }
 
-:root {
-  --fixed-cta-h: 56px;
-  --fixed-cta-gap: 14px;
-}
-
-@media (max-width: 900px) {
-  #addToCart {
-    height: var(--fixed-cta-h);
-  }
-
-  .size-picker-display {
-    margin-bottom: calc(
-      env(safe-area-inset-bottom, 0px) + var(--fixed-cta-h) + var(--fixed-cta-gap)
-    );
-  }
-}
-
 /* === ТИПОГРАФИКА И ФИНАЛЬНАЯ ПОЛИРОВКА (ЕДИНЫЙ БЛОК) === */
 
 /* 1. Базовые размеры шрифтов — тут один пульт для всего */
