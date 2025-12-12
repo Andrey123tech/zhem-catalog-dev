@@ -69,16 +69,17 @@ function getProductMainImage(product) {
     const first = product.images.find(Boolean);
     if (first) return first;
   }
-  return NO_PHOTO_URL;
+  return "";
 }
 
 function renderProductGallery(prod, container) {
   if (!container) return;
   const images = Array.isArray(prod.images) ? prod.images.filter(Boolean) : [];
   const hasImages = images.length > 0;
-  const mainUrl = hasImages ? images[0] : NO_PHOTO_URL;
+  const mainUrl = hasImages ? images[0] : "";
+  const showThumbs = images.length > 1;
 
-  const thumbsHtml = hasImages
+  const thumbsHtml = showThumbs
     ? images
         .map(
           (url, idx) => `
@@ -88,35 +89,37 @@ function renderProductGallery(prod, container) {
           `
         )
         .join("")
-    : `<div class="no-photo-placeholder">
-        <img src="${NO_PHOTO_URL}" alt="" aria-hidden="true" onerror="${IMG_ONERROR}">
-        <div class="no-photo-text">Фото скоро</div>
-      </div>`;
+    : "";
+
+  if (!hasImages) {
+    container.innerHTML = `
+      <div class="product-photo-main product-photo-empty" aria-hidden="true"></div>
+    `;
+    return;
+  }
 
   container.innerHTML = `
     <div class="product-photo-main">
       <img src="${mainUrl}" alt="${prod.title}" loading="lazy" data-role="product-main-photo" onerror="${IMG_ONERROR}">
     </div>
-    <div class="product-thumbs">
-      ${thumbsHtml}
-    </div>
+    ${showThumbs ? `<div class="product-thumbs">${thumbsHtml}</div>` : ""}
   `;
-
-  if (!hasImages) return;
 
   const mainImg = container.querySelector("[data-role=\"product-main-photo\"]");
   const thumbButtons = container.querySelectorAll(".product-thumb");
-  thumbButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      thumbButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const idx = parseInt(btn.dataset.idx, 10);
-      const nextUrl = images[idx] || NO_PHOTO_URL;
-      if (mainImg) {
-        mainImg.src = nextUrl;
-      }
+  if (showThumbs) {
+    thumbButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        thumbButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const idx = parseInt(btn.dataset.idx, 10);
+        const nextUrl = images[idx] || NO_PHOTO_URL;
+        if (mainImg) {
+          mainImg.src = nextUrl;
+        }
+      });
     });
-  });
+  }
 }
 
 // === 2. State & storage ===
@@ -1270,17 +1273,17 @@ function renderGrid() {
 
   let tilesHtml = "";
   list.forEach(p => {
-    const hasImages = Array.isArray(p.images) && p.images.length > 0;
     const imgUrl = getProductMainImage(p);
-    const photoSoon = hasImages ? "" : `<div class="photo-soon">Фото скоро</div>`;
+    const imgHtml = imgUrl
+      ? `<img src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="${IMG_ONERROR}">`
+      : "";
     const weightText =
       typeof p.avgWeight === "number" ? p.avgWeight.toFixed(2) + " г" : "";
 
     tilesHtml += `
   <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
     <div class="square">
-      ${photoSoon}
-      <img src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="${IMG_ONERROR}">
+      ${imgHtml}
     </div>
     <div class="tile-body">
       <div class="tile-title">${p.title}</div>
