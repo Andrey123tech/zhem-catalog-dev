@@ -428,9 +428,10 @@ img {
 }
 
 .no-photo-placeholder img {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
+  opacity: 0.55;
 }
 
 .no-photo-text {
