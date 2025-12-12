@@ -78,6 +78,7 @@ function renderProductGallery(prod, container) {
   const hasImages = images.length > 0;
   const mainUrl = hasImages ? images[0] : "";
   const showThumbs = images.length > 1;
+  let currentIndex = 0;
 
   const thumbsHtml = showThumbs
     ? images
@@ -107,17 +108,62 @@ function renderProductGallery(prod, container) {
 
   const mainImg = container.querySelector("[data-role=\"product-main-photo\"]");
   const thumbButtons = container.querySelectorAll(".product-thumb");
+  const mainArea = container.querySelector(".product-photo-main");
+
+  const setActiveIndex = (idx) => {
+    if (!hasImages) return;
+    const total = images.length;
+    if (!total) return;
+    const next = ((idx % total) + total) % total;
+    currentIndex = next;
+    if (mainImg) {
+      mainImg.src = images[next];
+    }
+    if (showThumbs) {
+      thumbButtons.forEach((b, i) => {
+        b.classList.toggle("active", i === next);
+      });
+    }
+  };
+
   if (showThumbs) {
     thumbButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        thumbButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
         const idx = parseInt(btn.dataset.idx, 10);
-        const nextUrl = images[idx] || NO_PHOTO_URL;
-        if (mainImg) {
-          mainImg.src = nextUrl;
-        }
+        setActiveIndex(idx);
       });
+    });
+  }
+
+  if (hasImages && mainArea) {
+    let startX = 0;
+    let startY = 0;
+    let isPointerDown = false;
+    const threshold = 40;
+
+    const onPointerDown = (e) => {
+      isPointerDown = true;
+      startX = e.clientX;
+      startY = e.clientY;
+    };
+
+    const onPointerUp = (e) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) <= Math.abs(dy) || Math.abs(dx) < threshold) return;
+      if (dx < 0) {
+        setActiveIndex(currentIndex + 1);
+      } else {
+        setActiveIndex(currentIndex - 1);
+      }
+    };
+
+    mainArea.addEventListener("pointerdown", onPointerDown);
+    mainArea.addEventListener("pointerup", onPointerUp);
+    mainArea.addEventListener("pointerleave", () => {
+      isPointerDown = false;
     });
   }
 }
