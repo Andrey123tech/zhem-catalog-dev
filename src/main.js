@@ -114,14 +114,14 @@ function renderProductGallery(prod, container) {
     if (!hasImages) return;
     const total = images.length;
     if (!total) return;
-    const next = Math.min(Math.max(idx, 0), total - 1);
-    currentIndex = next;
+    const clampedIndex = Math.max(0, Math.min(idx, total - 1));
+    currentIndex = clampedIndex;
     if (mainImg) {
-      mainImg.src = images[next];
+      mainImg.src = images[clampedIndex];
     }
     if (showThumbs) {
       thumbButtons.forEach((b, i) => {
-        b.classList.toggle("active", i === next);
+        b.classList.toggle("active", i === clampedIndex);
       });
     }
   };
@@ -153,14 +153,10 @@ function renderProductGallery(prod, container) {
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
       if (Math.abs(dx) <= Math.abs(dy) || Math.abs(dx) < threshold) return;
-      if (dx < 0) {
-        if (currentIndex < images.length - 1) {
-          setActiveIndex(currentIndex + 1);
-        }
-      } else {
-        if (currentIndex > 0) {
-          setActiveIndex(currentIndex - 1);
-        }
+      if (dx < 0 && currentIndex < images.length - 1) {
+        setActiveIndex(currentIndex + 1);
+      } else if (dx > 0 && currentIndex > 0) {
+        setActiveIndex(currentIndex - 1);
       }
     };
 
@@ -968,7 +964,7 @@ function setupBreadcrumbs() {
     } else {
       renderBreadcrumbs([
         { label: "Главная", url: "index.html" },
-        { label: "Каталог", url: "catalog.html" },
+        { label: "Каталог" },
         { label: artLabel }
       ]);
     }
