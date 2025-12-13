@@ -154,9 +154,13 @@ function renderProductGallery(prod, container) {
       const dy = e.clientY - startY;
       if (Math.abs(dx) <= Math.abs(dy) || Math.abs(dx) < threshold) return;
       if (dx < 0) {
-        setActiveIndex(currentIndex + 1);
+        if (currentIndex < images.length - 1) {
+          setActiveIndex(currentIndex + 1);
+        }
       } else {
-        setActiveIndex(currentIndex - 1);
+        if (currentIndex > 0) {
+          setActiveIndex(currentIndex - 1);
+        }
       }
     };
 
@@ -677,7 +681,1468 @@ function applyCatalogFilters(list, category) {
   };
 
   if (filterState.inStock) {
-    result…10737 tokens truncated…на")
+    result = result.filter(prod => {
+      const info = getStockInfo(prod);
+      if (!info.hasData) return false;
+      return info.hasAnyStock || (info.totalStock != null && info.totalStock > 0);
+    });
+  }
+
+  const canFilterBySize = isSizeFilterAllowed(category);
+  const selectedSizes = canFilterBySize
+    ? filterState.sizes.map(normalizeSizeKey).filter(Boolean)
+    : [];
+
+  if (selectedSizes.length) {
+    result = result.filter(prod => {
+      const info = getStockInfo(prod);
+      const stdSizes = getStandardSizesForProduct(prod).map(normalizeSizeKey);
+      return selectedSizes.some(sizeKey => {
+        const stockVal = getStockForSize(info, sizeKey);
+        if (filterState.inStock) return stockVal != null && stockVal > 0;
+        if (stockVal != null) return true;
+        return stdSizes.includes(sizeKey);
+      });
+    });
+  }
+
+  result = applyFiltersByWeight(result);
+
+  if (filterState.isPopular) {
+    result = result.filter(prod => isPopular(prod));
+  }
+
+  if (filterState.isNew) {
+    result = result.filter(prod => isNewProduct(prod, TODAY));
+  }
+
+  if (category === "rings") {
+    if (ringGenderFilter === "female") {
+      result = result.filter(prod => prod.gender === "female");
+    } else if (ringGenderFilter === "male") {
+      result = result.filter(prod => prod.gender === "male");
+    } else if (ringGenderFilter === "wedding") {
+      result = result.filter(prod => prod.gender === "wedding");
+    }
+
+    if (ringStonesFilter === "with") {
+      result = result.filter(prod => prod.hasStones === true);
+    } else if (ringStonesFilter === "without") {
+      result = result.filter(prod => prod.hasStones === false);
+    }
+  } else if (STONE_FILTER_CATEGORIES.includes(category)) {
+    const currentStonesFilter = stonesFilterByCategory[category];
+    if (currentStonesFilter === "with") {
+      result = result.filter(prod => prod.hasStones === true);
+    } else if (currentStonesFilter === "without") {
+      result = result.filter(prod => prod.hasStones === false);
+    }
+  }
+
+  return result;
+}
+
+// === 7. Order text & WhatsApp integration ===
+function buildOrderText(cart, products) {
+  if (!Array.isArray(cart) || !cart.length) return "";
+
+  const CATEGORY_NAMES = {
+    rings: "КОЛЬЦА",
+    earrings: "СЕРЬГИ",
+    bracelets: "БРАСЛЕТЫ",
+    pendants: "ПОДВЕСКИ",
+    pins: "БУЛАВКИ",
+    other: "ДРУГОЕ"
+  };
+
+  const groups = {};
+  const stockItems = [];
+  const preorderItems = [];
+  const stockCache = new Map();
+
+  let totalQty = 0;
+  let totalWeight = 0;
+
+  cart.forEach(it => {
+    const prod = products.find(p => p.sku === it.sku);
+    if (!prod) return;
+
+    const cat = prod.category || "other";
+    const qty = it.qty || 0;
+    const sizeVal = it.size || "-";
+    const avgWeight = prod.avgWeight || 0;
+
+    if (!groups[cat]) groups[cat] = [];
+    const baseRow = { sku: it.sku, size: sizeVal, qty, avgWeight, cat };
+    groups[cat].push(baseRow);
+
+    const stockInfo =
+      stockCache.get(prod.sku) || (() => {
+        const info = getStockMap(prod);
+        stockCache.set(prod.sku, info);
+        return info;
+      })();
+
+    const isSizeBased = SIZE_FILTER_CATEGORIES.has(cat);
+    const sizeKey = normalizeSizeKey(it.size);
+    let fromStock = false;
+
+    if (isSizeBased) {
+      const val = getStockForSize(stockInfo, sizeKey);
+      fromStock = val != null && val > 0;
+    } else {
+      const val = getStockForSize(stockInfo, sizeKey || NO_SIZE_KEY);
+      if (val != null) {
+        fromStock = val > 0;
+      } else {
+        const summary = getStockSummary(stockInfo);
+        fromStock = !!summary.hasStock;
+      }
+    }
+
+    (fromStock ? stockItems : preorderItems).push(baseRow);
+
+    totalQty += qty;
+    totalWeight += qty * avgWeight;
+  });
+
+  let txt = "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n";
+
+  const appendSection = (title, list) => {
+    if (!list.length) return;
+    txt += `${title}\n\n`;
+
+    const byCat = {};
+    list.forEach(row => {
+      const key = row.cat || "other";
+      if (!byCat[key]) byCat[key] = [];
+      byCat[key].push(row);
+    });
+
+    Object.keys(byCat).forEach(cat => {
+      txt += `${CATEGORY_NAMES[cat] || CATEGORY_NAMES.other}\n`;
+      byCat[cat].forEach(row => {
+        txt += `${row.sku} — ${row.size} — ${row.qty} шт\n`;
+      });
+      txt += "\n";
+    });
+  };
+
+  appendSection("ПО НАЛИЧИЮ (со склада):", stockItems);
+  appendSection("ПОД ЗАКАЗ:", preorderItems);
+
+  const totalStockQty = stockItems.reduce((s, row) => s + (row.qty || 0), 0);
+  const totalPreorderQty = preorderItems.reduce(
+    (s, row) => s + (row.qty || 0),
+    0
+  );
+
+  txt += `ИТОГ ПО ИСТОЧНИКУ:\nСо склада: ${totalStockQty} шт\nПод заказ: ${totalPreorderQty} шт\n\n`;
+
+  txt += `ОБЩИЙ ИТОГ:\nВсего: ${totalQty} шт ~ ${formatWeight(totalWeight)} г\n\n`;
+  txt += "---------------------------------------\n";
+  txt += "Таблица для Excel (копировать только этот блок):\n";
+  txt += "Категория;Артикул;Размер;Кол-во\n";
+
+  Object.keys(groups).forEach(cat => {
+    const catName = CATEGORY_NAMES[cat];
+    groups[cat].forEach(row => {
+      txt += `${catName};${row.sku};${row.size};${row.qty}\n`;
+    });
+  });
+
+  txt += `\nИТОГО;;;\n`;
+  txt += `;;Всего штук;${totalQty}\n`;
+  txt += `;;Вес, г;${formatWeight(totalWeight)}\n`;
+  txt += "---------------------------------------\n\n";
+  txt += "С уважением,\n";
+
+  return txt;
+}
+
+// === 8. Routing & breadcrumb helpers ===
+function getSkuFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("sku");
+}
+
+function getCategoryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("category");
+}
+
+function getOrderCategoryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("cat");
+}
+
+function getFromCatFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("fromCat");
+}
+
+function getPageName() {
+  const path = window.location.pathname;
+  const name = path.split("/").pop() || "index.html";
+  return name;
+}
+
+function ensureBreadcrumbsContainer() {
+  let bc = document.getElementById("breadcrumbs");
+  if (bc) return bc;
+
+  const tabs = document.querySelector(".main-tabs");
+  const anchor = tabs || document.querySelector(".topbar");
+  if (!anchor) return null;
+
+  bc = document.createElement("div");
+  bc.id = "breadcrumbs";
+  bc.className = "breadcrumbs";
+  anchor.insertAdjacentElement("afterend", bc);
+  return bc;
+}
+
+function renderBreadcrumbs(items) {
+  const bc = ensureBreadcrumbsContainer();
+  if (!bc) return;
+
+  const html = items
+    .map(it => {
+      if (!it.url) return `<span>${it.label}</span>`;
+      return `<a href="${it.url}">${it.label}</a>`;
+    })
+    .join(" / ");
+
+  bc.innerHTML = html;
+}
+
+function setupBreadcrumbs() {
+  const page = getPageName();
+
+  const CATEGORY_LABELS = {
+    rings: "Кольца",
+    earrings: "Серьги",
+    bracelets: "Браслеты",
+    pendants: "Подвески",
+    pins: "Булавки"
+  };
+
+  if (page === "index.html") {
+    renderBreadcrumbs([{ label: "Главная" }]);
+    return;
+  }
+
+  if ($("#grid")) {
+    const category = getCategoryFromUrl();
+    if (category && CATEGORY_LABELS[category]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог", url: "catalog.html" },
+        { label: CATEGORY_LABELS[category] }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог" }
+      ]);
+    }
+    return;
+  }
+
+  if ($("#product")) {
+    const sku = getSkuFromUrl();
+    const prod = PRODUCTS.find(p => p.sku === sku) || {};
+    const cat = prod.category;
+    const artLabel = sku ? `Арт. ${sku}` : "Товар";
+
+    if (cat && CATEGORY_LABELS[cat]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог", url: "catalog.html" },
+        {
+          label: CATEGORY_LABELS[cat],
+          url: "catalog.html?category=" + encodeURIComponent(cat)
+        },
+        { label: artLabel }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог", url: "catalog.html" },
+        { label: artLabel }
+      ]);
+    }
+    return;
+  }
+
+  if ($("#order")) {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("cat");
+    const artLabel = params.get("sku")
+      ? `Арт. ${params.get("sku")}`
+      : "Корзина";
+
+    if (cat && CATEGORY_LABELS[cat]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина", url: "order.html" },
+        { label: CATEGORY_LABELS[cat] }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина" }
+      ]);
+    }
+    return;
+  }
+
+  if ($("#orderItem")) {
+    const params = new URLSearchParams(window.location.search);
+    const sku = params.get("sku");
+    const fromCat = getFromCatFromUrl();
+    const prod = PRODUCTS.find(p => p.sku === sku) || {};
+    const rawCat = fromCat || prod.category;
+    const artLabel = sku ? `Арт. ${sku}` : "Позиция";
+
+    if (rawCat && CATEGORY_LABELS[rawCat]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина", url: "order.html" },
+        {
+          label: CATEGORY_LABELS[rawCat],
+          url: "order.html?cat=" + encodeURIComponent(rawCat)
+        },
+        { label: artLabel }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина", url: "order.html" },
+        { label: artLabel }
+      ]);
+    }
+    return;
+  }
+
+  renderBreadcrumbs([{ label: "Главная", url: "index.html" }]);
+}
+
+// === 9. Rendering & page-specific init ===
+function getInStockCheckboxes() {
+  return Array.from(
+    document.querySelectorAll(
+      '#filterInStock, #filterInStockInline, input[data-filter="inStock"]'
+    )
+  );
+}
+
+function readFilterControls() {
+  const wMin = document.getElementById("filterWeightMin");
+  const wMax = document.getElementById("filterWeightMax");
+  const cbPopular = document.getElementById("filterPopular");
+  const cbNew = document.getElementById("filterNew");
+  const inStockCbs = getInStockCheckboxes();
+  const activeSizeChips = Array.from(
+    document.querySelectorAll(".filter-size-chip.active")
+  ).filter(chip => !chip.classList.contains("ring-subfilter-chip"));
+  const category = getCategoryFromUrl();
+
+  filterState.weightMin = wMin && wMin.value ? parseFloat(wMin.value) : null;
+  filterState.weightMax = wMax && wMax.value ? parseFloat(wMax.value) : null;
+
+  filterState.sizes = isSizeFilterAllowed(category)
+    ? activeSizeChips
+        .map(chip => normalizeSizeKey(chip.textContent.trim()))
+        .filter(Boolean)
+    : [];
+
+  filterState.isPopular = !!(cbPopular && cbPopular.checked);
+  filterState.isNew = !!(cbNew && cbNew.checked);
+  filterState.inStock = inStockCbs.some(cb => cb.checked);
+}
+
+function syncFilterControlsFromState() {
+  const wMin = document.getElementById("filterWeightMin");
+  const wMax = document.getElementById("filterWeightMax");
+  const cbPopular = document.getElementById("filterPopular");
+  const cbNew = document.getElementById("filterNew");
+  const inStockCbs = getInStockCheckboxes();
+  const category = getCategoryFromUrl();
+  const sizeSet =
+    isSizeFilterAllowed(category) && Array.isArray(filterState.sizes)
+      ? new Set(filterState.sizes.map(normalizeSizeKey))
+      : new Set();
+
+  if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
+  if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
+  if (cbPopular) cbPopular.checked = !!filterState.isPopular;
+  if (cbNew) cbNew.checked = !!filterState.isNew;
+  inStockCbs.forEach(cb => (cb.checked = !!filterState.inStock));
+  document.querySelectorAll(".filter-size-chip").forEach(chip => {
+    if (chip.classList.contains("ring-subfilter-chip")) return;
+    const key = normalizeSizeKey(chip.textContent.trim());
+    if (sizeSet.size && sizeSet.has(key)) {
+      chip.classList.add("active");
+    } else {
+      chip.classList.remove("active");
+    }
+  });
+}
+
+function clearRingSubfiltersDom() {
+  const mount =
+    document.getElementById("ringSubfilters") ||
+    document.getElementById("ringSubfiltersMount");
+  if (mount) {
+    mount.innerHTML = "";
+  }
+}
+
+function ensureSubfiltersContainer() {
+  const mount =
+    document.getElementById("ringSubfilters") ||
+    document.getElementById("ringSubfiltersMount");
+  if (!mount) return null;
+
+  let container = document.getElementById("ringSubfiltersContainer");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "ringSubfiltersContainer";
+    container.className = "ring-subfilters";
+  }
+
+  if (!mount.contains(container)) {
+    mount.innerHTML = "";
+    mount.appendChild(container);
+  }
+
+  return container;
+}
+
+function renderRingSubfilters(container) {
+  if (!container) return;
+  container.className = "ring-subfilters";
+  container.innerHTML = `
+    <div class="ring-subfilters-row ring-subfilters-row-top">
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="female"
+      >
+        Женские
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="male"
+      >
+        Мужские
+      </button>
+    </div>
+    <div class="ring-subfilters-row ring-subfilters-row-bottom">
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-gender="wedding"
+      >
+        Обручальные
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-stones="with"
+      >
+        С камнями
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip"
+        data-ring-stones="without"
+      >
+        Без камней
+      </button>
+    </div>
+  `;
+}
+
+function renderStonesSubfilters(container, category) {
+  if (!container || !STONE_FILTER_CATEGORIES.includes(category)) return;
+  const active = stonesFilterByCategory[category];
+  container.className = "ring-subfilters";
+  container.innerHTML = `
+    <div class="ring-subfilters-row ring-subfilters-row-top">
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip${active === "with" ? " active" : ""}"
+        data-stones="with"
+        data-stones-category="${category}"
+      >
+        С камнями
+      </button>
+      <button
+        type="button"
+        class="filter-size-chip ring-subfilter-chip${active === "without" ? " active" : ""}"
+        data-stones="without"
+        data-stones-category="${category}"
+      >
+        Без камней
+      </button>
+    </div>
+  `;
+}
+
+function renderSubfiltersForCategory(category) {
+  loadStonesFiltersFromStorage();
+
+  if (category !== "rings" && !STONE_FILTER_CATEGORIES.includes(category)) {
+    clearRingSubfiltersDom();
+    return null;
+  }
+
+  const container = ensureSubfiltersContainer();
+  if (!container) return null;
+
+  if (category === "rings") {
+    renderRingSubfilters(container);
+  } else if (STONE_FILTER_CATEGORIES.includes(category)) {
+    renderStonesSubfilters(container, category);
+  }
+
+  return container;
+}
+
+function renderGrid() {
+  const grid = $("#grid");
+  if (!grid || !Array.isArray(PRODUCTS)) return;
+
+  loadFilterStateFromStorage();
+  loadStonesFiltersFromStorage();
+  syncFilterControlsFromState();
+  readFilterControls();
+
+  const category = getCategoryFromUrl();
+
+  const CATEGORY_LABELS = {
+    rings: "Кольца",
+    earrings: "Серьги",
+    bracelets: "Браслеты",
+    pendants: "Подвески",
+    pins: "Булавки",
+    necklaces: "Колье",
+    brooches: "Броши"
+  };
+
+  const titleEl = $("#catalogTitle");
+  const heroTitleEl = $("#heroTitle");
+
+  if (!category || !CATEGORY_LABELS[category] || !ALLOWED_CATEGORIES.has(category)) {
+    if (heroTitleEl) heroTitleEl.textContent = "Каталог";
+    if (titleEl) titleEl.textContent = "";
+    renderSubfiltersForCategory(null);
+
+    const cats = [
+      { key: "rings", label: "Кольца" },
+      { key: "earrings", label: "Серьги" },
+      { key: "bracelets", label: "Браслеты" },
+      { key: "pendants", label: "Подвески" },
+      { key: "pins", label: "Булавки" },
+      { key: "necklaces", label: "Колье" },
+      { key: "brooches", label: "Броши" }
+    ];
+
+    grid.innerHTML = cats
+      .map(
+        c => `
+        <a class="tile" href="catalog.html?category=${encodeURIComponent(
+          c.key
+        )}">
+          <div class="square">
+            <div class="category-icon-placeholder"></div>
+          </div>
+          <div class="tile-body">
+            <div class="tile-title">${c.label}</div>
+            <div class="tile-sub">
+              <span class="tile-art">Перейти к моделям</span>
+            </div>
+          </div>
+        </a>
+      `
+      )
+      .join("");
+
+    return;
+  }
+
+  let list = PRODUCTS.filter(
+    p => p.category === category && ALLOWED_CATEGORIES.has(p.category)
+  );
+  let subfiltersEl = null;
+
+  const searchInput = $("#skuSearch");
+  let query = "";
+  if (searchInput) {
+    if (!searchInput.dataset.bound) {
+      searchInput.dataset.bound = "1";
+      searchInput.addEventListener("input", () => {
+        renderGrid();
+      });
+    }
+
+    query = searchInput.value.trim();
+  }
+
+  if (query) {
+    const q = query.toLowerCase();
+    list = list.filter(p => String(p.sku).toLowerCase().includes(q));
+  }
+
+  if (category === "rings") {
+    loadRingSubfiltersFromStorage();
+    subfiltersEl = renderSubfiltersForCategory("rings");
+  } else if (STONE_FILTER_CATEGORIES.includes(category)) {
+    subfiltersEl = renderSubfiltersForCategory(category);
+  } else {
+    subfiltersEl = renderSubfiltersForCategory(null);
+  }
+
+  list = applyCatalogFilters(list, category);
+
+  list = list
+    .slice()
+    .sort((a, b) => {
+      const sa = typeof a.sortOrder === "number" ? a.sortOrder : 9999;
+      const sb = typeof b.sortOrder === "number" ? b.sortOrder : 9999;
+      if (sa !== sb) return sa - sb;
+      return String(a.sku).localeCompare(String(b.sku));
+    });
+
+  const label = CATEGORY_LABELS[category];
+  if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
+  if (titleEl) titleEl.textContent = "";
+
+  let tilesHtml = "";
+  list.forEach(p => {
+    const imgUrl = getProductMainImage(p);
+    const imgHtml = imgUrl
+      ? `<img src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="${IMG_ONERROR}">`
+      : "";
+    const weightText =
+      typeof p.avgWeight === "number" ? p.avgWeight.toFixed(2) + " г" : "";
+
+    tilesHtml += `
+  <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
+    <div class="square">
+      ${imgHtml}
+    </div>
+    <div class="tile-body">
+      <div class="tile-title">${p.title}</div>
+      <div class="tile-sub">
+        <span class="tile-art">Арт. ${p.sku}</span>
+        ${weightText ? `<span class="tile-weight">${weightText}</span>` : ""}
+      </div>
+    </div>
+  </a>
+`;
+  });
+
+  grid.innerHTML = tilesHtml;
+
+  if (category === "rings" && subfiltersEl) {
+    subfiltersEl.querySelectorAll("[data-ring-gender]").forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        ringGenderFilter === (btn.dataset.ringGender || "")
+      );
+    });
+    subfiltersEl.querySelectorAll("[data-ring-stones]").forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        ringStonesFilter === (btn.dataset.ringStones || "")
+      );
+    });
+  } else if (STONE_FILTER_CATEGORIES.includes(category) && subfiltersEl) {
+    const current = stonesFilterByCategory[category];
+    subfiltersEl.querySelectorAll("[data-stones]").forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        current === (btn.dataset.stones || "")
+      );
+    });
+  }
+
+  if (subfiltersEl && !subfiltersEl.dataset.bound) {
+    subfiltersEl.dataset.bound = "1";
+    subfiltersEl.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const ringGender = btn.dataset.ringGender;
+      const ringStones = btn.dataset.ringStones;
+      const ringWedding = btn.dataset.ringWedding;
+      const genericStones = btn.dataset.stones;
+      const stonesCategory = btn.dataset.stonesCategory;
+
+      if (
+        genericStones &&
+        stonesCategory &&
+        STONE_FILTER_CATEGORIES.includes(stonesCategory)
+      ) {
+        const currentVal = stonesFilterByCategory[stonesCategory];
+        stonesFilterByCategory[stonesCategory] =
+          currentVal === genericStones ? null : genericStones;
+        saveStonesFiltersToStorage();
+        renderGrid();
+        return;
+      }
+
+      const genderVal = ringWedding || ringGender;
+      if (genderVal) {
+        ringGenderFilter = ringGenderFilter === genderVal ? null : genderVal;
+      }
+      if (ringStones) {
+        ringStonesFilter = ringStonesFilter === ringStones ? null : ringStones;
+      }
+
+      saveRingSubfiltersToStorage();
+      renderGrid();
+    });
+  }
+
+  updateCartBadge();
+}
+
+function renderProduct() {
+  const box = $("#product");
+  if (!box) return;
+
+  loadFilterStateFromStorage();
+
+  const sku = getSkuFromUrl();
+  const prod = PRODUCTS.find(p => p.sku === sku);
+  if (!prod) {
+    box.innerHTML = "<p>Товар не найден.</p>";
+    return;
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const inStockOnly = urlParams.get("inStock") === "1";
+  const enforceStock = filterState.inStock === true || inStockOnly === true;
+  const stockInfo = getStockMap(prod);
+  const preferredFilterSize = getPreferredFilterSizeKey(prod, stockInfo);
+  const cartQtyMap = getCartQtyBySize(prod.sku);
+
+  const w =
+    prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
+
+  const cat = prod.category;
+  const img = getProductMainImage(prod);
+
+  const typeLabel = TYPE_LABELS[cat] || "Модель";
+
+  const isRing = cat === "rings";
+  const isBracelet = cat === "bracelets";
+  const isNecklace = cat === "necklaces";
+  const isBrooch = cat === "brooches";
+
+  // Only rings and bracelets use size-based logic for now
+  const isRingSized = isRing || isBracelet;
+
+  const showInStockSizesOnly =
+    filterState.inStock === true && isRingSized;
+
+  // Everything else is “no size” (simple qty):
+  // earrings, pendants, pins, necklaces, brooches
+  const isNoSize =
+    cat === "earrings" ||
+    cat === "pendants" ||
+    cat === "pins" ||
+    cat === "necklaces" ||
+    cat === "brooches";
+
+  let sizes = isRingSized
+    ? getVisibleSizesForProduct(prod, stockInfo, showInStockSizesOnly)
+    : [];
+  sizes = Array.from(new Set(sizes.map(normalizeSizeKey)));
+
+  const sizeState = new Map();
+  sizes.forEach(s => sizeState.set(normalizeSizeKey(s), 0));
+
+  box.innerHTML = `
+    <div class="product-main">
+      <div class="product-photo-wrap"></div>
+
+      <div class="product-meta">
+        <h1 class="product-title">
+          ${typeLabel} · Арт. ${prod.sku}
+        </h1>
+        ${w ? `<div class="product-weight">Средний вес ~ ${w}</div>` : ""}
+        <div class="product-stock-line">
+          ${renderStockIndicator(stockInfo, { sizeKey: preferredFilterSize })}
+        </div>
+      </div>
+
+      <div class="product-controls">
+        <div class="product-controls-row">
+          <div class="field">
+            <div class="field-control">
+              <button id="sizeMatrixOpen" type="button" class="size-picker-display">
+                <span id="sizeMatrixSummary">Выбрать размеры</span>
+                <span class="size-picker-arrow">▾</span>
+              </button>
+            </div>
+
+            <div class="qty-block-no-size hidden">
+              <div class="size-row" data-size="">
+                <div class="size-row-size"></div>
+                <div class="size-row-qty">
+                  <button type="button" id="qtyDec" class="qty-btn">−</button>
+                  <span id="qtyNoSize">1</span>
+                  <button type="button" id="qtyInc" class="qty-btn">+</button>
+                </div>
+                <div class="size-row-weight"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="addToCart" class="btn-primary" type="button">
+          В корзину
+        </button>
+      </div>
+    </div>
+  `;
+
+  const btnAdd = $("#addToCart", box);
+  const btnSizeOpen = $("#sizeMatrixOpen", box);
+  const summaryEl = $("#sizeMatrixSummary", box);
+  const sizeActiveStockEl = $("#sizeActiveStock", box);
+  const qtyBlock = $(".qty-block-no-size", box);
+  const qtySpan = $("#qtyNoSize", box);
+  const btnQtyDec = $("#qtyDec", box);
+  const btnQtyInc = $("#qtyInc", box);
+  let activeSizeKey = preferredFilterSize || null;
+
+  function preventDoubleTapZoom(btn) {
+    if (!btn) return;
+    btn.style.touchAction = "manipulation";
+  }
+
+  preventDoubleTapZoom(btnQtyDec);
+  preventDoubleTapZoom(btnQtyInc);
+
+  const calcSelectedQty = () => {
+    if (isNoSize) {
+      return qtySpan ? parseInt(qtySpan.textContent, 10) || 0 : 0;
+    }
+    if (isRingSized) {
+      let total = 0;
+      sizeState.forEach(q => {
+        total += q || 0;
+      });
+      return total;
+    }
+    return 0;
+  };
+
+  const updateAddButtonState = () => {
+    if (!btnAdd) return;
+    btnAdd.disabled = calcSelectedQty() <= 0;
+  };
+
+  const updateActiveSizeStock = sizeKey => {
+    activeSizeKey = sizeKey || null;
+    if (!sizeActiveStockEl) return;
+    if (!isRingSized || !sizeKey) {
+      sizeActiveStockEl.textContent = "";
+      sizeActiveStockEl.style.display = "none";
+      return;
+    }
+    const stockText = getSizeStockDisplay(stockInfo, sizeKey);
+    if (stockText) {
+      sizeActiveStockEl.textContent = `Арт. ${prod.sku} · р-р ${sizeKey} · ${stockText}`;
+      sizeActiveStockEl.style.display = "block";
+    } else {
+      sizeActiveStockEl.textContent = "";
+      sizeActiveStockEl.style.display = "none";
+    }
+  };
+
+  updateActiveSizeStock(activeSizeKey);
+
+  const photoWrap = $(".product-photo-wrap", box);
+  if (photoWrap) {
+    renderProductGallery(prod, photoWrap);
+  }
+
+  if (isRingSized && sizes.length === 0) {
+    if (summaryEl) {
+      summaryEl.textContent = stockInfo.hasData
+        ? "Нет размеров в наличии"
+        : "Нет данных о наличии";
+    }
+    if (btnSizeOpen) btnSizeOpen.disabled = true;
+  }
+
+  if (isNoSize) {
+    if (btnSizeOpen) btnSizeOpen.style.display = "none";
+    if (qtyBlock) qtyBlock.classList.remove("hidden");
+
+    const getNoSizeLimits = () =>
+      getNoSizeCapInfo(prod, cartQtyMap, { useStock: enforceStock });
+
+    if (qtySpan) {
+      const { remaining } = getNoSizeLimits();
+      const initial = Math.min(remaining || 0, 1);
+      qtySpan.textContent = String(initial);
+      updateAddButtonState();
+    }
+
+    if (btnQtyInc && qtySpan) {
+      btnQtyInc.onclick = () => {
+        let v = parseInt(qtySpan.textContent, 10);
+        if (isNaN(v)) v = 0;
+        const { remaining } = getNoSizeLimits();
+        const limit = remaining;
+        if (limit <= 0) return;
+        v = Math.min(limit, v + 1);
+        qtySpan.textContent = String(v);
+        updateAddButtonState();
+      };
+    }
+
+    if (btnQtyDec && qtySpan) {
+      btnQtyDec.onclick = () => {
+        let v = parseInt(qtySpan.textContent, 10);
+        if (isNaN(v)) v = 0;
+        v = Math.max(0, v - 1);
+        qtySpan.textContent = String(v);
+        updateAddButtonState();
+      };
+    }
+  }
+
+  let modal = null;
+  let resetRingSelection = () => {};
+
+  const resetNoSizeQty = () => {
+    if (qtySpan) qtySpan.textContent = "0";
+    updateAddButtonState();
+  };
+
+  if (isRingSized && sizes.length > 0) {
+    modal = document.createElement("div");
+    modal.id = "sizeMatrixModal";
+    modal.className = "size-matrix-backdrop hidden";
+    modal.innerHTML = `
+      <div class="size-matrix-sheet">
+        <div class="size-matrix-header">Размеры · Арт. ${prod.sku}</div>
+        <div class="size-matrix-list">
+          ${sizes
+            .map(s => {
+              const key = normalizeSizeKey(s);
+              const stockVal = getStockForSize(stockInfo, key);
+              const isZeroStock =
+                stockInfo.hasData &&
+                (stockVal == null || stockVal <= 0);
+              const shouldDisable = enforceStock && isZeroStock;
+              const stockLabel = getSizeStockDisplay(stockInfo, key);
+              const rowClass = shouldDisable ? "size-row no-stock" : "size-row";
+              const btnDis = shouldDisable ? "disabled" : "";
+              return `
+                <div class="${rowClass}" data-size="${key}">
+                  <div class="size-row-size">
+                    <div>р-р ${key}</div>
+                    ${stockLabel ? `<div class="size-row-stock">${stockLabel}</div>` : ""}
+                  </div>
+                  <div class="size-row-qty">
+                    <button type="button" data-act="dec" data-size="${key}" ${btnDis}>−</button>
+                    <span data-size="${key}">0</span>
+                    <button type="button" data-act="inc" data-size="${key}" ${btnDis}>+</button>
+                  </div>
+                </div>
+              `;
+            })
+            .join("")}
+        </div>
+        <button type="button" class="btn-primary size-matrix-done" id="sizeMatrixDone">
+          Готово
+        </button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const updateSummary = () => {
+      if (!summaryEl) return;
+      let total = 0;
+      sizeState.forEach(q => {
+        total += q || 0;
+      });
+      summaryEl.textContent =
+        total > 0 ? `Выбрано: ${total} шт.` : "Выбрать размеры";
+    };
+
+    const syncDomFromState = () => {
+      sizes.forEach(s => {
+        const key = normalizeSizeKey(s);
+        const span = modal.querySelector(
+          `.size-row-qty span[data-size="${key}"]`
+        );
+        if (span) span.textContent = String(sizeState.get(key) || 0);
+      });
+    };
+
+    const openModal = () => {
+      syncDomFromState();
+      modal.classList.remove("hidden");
+      document.body.classList.add("no-scroll");
+    };
+
+    const closeModal = () => {
+      modal.classList.add("hidden");
+      document.body.classList.remove("no-scroll");
+      updateSummary();
+    };
+
+    if (btnSizeOpen) {
+      btnSizeOpen.addEventListener("click", openModal);
+    }
+
+    modal.addEventListener("click", e => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    modal.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      if (btn.id === "sizeMatrixDone") {
+        closeModal();
+        return;
+      }
+
+      const act = btn.dataset.act;
+      const sizeAttr = btn.dataset.size;
+      if (!act || !sizeAttr) return;
+
+      const key = normalizeSizeKey(sizeAttr);
+      let current = sizeState.get(key) || 0;
+
+      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap, {
+        useStock: enforceStock
+      });
+      const maxAllowed = remaining == null ? 999 : remaining;
+
+      if (act === "inc") {
+        if (maxAllowed <= 0) return;
+        current = Math.min(maxAllowed, current + 1);
+      }
+      if (act === "dec") current = Math.max(0, current - 1);
+
+      sizeState.set(key, current);
+
+      const span = modal.querySelector(
+        `.size-row-qty span[data-size="${key}"]`
+      );
+      if (span) span.textContent = String(current);
+      updateActiveSizeStock(key);
+      updateAddButtonState();
+      updateSummary();
+    });
+
+    var addStateToCart = () => {
+      const cart = loadCart();
+
+      sizeState.forEach((qty, size) => {
+        if (!qty) return;
+
+        const existing = cart.find(
+          it => it.sku === prod.sku && normalizeSizeKey(it.size) === normalizeSizeKey(size)
+        );
+
+        const currentQty = existing ? existing.qty || 0 : 0;
+        const stockCap = enforceStock ? getStockForSize(stockInfo, size) : null;
+        let finalTotal = currentQty + qty;
+
+        if (stockCap != null) {
+          const cap = Math.max(0, stockCap);
+          finalTotal =
+            currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
+        } else {
+          finalTotal = Math.min(999, finalTotal);
+        }
+
+        const added = finalTotal - currentQty;
+        if (added <= 0) return;
+
+        if (existing) {
+          existing.qty = finalTotal;
+        } else {
+          cart.push({
+            sku: prod.sku,
+            size,
+            qty: finalTotal,
+            avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
+            image: img,
+            title: prod.title || `${typeLabel} ${prod.sku}`
+          });
+        }
+
+        cartQtyMap.set(
+          normalizeSizeKey(size),
+          (cartQtyMap.get(normalizeSizeKey(size)) || 0) + added
+        );
+      });
+
+      saveCart(cart);
+    };
+
+    resetRingSelection = () => {
+      sizeState.forEach((_, key) => sizeState.set(key, 0));
+      if (modal) {
+        sizes.forEach(s => {
+          const key = normalizeSizeKey(s);
+          const span = modal.querySelector(
+            `.size-row-qty span[data-size="${key}"]`
+          );
+          if (span) span.textContent = "0";
+        });
+      }
+      if (summaryEl) summaryEl.textContent = "Выбрать размеры";
+      updateActiveSizeStock(null);
+      updateAddButtonState();
+    };
+  }
+
+  updateAddButtonState();
+
+  if (btnAdd) {
+    const handleAddToCart = () => {
+      if (isNoSize) {
+        const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 0) : 0;
+        if (qty <= 0) {
+          toast("Укажите количество");
+          return;
+        }
+
+        const cartNow = loadCart();
+        const existing = cartNow.find(
+          it =>
+            it.sku === prod.sku &&
+            normalizeSizeKey(it.size) === NO_SIZE_KEY
+        );
+
+        const { cap, remaining } = getNoSizeCapInfo(prod, cartQtyMap, {
+          useStock: enforceStock
+        });
+
+        if (remaining <= 0) {
+          toast("Нет в наличии");
+          return;
+        }
+
+        const allowedToAdd = Math.min(qty, Math.max(0, remaining));
+
+        const currentQty = existing ? existing.qty || 0 : 0;
+        let finalTotal = currentQty + allowedToAdd;
+        finalTotal = Math.min(cap, finalTotal);
+
+        const added = finalTotal - currentQty;
+        if (added <= 0) {
+          toast("Нет в наличии");
+          return;
+        }
+
+        if (existing) {
+          existing.qty = finalTotal;
+        } else {
+          cartNow.push({
+            sku: prod.sku,
+            size: null,
+            qty: finalTotal,
+            avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
+            image: img,
+            title: prod.title || `${typeLabel} ${prod.sku}`
+          });
+        }
+
+        cartQtyMap.set(
+          NO_SIZE_KEY,
+          (cartQtyMap.get(NO_SIZE_KEY) || 0) + added
+        );
+
+        saveCart(cartNow);
+        animateAddToCart(btnAdd);
+
+        const cartCount = document.querySelector("#cartCount");
+        if (cartCount) {
+          cartCount.classList.add("cart-bump");
+          setTimeout(
+            () => cartCount.classList.remove("cart-bump"),
+            260
+          );
+        }
+
+        btnAdd.classList.add("btn-add-pulse");
+        setTimeout(
+          () => btnAdd.classList.remove("btn-add-pulse"),
+          220
+        );
+
+        toast("Добавлено в корзину");
+        resetNoSizeQty();
+        return;
+      }
+
+      if (isRingSized) {
+        if (sizes.length === 0) {
+          toast("Нет доступных размеров");
+          return;
+        }
+
+        if (calcSelectedQty() <= 0) {
+          toast("Выберите хотя бы один размер");
+          return;
+        }
+
+        addStateToCart();
+        animateAddToCart(btnAdd);
+
+        const cartCount = document.querySelector("#cartCount");
+        if (cartCount) {
+          cartCount.classList.add("cart-bump");
+          setTimeout(
+            () => cartCount.classList.remove("cart-bump"),
+            260
+          );
+        }
+
+        btnAdd.classList.add("btn-add-pulse");
+        setTimeout(
+          () => btnAdd.classList.remove("btn-add-pulse"),
+          220
+        );
+
+        toast("Добавлено в корзину");
+
+        resetRingSelection();
+        return;
+      }
+
+      toast("Невозможно определить схему размеров для товара");
+    };
+
+    btnAdd.onclick = null;
+    btnAdd.addEventListener("click", handleAddToCart);
+  }
+}
+
+function renderOrder() {
+  const box = $("#order");
+  if (!box) {
+    updateCartBadge();
+    return;
+  }
+
+  const cart = loadCart();
+  if (!cart.length) {
+    box.innerHTML = "<div class='card'>Корзина пуста.</div>";
+    box.onclick = null;
+    updateCartBadge();
+    return;
+  }
+
+  const skuMap = new Map();
+
+  cart.forEach(it => {
+    const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
+    const img = it.image || getProductMainImage(prod);
+    const avgW =
+      it.avgWeight != null ? it.avgWeight : prod.avgWeight;
+    const cat = prod.category || "other";
+
+    let g = skuMap.get(it.sku);
+    if (!g) {
+      const baseTitle = TYPE_LABELS[cat] || "Модель";
+
+      g = {
+        sku: it.sku,
+        title: prod.title || `${baseTitle} ${it.sku}`,
+        image: img,
+        avgWeight: avgW,
+        category: cat,
+        totalQty: 0,
+        totalWeight: 0
+      };
+      skuMap.set(it.sku, g);
+    }
+
+    const qty = it.qty || 0;
+    g.totalQty += qty;
+    if (avgW != null) {
+      g.totalWeight += (Number(avgW) || 0) * qty;
+    }
+  });
+
+  const groups = Array.from(skuMap.values());
+
+  const CATEGORY_ORDER = [
+    "rings",
+    "earrings",
+    "bracelets",
+    "pendants",
+    "pins",
+    "necklaces",
+    "brooches"
+  ];
+  const CATEGORY_LABELS = {
+    rings: "Кольца",
+    earrings: "Серьги",
+    bracelets: "Браслеты",
+    pendants: "Подвески",
+    pins: "Булавки",
+    necklaces: "Колье",
+    brooches: "Броши",
+    other: "Другие"
+  };
+
+  const byCategory = new Map();
+  groups.forEach(g => {
+    const cat = g.category || "other";
+    if (!byCategory.has(cat)) byCategory.set(cat, []);
+    byCategory.get(cat).push(g);
+  });
+
+  byCategory.forEach(list => {
+    list.sort((a, b) => String(a.sku).localeCompare(String(b.sku)));
+  });
+
+  const categoryStats = new Map();
+  byCategory.forEach((list, cat) => {
+    const skuCount = list.length;
+    let totalQty = 0;
+    let totalWeight = 0;
+
+    list.forEach(g => {
+      totalQty += g.totalQty || 0;
+      totalWeight += g.totalWeight || 0;
+    });
+
+    categoryStats.set(cat, {
+      skuCount,
+      totalQty,
+      totalWeight
+    });
+  });
+
+  const catFilter = getOrderCategoryFromUrl();
+
+  if (!catFilter) {
+    const parts = [];
+
+    CATEGORY_ORDER.forEach(cat => {
+      const stat = categoryStats.get(cat);
+      if (!stat) return;
+
+      const label = CATEGORY_LABELS[cat] || CATEGORY_LABELS.other;
+      const totalW =
+        stat.totalWeight && !isNaN(stat.totalWeight)
+          ? formatWeight(stat.totalWeight) + " г"
+          : "";
+
+      const subLine = totalW
+        ? `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}, вес ~ ${totalW}`
+        : `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}`;
+
+      parts.push(`
+        <div class="card cart-category-card" data-cat="${cat}">
+          <div class="cart-category-title">${label}</div>
+          <div class="cart-category-sub">${subLine}</div>
+        </div>
+      `);
+    });
+
+    const otherCats = Array.from(categoryStats.keys()).filter(
+      c => !CATEGORY_ORDER.includes(c)
+    );
+    otherCats.forEach(cat => {
+      const stat = categoryStats.get(cat);
+      if (!stat) return;
+      const label = CATEGORY_LABELS.other;
+      const totalW =
+        stat.totalWeight && !isNaN(stat.totalWeight)
+          ? formatWeight(stat.totalWeight) + " г"
+          : "";
+      const subLine = totalW
+        ? `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}, вес ~ ${totalW}`
+        : `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}`;
+
+      parts.push(`
+        <div class="card cart-category-card" data-cat="${cat}">
+          <div class="cart-category-title">${label}</div>
+          <div class="cart-category-sub">${subLine}</div>
+        </div>
+      `);
+    });
+
+    const rows = parts.join("");
+
+    const totalWeight = cart.reduce((s, it) => {
+      const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
+      const w =
+        it.avgWeight != null ? it.avgWeight : prod.avgWeight;
+      return s + (Number(w) || 0) * (it.qty || 0);
+    }, 0);
+    const totalQty = cart.reduce(
+      (s, it) => s + (it.qty || 0),
+      0
+    );
+
+    box.innerHTML = `
+      <div class="list">
+        ${rows}
+      </div>
+      <div style="height:10px"></div>
+      <div class="card order-summary-card">
+        <div class="section-title">Итого</div>
+        <div class="order-summary-text">
+          Позиции: ${groups.length}, штук: ${totalQty}, вес ~ ${formatWeight(
+      totalWeight
+    )} г
+        </div>
+        <div class="order-actions">
+          <button id="clearOrder" class="btn-secondary order-action-btn" type="button">Очистить</button>
+          <button id="copyOrder" class="btn-secondary order-action-btn" type="button">Скопировать</button>
+        </div>
+      </div>
+      <div class="order-bottom-space"></div>
+    `;
+
+    box.onclick = function (e) {
+      const card = e.target.closest(".cart-category-card");
+      if (!card) return;
+
+      const cat = card.dataset.cat;
+      if (!cat) return;
+
+      window.location.href =
+        "order.html?cat=" + encodeURIComponent(cat);
+    };
+
+    $("#copyOrder").onclick = () => {
+      const cartNow = loadCart();
+      if (!cartNow.length) return;
+
+      const header = "Артикул;Размер;Кол-во";
+      const lines = cartNow.map(
+        it => `${it.sku};${it.size};${it.qty}`
+      );
+      const txt = header + "\n" + lines.join("\n");
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(() =>
+          toast("Заявка скопирована")
         );
       } else {
         const ta = document.createElement("textarea");
