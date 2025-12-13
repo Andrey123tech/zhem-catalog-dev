@@ -1853,3 +1853,48 @@ body {
     height: 64px;
   }
 }
+
+/* === FIX: keep "Select sizes" visible when thumbs exist (mobile) === */
+@media (max-width: 900px) {
+
+  /* 1) Limit gallery height so thumbs cannot push controls under the fixed CTA */
+  .product-photo-main {
+    max-height: 52vh;          /* key: stop image block from growing too tall */
+    overflow: hidden;
+  }
+
+  .product-photo-main img {
+    max-height: 52vh;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* 2) Thumbs: single row + smaller + tighter spacing (less vertical footprint) */
+  .product-thumbs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px;
+    margin-top: 6px;           /* was 10px */
+    padding-bottom: 2px;
+  }
+
+  .product-thumb {
+    flex: 0 0 auto;
+    padding: 3px;
+    border-radius: 10px;
+  }
+
+  .product-thumb img {
+    width: 56px;               /* was 72px */
+    height: 56px;
+    border-radius: 8px;
+  }
+
+  /* 3) Extra safety: if still tight, allow controls to scroll above fixed CTA */
+  .product-card {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 150px) !important;
+  }
+}
