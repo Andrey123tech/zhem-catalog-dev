@@ -26,32 +26,6 @@
     <section id="product"></section>
   </main>
 
-  <div class="toast"></div>
-  <script type="module" src="./src/main.js"></script>
-  <script type="module">
-    if (!location.pathname.endsWith("product.html")) return;
-
-    const applyPrimaryPhoto = () => {
-      const params = new URLSearchParams(location.search);
-      const sku = params.get("sku");
-      if (!sku) return;
-
-      const photoWrap = document.querySelector(".product-photo-wrap");
-      const imgEl = photoWrap && photoWrap.querySelector("img");
-      if (!imgEl || !photoWrap) return;
-
-      imgEl.src = `/img/products/${encodeURIComponent(sku)}_1.jpg`;
-      imgEl.onerror = () => {
-        imgEl.style.display = "none";
-        photoWrap.style.background = "#fff";
-      };
-    };
-
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-      applyPrimaryPhoto();
-    } else {
-      document.addEventListener("DOMContentLoaded", applyPrimaryPhoto);
-    }
-  </script>
+  <div class="toast"></div>  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
