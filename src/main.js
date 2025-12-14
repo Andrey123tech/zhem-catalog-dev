@@ -1157,9 +1157,7 @@ function renderGrid() {
 
       const tilesHtml = list
         .map(p => {
-          const img =
-            (p.images && p.images[0]) ||
-            "https://picsum.photos/seed/placeholder/900";
+          const img = `/img/products/${p.sku}_1.jpg`;
           const stockInfo = getStockMap(p);
           const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
           const w =
@@ -1191,7 +1189,7 @@ function renderGrid() {
             sizeKey: sizeForDisplay
           })}
           <div class="square">
-            <img src="${img}" alt="${p.title || p.sku}">
+            <img src="${img}" alt="${p.title || p.sku}" loading="lazy" onerror="this.style.display='none'; this.closest('.square').style.background='#fff';">
           </div>
           <div class="tile-body">
             <div class="tile-title">${shortTitle}</div>
@@ -1280,9 +1278,7 @@ function renderGrid() {
 
   const tilesHtml = list
     .map(p => {
-      const img =
-        (p.images && p.images[0]) ||
-        "https://picsum.photos/seed/placeholder/900";
+      const img = `/img/products/${p.sku}_1.jpg`;
       const stockInfo = getStockMap(p);
       const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
       const w =
@@ -1313,7 +1309,7 @@ function renderGrid() {
             sizeKey: sizeForDisplay
           })}
           <div class="square">
-            <img src="${img}" alt="${p.title || p.sku}">
+            <img src="${img}" alt="${p.title || p.sku}" loading="lazy" onerror="this.style.display='none'; this.closest('.square').style.background='#fff';">
           </div>
           <div class="tile-body">
             <div class="tile-title">${shortTitle}</div>
