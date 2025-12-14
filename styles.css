@@ -257,7 +257,6 @@ img {
   object-fit: cover;
 }
 
-
 .tile-body {
   padding: 10px 12px 12px;
 }
@@ -336,108 +335,12 @@ img {
   border-radius: 20px;
   overflow: hidden;
   background: #f8fafc;
-  padding: 12px;
 }
 
 .product-photo-wrap img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-.product-photo-main {
-  border-radius: 16px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  touch-action: pan-y;
-}
-
-.product-photo-main img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
-.product-photo-empty {
-  background: #ffffff;
-  border-radius: 16px;
-  aspect-ratio: 1 / 1;
-}
-
-.product-thumbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.product-thumb {
-  border: 1px solid #e2e8f0;
-  background: #fff;
-  border-radius: 12px;
-  padding: 4px;
-  cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
-}
-
-.product-thumb:hover,
-.product-thumb:focus-visible {
-  border-color: #94a3b8;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
-}
-
-.product-thumb.active {
-  border-color: #0f172a;
-  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
-}
-
-.product-thumb img {
-  width: 72px;
-  height: 72px;
-  border-radius: 10px;
-  object-fit: cover;
-  display: block;
-}
-
-.no-photo-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.no-photo-placeholder img {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  opacity: 0.25;
-}
-
-/* === NO PHOTO: PURE WHITE EMPTY STATE === */
-
-/* the square image area stays white */
-.square {
-  background: #ffffff !important;
-}
-
-/* if fallback/placeholder wrapper exists — make it invisible */
-.no-photo-placeholder,
-.no-photo-text,
-.photo-soon,
-.photo-badge,
-.badge-photo,
-.placeholder-badge {
-  display: none !important;
-}
-
-/* if the code still inserts an <img> for empty state — hide it */
-.square img.no-photo,
-.square img[data-placeholder="1"],
-.square img[src*="no-photo"],
-.square img[src*="no_photo"] {
-  display: none !important;
 }
 
 .product-meta {
@@ -995,12 +898,8 @@ body.no-scroll {
 /* === Фиксированная кнопка "В корзину" только на карточке товара === */
 @media (max-width: 900px) {
   /* Чтобы контент не уезжал под кнопку при прокрутке */
-  .product-card {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 130px);
-  }
-
   .product-controls {
-    padding-bottom: 0;
+    padding-bottom: 80px;
   }
 
   /* Кнопка остаётся той же, просто закрепляем её внизу экрана */
@@ -1351,13 +1250,6 @@ body {
 .btn-primary:disabled {
   opacity: 0.55;
   box-shadow: none;
-}
-
-#addToCart:disabled,
-#addToCart[disabled] {
-  opacity: 1;
-  cursor: not-allowed;
-  box-shadow: 0 12px 26px rgba(90, 23, 34, 0.42);
 }
 
 /* На маленьких экранах — компактнее */
@@ -1822,60 +1714,4 @@ body {
   gap: 6px;
   font-size: 13px;
   margin-bottom: 6px;
-}
-
-/* === FIX: keep last controls visible above fixed #addToCart (mobile) === */
-@media (max-width: 900px) {
-  /* Overlay thumbs on the photo so they don't add height */
-  .product-photo-wrap {
-    position: relative;
-  }
-
-  .product-photo-main {
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Add scroll buffer on the main column so actions clear the fixed CTA */
-  .product-main {
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 140px) !important;
-  }
-
-  /* Do NOT resize the button — keep your original button style */
-  #addToCart {
-    height: auto !important;
-  }
-
-  /* Thumbnails stay in one horizontal row with smooth scroll */
-  .product-thumbs {
-    position: absolute;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-
-    margin-top: 0 !important;
-    padding: 6px 8px;
-    gap: 8px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(6px);
-    z-index: 5;
-  }
-
-  .product-thumb {
-    flex: 0 0 auto;
-    padding: 3px;
-    border-radius: 10px;
-  }
-
-  .product-thumb img {
-    width: 56px;
-    height: 56px;
-    border-radius: 8px;
-  }
 }
