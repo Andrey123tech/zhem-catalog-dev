@@ -2860,7 +2860,7 @@ function initSwipeToDelete() {
   );
 
   document.addEventListener("touchend", () => {
-    tracking is false;
+    tracking = false;
   });
 })();
 
