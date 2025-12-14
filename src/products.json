@@ -584,11 +584,7 @@
     "avgWeight": 1.134,
     "sizes": "ring",
     "isHit": true,
-    "images": [
-      "/img/products/Au190020_1.jpg",
-      "/img/products/Au190020_2.jpg",
-      "/img/products/Au190020_3.jpg"
-    ],
+    "images": [],
     "sortOrder": 1,
     "stockBySize": {
       "19": 3,
@@ -1095,11 +1091,7 @@
     "avgWeight": 0.926,
     "sizes": "ring",
     "isHit": true,
-    "images": [
-      "/img/products/Au190026_1.jpg",
-      "/img/products/Au190026_2.jpg",
-      "/img/products/Au190026_3.jpg"
-    ],
+    "images": [],
     "sortOrder": 1,
     "stockBySize": {
       "16.5": -1
