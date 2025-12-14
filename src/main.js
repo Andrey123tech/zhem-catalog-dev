@@ -828,29 +828,8 @@ function setupBreadcrumbs() {
       renderBreadcrumbs([
         { label: "Главная", url: "index.html" },
         { label: "Каталог", url: "catalog.html" },
-        { label: CATEGORY_LABELS[category] }
-      ]);
-    } else {
-      renderBreadcrumbs([
-        { label: "Главная", url: "index.html" },
-        { label: "Каталог" }
-      ]);
-    }
-    return;
-  }
-
-  if ($("#product")) {
-    const sku = getSkuFromUrl();
-    const prod = PRODUCTS.find(p => p.sku === sku) || {};
-    const cat = prod.category;
-    const artLabel = sku ? `Арт. ${sku}` : "Товар";
-
-    if (cat && CATEGORY_LABELS[cat]) {
-      renderBreadcrumbs([
-        { label: "Главная", url: "index.html" },
-        { label: "Каталог", url: "catalog.html" },
         {
-          label: CATEGORY_LABELS[cat],
+          label: CATEGORY_LABELS[category],
           url: "catalog.html?category=" + encodeURIComponent(cat)
         },
         { label: artLabel }
@@ -997,7 +976,6 @@ function ensureSubfiltersContainer() {
 
   let container = document.getElementById("ringSubfiltersContainer");
   if (!container) {
-    container = document.createElement("div");
     container.id = "ringSubfiltersContainer";
     container.className = "ring-subfilters";
   }
@@ -1408,9 +1386,7 @@ function renderProduct() {
   const preferredFilterSize = getPreferredFilterSizeKey(prod, stockInfo);
   const cartQtyMap = getCartQtyBySize(prod.sku);
 
-  const img =
-    (prod.images && prod.images[0]) ||
-    "https://picsum.photos/seed/placeholder/900";
+  const mainImgSrc = `/img/products/${prod.sku}_1.jpg`;
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
@@ -1449,7 +1425,12 @@ function renderProduct() {
   box.innerHTML = `
     <div class="product-main">
       <div class="product-photo-wrap">
-        <img src="${img}" alt="${prod.title || prod.sku}">
+        <img
+          src="${mainImgSrc}"
+          alt="${prod.title || prod.sku}"
+          loading="eager"
+          onerror="this.style.display='none'; const wrap=this.closest('.product-photo-wrap'); if(wrap) wrap.style.background='#fff';"
+        >
       </div>
 
       <div class="product-meta">
