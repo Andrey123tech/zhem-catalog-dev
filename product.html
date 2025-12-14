@@ -2,30 +2,83 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Жемчужина · Карточка изделия</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Товар · Жемчужина</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <header class="topbar">
     <div class="topbar-left">
-      <a href="/index.html" class="logo-link">
-        <img src="/logo_zhem.svg" alt="Жемчужина" class="logo-img">
+      <a href="catalog.html" class="logo-link">
+        <img src="img/logo.svg" alt="Жемчужина" class="logo-img">
       </a>
     </div>
 
-    <a href="order.html" class="cart-link">
-      Заказ
-      <span id="cartCount" class="cart-count">0</span>
+    <a href="cart.html" class="cart-link">
+      Корзина
+      <span class="cart-count" id="cartCount">0</span>
     </a>
   </header>
 
   <main class="container">
-    <a href="catalog.html" class="back-link">← Каталог</a>
 
-    <section id="product"></section>
+    <a href="javascript:history.back()" class="back-link">← Назад</a>
+
+    <div class="product-card">
+
+      <div class="product-main">
+
+        <div class="product-photo-wrap">
+          <div class="product-photo-main" id="productPhotoMain">
+            <!-- image injected by JS -->
+          </div>
+        </div>
+
+        <div class="product-meta">
+          <div class="product-art" id="productSku"></div>
+          <h1 class="product-title" id="productTitle"></h1>
+          <div class="product-weight" id="productWeight"></div>
+        </div>
+
+        <div class="product-controls" id="productControls">
+          <!-- size / qty / buttons are rendered by main.js -->
+        </div>
+
+      </div>
+
+    </div>
+
   </main>
 
-  <div class="toast"></div>  <script type="module" src="./src/main.js"></script>
+  <script src="main.js"></script>
+
+  <script>
+    // === SAFE PRODUCT IMAGE BINDING (PRODUCT PAGE ONLY) ===
+    (function () {
+      if (!location.pathname.endsWith("product.html")) return;
+
+      const params = new URLSearchParams(location.search);
+      const sku = params.get("sku");
+      if (!sku) return;
+
+      const photoContainer = document.getElementById("productPhotoMain");
+      if (!photoContainer) return;
+
+      const img = document.createElement("img");
+      img.src = `/img/products/${sku}_1.jpg`;
+      img.alt = sku;
+      img.loading = "eager";
+
+      img.onerror = function () {
+        img.remove();
+        photoContainer.style.background = "#ffffff";
+      };
+
+      photoContainer.appendChild(img);
+    })();
+  </script>
+
 </body>
 </html>
