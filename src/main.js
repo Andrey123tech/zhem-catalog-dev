@@ -1126,10 +1126,89 @@ function renderGrid() {
   const titleEl = $("#catalogTitle");
   const heroTitleEl = $("#heroTitle");
 
-  if (!category || !CATEGORY_LABELS[category] || !ALLOWED_CATEGORIES.has(category)) {
-    if (heroTitleEl) heroTitleEl.textContent = "Каталог";
+  const searchInput = $("#skuSearch");
+  let query = "";
+  if (searchInput) {
+    if (!searchInput.dataset.bound) {
+      searchInput.dataset.bound = "1";
+      searchInput.addEventListener("input", () => {
+        renderGrid();
+      });
+    }
+
+    query = searchInput.value.trim();
+  }
+
+  const isCategoryValid =
+    !!category && !!CATEGORY_LABELS[category] && ALLOWED_CATEGORIES.has(category);
+
+  if (!isCategoryValid) {
+    if (heroTitleEl) heroTitleEl.textContent = query ? `Поиск · ${query}` : "Каталог";
     if (titleEl) titleEl.textContent = "";
     renderSubfiltersForCategory(null);
+
+    if (query) {
+      const q = query.toLowerCase();
+      const list = PRODUCTS.filter(
+        p =>
+          ALLOWED_CATEGORIES.has(p.category) &&
+          String(p.sku).toLowerCase().includes(q)
+      );
+
+      const tilesHtml = list
+        .map(p => {
+          const img =
+            (p.images && p.images[0]) ||
+            "https://picsum.photos/seed/placeholder/900";
+          const stockInfo = getStockMap(p);
+          const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
+          const w =
+            p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
+          const typeLabel =
+            TYPE_LABELS[category] || TYPE_LABELS[p.category] || "Модель";
+          const baseType = TYPE_LABELS[p.category] || "Модель";
+          let shortTitle = "";
+          if (p.title) {
+            const cleaned = p.title.replace(p.sku, "").trim();
+            const startsWithModel = cleaned
+              ? /^модель/i.test(cleaned.trim())
+              : false;
+            if (cleaned && !startsWithModel) {
+              shortTitle = cleaned;
+            }
+          }
+          if (!shortTitle || /^модель/i.test(shortTitle)) {
+            shortTitle = baseType;
+          }
+          const inStockParam = filterState.inStock ? "&inStock=1" : "";
+
+          return `
+        <a class="tile" style="position:relative;" href="product.html?sku=${encodeURIComponent(
+          p.sku
+        )}${inStockParam}">
+          ${renderStockIndicator(stockInfo, {
+            align: "corner",
+            sizeKey: sizeForDisplay
+          })}
+          <div class="square">
+            <img src="${img}" alt="${p.title || p.sku}">
+          </div>
+          <div class="tile-body">
+            <div class="tile-title">${shortTitle}</div>
+            <div class="tile-sub">
+              <span class="tile-art">Арт. ${p.sku}</span>
+              ${w ? `<span class="tile-weight">${w}</span>` : ""}
+            </div>
+          </div>
+        </a>
+  `;
+        })
+        .join("");
+
+      grid.innerHTML = tilesHtml;
+      updateCartBadge();
+      return;
+    }
 
     const cats = [
       { key: "rings", label: "Кольца" },
@@ -1161,6 +1240,7 @@ function renderGrid() {
       )
       .join("");
 
+    updateCartBadge();
     return;
   }
 
@@ -1168,19 +1248,6 @@ function renderGrid() {
     p => p.category === category && ALLOWED_CATEGORIES.has(p.category)
   );
   let subfiltersEl = null;
-
-  const searchInput = $("#skuSearch");
-  let query = "";
-  if (searchInput) {
-    if (!searchInput.dataset.bound) {
-      searchInput.dataset.bound = "1";
-      searchInput.addEventListener("input", () => {
-        renderGrid();
-      });
-    }
-
-    query = searchInput.value.trim();
-  }
 
   if (query) {
     const q = query.toLowerCase();
@@ -2793,7 +2860,7 @@ function initSwipeToDelete() {
   );
 
   document.addEventListener("touchend", () => {
-    tracking = false;
+    tracking is false;
   });
 })();
 
