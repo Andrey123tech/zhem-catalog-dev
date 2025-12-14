@@ -9,8 +9,6 @@ import {
   DEFAULT_BRACELET_SIZE
 } from "./catalog_data.js";
 
-const NO_PHOTO_URL = "/img/no-photo.svg";
-const IMG_ONERROR = `this.onerror=null;this.src='${NO_PHOTO_URL}';`;
 const CART_KEY = "zhem_cart_v1";
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
 const NON_SIZE_CATEGORIES = new Set(["earrings", "pendants", "pins"]);
@@ -63,110 +61,6 @@ let stonesSubfiltersLoaded = false;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-
-function getProductMainImage(product) {
-  if (Array.isArray(product.images) && product.images.length > 0) {
-    const first = product.images.find(Boolean);
-    if (first) return first;
-  }
-  return "";
-}
-
-function renderProductGallery(prod, container) {
-  if (!container) return;
-  const images = Array.isArray(prod.images) ? prod.images.filter(Boolean) : [];
-  const hasImages = images.length > 0;
-  const mainUrl = hasImages ? images[0] : "";
-  const showThumbs = images.length > 1;
-  let currentIndex = 0;
-
-  const thumbsHtml = showThumbs
-    ? images
-        .map(
-          (url, idx) => `
-            <button class="product-thumb${idx === 0 ? " active" : ""}" type="button" data-idx="${idx}" aria-label="Фото ${idx + 1}">
-              <img src="${url}" alt="${prod.title}" loading="lazy" onerror="${IMG_ONERROR}">
-            </button>
-          `
-        )
-        .join("")
-    : "";
-
-  if (!hasImages) {
-    container.innerHTML = `
-      <div class="product-photo-main product-photo-empty" aria-hidden="true"></div>
-    `;
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="product-photo-main">
-      <img src="${mainUrl}" alt="${prod.title}" loading="lazy" data-role="product-main-photo" onerror="${IMG_ONERROR}">
-    </div>
-    ${showThumbs ? `<div class="product-thumbs">${thumbsHtml}</div>` : ""}
-  `;
-
-  const mainImg = container.querySelector("[data-role=\"product-main-photo\"]");
-  const thumbButtons = container.querySelectorAll(".product-thumb");
-  const mainArea = container.querySelector(".product-photo-main");
-
-  const setActiveIndex = (idx) => {
-    if (!hasImages) return;
-    const total = images.length;
-    if (!total) return;
-    const clampedIndex = Math.max(0, Math.min(idx, total - 1));
-    currentIndex = clampedIndex;
-    if (mainImg) {
-      mainImg.src = images[clampedIndex];
-    }
-    if (showThumbs) {
-      thumbButtons.forEach((b, i) => {
-        b.classList.toggle("active", i === clampedIndex);
-      });
-    }
-  };
-
-  if (showThumbs) {
-    thumbButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const idx = parseInt(btn.dataset.idx, 10);
-        setActiveIndex(idx);
-      });
-    });
-  }
-
-  if (hasImages && images.length > 1 && mainArea) {
-    let startX = 0;
-    let startY = 0;
-    let isPointerDown = false;
-    const threshold = 40;
-
-    const onPointerDown = (e) => {
-      isPointerDown = true;
-      startX = e.clientX;
-      startY = e.clientY;
-    };
-
-    const onPointerUp = (e) => {
-      if (!isPointerDown) return;
-      isPointerDown = false;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      if (Math.abs(dx) <= Math.abs(dy) || Math.abs(dx) < threshold) return;
-      if (dx < 0 && currentIndex < images.length - 1) {
-        setActiveIndex(currentIndex + 1);
-      } else if (dx > 0 && currentIndex > 0) {
-        setActiveIndex(currentIndex - 1);
-      }
-    };
-
-    mainArea.addEventListener("pointerdown", onPointerDown);
-    mainArea.addEventListener("pointerup", onPointerUp);
-    mainArea.addEventListener("pointerleave", () => {
-      isPointerDown = false;
-    });
-  }
-}
 
 // === 2. State & storage ===
 const filterState = {
@@ -381,53 +275,6 @@ function formatWeight(w) {
   if (w == null || isNaN(w)) return "";
   const num = Number(w);
   return num.toFixed(num >= 10 ? 1 : 2).replace(".", ",");
-}
-
-function normalizeSkuKey(sku) {
-  if (sku == null) return "";
-  return String(sku).trim().toLowerCase();
-}
-
-function productHasImages(prod) {
-  if (!prod) return false;
-  if (Array.isArray(prod.images)) {
-    return prod.images.some(Boolean);
-  }
-  return false;
-}
-
-function dedupeBySku(items) {
-  if (!Array.isArray(items)) return [];
-
-  const seen = new Map();
-  const result = [];
-
-  items.forEach(item => {
-    const key = normalizeSkuKey(item && item.sku);
-    if (!key) {
-      result.push(item);
-      return;
-    }
-
-    if (!seen.has(key)) {
-      const idx = result.length;
-      seen.set(key, { idx, item });
-      result.push(item);
-      return;
-    }
-
-    const entry = seen.get(key);
-    const current = entry.item;
-    const currentHasImages = productHasImages(current);
-    const nextHasImages = productHasImages(item);
-
-    if (!currentHasImages && nextHasImages) {
-      result[entry.idx] = item;
-      seen.set(key, { idx: entry.idx, item });
-    }
-  });
-
-  return result;
 }
 
 function normalizeSizeKey(size) {
@@ -808,82 +655,115 @@ function buildOrderText(cart, products) {
 
   cart.forEach(it => {
     const prod = products.find(p => p.sku === it.sku);
-    const catKey = prod ? prod.category : "other";
-    const catName = CATEGORY_NAMES[catKey] || CATEGORY_NAMES.other;
-    const info = prod ? getStockMap(prod) : { hasData: false, totalStock: null };
+    if (!prod) return;
 
-    const inStock =
-      info && info.hasData
-        ? info.hasAnyStock || (info.totalStock != null && info.totalStock > 0)
-        : true; // if unknown, treat as stock
-
-    if (!groups[catName]) groups[catName] = [];
-    groups[catName].push({ ...it, product: prod, inStock });
-
+    const cat = prod.category || "other";
     const qty = it.qty || 0;
-    totalQty += qty;
-    const weight = it.avgWeight || (prod && prod.avgWeight);
-    if (weight != null && !isNaN(weight)) {
-      totalWeight += qty * Number(weight);
+    const sizeVal = it.size || "-";
+    const avgWeight = prod.avgWeight || 0;
+
+    if (!groups[cat]) groups[cat] = [];
+    const baseRow = { sku: it.sku, size: sizeVal, qty, avgWeight, cat };
+    groups[cat].push(baseRow);
+
+    const stockInfo =
+      stockCache.get(prod.sku) || (() => {
+        const info = getStockMap(prod);
+        stockCache.set(prod.sku, info);
+        return info;
+      })();
+
+    const isSizeBased = SIZE_FILTER_CATEGORIES.has(cat);
+    const sizeKey = normalizeSizeKey(it.size);
+    let fromStock = false;
+
+    if (isSizeBased) {
+      const val = getStockForSize(stockInfo, sizeKey);
+      fromStock = val != null && val > 0;
+    } else {
+      const val = getStockForSize(stockInfo, sizeKey || NO_SIZE_KEY);
+      if (val != null) {
+        fromStock = val > 0;
+      } else {
+        const summary = getStockSummary(stockInfo);
+        fromStock = !!summary.hasStock;
+      }
     }
 
-    const targetArr = inStock ? stockItems : preorderItems;
-    targetArr.push({
-      ...it,
-      product: prod
+    (fromStock ? stockItems : preorderItems).push(baseRow);
+
+    totalQty += qty;
+    totalWeight += qty * avgWeight;
+  });
+
+  let txt = "Здравствуйте! Отправляю заявку по каталогу Жемчужина.\n\n";
+
+  const appendSection = (title, list) => {
+    if (!list.length) return;
+    txt += `${title}\n\n`;
+
+    const byCat = {};
+    list.forEach(row => {
+      const key = row.cat || "other";
+      if (!byCat[key]) byCat[key] = [];
+      byCat[key].push(row);
+    });
+
+    Object.keys(byCat).forEach(cat => {
+      txt += `${CATEGORY_NAMES[cat] || CATEGORY_NAMES.other}\n`;
+      byCat[cat].forEach(row => {
+        txt += `${row.sku} — ${row.size} — ${row.qty} шт\n`;
+      });
+      txt += "\n";
+    });
+  };
+
+  appendSection("ПО НАЛИЧИЮ (со склада):", stockItems);
+  appendSection("ПОД ЗАКАЗ:", preorderItems);
+
+  const totalStockQty = stockItems.reduce((s, row) => s + (row.qty || 0), 0);
+  const totalPreorderQty = preorderItems.reduce(
+    (s, row) => s + (row.qty || 0),
+    0
+  );
+
+  txt += `ИТОГ ПО ИСТОЧНИКУ:\nСо склада: ${totalStockQty} шт\nПод заказ: ${totalPreorderQty} шт\n\n`;
+
+  txt += `ОБЩИЙ ИТОГ:\nВсего: ${totalQty} шт ~ ${formatWeight(totalWeight)} г\n\n`;
+  txt += "---------------------------------------\n";
+  txt += "Таблица для Excel (копировать только этот блок):\n";
+  txt += "Категория;Артикул;Размер;Кол-во\n";
+
+  Object.keys(groups).forEach(cat => {
+    const catName = CATEGORY_NAMES[cat];
+    groups[cat].forEach(row => {
+      txt += `${catName};${row.sku};${row.size};${row.qty}\n`;
     });
   });
 
-  const lines = [];
+  txt += `\nИТОГО;;;\n`;
+  txt += `;;Всего штук;${totalQty}\n`;
+  txt += `;;Вес, г;${formatWeight(totalWeight)}\n`;
+  txt += "---------------------------------------\n\n";
+  txt += "С уважением,\n";
 
-  Object.entries(groups).forEach(([cat, items]) => {
-    lines.push(cat + ":");
-    items.forEach(it => {
-      const sizeSuffix =
-        it.size && it.size !== NO_SIZE_KEY ? ` · р-р ${it.size}` : "";
-      const weightText =
-        it.avgWeight != null ? ` · ~${formatWeight(it.avgWeight)} г` : "";
-      lines.push(
-        `— ${it.product ? it.product.title : "Модель"} · арт. ${it.sku}${sizeSuffix} · ${it.qty} шт${weightText}`
-      );
-    });
-    lines.push("");
-  });
-
-  const totalLine =
-    totalWeight > 0
-      ? `ИТОГО: ${totalQty} шт · ~ ${formatWeight(totalWeight)} г`
-      : `ИТОГО: ${totalQty} шт`;
-
-  lines.push(totalLine);
-
-  if (preorderItems.length) {
-    lines.push("");
-    lines.push("ПРЕДЗАКАЗ:");
-    preorderItems.forEach(it => {
-      const sizeSuffix =
-        it.size && it.size !== NO_SIZE_KEY ? ` · р-р ${it.size}` : "";
-      const weightText =
-        it.avgWeight != null ? ` · ~${formatWeight(it.avgWeight)} г` : "";
-      lines.push(
-        `— ${it.product ? it.product.title : "Модель"} · арт. ${it.sku}${sizeSuffix} · ${it.qty} шт${weightText}`
-      );
-    });
-  }
-
-  return lines.join("\n");
+  return txt;
 }
 
-// === 8. Catalog grid & product rendering ===
-function getCategoryFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const cat = params.get("category");
-  return cat && ALLOWED_CATEGORIES.has(cat) ? cat : null;
-}
-
+// === 8. Routing & breadcrumb helpers ===
 function getSkuFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("sku");
+}
+
+function getCategoryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("category");
+}
+
+function getOrderCategoryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("cat");
 }
 
 function getFromCatFromUrl() {
@@ -891,25 +771,160 @@ function getFromCatFromUrl() {
   return params.get("fromCat");
 }
 
-function getInStockCheckboxes() {
-  return Array.from(document.querySelectorAll("[data-role=\"inStockToggle\"]"));
+function getPageName() {
+  const path = window.location.pathname;
+  const name = path.split("/").pop() || "index.html";
+  return name;
 }
 
-function syncFilterControlsFromState() {
-  const wMin = document.getElementById("filterWeightMin");
-  const wMax = document.getElementById("filterWeightMax");
-  const cbPopular = document.getElementById("filterPopular");
-  const cbNew = document.getElementById("filterNew");
-  const cbInStock = document.getElementById("filterInStock");
+function ensureBreadcrumbsContainer() {
+  let bc = document.getElementById("breadcrumbs");
+  if (bc) return bc;
 
-  if (wMin) wMin.value = filterState.weightMin ?? "";
-  if (wMax) wMax.value = filterState.weightMax ?? "";
-  if (cbPopular) cbPopular.checked = filterState.isPopular;
-  if (cbNew) cbNew.checked = filterState.isNew;
+  const tabs = document.querySelector(".main-tabs");
+  const anchor = tabs || document.querySelector(".topbar");
+  if (!anchor) return null;
 
-  getInStockCheckboxes().forEach(cb => {
-    cb.checked = filterState.inStock;
-  });
+  bc = document.createElement("div");
+  bc.id = "breadcrumbs";
+  bc.className = "breadcrumbs";
+  anchor.insertAdjacentElement("afterend", bc);
+  return bc;
+}
+
+function renderBreadcrumbs(items) {
+  const bc = ensureBreadcrumbsContainer();
+  if (!bc) return;
+
+  const html = items
+    .map(it => {
+      if (!it.url) return `<span>${it.label}</span>`;
+      return `<a href="${it.url}">${it.label}</a>`;
+    })
+    .join(" / ");
+
+  bc.innerHTML = html;
+}
+
+function setupBreadcrumbs() {
+  const page = getPageName();
+
+  const CATEGORY_LABELS = {
+    rings: "Кольца",
+    earrings: "Серьги",
+    bracelets: "Браслеты",
+    pendants: "Подвески",
+    pins: "Булавки"
+  };
+
+  if (page === "index.html") {
+    renderBreadcrumbs([{ label: "Главная" }]);
+    return;
+  }
+
+  if ($("#grid")) {
+    const category = getCategoryFromUrl();
+    if (category && CATEGORY_LABELS[category]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог", url: "catalog.html" },
+        { label: CATEGORY_LABELS[category] }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог" }
+      ]);
+    }
+    return;
+  }
+
+  if ($("#product")) {
+    const sku = getSkuFromUrl();
+    const prod = PRODUCTS.find(p => p.sku === sku) || {};
+    const cat = prod.category;
+    const artLabel = sku ? `Арт. ${sku}` : "Товар";
+
+    if (cat && CATEGORY_LABELS[cat]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог", url: "catalog.html" },
+        {
+          label: CATEGORY_LABELS[cat],
+          url: "catalog.html?category=" + encodeURIComponent(cat)
+        },
+        { label: artLabel }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Каталог", url: "catalog.html" },
+        { label: artLabel }
+      ]);
+    }
+    return;
+  }
+
+  if ($("#order")) {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("cat");
+    const artLabel = params.get("sku")
+      ? `Арт. ${params.get("sku")}`
+      : "Корзина";
+
+    if (cat && CATEGORY_LABELS[cat]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина", url: "order.html" },
+        { label: CATEGORY_LABELS[cat] }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина" }
+      ]);
+    }
+    return;
+  }
+
+  if ($("#orderItem")) {
+    const params = new URLSearchParams(window.location.search);
+    const sku = params.get("sku");
+    const fromCat = getFromCatFromUrl();
+    const prod = PRODUCTS.find(p => p.sku === sku) || {};
+    const rawCat = fromCat || prod.category;
+    const artLabel = sku ? `Арт. ${sku}` : "Позиция";
+
+    if (rawCat && CATEGORY_LABELS[rawCat]) {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина", url: "order.html" },
+        {
+          label: CATEGORY_LABELS[rawCat],
+          url: "order.html?cat=" + encodeURIComponent(rawCat)
+        },
+        { label: artLabel }
+      ]);
+    } else {
+      renderBreadcrumbs([
+        { label: "Главная", url: "index.html" },
+        { label: "Корзина", url: "order.html" },
+        { label: artLabel }
+      ]);
+    }
+    return;
+  }
+
+  renderBreadcrumbs([{ label: "Главная", url: "index.html" }]);
+}
+
+// === 9. Rendering & page-specific init ===
+function getInStockCheckboxes() {
+  return Array.from(
+    document.querySelectorAll(
+      '#filterInStock, #filterInStockInline, input[data-filter="inStock"]'
+    )
+  );
 }
 
 function readFilterControls() {
@@ -917,37 +932,51 @@ function readFilterControls() {
   const wMax = document.getElementById("filterWeightMax");
   const cbPopular = document.getElementById("filterPopular");
   const cbNew = document.getElementById("filterNew");
-  const cbInStock = document.getElementById("filterInStock");
+  const inStockCbs = getInStockCheckboxes();
+  const activeSizeChips = Array.from(
+    document.querySelectorAll(".filter-size-chip.active")
+  ).filter(chip => !chip.classList.contains("ring-subfilter-chip"));
+  const category = getCategoryFromUrl();
 
-  const valMin = parseFloat(wMin && wMin.value.replace(",", "."));
-  const valMax = parseFloat(wMax && wMax.value.replace(",", "."));
+  filterState.weightMin = wMin && wMin.value ? parseFloat(wMin.value) : null;
+  filterState.weightMax = wMax && wMax.value ? parseFloat(wMax.value) : null;
 
-  filterState.weightMin = isNaN(valMin) ? null : valMin;
-  filterState.weightMax = isNaN(valMax) ? null : valMax;
-  filterState.isPopular = cbPopular ? cbPopular.checked : false;
-  filterState.isNew = cbNew ? cbNew.checked : false;
-  filterState.inStock = cbInStock ? cbInStock.checked : filterState.inStock;
+  filterState.sizes = isSizeFilterAllowed(category)
+    ? activeSizeChips
+        .map(chip => normalizeSizeKey(chip.textContent.trim()))
+        .filter(Boolean)
+    : [];
 
-  const sizeChips = document.querySelectorAll(".filter-size-chip");
-  filterState.sizes = Array.from(sizeChips)
-    .filter(chip => chip.classList.contains("active"))
-    .map(chip => normalizeSizeKey(chip.textContent));
+  filterState.isPopular = !!(cbPopular && cbPopular.checked);
+  filterState.isNew = !!(cbNew && cbNew.checked);
+  filterState.inStock = inStockCbs.some(cb => cb.checked);
 }
 
-function renderSubfilterChips() {
-  const ringGender = ringGenderFilter;
-  const ringStones = ringStonesFilter;
-  document.querySelectorAll("[data-ring-gender]").forEach(el => {
-    el.classList.toggle(
-      "active",
-      ringGender === (el.dataset.ringGender || "")
-    );
-  });
-  document.querySelectorAll("[data-ring-stones]").forEach(el => {
-    el.classList.toggle(
-      "active",
-      ringStones === (el.dataset.ringStones || "")
-    );
+function syncFilterControlsFromState() {
+  const wMin = document.getElementById("filterWeightMin");
+  const wMax = document.getElementById("filterWeightMax");
+  const cbPopular = document.getElementById("filterPopular");
+  const cbNew = document.getElementById("filterNew");
+  const inStockCbs = getInStockCheckboxes();
+  const category = getCategoryFromUrl();
+  const sizeSet =
+    isSizeFilterAllowed(category) && Array.isArray(filterState.sizes)
+      ? new Set(filterState.sizes.map(normalizeSizeKey))
+      : new Set();
+
+  if (wMin) wMin.value = filterState.weightMin != null ? filterState.weightMin : "";
+  if (wMax) wMax.value = filterState.weightMax != null ? filterState.weightMax : "";
+  if (cbPopular) cbPopular.checked = !!filterState.isPopular;
+  if (cbNew) cbNew.checked = !!filterState.isNew;
+  inStockCbs.forEach(cb => (cb.checked = !!filterState.inStock));
+  document.querySelectorAll(".filter-size-chip").forEach(chip => {
+    if (chip.classList.contains("ring-subfilter-chip")) return;
+    const key = normalizeSizeKey(chip.textContent.trim());
+    if (sizeSet.size && sizeSet.has(key)) {
+      chip.classList.add("active");
+    } else {
+      chip.classList.remove("active");
+    }
   });
 }
 
@@ -955,7 +984,9 @@ function clearRingSubfiltersDom() {
   const mount =
     document.getElementById("ringSubfilters") ||
     document.getElementById("ringSubfiltersMount");
-  if (mount) mount.innerHTML = "";
+  if (mount) {
+    mount.innerHTML = "";
+  }
 }
 
 function ensureSubfiltersContainer() {
@@ -1136,8 +1167,6 @@ function renderGrid() {
   let list = PRODUCTS.filter(
     p => p.category === category && ALLOWED_CATEGORIES.has(p.category)
   );
-
-  list = dedupeBySku(list);
   let subfiltersEl = null;
 
   const searchInput = $("#skuSearch");
@@ -1182,30 +1211,54 @@ function renderGrid() {
   if (heroTitleEl) heroTitleEl.textContent = `Каталог · ${label}`;
   if (titleEl) titleEl.textContent = "";
 
-  let tilesHtml = "";
-  list.forEach(p => {
-    const imgUrl = getProductMainImage(p);
-    const imgHtml = imgUrl
-      ? `<img src="${imgUrl}" alt="${p.title}" loading="lazy" onerror="${IMG_ONERROR}">`
-      : "";
-    const weightText =
-      typeof p.avgWeight === "number" ? p.avgWeight.toFixed(2) + " г" : "";
+  const tilesHtml = list
+    .map(p => {
+      const img =
+        (p.images && p.images[0]) ||
+        "https://picsum.photos/seed/placeholder/900";
+      const stockInfo = getStockMap(p);
+      const sizeForDisplay = getPreferredFilterSizeKey(p, stockInfo);
+      const w =
+        p.avgWeight != null ? formatWeight(p.avgWeight) + " г" : "";
+      const typeLabel = TYPE_LABELS[category] || "Модель";
+      const baseType = TYPE_LABELS[p.category] || "Модель";
+      let shortTitle = "";
+      if (p.title) {
+        const cleaned = p.title.replace(p.sku, "").trim();
+        const startsWithModel = cleaned
+          ? /^модель/i.test(cleaned.trim())
+          : false;
+        if (cleaned && !startsWithModel) {
+          shortTitle = cleaned;
+        }
+      }
+      if (!shortTitle || /^модель/i.test(shortTitle)) {
+        shortTitle = baseType;
+      }
+      const inStockParam = filterState.inStock ? "&inStock=1" : "";
 
-    tilesHtml += `
-  <a class="tile" href="product.html?sku=${encodeURIComponent(p.sku)}">
-    <div class="square">
-      ${imgHtml}
-    </div>
-    <div class="tile-body">
-      <div class="tile-title">${p.title}</div>
-      <div class="tile-sub">
-        <span class="tile-art">Арт. ${p.sku}</span>
-        ${weightText ? `<span class="tile-weight">${weightText}</span>` : ""}
-      </div>
-    </div>
-  </a>
-`;
-  });
+      return `
+        <a class="tile" style="position:relative;" href="product.html?sku=${encodeURIComponent(
+          p.sku
+        )}${inStockParam}">
+          ${renderStockIndicator(stockInfo, {
+            align: "corner",
+            sizeKey: sizeForDisplay
+          })}
+          <div class="square">
+            <img src="${img}" alt="${p.title || p.sku}">
+          </div>
+          <div class="tile-body">
+            <div class="tile-title">${shortTitle}</div>
+            <div class="tile-sub">
+              <span class="tile-art">Арт. ${p.sku}</span>
+              ${w ? `<span class="tile-weight">${w}</span>` : ""}
+            </div>
+          </div>
+        </a>
+  `;
+    })
+    .join("");
 
   grid.innerHTML = tilesHtml;
 
@@ -1292,11 +1345,13 @@ function renderProduct() {
   const preferredFilterSize = getPreferredFilterSizeKey(prod, stockInfo);
   const cartQtyMap = getCartQtyBySize(prod.sku);
 
+  const img =
+    (prod.images && prod.images[0]) ||
+    "https://picsum.photos/seed/placeholder/900";
   const w =
     prod.avgWeight != null ? formatWeight(prod.avgWeight) + " г" : "";
 
   const cat = prod.category;
-  const img = getProductMainImage(prod);
 
   const typeLabel = TYPE_LABELS[cat] || "Модель";
 
@@ -1330,7 +1385,9 @@ function renderProduct() {
 
   box.innerHTML = `
     <div class="product-main">
-      <div class="product-photo-wrap"></div>
+      <div class="product-photo-wrap">
+        <img src="${img}" alt="${prod.title || prod.sku}">
+      </div>
 
       <div class="product-meta">
         <h1 class="product-title">
@@ -1430,11 +1487,6 @@ function renderProduct() {
 
   updateActiveSizeStock(activeSizeKey);
 
-  const photoWrap = $(".product-photo-wrap", box);
-  if (photoWrap) {
-    renderProductGallery(prod, photoWrap);
-  }
-
   if (isRingSized && sizes.length === 0) {
     if (summaryEl) {
       summaryEl.textContent = stockInfo.hasData
@@ -1463,11 +1515,9 @@ function renderProduct() {
         let v = parseInt(qtySpan.textContent, 10);
         if (isNaN(v)) v = 0;
         const { remaining } = getNoSizeLimits();
-        if (remaining != null) {
-          v = Math.min(remaining, v + 1);
-        } else {
-          v = v + 1;
-        }
+        const limit = remaining;
+        if (limit <= 0) return;
+        v = Math.min(limit, v + 1);
         qtySpan.textContent = String(v);
         updateAddButtonState();
       };
@@ -1482,232 +1532,319 @@ function renderProduct() {
         updateAddButtonState();
       };
     }
+  }
 
+  let modal = null;
+  let resetRingSelection = () => {};
+
+  const resetNoSizeQty = () => {
+    if (qtySpan) qtySpan.textContent = "0";
     updateAddButtonState();
-  } else if (isRingSized) {
-    const stockMap = stockInfo;
+  };
 
-    if (btnSizeOpen) {
-      btnSizeOpen.addEventListener("click", () => {
-        const overlay = document.getElementById("sizePickerOverlay");
-        const sheet = document.getElementById("sizePickerSheet");
-        const list = document.getElementById("sizePickerList");
-        if (!overlay || !sheet || !list) return;
-
-        const renderRows = () => {
-          list.innerHTML = sizes
-            .map(size => {
-              const key = normalizeSizeKey(size);
-              const qty = sizeState.get(key) || 0;
-              const stockDisplay = getSizeStockDisplay(stockMap, key);
-              const isPreferred = key === activeSizeKey;
-              const stockIndicator = stockDisplay
-                ? `<span class="size-stock">${stockDisplay}</span>`
-                : "";
-              const badge = isPreferred
-                ? `<span class="size-badge">р-р ${key}</span>`
-                : `<span class="size-badge">${stockIndicator || ""}</span>`;
+  if (isRingSized && sizes.length > 0) {
+    modal = document.createElement("div");
+    modal.id = "sizeMatrixModal";
+    modal.className = "size-matrix-backdrop hidden";
+    modal.innerHTML = `
+      <div class="size-matrix-sheet">
+        <div class="size-matrix-header">Размеры · Арт. ${prod.sku}</div>
+        <div class="size-matrix-list">
+          ${sizes
+            .map(s => {
+              const key = normalizeSizeKey(s);
+              const stockVal = getStockForSize(stockInfo, key);
+              const isZeroStock =
+                stockInfo.hasData &&
+                (stockVal == null || stockVal <= 0);
+              const shouldDisable = enforceStock && isZeroStock;
+              const stockLabel = getSizeStockDisplay(stockInfo, key);
+              const rowClass = shouldDisable ? "size-row no-stock" : "size-row";
+              const btnDis = shouldDisable ? "disabled" : "";
               return `
-                <div class="size-row" data-size="${key}">
-                  ${badge}
-                  <div class="size-row-qty">
-                    <button type="button" data-act="dec" data-size="${key}">−</button>
-                    <span>${qty}</span>
-                    <button type="button" data-act="inc" data-size="${key}">+</button>
+                <div class="${rowClass}" data-size="${key}">
+                  <div class="size-row-size">
+                    <div>р-р ${key}</div>
+                    ${stockLabel ? `<div class="size-row-stock">${stockLabel}</div>` : ""}
                   </div>
-                  <div class="size-row-weight">${stockIndicator}</div>
+                  <div class="size-row-qty">
+                    <button type="button" data-act="dec" data-size="${key}" ${btnDis}>−</button>
+                    <span data-size="${key}">0</span>
+                    <button type="button" data-act="inc" data-size="${key}" ${btnDis}>+</button>
+                  </div>
                 </div>
               `;
             })
-            .join("");
-        };
-
-        const closeSheet = () => {
-          overlay.classList.remove("visible");
-          sheet.classList.remove("open");
-        };
-
-        overlay.addEventListener(
-          "click",
-          e => {
-            if (e.target === overlay) closeSheet();
-          },
-          { once: true }
-        );
-
-        sheet.querySelector(".size-picker-close").onclick = () => {
-          closeSheet();
-        };
-
-        list.onclick = e => {
-          const btn = e.target.closest("button");
-          if (!btn) return;
-          const act = btn.dataset.act;
-          const size = btn.dataset.size;
-          if (!act || !size) return;
-
-          const key = normalizeSizeKey(size);
-          const current = sizeState.get(key) || 0;
-          const stockVal = getStockForSize(stockMap, key);
-          let next = current;
-
-          if (act === "inc") {
-            const cap =
-              enforceStock && stockVal != null ? Math.max(stockVal, 0) : 999;
-            next = Math.min(cap, current + 1);
-          }
-          if (act === "dec") {
-            next = Math.max(0, current - 1);
-          }
-          sizeState.set(key, next);
-
-          const row = list.querySelector(`.size-row[data-size="${key}"]`);
-          if (row) {
-            const span = row.querySelector(".size-row-qty span");
-            if (span) span.textContent = String(next);
-          }
-
-          const { remaining } = getNoSizeCapInfo(
-            prod,
-            getCartQtyBySize(prod.sku),
-            { useStock: enforceStock }
-          );
-
-          const totalSelected = calcSelectedQty();
-          updateAddButtonState();
-          updateActiveSizeStock(activeSizeKey);
-
-          if (summaryEl) {
-            const sizesSelected = [];
-            sizeState.forEach((qty, sizeKey) => {
-              if (qty > 0) sizesSelected.push(`р-р ${sizeKey} · ${qty} шт`);
-            });
-            summaryEl.textContent =
-              sizesSelected.length > 0
-                ? sizesSelected.join(", ")
-                : "Выбрать размеры";
-          }
-
-          if (remaining != null && totalSelected > remaining) {
-            toast("В корзине уже есть этот артикул — скорректировали сумму");
-          }
-        };
-
-        renderRows();
-        overlay.classList.add("visible");
-        sheet.classList.add("open");
-      });
-    }
+            .join("")}
+        </div>
+        <button type="button" class="btn-primary size-matrix-done" id="sizeMatrixDone">
+          Готово
+        </button>
+      </div>
+    `;
+    document.body.appendChild(modal);
 
     const updateSummary = () => {
-      const sizesSelected = [];
-      sizeState.forEach((qty, sizeKey) => {
-        if (qty > 0) sizesSelected.push(`р-р ${sizeKey} · ${qty} шт`);
+      if (!summaryEl) return;
+      let total = 0;
+      sizeState.forEach(q => {
+        total += q || 0;
       });
-      if (summaryEl) {
-        summaryEl.textContent =
-          sizesSelected.length > 0
-            ? sizesSelected.join(", ")
-            : "Выбрать размеры";
-      }
+      summaryEl.textContent =
+        total > 0 ? `Выбрано: ${total} шт.` : "Выбрать размеры";
     };
 
-    updateSummary();
-  }
+    const syncDomFromState = () => {
+      sizes.forEach(s => {
+        const key = normalizeSizeKey(s);
+        const span = modal.querySelector(
+          `.size-row-qty span[data-size="${key}"]`
+        );
+        if (span) span.textContent = String(sizeState.get(key) || 0);
+      });
+    };
 
-  if (btnAdd) {
-    btnAdd.addEventListener("click", () => {
-      const now = Date.now();
-      if (now - lastSwipeTime < SWIPE_CLICK_SUPPRESS_MS) {
+    const openModal = () => {
+      syncDomFromState();
+      modal.classList.remove("hidden");
+      document.body.classList.add("no-scroll");
+    };
+
+    const closeModal = () => {
+      modal.classList.add("hidden");
+      document.body.classList.remove("no-scroll");
+      updateSummary();
+    };
+
+    if (btnSizeOpen) {
+      btnSizeOpen.addEventListener("click", openModal);
+    }
+
+    modal.addEventListener("click", e => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    modal.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      if (btn.id === "sizeMatrixDone") {
+        closeModal();
         return;
       }
 
+      const act = btn.dataset.act;
+      const sizeAttr = btn.dataset.size;
+      if (!act || !sizeAttr) return;
+
+      const key = normalizeSizeKey(sizeAttr);
+      let current = sizeState.get(key) || 0;
+
+      const remaining = getRemainingStockForSize(stockInfo, key, cartQtyMap, {
+        useStock: enforceStock
+      });
+      const maxAllowed = remaining == null ? 999 : remaining;
+
+      if (act === "inc") {
+        if (maxAllowed <= 0) return;
+        current = Math.min(maxAllowed, current + 1);
+      }
+      if (act === "dec") current = Math.max(0, current - 1);
+
+      sizeState.set(key, current);
+
+      const span = modal.querySelector(
+        `.size-row-qty span[data-size="${key}"]`
+      );
+      if (span) span.textContent = String(current);
+      updateActiveSizeStock(key);
+      updateAddButtonState();
+      updateSummary();
+    });
+
+    var addStateToCart = () => {
       const cart = loadCart();
-      const enforceStock = filterState.inStock === true || inStockOnly === true;
-      const cartQtyMap = getCartQtyBySize(prod.sku);
 
-      const addNoSize = () => {
-        const qty = parseInt(qtySpan.textContent, 10) || 0;
-        if (qty <= 0) {
-          toast("Выберите количество");
-          return;
-        }
-
-        const capInfo = getNoSizeCapInfo(prod, cartQtyMap, { useStock: enforceStock });
-        const allowed = Math.max(0, capInfo.cap - capInfo.alreadyInCart);
-        const qtyToAdd = Math.min(allowed, qty);
-        if (qtyToAdd <= 0) {
-          toast("Ограничено остатком");
-          return;
-        }
+      sizeState.forEach((qty, size) => {
+        if (!qty) return;
 
         const existing = cart.find(
-          it => it.sku === prod.sku && normalizeSizeKey(it.size) === NO_SIZE_KEY
+          it => it.sku === prod.sku && normalizeSizeKey(it.size) === normalizeSizeKey(size)
         );
+
+        const currentQty = existing ? existing.qty || 0 : 0;
+        const stockCap = enforceStock ? getStockForSize(stockInfo, size) : null;
+        let finalTotal = currentQty + qty;
+
+        if (stockCap != null) {
+          const cap = Math.max(0, stockCap);
+          finalTotal =
+            currentQty >= cap ? currentQty : Math.min(cap, finalTotal);
+        } else {
+          finalTotal = Math.min(999, finalTotal);
+        }
+
+        const added = finalTotal - currentQty;
+        if (added <= 0) return;
+
         if (existing) {
-          existing.qty = (existing.qty || 0) + qtyToAdd;
+          existing.qty = finalTotal;
         } else {
           cart.push({
             sku: prod.sku,
-            size: NO_SIZE_KEY,
-            qty: qtyToAdd,
-            image: getProductMainImage(prod),
-            avgWeight: prod.avgWeight,
-            category: prod.category,
-            title: prod.title
+            size,
+            qty: finalTotal,
+            avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
+            image: img,
+            title: prod.title || `${typeLabel} ${prod.sku}`
           });
         }
 
-        saveCart(cart);
-        animateAddToCart(btnAdd);
-        toast("Добавлено");
-      };
+        cartQtyMap.set(
+          normalizeSizeKey(size),
+          (cartQtyMap.get(normalizeSizeKey(size)) || 0) + added
+        );
+      });
 
-      const addSized = () => {
-        let added = 0;
-        sizeState.forEach((qty, sizeKey) => {
-          if (qty <= 0) return;
-          const stockVal = enforceStock ? getStockForSize(stockInfo, sizeKey) : null;
-          const inCart = cartQtyMap.get(sizeKey) || 0;
-          const allowed =
-            stockVal == null ? qty : Math.max(0, Math.min(qty, stockVal - inCart));
-          if (allowed <= 0) return;
+      saveCart(cart);
+    };
 
-          const existing = cart.find(
-            it => it.sku === prod.sku && normalizeSizeKey(it.size) === sizeKey
+    resetRingSelection = () => {
+      sizeState.forEach((_, key) => sizeState.set(key, 0));
+      if (modal) {
+        sizes.forEach(s => {
+          const key = normalizeSizeKey(s);
+          const span = modal.querySelector(
+            `.size-row-qty span[data-size="${key}"]`
           );
-          if (existing) {
-            existing.qty = (existing.qty || 0) + allowed;
-          } else {
-            cart.push({
-              sku: prod.sku,
-              size: sizeKey,
-              qty: allowed,
-              image: getProductMainImage(prod),
-              avgWeight: prod.avgWeight,
-              category: prod.category,
-              title: prod.title
-            });
-          }
-
-          added += allowed;
+          if (span) span.textContent = "0";
         });
+      }
+      if (summaryEl) summaryEl.textContent = "Выбрать размеры";
+      updateActiveSizeStock(null);
+      updateAddButtonState();
+    };
+  }
 
-        if (added <= 0) {
-          toast("Выберите количество");
+  updateAddButtonState();
+
+  if (btnAdd) {
+    btnAdd.onclick = () => {
+      if (isNoSize) {
+        const qty = qtySpan ? (parseInt(qtySpan.textContent, 10) || 0) : 0;
+        if (qty <= 0) {
+          toast("Укажите количество");
           return;
         }
 
-        saveCart(cart);
+        const cartNow = loadCart();
+        const existing = cartNow.find(
+          it =>
+            it.sku === prod.sku &&
+            normalizeSizeKey(it.size) === NO_SIZE_KEY
+        );
+
+        const { cap, remaining } = getNoSizeCapInfo(prod, cartQtyMap, {
+          useStock: enforceStock
+        });
+
+        if (remaining <= 0) {
+          toast("Нет в наличии");
+          return;
+        }
+
+        const allowedToAdd = Math.min(qty, Math.max(0, remaining));
+
+        const currentQty = existing ? existing.qty || 0 : 0;
+        let finalTotal = currentQty + allowedToAdd;
+        finalTotal = Math.min(cap, finalTotal);
+
+        const added = finalTotal - currentQty;
+        if (added <= 0) {
+          toast("Нет в наличии");
+          return;
+        }
+
+        if (existing) {
+          existing.qty = finalTotal;
+        } else {
+          cartNow.push({
+            sku: prod.sku,
+            size: null,
+            qty: finalTotal,
+            avgWeight: prod.avgWeight != null ? prod.avgWeight : null,
+            image: img,
+            title: prod.title || `${typeLabel} ${prod.sku}`
+          });
+        }
+
+        cartQtyMap.set(
+          NO_SIZE_KEY,
+          (cartQtyMap.get(NO_SIZE_KEY) || 0) + added
+        );
+
+        saveCart(cartNow);
         animateAddToCart(btnAdd);
-        toast("Добавлено");
-      };
 
-      if (isNoSize) addNoSize();
-      else addSized();
+        const cartCount = document.querySelector("#cartCount");
+        if (cartCount) {
+          cartCount.classList.add("cart-bump");
+          setTimeout(
+            () => cartCount.classList.remove("cart-bump"),
+            260
+          );
+        }
 
-      updateCartBadge();
-    });
+        btnAdd.classList.add("btn-add-pulse");
+        setTimeout(
+          () => btnAdd.classList.remove("btn-add-pulse"),
+          220
+        );
+
+        toast("Добавлено в корзину");
+        resetNoSizeQty();
+        return;
+      }
+
+      if (isRingSized) {
+        if (sizes.length === 0) {
+          toast("Нет доступных размеров");
+          return;
+        }
+
+        if (calcSelectedQty() <= 0) {
+          toast("Выберите хотя бы один размер");
+          return;
+        }
+
+        addStateToCart();
+        animateAddToCart(btnAdd);
+
+        const cartCount = document.querySelector("#cartCount");
+        if (cartCount) {
+          cartCount.classList.add("cart-bump");
+          setTimeout(
+            () => cartCount.classList.remove("cart-bump"),
+            260
+          );
+        }
+
+        btnAdd.classList.add("btn-add-pulse");
+        setTimeout(
+          () => btnAdd.classList.remove("btn-add-pulse"),
+          220
+        );
+
+        toast("Добавлено в корзину");
+
+        resetRingSelection();
+        return;
+      }
+
+      toast("Невозможно определить схему размеров для товара");
+    };
   }
 }
 
@@ -1718,36 +1855,60 @@ function renderOrder() {
     return;
   }
 
-  loadFilterStateFromStorage();
-
   const cart = loadCart();
   if (!cart.length) {
-    box.innerHTML = `
-      <div class="empty">
-        <div class="empty-title">Корзина пуста</div>
-        <p>Добавьте модели из каталога</p>
-        <a class="btn-primary" href="catalog.html">Перейти в каталог</a>
-      </div>
-    `;
+    box.innerHTML = "<div class='card'>Корзина пуста.</div>";
+    box.onclick = null;
     updateCartBadge();
     return;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  const catFilter = params.get("cat");
+  const skuMap = new Map();
 
-  const byCategory = new Map();
   cart.forEach(it => {
-    const prod = PRODUCTS.find(p => p.sku === it.sku);
-    const cat = prod ? prod.category : "other";
-    if (!byCategory.has(cat)) byCategory.set(cat, []);
-    byCategory.get(cat).push({
-      ...it,
-      product: prod,
-      stockInfo: prod ? getStockMap(prod) : null
-    });
+    const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
+    const img =
+      it.image ||
+      (prod.images && prod.images[0]) ||
+      "https://picsum.photos/seed/placeholder/200";
+    const avgW =
+      it.avgWeight != null ? it.avgWeight : prod.avgWeight;
+    const cat = prod.category || "other";
+
+    let g = skuMap.get(it.sku);
+    if (!g) {
+      const baseTitle = TYPE_LABELS[cat] || "Модель";
+
+      g = {
+        sku: it.sku,
+        title: prod.title || `${baseTitle} ${it.sku}`,
+        image: img,
+        avgWeight: avgW,
+        category: cat,
+        totalQty: 0,
+        totalWeight: 0
+      };
+      skuMap.set(it.sku, g);
+    }
+
+    const qty = it.qty || 0;
+    g.totalQty += qty;
+    if (avgW != null) {
+      g.totalWeight += (Number(avgW) || 0) * qty;
+    }
   });
 
+  const groups = Array.from(skuMap.values());
+
+  const CATEGORY_ORDER = [
+    "rings",
+    "earrings",
+    "bracelets",
+    "pendants",
+    "pins",
+    "necklaces",
+    "brooches"
+  ];
   const CATEGORY_LABELS = {
     rings: "Кольца",
     earrings: "Серьги",
@@ -1759,72 +1920,158 @@ function renderOrder() {
     other: "Другие"
   };
 
-  const filtersHtml = `
-    <div class="filters-row">
-      <a href="order.html" class="filter-chip${catFilter ? "" : " active"}">Все</a>
-      ${Array.from(byCategory.keys())
-        .map(cat => {
-          const label = CATEGORY_LABELS[cat] || cat;
-          const active = catFilter === cat ? " active" : "";
-          return `<a href="order.html?cat=${cat}" class="filter-chip${active}">${label}</a>`;
-        })
-        .join("")}
-    </div>
-  `;
+  const byCategory = new Map();
+  groups.forEach(g => {
+    const cat = g.category || "other";
+    if (!byCategory.has(cat)) byCategory.set(cat, []);
+    byCategory.get(cat).push(g);
+  });
 
-  box.innerHTML = filtersHtml;
+  byCategory.forEach(list => {
+    list.sort((a, b) => String(a.sku).localeCompare(String(b.sku)));
+  });
 
-  const catKeys = Array.from(byCategory.keys());
-  if (!catFilter || !catKeys.includes(catFilter)) {
-    const rows = cart
-      .map(it => {
-        const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
-        const img = it.image || getProductMainImage(prod);
-        const sizeText =
-          it.size && it.size !== NO_SIZE_KEY ? `р-р ${it.size}` : "";
-        const qty = it.qty || 0;
-        const weight =
-          it.avgWeight != null ? `~ ${formatWeight(it.avgWeight)} г` : "";
-        return `
-          <div class="list-item cart-row" data-sku="${it.sku}">
-            <div class="cart-thumb">
-              <img src="${img}" alt="${prod.title || it.sku}" onerror="${IMG_ONERROR}">
-            </div>
-            <div class="cart-meta">
-              <div class="badge">Арт. ${it.sku}</div>
-              <div class="cart-title">${prod.title || "Модель"}</div>
-              <div class="cart-sub">
-                ${[sizeText, `${qty} шт`, weight].filter(Boolean).join(" · ")}
-              </div>
-            </div>
-          </div>
-        `;
-      })
-      .join("");
+  const categoryStats = new Map();
+  byCategory.forEach((list, cat) => {
+    const skuCount = list.length;
+    let totalQty = 0;
+    let totalWeight = 0;
 
-    box.innerHTML += `
+    list.forEach(g => {
+      totalQty += g.totalQty || 0;
+      totalWeight += g.totalWeight || 0;
+    });
+
+    categoryStats.set(cat, {
+      skuCount,
+      totalQty,
+      totalWeight
+    });
+  });
+
+  const catFilter = getOrderCategoryFromUrl();
+
+  if (!catFilter) {
+    const parts = [];
+
+    CATEGORY_ORDER.forEach(cat => {
+      const stat = categoryStats.get(cat);
+      if (!stat) return;
+
+      const label = CATEGORY_LABELS[cat] || CATEGORY_LABELS.other;
+      const totalW =
+        stat.totalWeight && !isNaN(stat.totalWeight)
+          ? formatWeight(stat.totalWeight) + " г"
+          : "";
+
+      const subLine = totalW
+        ? `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}, вес ~ ${totalW}`
+        : `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}`;
+
+      parts.push(`
+        <div class="card cart-category-card" data-cat="${cat}">
+          <div class="cart-category-title">${label}</div>
+          <div class="cart-category-sub">${subLine}</div>
+        </div>
+      `);
+    });
+
+    const otherCats = Array.from(categoryStats.keys()).filter(
+      c => !CATEGORY_ORDER.includes(c)
+    );
+    otherCats.forEach(cat => {
+      const stat = categoryStats.get(cat);
+      if (!stat) return;
+      const label = CATEGORY_LABELS.other;
+      const totalW =
+        stat.totalWeight && !isNaN(stat.totalWeight)
+          ? formatWeight(stat.totalWeight) + " г"
+          : "";
+      const subLine = totalW
+        ? `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}, вес ~ ${totalW}`
+        : `Моделей: ${stat.skuCount}, штук: ${stat.totalQty}`;
+
+      parts.push(`
+        <div class="card cart-category-card" data-cat="${cat}">
+          <div class="cart-category-title">${label}</div>
+          <div class="cart-category-sub">${subLine}</div>
+        </div>
+      `);
+    });
+
+    const rows = parts.join("");
+
+    const totalWeight = cart.reduce((s, it) => {
+      const prod = PRODUCTS.find(p => p.sku === it.sku) || {};
+      const w =
+        it.avgWeight != null ? it.avgWeight : prod.avgWeight;
+      return s + (Number(w) || 0) * (it.qty || 0);
+    }, 0);
+    const totalQty = cart.reduce(
+      (s, it) => s + (it.qty || 0),
+      0
+    );
+
+    box.innerHTML = `
       <div class="list">
         ${rows}
+      </div>
+      <div style="height:10px"></div>
+      <div class="card order-summary-card">
+        <div class="section-title">Итого</div>
+        <div class="order-summary-text">
+          Позиции: ${groups.length}, штук: ${totalQty}, вес ~ ${formatWeight(
+      totalWeight
+    )} г
+        </div>
+        <div class="order-actions">
+          <button id="clearOrder" class="btn-secondary order-action-btn" type="button">Очистить</button>
+          <button id="copyOrder" class="btn-secondary order-action-btn" type="button">Скопировать</button>
+        </div>
       </div>
       <div class="order-bottom-space"></div>
     `;
 
     box.onclick = function (e) {
-      const row = e.target.closest(".cart-row");
-      if (!row) return;
+      const card = e.target.closest(".cart-category-card");
+      if (!card) return;
 
-      const now = Date.now();
-      if (now - lastSwipeTime < SWIPE_CLICK_SUPPRESS_MS) {
-        return;
+      const cat = card.dataset.cat;
+      if (!cat) return;
+
+      window.location.href =
+        "order.html?cat=" + encodeURIComponent(cat);
+    };
+
+    $("#copyOrder").onclick = () => {
+      const cartNow = loadCart();
+      if (!cartNow.length) return;
+
+      const header = "Артикул;Размер;Кол-во";
+      const lines = cartNow.map(
+        it => `${it.sku};${it.size};${it.qty}`
+      );
+      const txt = header + "\n" + lines.join("\n");
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(() =>
+          toast("Заявка скопирована")
+        );
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        toast("Заявка скопирована");
       }
+    };
 
-      const sku = row.dataset.sku;
-      if (!sku) return;
-
-      const params2 = new URLSearchParams();
-      params2.set("sku", sku);
-
-      window.location.href = "order_item.html?" + params2.toString();
+    $("#clearOrder").onclick = () => {
+      if (!confirm("Очистить корзину?")) return;
+      saveCart([]);
+      renderOrder();
     };
 
     const btnSend = $("#sendToManager");
@@ -1838,37 +2085,15 @@ function renderOrder() {
 
         const txt = buildOrderText(cartNow, PRODUCTS);
 
-        if (navigator.share) {
-          navigator.share({
-            title: "Заявка в каталог",
-            text: txt
-          });
-        } else if (navigator.clipboard) {
-          navigator.clipboard.writeText(txt).then(
-            () => {
-              toast("Заявка скопирована");
-            },
-            () => {
-              toast("Не удалось скопировать");
-            }
-          );
-        } else {
-          const ta = document.createElement("textarea");
-          ta.value = txt;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-          toast("Заявка скопирована");
-        }
+        const phone = MANAGER_PHONE;
+        const url =
+          "https://wa.me/" +
+          phone +
+          "?text=" +
+          encodeURIComponent(txt);
+        window.open(url, "_blank");
       };
     }
-
-    $("#clearOrder").onclick = () => {
-      if (!confirm("Очистить корзину?")) return;
-      saveCart([]);
-      renderOrder();
-    };
 
     updateCartBadge();
     return;
@@ -1890,7 +2115,7 @@ function renderOrder() {
       return `
         <div class="list-item cart-row" data-sku="${g.sku}">
           <div class="cart-thumb">
-            <img src="${g.image}" alt="${g.title}" onerror="${IMG_ONERROR}">
+            <img src="${g.image}" alt="">
           </div>
           <div class="cart-meta">
             <div class="badge">Арт. ${g.sku}</div>
@@ -1902,6 +2127,16 @@ function renderOrder() {
     })
     .join("");
 
+  const catPositions = catList.length;
+  const catQty = catList.reduce(
+    (s, g) => s + (g.totalQty || 0),
+    0
+  );
+  const catWeight = catList.reduce(
+    (s, g) => s + (g.totalWeight || 0),
+    0
+  );
+
   box.innerHTML = `
     <div class="cart-category-header">${label}</div>
     <div class="list">
@@ -1911,12 +2146,7 @@ function renderOrder() {
     <div class="card order-summary-card">
       <div class="section-title">Итого</div>
       <div class="order-summary-text">
-        Позиции: ${catList.length}, штук: ${catList.reduce(
-          (s, g) => s + (g.totalQty || 0),
-          0
-        )}, вес ~ ${formatWeight(
-          catList.reduce((s, g) => s + (g.totalWeight || 0), 0)
-        )} г
+        Позиции: ${catPositions}, штук: ${catQty}, вес ~ ${formatWeight(catWeight)} г
       </div>
     </div>
     <div class="order-bottom-space"></div>
@@ -1988,7 +2218,10 @@ function renderOrderItem() {
   }
 
   const prod = PRODUCTS.find(p => p.sku === sku) || {};
-  const img = items[0].image || getProductMainImage(prod);
+  const img =
+    items[0].image ||
+    (prod.images && prod.images[0]) ||
+    "https://picsum.photos/seed/placeholder/900";
   const avgW =
     items[0].avgWeight != null ? items[0].avgWeight : prod.avgWeight;
   const title = prod.title || `Модель ${sku}`;
@@ -2020,7 +2253,7 @@ function renderOrderItem() {
     box.innerHTML = `
       <div class="card model-edit">
         <div class="model-photo-wrap">
-          <img src="${img}" alt="${title}" onerror="${IMG_ONERROR}">
+          <img src="${img}" alt="${title}">
         </div>
 
         <div class="model-edit-body">
@@ -2165,7 +2398,7 @@ function renderOrderItem() {
   box.innerHTML = `
     <div class="card model-edit">
       <div class="model-photo-wrap">
-        <img src="${img}" alt="${title}" onerror="${IMG_ONERROR}">
+        <img src="${img}" alt="${title}">
       </div>
 
       <div class="model-edit-body">
