@@ -1518,8 +1518,10 @@ function renderProduct() {
     if (!isProductPage()) return;
 
     let currentIndex = 1;
-    let canAdvance = true;
     const availabilityCache = new Map([[1, true]]);
+    const MAX_PHOTOS = 4;
+    let lastIndexKnown = false;
+    let confirmedLastIndex = 1;
     let lastTouchTs = 0;
     let swipeRecently = false;
     const SWIPE_THRESHOLD_PX = 40;
@@ -1528,10 +1530,6 @@ function renderProduct() {
     let startY = 0;
 
     const buildSrc = idx => `/img/products/${prod.sku}_${idx}.jpg`;
-
-    const stopAdvancing = () => {
-      canAdvance = false;
-    };
 
     const showPhoto = (idx, src) => {
       currentIndex = idx;
@@ -1549,11 +1547,18 @@ function renderProduct() {
     };
 
     const tryAdvance = () => {
-      if (!canAdvance) return;
+      if (lastIndexKnown && currentIndex === confirmedLastIndex) {
+        if (confirmedLastIndex === 1) return;
+        showPhoto(1, buildSrc(1));
+        return;
+      }
 
       const nextIndex = currentIndex + 1;
-      if (nextIndex > 4) {
-        stopAdvancing();
+      if (nextIndex > MAX_PHOTOS) {
+        lastIndexKnown = true;
+        confirmedLastIndex = currentIndex;
+        if (confirmedLastIndex === 1) return;
+        showPhoto(1, buildSrc(1));
         return;
       }
 
@@ -1566,7 +1571,10 @@ function renderProduct() {
       }
 
       if (cached === false) {
-        stopAdvancing();
+        lastIndexKnown = true;
+        confirmedLastIndex = currentIndex;
+        if (confirmedLastIndex === 1) return;
+        showPhoto(1, buildSrc(1));
         return;
       }
 
@@ -1577,7 +1585,10 @@ function renderProduct() {
       };
       probe.onerror = () => {
         availabilityCache.set(nextIndex, false);
-        stopAdvancing();
+        lastIndexKnown = true;
+        confirmedLastIndex = currentIndex;
+        if (confirmedLastIndex === 1) return;
+        showPhoto(1, buildSrc(1));
       };
       probe.src = candidateSrc;
     };
