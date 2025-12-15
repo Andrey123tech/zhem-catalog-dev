@@ -1513,11 +1513,19 @@ function renderProduct() {
 
   (function initProductPhotoSwitching() {
     if (!photoWrap || !mainPhoto || !prod || !prod.sku) return;
+    const isProductPage = () =>
+      (window.location.pathname || "").toLowerCase().endsWith("product.html");
+    if (!isProductPage()) return;
 
     let currentIndex = 1;
     let canAdvance = true;
     const availabilityCache = new Map([[1, true]]);
     let lastTouchTs = 0;
+    let swipeRecently = false;
+    const SWIPE_THRESHOLD_PX = 40;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
 
     const buildSrc = idx => `/img/products/${prod.sku}_${idx}.jpg`;
 
@@ -1530,6 +1538,14 @@ function renderProduct() {
       mainPhoto.src = src;
       mainPhoto.style.display = "";
       photoWrap.style.background = "";
+    };
+
+    const markSwiped = () => {
+      swipeRecently = true;
+      lastTouchTs = Date.now();
+      setTimeout(() => {
+        swipeRecently = false;
+      }, SWIPE_CLICK_SUPPRESS_MS);
     };
 
     const tryAdvance = () => {
@@ -1566,14 +1582,65 @@ function renderProduct() {
       probe.src = candidateSrc;
     };
 
+    const tryGoPrevious = () => {
+      if (currentIndex <= 1) return;
+      const prevIndex = currentIndex - 1;
+      const cached = availabilityCache.get(prevIndex);
+      const candidateSrc = buildSrc(prevIndex);
+      if (cached === false) return;
+      availabilityCache.set(prevIndex, true);
+      showPhoto(prevIndex, candidateSrc);
+    };
+
+    const handleSwipeDirection = dir => {
+      if (dir === "left") {
+        markSwiped();
+        tryAdvance();
+        return;
+      }
+      if (dir === "right") {
+        markSwiped();
+        tryGoPrevious();
+      }
+    };
+
+    photoWrap.addEventListener("pointerdown", e => {
+      if (!isProductPage()) return;
+      if (!e.isPrimary) return;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+
+    photoWrap.addEventListener("pointermove", e => {
+      if (pointerId == null || e.pointerId !== pointerId) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) <= Math.abs(dy)) return;
+      if (Math.abs(dx) < SWIPE_THRESHOLD_PX) return;
+      handleSwipeDirection(dx < 0 ? "left" : "right");
+      pointerId = null;
+    });
+
+    const resetPointer = e => {
+      if (pointerId == null || (e && e.pointerId !== pointerId)) return;
+      pointerId = null;
+    };
+
+    photoWrap.addEventListener("pointerup", resetPointer);
+    photoWrap.addEventListener("pointercancel", resetPointer);
+
     photoWrap.addEventListener("touchend", e => {
       if (e.touches && e.touches.length) return;
+      if (swipeRecently) return;
       lastTouchTs = Date.now();
       tryAdvance();
     });
 
     photoWrap.addEventListener("click", () => {
-      if (Date.now() - lastTouchTs < SWIPE_CLICK_SUPPRESS_MS) return;
+      if (swipeRecently || Date.now() - lastTouchTs < SWIPE_CLICK_SUPPRESS_MS) {
+        return;
+      }
       tryAdvance();
     });
   })();
