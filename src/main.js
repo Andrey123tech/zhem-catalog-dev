@@ -1515,15 +1515,12 @@ function renderProduct() {
     if (!photoWrap || !mainPhoto || !prod || !prod.sku) return;
 
     let currentIndex = 1;
-    let canAdvance = true;
+    let hasSecondPhoto = false;
     const availabilityCache = new Map([[1, true]]);
     let lastTouchTs = 0;
+    const MAX_PHOTOS = 4;
 
     const buildSrc = idx => `/img/products/${prod.sku}_${idx}.jpg`;
-
-    const stopAdvancing = () => {
-      canAdvance = false;
-    };
 
     const showPhoto = (idx, src) => {
       currentIndex = idx;
@@ -1532,12 +1529,21 @@ function renderProduct() {
       photoWrap.style.background = "";
     };
 
-    const tryAdvance = () => {
-      if (!canAdvance) return;
+    const resetToFirst = () => {
+      if (currentIndex === 1) return;
+      const firstSrc = buildSrc(1);
+      showPhoto(1, firstSrc);
+    };
 
+    const handleNoNext = () => {
+      if (!hasSecondPhoto) return;
+      resetToFirst();
+    };
+
+    const tryAdvance = () => {
       const nextIndex = currentIndex + 1;
-      if (nextIndex > 4) {
-        stopAdvancing();
+      if (nextIndex > MAX_PHOTOS) {
+        handleNoNext();
         return;
       }
 
@@ -1545,23 +1551,26 @@ function renderProduct() {
       const candidateSrc = buildSrc(nextIndex);
 
       if (cached === true) {
+        availabilityCache.set(nextIndex, true);
+        if (nextIndex > 1) hasSecondPhoto = true;
         showPhoto(nextIndex, candidateSrc);
         return;
       }
 
       if (cached === false) {
-        stopAdvancing();
+        handleNoNext();
         return;
       }
 
       const probe = new Image();
       probe.onload = () => {
         availabilityCache.set(nextIndex, true);
+        if (nextIndex > 1) hasSecondPhoto = true;
         showPhoto(nextIndex, candidateSrc);
       };
       probe.onerror = () => {
         availabilityCache.set(nextIndex, false);
-        stopAdvancing();
+        handleNoNext();
       };
       probe.src = candidateSrc;
     };
@@ -1789,6 +1798,7 @@ function renderProduct() {
         `.size-row-qty span[data-size="${key}"]`
       );
       if (span) span.textContent = String(current);
+
       updateActiveSizeStock(key);
       updateAddButtonState();
       updateSummary();
@@ -2923,19 +2933,4 @@ function initSwipeToDelete() {
   );
 
   document.addEventListener("touchend", () => {
-    tracking = false;
-  });
-})();
-
-document.addEventListener("DOMContentLoaded", () => {
-  if ($("#grid")) renderGrid();
-  if ($("#product")) renderProduct();
-  if ($("#order")) renderOrder();
-  if ($("#orderItem")) renderOrderItem();
-
-  updateCartBadge();
-  initSwipeToDelete();
-  setupBreadcrumbs();
-});
-
-window.addEventListener("load", initFilterSheet);
+    tracking is not present anymore. });
