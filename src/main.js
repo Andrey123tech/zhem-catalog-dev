@@ -1499,6 +1499,8 @@ function renderProduct() {
   const qtySpan = $("#qtyNoSize", box);
   const btnQtyDec = $("#qtyDec", box);
   const btnQtyInc = $("#qtyInc", box);
+  const photoWrap = $(".product-photo-wrap", box);
+  const mainPhoto = photoWrap ? $("img", photoWrap) : null;
   let activeSizeKey = preferredFilterSize || null;
 
   function preventDoubleTapZoom(btn) {
@@ -1508,6 +1510,73 @@ function renderProduct() {
 
   preventDoubleTapZoom(btnQtyDec);
   preventDoubleTapZoom(btnQtyInc);
+
+  (function initProductPhotoSwitching() {
+    if (!photoWrap || !mainPhoto || !prod || !prod.sku) return;
+
+    let currentIndex = 1;
+    let canAdvance = true;
+    const availabilityCache = new Map([[1, true]]);
+    let lastTouchTs = 0;
+
+    const buildSrc = idx => `/img/products/${prod.sku}_${idx}.jpg`;
+
+    const stopAdvancing = () => {
+      canAdvance = false;
+    };
+
+    const showPhoto = (idx, src) => {
+      currentIndex = idx;
+      mainPhoto.src = src;
+      mainPhoto.style.display = "";
+      photoWrap.style.background = "";
+    };
+
+    const tryAdvance = () => {
+      if (!canAdvance) return;
+
+      const nextIndex = currentIndex + 1;
+      if (nextIndex > 4) {
+        stopAdvancing();
+        return;
+      }
+
+      const cached = availabilityCache.get(nextIndex);
+      const candidateSrc = buildSrc(nextIndex);
+
+      if (cached === true) {
+        showPhoto(nextIndex, candidateSrc);
+        return;
+      }
+
+      if (cached === false) {
+        stopAdvancing();
+        return;
+      }
+
+      const probe = new Image();
+      probe.onload = () => {
+        availabilityCache.set(nextIndex, true);
+        showPhoto(nextIndex, candidateSrc);
+      };
+      probe.onerror = () => {
+        availabilityCache.set(nextIndex, false);
+        stopAdvancing();
+      };
+      probe.src = candidateSrc;
+    };
+
+    photoWrap.addEventListener("touchend", e => {
+      if (e.touches && e.touches.length) return;
+      lastTouchTs = Date.now();
+      tryAdvance();
+    });
+
+    photoWrap.addEventListener("click", () => {
+      if (Date.now() - lastTouchTs < SWIPE_CLICK_SUPPRESS_MS) return;
+      tryAdvance();
+    });
+  })();
 
   const calcSelectedQty = () => {
     if (isNoSize) {
