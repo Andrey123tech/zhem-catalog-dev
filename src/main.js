@@ -1524,6 +1524,7 @@ function renderProduct() {
     let confirmedLastIndex = 1;
     let lastTouchTs = 0;
     let swipeRecently = false;
+    let isPinching = false;
     const SWIPE_THRESHOLD_PX = 40;
     let pointerId = null;
     let startX = 0;
@@ -1641,7 +1642,19 @@ function renderProduct() {
     photoWrap.addEventListener("pointerup", resetPointer);
     photoWrap.addEventListener("pointercancel", resetPointer);
 
+    photoWrap.addEventListener("touchstart", e => {
+      if (e.touches && e.touches.length > 1) {
+        isPinching = true;
+      }
+    });
+
     photoWrap.addEventListener("touchend", e => {
+      if (e.touches && e.touches.length === 0) {
+        isPinching = false;
+      }
+      if (isPinching) return;
+      if (e.touches && e.touches.length > 1) return;
+      if (e.changedTouches && e.changedTouches.length > 1) return;
       if (e.touches && e.touches.length) return;
       if (swipeRecently) return;
       lastTouchTs = Date.now();
@@ -1649,6 +1662,7 @@ function renderProduct() {
     });
 
     photoWrap.addEventListener("click", () => {
+      if (isPinching) return;
       if (swipeRecently || Date.now() - lastTouchTs < SWIPE_CLICK_SUPPRESS_MS) {
         return;
       }
