@@ -83,7 +83,9 @@
     "avgWeight": 1.368,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180572p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 43,
     "isNew": false,
@@ -206,7 +208,9 @@
     "avgWeight": 1.976,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180574p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 45,
     "isNew": false,
@@ -321,7 +325,9 @@
     "avgWeight": 1.858,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180573p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 38,
     "isNew": false,
@@ -633,7 +639,9 @@
     "avgWeight": 1.508,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180575p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 9,
     "isNew": false,
@@ -817,7 +825,9 @@
     "avgWeight": 1.262,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180405p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 22,
     "isNew": false,
@@ -1010,7 +1020,9 @@
     "avgWeight": 1.788,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180562p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 14,
     "isNew": false,
@@ -1108,7 +1120,9 @@
     "avgWeight": 0.771,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au190314p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 113,
     "isNew": false,
@@ -1208,7 +1222,9 @@
     "avgWeight": 1.57,
     "sizes": null,
     "isHit": true,
-    "images": [],
+    "images": [
+      "/img/products/Au180634p_1.jpg"
+    ],
     "sortOrder": 1,
     "stock": 35,
     "isNew": false,
@@ -8028,7 +8044,9 @@
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 2.235,
-    "images": [],
+    "images": [
+      "/img/products/Au180450p_1.jpg"
+    ],
     "sortOrder": 999,
     "stockBySize": {},
     "stock": 4,
@@ -8172,7 +8190,9 @@
     "metal": "Au585",
     "color": "rose",
     "avgWeight": 1.431,
-    "images": [],
+    "images": [
+      "/img/products/Au180381p_1.jpg"
+    ],
     "sortOrder": 999,
     "stockBySize": {},
     "stock": 27,
