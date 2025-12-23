@@ -5,6 +5,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+      manager: "manager.html",
         main: 'index.html',
         product: 'product.html',
         order: 'order.html',
