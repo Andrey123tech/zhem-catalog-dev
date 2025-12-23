@@ -5,3 +5,14 @@ img/products
 
 # local backups
 backups/
+
+# === local reports / audits (do not commit) ===
+dangerous_skus_report.txt
+data/AUDIT_*
+data/PHOTO_*
+data/PRODUCTS_without_photos.txt
+data/photos_without_product.txt
+data/sku_normalize_report*.tsv
+data/NEEDS_REDO_suffix_skus.tsv
+tools/audit_raw_vs_catalog.js
+
