@@ -73,3 +73,25 @@ document.getElementById("clear").onclick = ()=>{save([]);render()};
 document.getElementById("merge").onclick = merge;
 
 render();
+
+import { loadManagerInbox } from './manager_inbox.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const list = document.getElementById('ordersList');
+  if (!list) return;
+
+  const orders = await loadManagerInbox();
+
+  if (!orders.length) {
+    list.innerHTML = '<p style="opacity:.6">Заявок пока нет</p>';
+    return;
+  }
+
+  list.innerHTML = orders.map((o, i) => `
+    <div class="order-card">
+      <strong>Заявка #${i + 1}</strong><br>
+      <small>${o.client || 'Без имени'}</small><br>
+      <small>${new Date(o.createdAt).toLocaleString()}</small>
+    </div>
+  `).join('');
+});
