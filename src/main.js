@@ -3,7 +3,6 @@
 
 // === 1. Imports & constants ===
 import {
-import { sendOrderToInbox } from "./inbox_client.js";
   PRODUCTS,
   SIZES,
   BRACELET_SIZES,
