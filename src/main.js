@@ -8,6 +8,7 @@ import {
   BRACELET_SIZES,
   DEFAULT_BRACELET_SIZE
 } from "./catalog_data.js";
+import { sendOrderToInbox } from "./inbox_client.js";
 
 const CART_KEY = "zhem_cart_v1";
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
@@ -2306,6 +2307,16 @@ function renderOrder() {
         }
 
         const txt = buildOrderText(cartNow, PRODUCTS);
+
+        // manager inbox (serverless): сохраняем текст заявки (табличный блок внутри txt)
+        sendOrderToInbox({
+          clientName: (window?.CURRENT_CLIENT_NAME || ""),
+          clientPhone: (window?.CURRENT_CLIENT_PHONE || ""),
+          source: "catalog",
+          note: "",
+          orderText: txt
+        });
+
 
         const phone = MANAGER_PHONE;
         const url =
