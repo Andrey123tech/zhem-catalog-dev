@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Каталог менеджера · Жемчужина</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="page">
+    <div class="container">
+      <h1>Каталог менеджера</h1>
+      <div style="opacity:.7;margin-bottom:12px">
+        Ветка manager · закрытая зона
+      </div>
+
+      <div class="card" style="padding:12px;margin-bottom:12px">
+        <button id="seed">Создать тест-заявки</button>
+        <button id="clear">Очистить</button>
+        <button id="merge">Сформировать заказ в производство</button>
+      </div>
+
+      <div class="card" style="padding:12px;margin-bottom:12px">
+        <h3>Список заявок</h3>
+        <div id="orders"></div>
+      </div>
+
+      <div class="card" style="padding:12px">
+        <h3>Экспорт</h3>
+        <textarea id="out" rows="14" style="width:100%"></textarea>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="/src/manager.js"></script>
+</body>
+</html>
