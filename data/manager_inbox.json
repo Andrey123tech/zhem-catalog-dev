@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "inbox_1766521128399_786c181ac43e",
+    "createdAt": "2025-12-23T20:18:48.399Z",
+    "clientName": "TEST Андрей",
+    "clientPhone": "+77000000000",
+    "source": "catalog",
+    "items": [
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au04007",
+        "size": "16.5",
+        "qty": 1,
+        "source": "stock"
+      },
+      {
+        "category": "ПОД ЗАКАЗ",
+        "sku": "Au185800Kk",
+        "size": "17.0",
+        "qty": 2,
+        "source": "order"
+      }
+    ],
+    "note": "test from curl"
+  }
+]
