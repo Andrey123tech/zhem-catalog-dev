@@ -16,3 +16,7 @@ data/sku_normalize_report*.tsv
 data/NEEDS_REDO_suffix_skus.tsv
 tools/audit_raw_vs_catalog.js
 
+.vercel
+.env*.local
+
+/dist/
