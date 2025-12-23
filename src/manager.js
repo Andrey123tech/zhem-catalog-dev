@@ -1,3 +1,4 @@
+// MANAGER_DEBUG_PANEL
 const KEY = "ZHEM_MANAGER_ORDERS";
 
 function load() {
@@ -76,7 +77,21 @@ render();
 
 import { loadManagerInbox } from './manager_inbox.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const dbg = document.createElement("pre");
+  dbg.id = "mgr-debug";
+  dbg.style.cssText = "white-space:pre-wrap;padding:12px;border:1px solid #ddd;border-radius:12px;margin:12px;background:#fff;max-height:280px;overflow:auto;font-size:12px;";
+  dbg.textContent = "DEBUG: loading...\n";
+  document.body.prepend(dbg);
+
+  try {
+    const r = await fetch("/api/inbox-list");
+    const t = await r.text();
+    dbg.textContent += "GET /api/inbox-list status: " + r.status + "\n";
+    dbg.textContent += "body: " + t.slice(0, 1200) + "\n";
+  } catch (e) {
+    dbg.textContent += "fetch error: " + (e?.message || e) + "\n";
+  }
   const list = document.getElementById('ordersList');
   if (!list) return;
 
