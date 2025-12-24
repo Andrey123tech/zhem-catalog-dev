@@ -149,5 +149,100 @@
       }
     ],
     "note": ""
+  },
+  {
+    "id": "inbox_1766571931660_c65b67a96acc8",
+    "createdAt": "2025-12-24T10:25:31.661Z",
+    "clientName": "",
+    "clientPhone": "",
+    "source": "catalog",
+    "orderNo": "ZHM-1766571931660",
+    "items": [
+      {
+        "category": "Категория",
+        "sku": "Артикул",
+        "size": "Размер",
+        "qty": 0
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "17.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "17.5",
+        "qty": 2
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "18.0",
+        "qty": 2
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "18.5",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "19.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "19.5",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "20.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "16.5",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "17.0",
+        "qty": 2
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "17.5",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "18.0",
+        "qty": 2
+      },
+      {
+        "category": "СЕРЬГИ",
+        "sku": "Au0237168",
+        "size": "",
+        "qty": 6
+      },
+      {
+        "category": "СЕРЬГИ",
+        "sku": "Au0237165",
+        "size": "",
+        "qty": 7
+      }
+    ],
+    "note": ""
   }
 ]
