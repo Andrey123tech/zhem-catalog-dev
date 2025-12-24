@@ -22,5 +22,14 @@
       }
     ],
     "note": "test from curl"
+  },
+  {
+    "id": "inbox_1766561547728_2b4a368411c12",
+    "createdAt": "2025-12-24T07:32:27.728Z",
+    "clientName": "",
+    "clientPhone": "",
+    "source": "catalog",
+    "items": [],
+    "note": ""
   }
 ]
