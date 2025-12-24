@@ -337,5 +337,64 @@
         "qty": 2
       }
     ]
+  },
+  {
+    "id": "inbox_1766598531548_3098e53ff6f4c",
+    "createdAt": "2025-12-24T17:48:51.548Z",
+    "orderNo": "ZHM-251224-2248-668",
+    "clientName": "",
+    "clientPhone": "",
+    "source": "catalog",
+    "note": "",
+    "items": [
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "17.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "17.5",
+        "qty": 4
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "18.0",
+        "qty": 5
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190135",
+        "size": "17.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190135",
+        "size": "17.5",
+        "qty": 4
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190135",
+        "size": "18.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190135",
+        "size": "18.5",
+        "qty": 2
+      },
+      {
+        "category": "БРАСЛЕТЫ",
+        "sku": "Au177602",
+        "size": "18.0",
+        "qty": 6
+      }
+    ]
   }
 ]
