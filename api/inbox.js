@@ -26,15 +26,39 @@ export default async function handler(req, res) {
   }
 
   const item = req.body || {};
-  const entry = {
+  const orderNo = "ZHM-" + Date.now();
+
+const entry = {
     id: `inbox_${Date.now()}_${Math.random().toString(16).slice(2)}`,
     createdAt: new Date().toISOString(),
     clientName: item.clientName || "",
     clientPhone: item.clientPhone || "",
     source: item.source || "catalog",
-    items: Array.isArray(item.items) ? item.items : [],
+    orderNo: orderNo,
+    items: (Array.isArray(item.items) && item.items.length)
+      ? item.items
+      : parseOrderText(item.orderText || ""),
     note: item.note || ""
   };
+
+function parseOrderText(txt) {
+  if (!txt || typeof txt !== "string") return [];
+  const lines = txt.split(/\r?\n/);
+  const out = [];
+  for (const line of lines) {
+    if (!line.includes(";")) continue;
+    const [category, sku, size, qty] = line.split(";").map(s => s && s.trim());
+    if (!sku || !qty) continue;
+    out.push({
+      category: category || "",
+      sku,
+      size: size === "-" ? "" : size,
+      qty: Number(qty) || 0
+    });
+  }
+  return out;
+}
+
 
   const ghHeaders = {
     "Authorization": `Bearer ${TOKEN}`,
