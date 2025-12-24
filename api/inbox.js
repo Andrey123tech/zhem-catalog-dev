@@ -26,6 +26,19 @@ export default async function handler(req, res) {
   }
 
   const item = req.body || {};
+
+function pad(n,len){ n=String(n); return n.length>=len ? n : "0".repeat(len-n.length)+n; }
+function makeOrderNo(){
+  const d=new Date();
+  const yy=String(d.getFullYear()).slice(-2);
+  const mm=pad(d.getMonth()+1,2);
+  const dd=pad(d.getDate(),2);
+  const hh=pad(d.getHours(),2);
+  const mi=pad(d.getMinutes(),2);
+  const rnd=pad(Math.floor(Math.random()*1000),3); // 000-999
+  return `${yy}${mm}${dd}-${hh}${mi}-${rnd}`;
+}
+
   const orderNo = "ZHM-" + Date.now();
 
 const entry = {
