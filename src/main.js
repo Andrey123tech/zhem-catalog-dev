@@ -11,6 +11,19 @@ import {
 import { sendOrderToInbox } from "./inbox_client.js";
 
 const CART_KEY = "zhem_cart_v1";
+
+function makeOrderNo() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2,"0");
+  const y = String(d.getFullYear()).slice(2);
+  const m = pad(d.getMonth()+1);
+  const day = pad(d.getDate());
+  const hh = pad(d.getHours());
+  const mm = pad(d.getMinutes());
+  const rnd = String(Math.floor(Math.random()*1000)).padStart(3,"0");
+  return `ZHM-${y}${m}${day}-${hh}${mm}-${rnd}`;
+}
+
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
 const NON_SIZE_CATEGORIES = new Set(["earrings", "pendants", "pins"]);
 const SIZE_FILTER_CATEGORIES = new Set(["rings", "bracelets"]);
@@ -2306,19 +2319,22 @@ function renderOrder() {
           return;
         }
 
-        const txt = buildOrderText(cartNow, PRODUCTS);
+        const orderNo = makeOrderNo();
+        const coreTxt = buildOrderText(cartNow, PRODUCTS);
+        const txt = `№ ${orderNo}\n\n` + coreTxt;
 
-        // manager inbox (serverless): сохраняем текст заявки (табличный блок внутри txt)
-        sendOrderToInbox({
-          clientName: (window?.CURRENT_CLIENT_NAME || ""),
-          clientPhone: (window?.CURRENT_CLIENT_PHONE || ""),
-          source: "catalog",
-          note: "",
-          orderText: txt
-        });
-
-
-        const phone = MANAGER_PHONE;
+        // manager inbox (serverless): сохраняем текст заявки
+        try {
+          sendOrderToInbox({
+            orderNo,
+            clientName: "",
+            clientPhone: "",
+            source: "catalog",
+            note: "",
+            orderText: txt
+          });
+        } catch (e) {}
+const phone = MANAGER_PHONE;
         const url =
           "https://wa.me/" +
           phone +
