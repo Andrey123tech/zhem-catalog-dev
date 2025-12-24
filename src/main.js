@@ -20,8 +20,8 @@ function makeOrderNo() {
   const day = pad(d.getDate());
   const hh = pad(d.getHours());
   const mm = pad(d.getMinutes());
-  const rnd = String(Math.floor(Math.random()*1000)).padStart(3,"0");
-  return `ZHM-${y}${m}${day}-${hh}${mm}-${rnd}`;
+  const ss = pad(d.getSeconds());
+  return `ZHM-${y}${m}${day}-${hh}${mm}${ss}`;
 }
 
 const FILTER_STORAGE_KEY = "zhem_filters_v1";
