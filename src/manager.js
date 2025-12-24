@@ -1,164 +1,138 @@
 const $ = (s) => document.querySelector(s);
 
-const elStatus = $("#status");
-const elOrders = $("#orders");
-const elDebug  = $("#debug");
-const elExport = $("#export");
-
-function logDebug(...args) {
-  if (!elDebug) return;
-  elDebug.style.display = "block";
-  elDebug.textContent += "\n" + args.map(a => (typeof a === "string" ? a : JSON.stringify(a, null, 2))).join(" ");
+function esc(s) {
+  return String(s ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
-const API_BASE =
-  (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-    ? "https://zhem-catalog-dev.vercel.app"
-    : "";
-
-function setStatus(t) {
-  if (elStatus) elStatus.textContent = t;
+function fmtDate(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString("ru-RU", { hour12: false });
+  } catch {
+    return iso || "";
+  }
 }
 
-function fmtDT(iso) {
-  try { return new Date(iso).toLocaleString(); } catch { return iso || ""; }
+function sumQty(items) {
+  return (items || []).reduce((a, x) => a + (Number(x?.qty) || 0), 0);
 }
 
-function safe(s){ return (s ?? "").toString(); }
+function render(items) {
+  const root = $("#orders");
+  const status = $("#status");
+  if (!root) return;
 
-function normalizeCategory(it){
-  // в inbox может прилетать "ПОД ЗАКАЗ" как category, а не раздел.
-  // для экспорта всё равно пишем в Category как есть.
-  return safe(it.category || "");
-}
+  root.innerHTML = "";
 
-function renderOrders(items) {
-  if (!elOrders) return;
+  const arr = Array.isArray(items) ? items.slice() : [];
+  arr.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
 
-  if (!Array.isArray(items) || items.length === 0) {
-    elOrders.innerHTML = `<div style="padding:10px 0;color:#777">Заявок пока нет</div>`;
+  if (status) status.textContent = `Заявок: ${arr.length}`;
+
+  if (arr.length === 0) {
+    root.innerHTML = `<div style="padding:10px 12px;color:#777">Пока заявок нет.</div>`;
     return;
   }
 
-  // список чекбоксов
-  elOrders.innerHTML = items.map((o) => {
-    const title = `${safe(o.clientName) || "Без имени"} ${safe(o.clientPhone)}`.trim();
-    const when  = fmtDT(o.createdAt);
-    const count = Array.isArray(o.items) ? o.items.reduce((s,x)=>s+(+x.qty||0),0) : 0;
+  for (const o of arr) {
+    const orderNo = o.orderNo || "";
+    const who = (o.clientName || "").trim() || "Без имени";
+    const phone = (o.clientPhone || "").trim();
+    const when = fmtDate(o.createdAt);
+    const it = Array.isArray(o.items) ? o.items : [];
+    const pos = it.length;
+    const qty = sumQty(it);
 
-    return `
-      <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eee">
-        <input type="checkbox" data-id="${o.id}" style="margin-top:4px">
-        <div style="line-height:1.2">
-          <div style="font-weight:600">${title}</div>
-          <div style="color:#666;font-size:13px">${when} · позиций: ${(o.items||[]).length} · шт: ${count}</div>
-          ${o.note ? `<div style="color:#888;font-size:13px;margin-top:4px">${safe(o.note)}</div>` : ""}
+    const headerLine = `
+      <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-weight:700">
+            ${orderNo ? `№ ${esc(orderNo)}` : "Заявка"} · ${esc(who)}${phone ? ` · ${esc(phone)}` : ""}
+          </div>
+          <div style="color:#666;font-size:13px;margin-top:2px">
+            ${esc(when)} · позиций: ${pos} · шт: ${qty}
+          </div>
         </div>
-      </label>
+        <button class="btn" data-open="1" style="white-space:nowrap">Открыть</button>
+      </div>
     `;
-  }).join("");
-}
 
-function buildExcelBlock(itemsSelected) {
-  // формат как у тебя: Категория;Артикул;Размер;Кол-во
-  const rows = [];
-  for (const order of itemsSelected) {
-    for (const it of (order.items || [])) {
-      rows.push([
-        normalizeCategory(it) || "—",
-        safe(it.sku),
-        safe(it.size) || "-",
-        String(+it.qty || 0)
-      ]);
-    }
-  }
+    const detailsRows = it.map(x => `
+      <tr>
+        <td>${esc(x.category || "")}</td>
+        <td><b>${esc(x.sku || "")}</b></td>
+        <td>${esc(x.size || "-")}</td>
+        <td style="text-align:right">${esc(x.qty || 0)}</td>
+        <td>${esc(x.source || "")}</td>
+      </tr>
+    `).join("");
 
-  // агрегируем одинаковые строки
-  const map = new Map();
-  for (const r of rows) {
-    const k = r.join(";");
-    map.set(k, (map.get(k) || 0) + (+r[3] || 0));
-  }
+    const details = `
+      <div class="details" style="display:none;margin-top:10px">
+        ${it.length ? `
+          <div style="overflow:auto;border:1px solid #eee;border-radius:12px">
+            <table style="width:100%;border-collapse:collapse;font-size:14px">
+              <thead>
+                <tr style="background:#fafafa">
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Категория</th>
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Артикул</th>
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Размер</th>
+                  <th style="text-align:right;padding:8px;border-bottom:1px solid #eee">Кол-во</th>
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Источник</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${detailsRows}
+              </tbody>
+            </table>
+          </div>
+        ` : `
+          <div style="padding:10px 12px;color:#777">
+            В этой заявке нет позиций (скорее всего старая тестовая запись).
+          </div>
+        `}
+      </div>
+    `;
 
-  const out = [];
-  out.push("Категория;Артикул;Размер;Кол-во");
-  for (const [k, qty] of map.entries()) {
-    const parts = k.split(";");
-    parts[3] = String(qty);
-    out.push(parts.join(";"));
-  }
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.padding = "12px";
+    card.style.marginBottom = "12px";
+    card.innerHTML = headerLine + details;
 
-  // итоги
-  const total = Array.from(map.values()).reduce((s,n)=>s+n,0);
-  out.push("");
-  out.push("ИТОГО;;;");
-  out.push(`;;Всего штук;${total}`);
-  return out.join("\n");
-}
-
-async function loadInbox() {
-  setStatus("Загружаю заявки…");
-  logDebug("DEBUG: loading...");
-
-  const url = `${API_BASE}/api/inbox-list`;
-  const r = await fetch(url, { cache: "no-store" });
-  const txt = await r.text();
-
-  logDebug(`GET /api/inbox-list status: ${r.status}`);
-  logDebug("body:", txt);
-
-  let data;
-  try { data = JSON.parse(txt); } catch { data = null; }
-  const items = data?.items || [];
-
-  renderOrders(items);
-  setStatus(`Заявок: ${items.length}`);
-
-  // кнопки
-  const btnMake = $("#btn-make-production");
-  const btnTest = $("#btn-make-test");
-  const btnClear = $("#btn-clear");
-
-  btnTest && (btnTest.onclick = async () => {
-    const payload = {
-      clientName: "TEST Андрей",
-      clientPhone: "+77000000000",
-      source: "catalog",
-      note: "test from manager page",
-      items: [
-        { category:"КОЛЬЦА", sku:"Au04007", size:"16.5", qty:1, source:"stock" },
-        { category:"ПОД ЗАКАЗ", sku:"Au185800Kk", size:"17.0", qty:2, source:"order" }
-      ]
-    };
-    const pr = await fetch(`${API_BASE}/api/inbox`, {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify(payload)
+    const btn = card.querySelector('button[data-open="1"]');
+    const det = card.querySelector(".details");
+    btn?.addEventListener("click", () => {
+      const isOpen = det.style.display !== "none";
+      det.style.display = isOpen ? "none" : "block";
+      btn.textContent = isOpen ? "Открыть" : "Скрыть";
     });
-    logDebug("POST /api/inbox:", pr.status, await pr.text());
-    await loadInbox();
-  });
 
-  btnClear && (btnClear.onclick = () => {
-    // просто очищаем поле экспорта (не удаляем заявки)
-    if (elExport) elExport.value = "";
-  });
-
-  btnMake && (btnMake.onclick = () => {
-    const checked = Array.from(elOrders.querySelectorAll('input[type="checkbox"]:checked'))
-      .map(x => x.getAttribute("data-id"));
-
-    const selected = items.filter(o => checked.includes(o.id));
-    if (selected.length === 0) {
-      alert("Выбери заявки галочками.");
-      return;
-    }
-    const block = buildExcelBlock(selected);
-    if (elExport) elExport.value = block;
-  });
+    root.appendChild(card);
+  }
 }
 
-loadInbox().catch(e => {
-  setStatus("Ошибка загрузки заявок");
-  logDebug("ERROR:", e?.message || e);
-});
+async function load() {
+  const debug = document.getElementById("debug");
+  const log = (...a) => { if (debug) debug.textContent += "\n" + a.join(" "); };
+
+  try {
+    log("DEBUG: loading...");
+    const r = await fetch("/api/inbox-list", { cache: "no-store" });
+    log("GET /api/inbox-list status:", r.status);
+    const t = await r.text();
+    log("body:", t.slice(0, 2000));
+    const j = JSON.parse(t);
+    render(j.items || []);
+  } catch (e) {
+    const status = $("#status");
+    if (status) status.textContent = "Ошибка загрузки inbox-list";
+    console.error(e);
+  }
+}
+
+load();
