@@ -40,7 +40,7 @@ export default async function handler(req, res) {
   
 function parseOrderText(txt){
   if(!txt || typeof txt!=="string") return [];
-  const lines = txt.split(/\r?\n/);
+  const lines = txt.split(/orderText: orderTextr?orderText: orderTextn/);
 
   // найдём Excel-блок
   let start = lines.findIndex(l => l.trim().startsWith("Категория;Артикул;Размер;Кол-во"));
