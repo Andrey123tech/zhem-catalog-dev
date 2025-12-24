@@ -37,7 +37,36 @@ export default async function handler(req, res) {
   const orderNo = `ZHM-${y}${m}${day}-${hh}${mm}-${rnd}`;
 
   const body = req.body || {};
-  const entry = {
+  
+function parseOrderText(txt){
+  if(!txt || typeof txt!=="string") return [];
+  const lines = txt.split(/\r?\n/);
+
+  // найдём Excel-блок
+  let start = lines.findIndex(l => l.trim().startsWith("Категория;Артикул;Размер;Кол-во"));
+  if(start < 0) return [];
+
+  const out=[];
+  for(let i=start+1;i<lines.length;i++){
+    const line = (lines[i]||"").trim();
+    if(!line) break;
+    if(!line.includes(";")) continue;
+
+    const parts = line.split(";").map(x => (x||"").trim());
+    const category = parts[0] || "";
+    const sku = parts[1] || "";
+    const size = (parts[2]||"") === "-" ? "" : (parts[2]||"");
+    const qty = Number(parts[3]||0);
+
+    if(!sku) continue;
+    if(!qty) continue;
+
+    out.push({ category, sku, size, qty });
+  }
+  return out;
+}
+
+const entry = {
     id: `inbox_${Date.now()}_${Math.random().toString(16).slice(2)}`,
     createdAt: new Date().toISOString(),
     orderNo,
