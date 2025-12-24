@@ -19,6 +19,7 @@
         <button id="seed">Создать тест-заявки</button>
         <button id="clear">Очистить</button>
         <button id="merge">Сформировать заказ в производство</button>
+<button id="btnDebug" style="display:none">Debug</button>
       </div>
 
       <div class="card" style="padding:12px;margin-bottom:12px">
@@ -33,9 +34,6 @@
       </div>
     </div>
   </main>
-
-  
-<pre id="debug" style="white-space:pre-wrap;background:#111;color:#0f0;padding:10px;border-radius:10px;overflow:auto;max-height:260px;margin:12px 0;display:none">DEBUG: loading...</pre>
   <script type="module" src="/src/manager.js"></script>
 <script>
 (function(){
@@ -53,6 +51,25 @@
   } else {
     apply();
   }
+})();
+</script>
+<script>
+(function(){
+  function ready(fn){ if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",fn); else fn(); }
+  ready(function(){
+    try{
+      var p=new URLSearchParams(location.search);
+      var dbg=document.getElementById("debug");
+      var b=document.getElementById("btnDebug");
+      if(!dbg||!b) return;
+      if(p.get("debug")==="1"){
+        b.style.display="inline-block";
+        b.addEventListener("click", function(){
+          dbg.style.display = (dbg.style.display==="none" ? "block" : "none");
+        });
+      }
+    }catch(e){}
+  });
 })();
 </script>
 </body>
