@@ -39,7 +39,15 @@ function makeOrderNo(){
   return `${yy}${mm}${dd}-${hh}${mi}-${rnd}`;
 }
 
-  const orderNo = "ZHM-" + Date.now();
+  const d=new Date();
+  const pad=(n)=>String(n).padStart(2,"0");
+  const y=String(d.getFullYear()).slice(2);
+  const m=pad(d.getMonth()+1);
+  const day=pad(d.getDate());
+  const hh=pad(d.getHours());
+  const mm=pad(d.getMinutes());
+  const rnd=Math.random().toString(36).slice(2,5).toUpperCase();
+  const orderNo=`ZHM---`;
 
 const entry = {
     id: `inbox_${Date.now()}_${Math.random().toString(16).slice(2)}`,
