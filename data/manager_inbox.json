@@ -31,5 +31,34 @@
     "source": "catalog",
     "items": [],
     "note": ""
+  },
+  {
+    "id": "inbox_1766570924995_b1098dec682a9",
+    "createdAt": "2025-12-24T10:08:44.995Z",
+    "clientName": "TEST Андрей",
+    "clientPhone": "+77000000000",
+    "source": "catalog",
+    "orderNo": "ZHM-1766570924995",
+    "items": [
+      {
+        "category": "Категория",
+        "sku": "Артикул",
+        "size": "Размер",
+        "qty": 0
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au04007",
+        "size": "16.5",
+        "qty": 1
+      },
+      {
+        "category": "ПОД ЗАКАЗ",
+        "sku": "Au185800Kk",
+        "size": "17.0",
+        "qty": 2
+      }
+    ],
+    "note": "orderNo test"
   }
 ]
