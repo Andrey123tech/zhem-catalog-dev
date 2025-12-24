@@ -46,5 +46,16 @@
 </script>
 <pre id="debug" style="white-space:pre-wrap;background:#111;color:#0f0;padding:10px;border-radius:10px;overflow:auto;max-height:260px;margin:12px 0;display:none">DEBUG: loading...</pre>
   <script type="module" src="/src/manager.js"></script>
+<script>
+(function(){
+  try {
+    var p=new URLSearchParams(location.search);
+    if(p.get("debug")==="1"){
+      var d=document.getElementById("debug");
+      if(d) d.style.display="block";
+    }
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
