@@ -244,5 +244,28 @@
       }
     ],
     "note": ""
+  },
+  {
+    "id": "inbox_1766596487626_01dc20389f179",
+    "createdAt": "2025-12-24T17:14:47.626Z",
+    "orderNo": "ZHM-251224-1714-0CU",
+    "clientName": "TEST MANUAL",
+    "clientPhone": "+70000000000",
+    "source": "catalog",
+    "note": "",
+    "items": [
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au04007",
+        "size": "16.5",
+        "qty": 2
+      },
+      {
+        "category": "СЕРЬГИ",
+        "sku": "Au0237168",
+        "size": "",
+        "qty": 1
+      }
+    ]
   }
 ]
