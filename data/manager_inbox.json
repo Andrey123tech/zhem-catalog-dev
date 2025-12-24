@@ -267,5 +267,22 @@
         "qty": 1
       }
     ]
+  },
+  {
+    "id": "inbox_1766597417370_e88e9e9d1f81f",
+    "createdAt": "2025-12-24T17:30:17.370Z",
+    "orderNo": "ZHM-251224-1730-SHZ",
+    "clientName": "TEST NO",
+    "clientPhone": "+70000000000",
+    "source": "catalog",
+    "note": "",
+    "items": [
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au04007",
+        "size": "16.5",
+        "qty": 1
+      }
+    ]
   }
 ]
