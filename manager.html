@@ -23,6 +23,7 @@
 
       <div class="card" style="padding:12px;margin-bottom:12px">
         <h3>Список заявок</h3>
+        <div id="status" style="padding:10px 12px;color:#666">…</div>
         <div id="orders"></div>
       </div>
 
@@ -33,6 +34,17 @@
     </div>
   </main>
 
+  
+<script>
+  try {
+    const p=new URLSearchParams(location.search);
+    if(p.get("debug")==="1"){
+      const d=document.getElementById("debug");
+      if(d) d.style.display="block";
+    }
+  } catch(e) {}
+</script>
+<pre id="debug" style="white-space:pre-wrap;background:#111;color:#0f0;padding:10px;border-radius:10px;overflow:auto;max-height:260px;margin:12px 0;display:none">DEBUG: loading...</pre>
   <script type="module" src="/src/manager.js"></script>
 </body>
 </html>
