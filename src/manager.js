@@ -1,75 +1,138 @@
-const KEY = "ZHEM_MANAGER_ORDERS";
+const $ = (s) => document.querySelector(s);
 
-function load() {
-  return JSON.parse(localStorage.getItem(KEY) || "[]");
-}
-function save(v) {
-  localStorage.setItem(KEY, JSON.stringify(v));
-}
-
-function seed() {
-  const demo = [
-    {
-      id: "client-1",
-      name: "Клиент (WhatsApp)",
-      items: [
-        { cat:"КОЛЬЦА", sku:"Au04007", size:"19.0", qty:2, src:"склад" },
-        { cat:"КОЛЬЦА", sku:"Au185800Kk", size:"16.5", qty:1, src:"заказ" },
-      ]
-    },
-    {
-      id: "internal",
-      name: "Внутренняя заявка",
-      items: [
-        { cat:"БРАСЛЕТЫ", sku:"Au177621", size:"18.0", qty:6, src:"склад" },
-        { cat:"БРАСЛЕТЫ", sku:"Au177621", size:"19.0", qty:4, src:"заказ" },
-      ]
-    }
-  ];
-  save(demo);
-  render();
+function esc(s) {
+  return String(s ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
-function render() {
-  const root = document.getElementById("orders");
-  const orders = load();
+function fmtDate(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString("ru-RU", { hour12: false });
+  } catch {
+    return iso || "";
+  }
+}
+
+function sumQty(items) {
+  return (items || []).reduce((a, x) => a + (Number(x?.qty) || 0), 0);
+}
+
+function render(items) {
+  const root = $("#orders");
+  const status = $("#status");
+  if (!root) return;
+
   root.innerHTML = "";
 
-  orders.forEach(o => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <label>
-        <input type="checkbox" value="${o.id}">
-        <b>${o.name}</b>
-      </label>
+  const arr = Array.isArray(items) ? items.slice() : [];
+  arr.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
+
+  if (status) status.textContent = `Заявок: ${arr.length}`;
+
+  if (arr.length === 0) {
+    root.innerHTML = `<div style="padding:10px 12px;color:#777">Пока заявок нет.</div>`;
+    return;
+  }
+
+  for (const o of arr) {
+    const orderNo = o.orderNo || "";
+    const who = (o.clientName || "").trim() || "Без имени";
+    const phone = (o.clientPhone || "").trim();
+    const when = fmtDate(o.createdAt);
+    const it = Array.isArray(o.items) ? o.items : [];
+    const pos = it.length;
+    const qty = sumQty(it);
+
+    const headerLine = `
+      <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-weight:700">
+            ${orderNo ? `№ ${esc(orderNo)}` : "Заявка"} · ${esc(who)}${phone ? ` · ${esc(phone)}` : ""}
+          </div>
+          <div style="color:#666;font-size:13px;margin-top:2px">
+            ${esc(when)} · позиций: ${pos} · шт: ${qty}
+          </div>
+        </div>
+        <button class="btn" data-open="1" style="white-space:nowrap">Открыть</button>
+      </div>
     `;
-    root.appendChild(div);
-  });
-}
 
-function merge() {
-  const orders = load();
-  const checked = [...document.querySelectorAll("input:checked")].map(i=>i.value);
-  const rows = [];
+    const detailsRows = it.map(x => `
+      <tr>
+        <td>${esc(x.category || "")}</td>
+        <td><b>${esc(x.sku || "")}</b></td>
+        <td>${esc(x.size || "-")}</td>
+        <td style="text-align:right">${esc(x.qty || 0)}</td>
+        <td>${esc(x.source || "")}</td>
+      </tr>
+    `).join("");
 
-  orders
-    .filter(o => checked.includes(o.id))
-    .forEach(o => {
-      o.items
-        .filter(i=>i.src==="заказ")
-        .forEach(i=>rows.push(i));
+    const details = `
+      <div class="details" style="display:none;margin-top:10px">
+        ${it.length ? `
+          <div style="overflow:auto;border:1px solid #eee;border-radius:12px">
+            <table style="width:100%;border-collapse:collapse;font-size:14px">
+              <thead>
+                <tr style="background:#fafafa">
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Категория</th>
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Артикул</th>
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Размер</th>
+                  <th style="text-align:right;padding:8px;border-bottom:1px solid #eee">Кол-во</th>
+                  <th style="text-align:left;padding:8px;border-bottom:1px solid #eee">Источник</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${detailsRows}
+              </tbody>
+            </table>
+          </div>
+        ` : `
+          <div style="padding:10px 12px;color:#777">
+            В этой заявке нет позиций (скорее всего старая тестовая запись).
+          </div>
+        `}
+      </div>
+    `;
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.padding = "12px";
+    card.style.marginBottom = "12px";
+    card.innerHTML = headerLine + details;
+
+    const btn = card.querySelector('button[data-open="1"]');
+    const det = card.querySelector(".details");
+    btn?.addEventListener("click", () => {
+      const isOpen = det.style.display !== "none";
+      det.style.display = isOpen ? "none" : "block";
+      btn.textContent = isOpen ? "Открыть" : "Скрыть";
     });
 
-  const out = ["Категория;Артикул;Размер;Кол-во"];
-  rows.forEach(r=>{
-    out.push(`${r.cat};${r.sku};${r.size};${r.qty}`);
-  });
-
-  document.getElementById("out").value = out.join("\n");
+    root.appendChild(card);
+  }
 }
 
-document.getElementById("seed").onclick = seed;
-document.getElementById("clear").onclick = ()=>{save([]);render()};
-document.getElementById("merge").onclick = merge;
+async function load() {
+  const debug = document.getElementById("debug");
+  const log = (...a) => { if (debug) debug.textContent += "\n" + a.join(" "); };
 
-render();
+  try {
+    log("DEBUG: loading...");
+    const r = await fetch("/api/inbox-list", { cache: "no-store" });
+    log("GET /api/inbox-list status:", r.status);
+    const t = await r.text();
+    log("body:", t.slice(0, 2000));
+    const j = JSON.parse(t);
+    render(j.items || []);
+  } catch (e) {
+    const status = $("#status");
+    if (status) status.textContent = "Ошибка загрузки inbox-list";
+    console.error(e);
+  }
+}
+
+load();
