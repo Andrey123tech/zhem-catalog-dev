@@ -60,5 +60,94 @@
       }
     ],
     "note": "orderNo test"
+  },
+  {
+    "id": "inbox_1766571283530_a038f8b4f6346",
+    "createdAt": "2025-12-24T10:14:43.530Z",
+    "clientName": "",
+    "clientPhone": "",
+    "source": "catalog",
+    "orderNo": "ZHM-1766571283530",
+    "items": [
+      {
+        "category": "Категория",
+        "sku": "Артикул",
+        "size": "Размер",
+        "qty": 0
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "16.5",
+        "qty": 2
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "17.0",
+        "qty": 2
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "17.5",
+        "qty": 4
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190026",
+        "size": "18.0",
+        "qty": 3
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "16.5",
+        "qty": 4
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "17.0",
+        "qty": 4
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "17.5",
+        "qty": 5
+      },
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au190056",
+        "size": "18.0",
+        "qty": 5
+      },
+      {
+        "category": "СЕРЬГИ",
+        "sku": "Au016167",
+        "size": "",
+        "qty": 6
+      },
+      {
+        "category": "СЕРЬГИ",
+        "sku": "Au0237168",
+        "size": "",
+        "qty": 7
+      },
+      {
+        "category": "СЕРЬГИ",
+        "sku": "Au0757719",
+        "size": "",
+        "qty": 8
+      },
+      {
+        "category": "БРАСЛЕТЫ",
+        "sku": "Au177602",
+        "size": "18.0",
+        "qty": 6
+      }
+    ],
+    "note": ""
   }
 ]
