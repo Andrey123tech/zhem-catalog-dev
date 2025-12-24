@@ -73,7 +73,7 @@ const entry = {
     clientName: body.clientName || "",
     clientPhone: body.clientPhone || "",
     source: body.source || "catalog",
-    items: Array.isArray(body.items) ? body.items : [],
+    items: (Array.isArray(body.items) && body.items.length) ? body.items : parseOrderText(body.orderText || ""),
     note: body.note || "",
     orderText: body.orderText || ""
   };
