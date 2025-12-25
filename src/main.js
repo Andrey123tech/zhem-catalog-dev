@@ -2444,7 +2444,7 @@ function renderOrder() {
   const btnSend = $("#sendToManager");
   if (btnSend) {
     btnSend.textContent = "Готово";
-    btnSend.onclick = () => {
+    btnSend.onclick = async () => {
       window.location.href = "order.html";
     };
   }

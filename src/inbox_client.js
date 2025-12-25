@@ -1,23 +1,19 @@
 export async function sendOrderToInbox(payload) {
   try {
-    const url = "/api/inbox";
-    const body = JSON.stringify(payload || {});
-    // 1) Лучший вариант: sendBeacon (работает даже если страница уходит на wa.me)
-    if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
-      const blob = new Blob([body], { type: "application/json" });
-      const ok = navigator.sendBeacon(url, blob);
-      // если sendBeacon вернул false — попробуем запасной fetch
-      if (ok) return;
-    }
-
-    // 2) Запасной вариант: fetch с keepalive
-    await fetch(url, {
+    const res = await fetch("/api/inbox", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body,
-      keepalive: true
+      body: JSON.stringify(payload || {})
     });
+
+    // не ломаем WhatsApp, просто вернём ошибку как объект
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      return { ok: false, status: res.status, error: text.slice(0, 200) };
+    }
+
+    return await res.json();
   } catch (e) {
-    // намеренно молчим — inbox не должен ломать отправку в WhatsApp
+    return { ok: false, error: String(e && e.message ? e.message : e) };
   }
 }
