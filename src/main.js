@@ -2319,9 +2319,26 @@ function renderOrder() {
           return;
         }
 
-        const coreTxt = buildOrderText(cartNow, PRODUCTS);
+        // базовый текст заявки (НО БЕЗ локального номера)
+        let coreTxt = buildOrderText(cartNow, PRODUCTS);
+        coreTxt = String(coreTxt || "").replace(/^№[^\n]*\n\n/, ""); // убираем "№ ..."
 
-        // 1) пишем заявку в inbox и ждём ответ с orderNo (единый номер на сервере)
+        // формируем items прямо из корзины (чтобы у менеджера всегда были позиции/шт)
+        const bySku = new Map((Array.isArray(PRODUCTS) ? PRODUCTS : []).map(p => [p.sku, p]));
+        const CATEGORY_LABELS = { rings:"КОЛЬЦА", earrings:"СЕРЬГИ", bracelets:"БРАСЛЕТЫ", pendants:"ПОДВЕСКИ", pins:"БУЛАВКИ" };
+        const items = (Array.isArray(cartNow) ? cartNow : []).map(it => {
+          const sku = it.sku || "";
+          const p = bySku.get(sku);
+          const cat = p ? (CATEGORY_LABELS[p.category] || p.category || "") : "";
+          return {
+            category: cat,
+            sku,
+            size: (it.size && it.size !== "-") ? String(it.size) : "",
+            qty: Number(it.qty || it.count || 0) || 0
+          };
+        }).filter(x => x.sku && x.qty > 0);
+
+        // 1) пишем в inbox и ждём серверный orderNo
         let orderNo = "";
         try {
           const r = await sendOrderToInbox({
@@ -2329,12 +2346,13 @@ function renderOrder() {
             clientPhone: "",
             source: "catalog",
             note: "",
-            orderText: coreTxt
+            orderText: coreTxt,
+            items
           });
           orderNo = (r && r.orderNo) ? String(r.orderNo) : "";
         } catch (e) {}
 
-        // 2) формируем WhatsApp-текст уже с серверным номером
+        // 2) WhatsApp-текст с ЕДИНЫМ номером от сервера
         const txt = orderNo ? (`№ ${orderNo}\n\n` + coreTxt) : coreTxt;
 
         const phone = MANAGER_PHONE;
