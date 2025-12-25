@@ -601,5 +601,23 @@
     ],
     "note": "",
     "orderText": "test"
+  },
+  {
+    "id": "inbox_1766643546059_bba48b1d48106",
+    "createdAt": "2025-12-25T06:19:06.059Z",
+    "orderNo": "ZHM-251225-0619-829",
+    "clientName": "",
+    "clientPhone": "",
+    "source": "catalog",
+    "items": [
+      {
+        "category": "КОЛЬЦА",
+        "sku": "Au04007",
+        "size": "16.5",
+        "qty": 2
+      }
+    ],
+    "note": "",
+    "orderText": "TEST"
   }
 ]
