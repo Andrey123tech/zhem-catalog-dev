@@ -2312,29 +2312,32 @@ function renderOrder() {
 
     const btnSend = $("#sendToManager");
     if (btnSend) {
-      btnSend.onclick = () => {
+      btnSend.onclick = async () => {
         const cartNow = loadCart();
         if (!cartNow.length) {
           toast("Корзина пуста");
           return;
         }
 
-        const orderNo = makeOrderNo();
         const coreTxt = buildOrderText(cartNow, PRODUCTS);
-        const txt = `№ ${orderNo}\n\n` + coreTxt;
 
-        // manager inbox (serverless): сохраняем текст заявки
+        // 1) пишем заявку в inbox и ждём ответ с orderNo (единый номер на сервере)
+        let orderNo = "";
         try {
-          sendOrderToInbox({
-            orderNo,
+          const r = await sendOrderToInbox({
             clientName: "",
             clientPhone: "",
             source: "catalog",
             note: "",
-            orderText: txt
+            orderText: coreTxt
           });
+          orderNo = (r && r.orderNo) ? String(r.orderNo) : "";
         } catch (e) {}
-const phone = MANAGER_PHONE;
+
+        // 2) формируем WhatsApp-текст уже с серверным номером
+        const txt = orderNo ? (`№ ${orderNo}\n\n` + coreTxt) : coreTxt;
+
+        const phone = MANAGER_PHONE;
         const url =
           "https://wa.me/" +
           phone +
