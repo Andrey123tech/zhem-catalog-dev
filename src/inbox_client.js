@@ -1,19 +1,21 @@
-export async function sendOrderToInbox(payload) {
+export function sendOrderToInbox(payload) {
   try {
-    const res = await fetch("/api/inbox", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload || {})
-    });
+    const url = "/api/inbox";
+    const body = JSON.stringify(payload || {});
 
-    // не ломаем WhatsApp, просто вернём ошибку как объект
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      return { ok: false, status: res.status, error: text.slice(0, 200) };
+    // 1) sendBeacon - не блокирует переход на wa.me
+    if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
+      const blob = new Blob([body], { type: "application/json" });
+      navigator.sendBeacon(url, blob);
+      return;
     }
 
-    return await res.json();
-  } catch (e) {
-    return { ok: false, error: String(e && e.message ? e.message : e) };
-  }
+    // 2) запасной вариант
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      keepalive: true
+    }).catch(() => {});
+  } catch (e) {}
 }

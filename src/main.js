@@ -2312,7 +2312,7 @@ function renderOrder() {
 
     const btnSend = $("#sendToManager");
     if (btnSend) {
-      btnSend.onclick = async () => {
+      btnSend.onclick = () => {
         const cartNow = loadCart();
         if (!cartNow.length) {
           toast("Корзина пуста");
@@ -2340,19 +2340,17 @@ function renderOrder() {
 
         // 1) пишем в inbox и ждём серверный orderNo
         let orderNo = "";
-        try {
-          const r = await sendOrderToInbox({
+        sendOrderToInbox({
+            orderNo,
+            source: "catalog",
             clientName: "",
             clientPhone: "",
-            source: "catalog",
             note: "",
-            orderText: coreTxt,
-            items
+            orderText: txt,
+            items: cartNow
           });
-          orderNo = (r && r.orderNo) ? String(r.orderNo) : "";
-        } catch (e) {}
 
-        // 2) WhatsApp-текст с ЕДИНЫМ номером от сервера
+// 2) WhatsApp-текст с ЕДИНЫМ номером от сервера
         const txt = orderNo ? (`№ ${orderNo}\n\n` + coreTxt) : coreTxt;
 
         const phone = MANAGER_PHONE;
